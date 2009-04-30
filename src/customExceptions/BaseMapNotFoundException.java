@@ -1,4 +1,4 @@
-package custom_exceptions;
+package customExceptions;
 
 public class BaseMapNotFoundException extends Exception {
 
