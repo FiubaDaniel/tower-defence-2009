@@ -4,7 +4,7 @@ import javax.management.InvalidAttributeValueException;
 
 public class Posicion {
 
-	private boolean TipodeCamino; // Si es tipo = 1 es caminable
+	private boolean Caminable; // Si es tipo = 1 es caminable
 	private int CoordX;
 	private int CoordY;
 
@@ -13,18 +13,24 @@ public class Posicion {
 		if ((CoordX >= 0) && (CoordY >= 0)) {
 			setCoordX(coordX);
 			setCoordY(coordY);
-			setTipodeCamino(tipodeCamino);
+			setCaminable(tipodeCamino);
 		} else
 			throw new InvalidAttributeValueException();
 
 	}
 
-	public void setTipodeCamino(boolean tipodeCamino) {
-		TipodeCamino = tipodeCamino;
+	public Posicion(Posicion posicion) {
+		CoordX = posicion.getCoordX();
+		CoordY = posicion.getCoordY();
+		Caminable = posicion.isCaminable();
 	}
 
-	public boolean isTipodeCamino() {
-		return TipodeCamino;
+	public void setCaminable(boolean tipodeCamino) {
+		Caminable = tipodeCamino;
+	}
+
+	public boolean isCaminable() {
+		return Caminable;
 	}
 
 	public void setCoordX(int coordX) throws InvalidAttributeValueException {
