@@ -10,8 +10,8 @@ import java.util.LinkedList;
 
 import javax.management.InvalidAttributeValueException;
 
-import custom_exceptions.BaseMapNotFoundException;
-import custom_exceptions.InvalidMapFormatException;
+import customExceptions.BaseMapNotFoundException;
+import customExceptions.InvalidMapFormatException;
 
 public class Escenario {
 
@@ -41,7 +41,7 @@ public class Escenario {
 	private Escenario() throws FileNotFoundException, InvalidMapFormatException {
 		this.NumeroNivel = 1;
 		try {
-			ArchivodeMapa = new File("/ArchivosMapas/Mapa" + NumeroNivel
+			ArchivodeMapa = new File("/Mapas/Mapa" + NumeroNivel
 					+ ".mp");
 			this.CargarMapa(); // Este método tira una excepción si el formato
 			// del archivo está mal

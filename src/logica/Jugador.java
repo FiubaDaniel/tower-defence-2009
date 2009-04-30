@@ -2,8 +2,8 @@ package logica;
 
 import javax.management.InvalidAttributeValueException;
 
-import custom_exceptions.DineroMuyBajoException;
-import custom_exceptions.VidaMenorCantidadException;
+import customExceptions.DineroMuyBajoException;
+import customExceptions.VidaMenorCantidadException;
 
 public class Jugador {
 
