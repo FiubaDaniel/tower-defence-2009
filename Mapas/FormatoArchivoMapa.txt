@@ -1,0 +1,5 @@
+Mapa 30 filas X 80 columnas
+Dinero Inicial
+CantidadDeBichosBase
+CantidadDeVidaBase
+
