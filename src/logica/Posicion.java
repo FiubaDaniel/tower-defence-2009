@@ -54,5 +54,15 @@ public class Posicion {
 	public int getCoordY() {
 		return CoordY;
 	}
+	
+	public double getDistancia(Posicion posicion){
+		
+		//calcula la distancia entre las coordenadas de "this" con "posicion" 
+		
+		double sqrX = Math.pow((CoordX - posicion.getCoordX()), 2);
+		double sqrY = Math.pow((CoordY - posicion.getCoordY()), 2);
+		
+		return (Math.sqrt(sqrX + sqrY));
+	}
 
 }
