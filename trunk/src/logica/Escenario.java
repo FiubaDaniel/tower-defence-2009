@@ -48,7 +48,7 @@ public class Escenario {
 			InvalidMapFormatException, MapNotCreatedException {
 		this.NumeroNivel = 1;
 		try {
-			ArchivodeMapa = new File("/Mapa" + NumeroNivel + ".mp");
+			ArchivodeMapa = new File("/Mapas/Mapa" + NumeroNivel + ".mp");
 			this.cargarMapa(); // Este método tira una excepción si el formato
 			// del archivo está mal
 			this.crearListaAlaSalida();
