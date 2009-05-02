@@ -5,11 +5,10 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
-
-import javax.management.InvalidAttributeValueException;
 
 import customExceptions.BaseMapNotFoundException;
 import customExceptions.InvalidMapFormatException;
@@ -33,8 +32,7 @@ public class Escenario {
 	private int NumeroNivel;
 	private File ArchivodeMapa;
 
-	public Escenario crearEscenario() throws BaseMapNotFoundException,
-			InvalidMapFormatException, MapNotCreatedException {
+	public static Escenario obtenerEscenario() {
 		if (escenario == null)
 			try {
 				escenario = new Escenario();
@@ -44,11 +42,10 @@ public class Escenario {
 		return escenario;
 	}
 
-	private Escenario() throws FileNotFoundException,
-			InvalidMapFormatException, MapNotCreatedException {
+	private Escenario() throws FileNotFoundException {
 		this.NumeroNivel = 1;
 		try {
-			ArchivodeMapa = new File("/Mapas/Mapa" + NumeroNivel + ".mp");
+			ArchivodeMapa = new File("Mapas/Mapa" + NumeroNivel + ".mp");
 			this.cargarMapa(); // Este método tira una excepción si el formato
 			// del archivo está mal
 			this.crearListaAlaSalida();
@@ -59,7 +56,7 @@ public class Escenario {
 	}
 
 	private void cargarValorenPosiciondeMatriz(int fila, int columna,
-			boolean caminable) throws InvalidAttributeValueException {
+			boolean caminable) {
 		if (Mapa[fila][columna] == null) {
 			Mapa[fila][columna] = new Posicion(columna, fila, caminable);
 		} else {
@@ -71,26 +68,29 @@ public class Escenario {
 	}
 
 	private void cargarMapa() throws InvalidMapFormatException {
-		FileInputStream fis = null;
+		/*FileInputStream fis = null;
 		BufferedInputStream bis = null;
-		DataInputStream dis = null;
-
+		DataInputStream dis = null;*/
+		FileReader fl = null;
+		
 		char auxiliardeLecturadeChars = 0;
 
 		int i = 0, j = 0;
+		
+		Mapa = new Posicion[MAPROWS][MAPCOLUMNS];
 
 		try {
-			fis = new FileInputStream(ArchivodeMapa);
+			fl = new FileReader(ArchivodeMapa);
+			
+			int EOF = 0;
+			
+			for (i = 0; (EOF != -1) && (i != MAPROWS); i++) {
+				for (j = 0; (EOF != -1) && (j != MAPCOLUMNS); j++) {
 
-			// utilizo un buffer de datos para agilizar la lectura del archivo
-			bis = new BufferedInputStream(fis);
-			dis = new DataInputStream(bis);
-
-			for (; (dis.available() != 0) && (i != MAPROWS); i++) {
-				for (; (dis.available() != 0) && (j != MAPCOLUMNS); j++) {
-
-					auxiliardeLecturadeChars = dis.readChar();
-
+					auxiliardeLecturadeChars = (char)fl.read();
+					if (i > 0 && j == 0)
+						auxiliardeLecturadeChars = (char)fl.read();
+					
 					switch (auxiliardeLecturadeChars) {
 					case '-':
 						cargarValorenPosiciondeMatriz(i, j, false);
@@ -112,39 +112,35 @@ public class Escenario {
 						else
 							this.setEntrada(Mapa[i][j]);
 						break;
-
 					}
 				}
 			}
 
 			if ((i != MAPROWS) || (j != MAPCOLUMNS))
 				throw new InvalidMapFormatException();
-
-			this.setDineroBase(dis.readDouble());
-			this.setCantBichos(dis.readInt());
-			this.setCantidadDeVidaBase(dis.readInt());
-
-			fis.close();
-			bis.close();
-			dis.close();
+	
+			this.setDineroBase(fl.read());
+			this.setCantBichos(fl.read());
+			this.setCantidadDeVidaBase(fl.read());
+			
+			fl.close();
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace(); // TODO Cambiar esto
 		} catch (IOException e) {
 			e.printStackTrace(); // TODO Cambiar esto
-		} catch (InvalidAttributeValueException e) {
+		} catch (IllegalArgumentException e) {
 			throw new InvalidMapFormatException();
 		} catch (NoteHagaselVivoException e) {
 			throw new InvalidMapFormatException();
 		}
 	}
 
-	public void setCantBichos(int cantBichos)
-			throws InvalidAttributeValueException {
+	public void setCantBichos(int cantBichos) {
 		if (cantBichos >= 0)
 			this.CantBichos = cantBichos;
 		else
-			throw new InvalidAttributeValueException();
+			throw new IllegalArgumentException();
 	}
 
 	public int getCantBichos() {
@@ -154,7 +150,8 @@ public class Escenario {
 	private void setCaminoAlaSalida(LinkedList caminoAlaSalida) {
 		this.CaminoAlaSalida = caminoAlaSalida;
 	}
-	public LinkedList getCaminoAlaSalida(){
+
+	public LinkedList getCaminoAlaSalida() {
 		return CaminoAlaSalida;
 	}
 
@@ -183,8 +180,7 @@ public class Escenario {
 		return NumeroNivel;
 	}
 
-	private void setDineroBase(double dineroBase)
-			throws NoteHagaselVivoException {
+	private void setDineroBase(double dineroBase) {
 		if (dineroBase <= DINEROBASEMAX) {
 			this.DineroBase = dineroBase;
 		} else
@@ -218,7 +214,7 @@ public class Escenario {
 	}
 
 	private void checkAdd(Posicion Aux, LinkedList ListaProvisoria,
-			LinkedList OpcionesdeCamino) throws InvalidMapFormatException {
+			LinkedList OpcionesdeCamino) {
 
 		// Cada casillero se puede tomar como el siguiente dibujo
 
@@ -240,7 +236,7 @@ public class Escenario {
 					OpcionesdeCamino, ListaProvisoria);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			if ((Aux.getCoordX() != MAPCOLUMNS - 1)
-					|| (Aux.getCoordY() != MAPROWS - 1))
+					&& (Aux.getCoordY() != MAPROWS - 1))
 				throw new InvalidMapFormatException();
 		}
 		try {
@@ -248,7 +244,7 @@ public class Escenario {
 					OpcionesdeCamino, ListaProvisoria);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			if ((Aux.getCoordX() != MAPCOLUMNS - 1)
-					|| (Aux.getCoordY() != MAPROWS - 1))
+					&& (Aux.getCoordY() != MAPROWS - 1))
 				throw new InvalidMapFormatException();
 		}
 		try {
@@ -256,7 +252,7 @@ public class Escenario {
 					OpcionesdeCamino, ListaProvisoria);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			if ((Aux.getCoordX() != MAPCOLUMNS - 1)
-					|| (Aux.getCoordY() != MAPROWS - 1))
+					&& (Aux.getCoordY() != MAPROWS - 1))
 				throw new InvalidMapFormatException();
 		}
 		try {
@@ -264,7 +260,7 @@ public class Escenario {
 					OpcionesdeCamino, ListaProvisoria);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			if ((Aux.getCoordX() != MAPCOLUMNS - 1)
-					|| (Aux.getCoordY() != MAPROWS - 1))
+					&& (Aux.getCoordY() != MAPROWS - 1))
 				throw new InvalidMapFormatException();
 		}
 
@@ -314,8 +310,7 @@ public class Escenario {
 
 	}
 
-	private void crearListaAlaSalida() throws InvalidMapFormatException,
-			MapNotCreatedException {
+	private void crearListaAlaSalida() {
 		if (Entrada != null) {
 			// Si entrada es null, quiere decir que no se cargo el mapa
 
@@ -346,15 +341,14 @@ public class Escenario {
 		}
 	}
 
-	public void eliminarEnemigodeLista(Enemigo paraeliminar)
-			throws MapaSinEnemigosExcepion {
+	public void eliminarEnemigodeLista(Enemigo paraeliminar) {
 		if (EnemigosEnElMapa.isEmpty() == false) {
 			EnemigosEnElMapa.remove(paraeliminar);
 		} else
 			throw new MapaSinEnemigosExcepion();
 	}
 
-	public void eliminarEnemigosSinVidadelaLista() throws MapaSinEnemigosExcepion {
+	public void eliminarEnemigosSinVidadelaLista() {
 		Iterator it = EnemigosEnElMapa.iterator();
 
 		Enemigo PosibleVictima = null;
