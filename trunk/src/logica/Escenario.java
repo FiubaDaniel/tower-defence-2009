@@ -6,14 +6,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.NoSuchElementException;
-
 import customExceptions.BaseMapNotFoundException;
 import customExceptions.InvalidMapFormatException;
 import customExceptions.MapNotCreatedException;
 import customExceptions.MapaSinEnemigosExcepion;
 import customExceptions.NoteHagaselVivoException;
 
+/**
+ * Esta clase controla todos los aspectos generales del manejo del mapa, desde
+ * su creacion a su correcta configuracion.
+ * 
+ * @author hector
+ * 
+ */
 public class Escenario {
 
 	private static final int MAPCOLUMNS = 80;
@@ -30,6 +35,15 @@ public class Escenario {
 	private int NumeroNivel;
 	private File ArchivodeMapa;
 
+	/**
+	 * Este metodo se encarga de la implementacion de Escenario como singleton.
+	 * <p>
+	 * Si ya existe un escenario, el metodo retorna ese mismo escenario. Y
+	 * ademas es estatico para poder ser llamdo desde cualquier lugar.
+	 * 
+	 * @return Un Escenario nuevo si es el primero a ser creado o la referencia
+	 *         al que ya fue creado.
+	 */
 	public static Escenario obtenerEscenario() {
 		if (escenario == null)
 			try {
@@ -40,8 +54,20 @@ public class Escenario {
 		return escenario;
 	}
 
+	/**
+	 * Este es el constructor de Escenario. Es privado para evitar las multiples
+	 * llamadas e instancias de Escenario. Para crear un nuevo escenario, este
+	 * constructor toma los valores de sus atributos.
+	 * 
+	 * @throws FileNotFoundException
+	 *             Si el archivo no fue encontrado
+	 * @throws InvalidMapFormatException
+	 *             Si hubo un error al leer la informacion contenida en el
+	 *             archivo. Es decir, se encontró el archivo, pero esta mal
+	 *             configurado
+	 */
 	private Escenario() throws FileNotFoundException {
-		this.NumeroNivel = 3;
+		this.NumeroNivel = 1;
 		try {
 			ArchivodeMapa = new File("Mapas/Mapa" + NumeroNivel + ".mp");
 			this.cargarMapa(); // Este método tira una excepción si el formato
@@ -68,6 +94,14 @@ public class Escenario {
 
 	}
 
+	/**
+	 * Este metodo lee el archivo que contiene la informacion del mapa y la pasa
+	 * a una matriz. A su vez, carga lso valores iniciales de Dinero, Vida y
+	 * Cantidad de Bichos en el escenario.
+	 * 
+	 * @throws InvalidMapFormatException
+	 *             Si hubo algun error al acceder el archivo.
+	 */
 	private void cargarMapa() throws InvalidMapFormatException {
 		FileReader fl = null;
 
@@ -117,9 +151,8 @@ public class Escenario {
 			if ((i != MAPROWS) || (j != MAPCOLUMNS))
 				throw new InvalidMapFormatException();
 
-			// Revisar esto
 			auxiliardeLecturadeChars = (char) fl.read();
-			this.setDineroBase(fl.read());
+			this.setDineroBase(fl.read() * 5);
 			auxiliardeLecturadeChars = (char) fl.read();
 			this.setCantBichos(fl.read());
 			auxiliardeLecturadeChars = (char) fl.read();
@@ -128,7 +161,7 @@ public class Escenario {
 			fl.close();
 
 		} catch (IOException e) {
-			e.printStackTrace(); // TODO Cambiar esto
+			throw new InvalidMapFormatException();
 		} catch (IllegalArgumentException e) {
 			throw new InvalidMapFormatException();
 		} catch (NoteHagaselVivoException e) {
@@ -201,13 +234,31 @@ public class Escenario {
 		return CantidadDeVidaBase;
 	}
 
+	/**
+	 * Agrega un enemigo a la lista de enemigos del mapa. SI la lista no fue
+	 * creada, este metodo la crea.
+	 * 
+	 * @param enemigo
+	 *            Enemigo para agregar
+	 */
+
 	public void agregarEnemigoALista(Enemigo enemigo) {
 		if (EnemigosEnElMapa.isEmpty())
 			EnemigosEnElMapa = new LinkedList();
-		
+
 		EnemigosEnElMapa.add(enemigo);
 	}
 
+	/**
+	 * Este método se asegura que la posicion a usar para llegar a la salida sea
+	 * caminable y sea igual a la posicion anterior a la actual, es decir que no
+	 * vaya hacia el comienzo.
+	 * 
+	 * @param fila Fila de la posicion a verificar
+	 * @param columna Columna de la posicion a verificar 
+	 * @param OpcionesdeCamino Lista con las opciones de posicion para colocar en el camino
+	 * @param ListaProvisoria Lista provisoria con el actual camino a la salida
+	 */
 	private void subCheck(int fila, int columna, LinkedList OpcionesdeCamino,
 			LinkedList ListaProvisoria) {
 		Iterator it = ListaProvisoria.descendingIterator();
@@ -223,24 +274,28 @@ public class Escenario {
 			OpcionesdeCamino.add(Mapa[fila][columna]);
 
 	}
+	/**
+	 * Cada casillero se puede tomar como el siguiente dibujo<p>
 
+	 *	MI MP MI con MI = Movimiento Imposible<p>
+	 *	MP PA MP 	 MP = Movimiento Posible<p>
+	 *	MI MP MI 	 PA = Posicion Actual<p>
+
+	 *	Los movimientos en diagonal están prohibidos.<p>
+
+	 *	Uso try/catch separados porque si uno falla por ser una posicion de
+	 *	los límites tiene que seguir con el resto
+	 *	Y si falla por un error del mapa, sale del método.<p>
+
+	 *	Las "constantes" aparecen -1 porque estas representan aaprtir de que
+	 *	número no hay más filas o columnas<p>
+	
+	 * @param Aux Ultima posicion colocada en la lista Provisoria
+	 * @param ListaProvisoria Lista provisoria con el actual camino a la salida
+	 * @param OpcionesdeCamino Lista con las opciones de posicion para colocar en el camino
+	 */
 	private void checkAdd(Posicion Aux, LinkedList ListaProvisoria,
 			LinkedList OpcionesdeCamino) {
-
-		// Cada casillero se puede tomar como el siguiente dibujo
-
-		// MI MP MI con MI = Movimiento Imposible
-		// MP PA MP MP = Movimiento Posible
-		// MI MP MI PA = Posicion Actual
-
-		// Los movimientos en diagonal están prohibidos.
-
-		// Uso try/catch separados porque si uno falla por ser una posicion de
-		// los límites tiene que seguir con el resto
-		// Y si falla por un error del mapa, sale del método.
-
-		// Las "constantes" aparecen -1 porque estas representan aaprtir de que
-		// número no hay más filas o columnas
 
 		try {
 			this.subCheck(Aux.getCoordY() + 1, Aux.getCoordX(),
@@ -275,39 +330,45 @@ public class Escenario {
 		}
 
 	}
-
+	/**
+	 * Este algoritmos se encarga de elegir el camino correcto ante una
+	 * bifurcación. Esto se logra bsucando cual de las opciones de
+	 * camino sigue la misma dirreción con la que venía la ultima
+	 * posicion. Esto es más que nada para los "rulos".<p>
+	 * 
+	 * MI BB CC con MI = Movimiento Imposible (Terreno No Caminable)<p>
+	 * SS AA DD<p>
+	 * MI EE MI<p>
+	 * 
+	 * El camino deseado es EE -> AA -> BB -> CC -> DD -> AA -> SS<p>
+	 * 
+	 * Al llegar a AA, se produce una división del camino. En las
+	 * opciones de camino están BB, DD y SS. EE no está porque es la
+	 * última posición en la ListaProvisoria. Ahora, el algoritmo
+	 * compara para ver que posibles caminos tienen la misma coordenada
+	 * X o Y de la última posicion usada (es decir comparten la misma
+	 * dirreción). Esto lo cumple BB, por lo que es elegida una posicion.
+	 * Luego el camino sigue de forma normal.<p>
+	 * 
+	 * 
+	 * @param ListaProvisoria
+	 * @param OpcionesdeCamino
+	 * @return La posicion siguiente valida para el camino a la salida
+	 */
 	private Posicion SiguientePosicionenCamino(LinkedList ListaProvisoria,
 			LinkedList OpcionesdeCamino) {
 
-		// Este algoritmos se encarga de elegir el camino correcto ante una
-		// bifurcación. Esto se logra bsucando cual de las opciones de
-		// camino sigue la misma dirreción con la que venía la ultima
-		// posicion. Esto es más que nada para los "rulos".
-
-		// MI BB CC con MI = Movimiento Imposible (Terreno No Caminable)
-		// SS AA DD
-		// MI EE MI
-		// El camino deseado es EE -> AA -> BB -> CC -> DD -> AA -> SS
-
-		// Al llegar a AA, se produce una división del camino. En las
-		// opciones de camino están BB, DD y SS. EE no está porque es la
-		// última posición en la ListaProvisoria. Ahora, el algoritmo
-		// compara para ver que posibles caminos tienen la misma coordenada
-		// X o Y de la última posicion usada (es decir comparten la misma
-		// dirreción). Esto lo cumple BB, por lo que es elegida una posicion.
-		// Luego el camino sigue de forma normal.
-
 		Iterator it = OpcionesdeCamino.iterator();
-		
+
 		Iterator itProvisoria = ListaProvisoria.descendingIterator();
 
 		Posicion Auxiliar = null;
-		
+
 		if (ListaProvisoria.size() != 1)
 			itProvisoria.next(); // Me muevo al último elemento
-		
-		Auxiliar =  (Posicion) itProvisoria.next();
-		
+
+		Auxiliar = (Posicion) itProvisoria.next();
+
 		int j = Auxiliar.getCoordY();
 		int i = Auxiliar.getCoordX();
 
@@ -326,7 +387,7 @@ public class Escenario {
 		return Auxiliar;
 
 	}
-
+	
 	private void crearListaAlaSalida() {
 		if (Entrada != null) {
 			// Si entrada es null, quiere decir que no se cargo el mapa
@@ -363,10 +424,12 @@ public class Escenario {
 			throw new MapNotCreatedException();
 		}
 	}
+	
+	
 
-	public void eliminarEnemigodeLista(Enemigo paraeliminar) {
+	public boolean eliminarEnemigodeLista(Enemigo paraeliminar) {
 		if (!EnemigosEnElMapa.isEmpty()) {
-			EnemigosEnElMapa.remove(paraeliminar);
+			return EnemigosEnElMapa.remove(paraeliminar);
 		} else
 			throw new MapaSinEnemigosExcepion();
 	}
@@ -380,24 +443,22 @@ public class Escenario {
 
 			PosibleVictima = (Enemigo) it.next();
 
-			if (true) {
-				// TODO terminar cuando este la clase enemigo, asi evito
-				// error con PosibleVictima.getvida <= 0
+			if (PosibleVictima.getVida() <= 0)
+				it.remove();
+				
 
-				this.eliminarEnemigodeLista(PosibleVictima);
-			}
 		}
 
 	}
 
 	public Posicion obtenerSiguientePosicionCaminable(Posicion ubicacion) {
 
-		Iterator it = EnemigosEnElMapa.iterator();
+		Iterator it = CaminoAlaSalida.iterator();
 
-		Posicion Aux = null;
+		Posicion Aux = new Posicion(MAPROWS + 1, MAPCOLUMNS + 1, false);
 
-		while (it.hasNext() && (Aux.getCoordX() != ubicacion.getCoordX())
-				&& (Aux.getCoordY() != ubicacion.getCoordY())) {
+		while (it.hasNext() && ((Aux.getCoordX() != ubicacion.getCoordX())
+				|| (Aux.getCoordY() != ubicacion.getCoordY()))) {
 			Aux = (Posicion) it.next();
 		}
 
