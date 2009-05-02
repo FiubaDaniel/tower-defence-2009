@@ -1,6 +1,6 @@
 package customExceptions;
 
-public class MapaSinEnemigosExcepion extends Exception {
+public class MapaSinEnemigosExcepion extends RuntimeException {
 
 	/**
 	 * 

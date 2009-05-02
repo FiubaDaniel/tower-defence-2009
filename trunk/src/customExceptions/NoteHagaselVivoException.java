@@ -1,6 +1,6 @@
 package customExceptions;
 
-public class NoteHagaselVivoException extends Exception {
+public class NoteHagaselVivoException extends RuntimeException {
 
 	/**
 	 * 

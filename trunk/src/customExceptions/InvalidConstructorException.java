@@ -1,7 +1,7 @@
 package customExceptions;
 
-public class InvalidConstructorException extends Exception {
+public class InvalidConstructorException extends RuntimeException {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 }

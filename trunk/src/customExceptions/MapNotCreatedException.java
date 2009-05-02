@@ -1,6 +1,6 @@
 package customExceptions;
 
-public class MapNotCreatedException extends Exception {
+public class MapNotCreatedException extends RuntimeException {
 
 	/**
 	 * 
