@@ -1,6 +1,6 @@
 package customExceptions;
 
-public class InvalidMapFormatException extends Exception {
+public class InvalidMapFormatException extends RuntimeException {
 
 	/**
 	 * 
