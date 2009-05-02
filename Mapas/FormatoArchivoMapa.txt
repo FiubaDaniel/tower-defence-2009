@@ -1,5 +1,6 @@
 Mapa 30 filas X 80 columnas
-Dinero Inicial
+Dinero Inicial / 5
 CantidadDeBichosBase
 CantidadDeVidaBase
 
+Los valores están se toman del equivalente decimal en ascii de las letras.
