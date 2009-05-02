@@ -2,6 +2,14 @@ package logica;
 
 import customExceptions.DineroMuyBajoException;
 
+
+/**
+ * Esta clase controla todos los aspectos generales del manejo del Jugador, desde
+ * su creacion a su correcta configuracion.
+ * 
+ * @author hector
+ * 
+ */
 public class Jugador {
 
 	private static Jugador jugador;

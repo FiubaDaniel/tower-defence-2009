@@ -1,5 +1,12 @@
 package logica;
 
+/**
+ * Esta clase controla todos los aspectos generales de las posiciones, desde su
+ * creacion a su correcta configuracion.
+ * 
+ * @author hector
+ * 
+ */
 public class Posicion {
 
 	private boolean Caminable; // Si es tipo = 1 es caminable
@@ -15,8 +22,8 @@ public class Posicion {
 			throw new IllegalArgumentException();
 
 	}
-	
-	public Posicion(){
+
+	public Posicion() {
 		CoordX = 0;
 		CoordY = 0;
 		Caminable = false;
@@ -57,14 +64,19 @@ public class Posicion {
 	public int getCoordY() {
 		return CoordY;
 	}
-	
-	public double getDistancia(Posicion posicion){
-		
-		//calcula la distancia entre las coordenadas de "this" con "posicion" 
-		
+
+	/**
+	 * Este método calcula la distancia entre las coordenadas de "this" con
+	 * "posicion"
+	 * 
+	 * @param posicion Posicion con la que se quiere calcular la distancia
+	 * @return distancia entre las coordenadas de "this" con "posicion"
+	 */
+	public double getDistancia(Posicion posicion) {
+
 		double sqrX = Math.pow((CoordX - posicion.getCoordX()), 2);
 		double sqrY = Math.pow((CoordY - posicion.getCoordY()), 2);
-		
+
 		return (Math.sqrt(sqrX + sqrY));
 	}
 
