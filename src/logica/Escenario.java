@@ -1,14 +1,12 @@
 package logica;
 
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 import customExceptions.BaseMapNotFoundException;
 import customExceptions.InvalidMapFormatException;
@@ -43,14 +41,17 @@ public class Escenario {
 	}
 
 	private Escenario() throws FileNotFoundException {
-		this.NumeroNivel = 1;
+		this.NumeroNivel = 3;
 		try {
 			ArchivodeMapa = new File("Mapas/Mapa" + NumeroNivel + ".mp");
 			this.cargarMapa(); // Este método tira una excepción si el formato
 			// del archivo está mal
 			this.crearListaAlaSalida();
+			EnemigosEnElMapa = new LinkedList();
 		} catch (NullPointerException e) {
 			throw new FileNotFoundException();
+		} catch (IllegalStateException e) {
+			throw new InvalidMapFormatException();
 		}
 
 	}
@@ -68,29 +69,26 @@ public class Escenario {
 	}
 
 	private void cargarMapa() throws InvalidMapFormatException {
-		/*FileInputStream fis = null;
-		BufferedInputStream bis = null;
-		DataInputStream dis = null;*/
 		FileReader fl = null;
-		
+
 		char auxiliardeLecturadeChars = 0;
 
 		int i = 0, j = 0;
-		
+
 		Mapa = new Posicion[MAPROWS][MAPCOLUMNS];
 
 		try {
 			fl = new FileReader(ArchivodeMapa);
-			
+
 			int EOF = 0;
-			
+
 			for (i = 0; (EOF != -1) && (i != MAPROWS); i++) {
 				for (j = 0; (EOF != -1) && (j != MAPCOLUMNS); j++) {
 
-					auxiliardeLecturadeChars = (char)fl.read();
+					auxiliardeLecturadeChars = (char) fl.read();
 					if (i > 0 && j == 0)
-						auxiliardeLecturadeChars = (char)fl.read();
-					
+						auxiliardeLecturadeChars = (char) fl.read();
+
 					switch (auxiliardeLecturadeChars) {
 					case '-':
 						cargarValorenPosiciondeMatriz(i, j, false);
@@ -118,15 +116,17 @@ public class Escenario {
 
 			if ((i != MAPROWS) || (j != MAPCOLUMNS))
 				throw new InvalidMapFormatException();
-	
+
+			// Revisar esto
+			auxiliardeLecturadeChars = (char) fl.read();
 			this.setDineroBase(fl.read());
+			auxiliardeLecturadeChars = (char) fl.read();
 			this.setCantBichos(fl.read());
+			auxiliardeLecturadeChars = (char) fl.read();
 			this.setCantidadDeVidaBase(fl.read());
-			
+
 			fl.close();
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace(); // TODO Cambiar esto
 		} catch (IOException e) {
 			e.printStackTrace(); // TODO Cambiar esto
 		} catch (IllegalArgumentException e) {
@@ -171,8 +171,8 @@ public class Escenario {
 		return Entrada;
 	}
 
-	public void setNumeroNivel(int numeroNivel) { // nose si debería ser publico
-		// o privado
+	public void setNumeroNivel(int numeroNivel) {
+		// nose si debería ser publico o privado
 		this.NumeroNivel = numeroNivel;
 	}
 
@@ -202,13 +202,24 @@ public class Escenario {
 	}
 
 	public void agregarEnemigoALista(Enemigo enemigo) {
+		if (EnemigosEnElMapa.isEmpty())
+			EnemigosEnElMapa = new LinkedList();
+		
 		EnemigosEnElMapa.add(enemigo);
 	}
 
 	private void subCheck(int fila, int columna, LinkedList OpcionesdeCamino,
 			LinkedList ListaProvisoria) {
+		Iterator it = ListaProvisoria.descendingIterator();
+		Posicion Aux = null;
+
+		if (ListaProvisoria.size() != 1)
+			Aux = (Posicion) it.next(); // Me muevo al último elemento
+
+		Aux = (Posicion) it.next();
+
 		if (Mapa[fila][columna].isCaminable() == true
-				&& ListaProvisoria.getLast() != Mapa[fila][columna])
+				&& (Aux.getCoordX() != columna || Aux.getCoordY() != fila))
 			OpcionesdeCamino.add(Mapa[fila][columna]);
 
 	}
@@ -234,33 +245,32 @@ public class Escenario {
 		try {
 			this.subCheck(Aux.getCoordY() + 1, Aux.getCoordX(),
 					OpcionesdeCamino, ListaProvisoria);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			if ((Aux.getCoordX() != MAPCOLUMNS - 1)
-					&& (Aux.getCoordY() != MAPROWS - 1))
+		} catch (Exception e) {
+			if (Aux.getCoordY() != MAPROWS - 1)
 				throw new InvalidMapFormatException();
 		}
+
 		try {
 			this.subCheck(Aux.getCoordY(), Aux.getCoordX() + 1,
 					OpcionesdeCamino, ListaProvisoria);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			if ((Aux.getCoordX() != MAPCOLUMNS - 1)
-					&& (Aux.getCoordY() != MAPROWS - 1))
+		} catch (Exception e) {
+			if (Aux.getCoordX() != MAPCOLUMNS - 1)
 				throw new InvalidMapFormatException();
 		}
+
 		try {
 			this.subCheck(Aux.getCoordY() - 1, Aux.getCoordX(),
 					OpcionesdeCamino, ListaProvisoria);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			if ((Aux.getCoordX() != MAPCOLUMNS - 1)
-					&& (Aux.getCoordY() != MAPROWS - 1))
+		} catch (Exception e) {
+			if (Aux.getCoordY() != 0)
 				throw new InvalidMapFormatException();
 		}
+
 		try {
 			this.subCheck(Aux.getCoordY(), Aux.getCoordX() - 1,
 					OpcionesdeCamino, ListaProvisoria);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			if ((Aux.getCoordX() != MAPCOLUMNS - 1)
-					&& (Aux.getCoordY() != MAPROWS - 1))
+		} catch (Exception e) {
+			if (Aux.getCoordX() != 0)
 				throw new InvalidMapFormatException();
 		}
 
@@ -287,12 +297,19 @@ public class Escenario {
 		// dirreción). Esto lo cumple BB, por lo que es elegida una posicion.
 		// Luego el camino sigue de forma normal.
 
-		int i = ((Posicion) ListaProvisoria.getLast()).getCoordY();
-		int j = ((Posicion) ListaProvisoria.getLast()).getCoordX();
-
 		Iterator it = OpcionesdeCamino.iterator();
+		
+		Iterator itProvisoria = ListaProvisoria.descendingIterator();
 
 		Posicion Auxiliar = null;
+		
+		if (ListaProvisoria.size() != 1)
+			itProvisoria.next(); // Me muevo al último elemento
+		
+		Auxiliar =  (Posicion) itProvisoria.next();
+		
+		int j = Auxiliar.getCoordY();
+		int i = Auxiliar.getCoordX();
 
 		boolean AgregueAlgo = false;
 
@@ -315,24 +332,30 @@ public class Escenario {
 			// Si entrada es null, quiere decir que no se cargo el mapa
 
 			LinkedList ListaProvisoria = new LinkedList();
+			LinkedList OpcionesdeCamino = new LinkedList();
 
 			ListaProvisoria.add(Entrada);
 
 			Posicion Aux = Entrada;
 
-			while (Aux != this.Salida) {
+			while ((Aux.getCoordX() != Salida.getCoordX())
+					|| (Aux.getCoordY() != Salida.getCoordY())) {
 
-				LinkedList OpcionesdeCamino = new LinkedList();
+				OpcionesdeCamino.clear();
 
 				this.checkAdd(Aux, ListaProvisoria, OpcionesdeCamino);
 
-				if (OpcionesdeCamino.size() == 1) {
-					ListaProvisoria.add((Posicion) OpcionesdeCamino.getLast());
-					Aux = (Posicion) OpcionesdeCamino.getLast();
-				} else {
-					Aux = SiguientePosicionenCamino(ListaProvisoria,
-							OpcionesdeCamino);
-				}
+				if (!OpcionesdeCamino.isEmpty()) {
+					if (OpcionesdeCamino.size() == 1) {
+						ListaProvisoria.add((Posicion) OpcionesdeCamino
+								.getLast());
+						Aux = (Posicion) OpcionesdeCamino.getLast();
+					} else {
+						Aux = SiguientePosicionenCamino(ListaProvisoria,
+								OpcionesdeCamino);
+					}
+				} else
+					throw new IllegalStateException();
 			}
 
 			this.setCaminoAlaSalida(ListaProvisoria);
@@ -342,7 +365,7 @@ public class Escenario {
 	}
 
 	public void eliminarEnemigodeLista(Enemigo paraeliminar) {
-		if (EnemigosEnElMapa.isEmpty() == false) {
+		if (!EnemigosEnElMapa.isEmpty()) {
 			EnemigosEnElMapa.remove(paraeliminar);
 		} else
 			throw new MapaSinEnemigosExcepion();
@@ -373,7 +396,8 @@ public class Escenario {
 
 		Posicion Aux = null;
 
-		while (it.hasNext() && Aux != ubicacion) {
+		while (it.hasNext() && (Aux.getCoordX() != ubicacion.getCoordX())
+				&& (Aux.getCoordY() != ubicacion.getCoordY())) {
 			Aux = (Posicion) it.next();
 		}
 
