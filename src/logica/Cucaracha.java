@@ -6,6 +6,7 @@ public class Cucaracha extends Enemigo {
 		this.setPosicion(unLugar);
 		this.setResistencia(4);
 		this.setVelocidad(5);
+		this.setvida(10);
 	}
 	
 	public void avanzar(Escenario terreno){

@@ -7,6 +7,7 @@ public class Mosca extends Enemigo {
 		this.setResistencia(3);
 		this.setVelocidad(4);
 		this.setVolador();
+		this.setvida(5);
 	}
 	
 	public void avanzar(Escenario terreno){
