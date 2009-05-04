@@ -8,8 +8,9 @@ public class Cucaracha extends Enemigo {
 		this.setVelocidad(5);
 	}
 	
-	public void avanzar(){
-		
+	public void avanzar(Escenario terreno){
+		Posicion siguiente= terreno.obtenerSiguientePosicionCaminable(this.getPosicion());
+		this.cambiarPosicion(siguiente);		
 	}
 
 }
