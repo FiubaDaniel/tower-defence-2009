@@ -8,7 +8,8 @@ public class Hormiga extends Enemigo {
 		this.setVelocidad(1);
 	}
 	
-	public void avanzar(){
-		
+	public void avanzar(Escenario terreno){
+		Posicion siguiente= terreno.obtenerSiguientePosicionCaminable(this.getPosicion());
+		this.cambiarPosicion(siguiente);		
 	}
 }

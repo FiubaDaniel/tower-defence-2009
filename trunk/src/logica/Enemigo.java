@@ -1,6 +1,5 @@
 package logica;
 
-import java.util.*;
 import customExceptions.EnemigoYaMuerto;
 import customExceptions.PorcentajeNegativoException;
 
@@ -11,7 +10,7 @@ public abstract class Enemigo {
 	private int velocidad;
 	private Posicion lugarQueOcupa;
 
-	public abstract void avanzar();
+	public abstract void avanzar(Escenario terreno);
 	
 	public void disminuirVida(int vidaRestada) throws EnemigoYaMuerto {
 		try{
@@ -65,6 +64,10 @@ public abstract class Enemigo {
 	}
 	
 	protected void setPosicion(Posicion unLugar){
+		lugarQueOcupa = unLugar;
+	}
+	
+	public void cambiarPosicion(Posicion unLugar){
 		lugarQueOcupa = unLugar;
 	}
 	

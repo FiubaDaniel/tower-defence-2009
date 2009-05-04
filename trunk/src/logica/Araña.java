@@ -8,8 +8,9 @@ public class Araña extends Enemigo {
 		this.setResistencia(2);
 	}
 	
-	public void avanzar(){
-		
+	public void avanzar(Escenario terreno){
+		Posicion siguiente= terreno.obtenerSiguientePosicionCaminable(this.getPosicion());
+		this.cambiarPosicion(siguiente);
 	}
 
 }
