@@ -7,7 +7,6 @@ import logica.Araña;
 
 public class EnemigoTest {
 	
-	@Test
 	public void crear(){
 		boolean valor = true;
 		Posicion lugar = new Posicion(1,1,valor);

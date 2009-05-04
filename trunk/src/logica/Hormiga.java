@@ -6,6 +6,7 @@ public class Hormiga extends Enemigo {
 		this.setPosicion(unLugar);
 		this.setResistencia(1);
 		this.setVelocidad(1);
+		this.setvida(1);
 	}
 	
 	public void avanzar(Escenario terreno){

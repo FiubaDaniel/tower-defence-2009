@@ -81,4 +81,11 @@ public abstract class Enemigo {
 	public boolean getVolador(){
 		return bichoVolador;
 	}
+	
+	protected void setvida(int cantidad){
+		if (cantidad > 0)
+			vida = cantidad;
+		else
+			throw new IllegalArgumentException();
+	}
 }

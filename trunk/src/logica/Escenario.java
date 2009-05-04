@@ -445,8 +445,6 @@ public class Escenario {
 
 			if (PosibleVictima.getVida() <= 0)
 				it.remove();
-				
-
 		}
 
 	}
