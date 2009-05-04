@@ -5,7 +5,7 @@ import customExceptions.PorcentajeNegativoException;
 
 public abstract class Enemigo {
 	
-	private int resistencia;
+	private int vida;
 	private boolean bichoVolador = false;
 	private int velocidad;
 	private Posicion lugarQueOcupa;
@@ -14,13 +14,13 @@ public abstract class Enemigo {
 	
 	public void disminuirVida(int vidaRestada) throws EnemigoYaMuerto {
 		try{
-			if (resistencia == 0)
+			if (vida == 0)
 				throw new EnemigoYaMuerto();
 			else
-				if (resistencia <= vidaRestada)
-					resistencia = 0;
+				if (vida <= vidaRestada)
+					vida = 0;
 				else
-					resistencia -= vidaRestada;
+					vida -= vidaRestada;
 		}
 		catch (EnemigoYaMuerto error){
 			System.out.print("El enemigo ya esta muerto");
@@ -51,16 +51,23 @@ public abstract class Enemigo {
 		return lugarQueOcupa;
 	}
 	
+	public int getVida(){
+		return vida;
+	}
 	protected void setVelocidad(int velocidadInicial){
 		velocidad = velocidadInicial;
 	}
 	
-	protected void setResistencia(int resistenciaInicial){
-		resistencia = resistenciaInicial;
+	protected void setResistencia(int vidaInicial){
+		vida = vidaInicial;
 	}
 	
 	protected void setVolador(){
 		bichoVolador = true;
+	}
+	
+	public int getVelocidad(){
+		return velocidad;
 	}
 	
 	protected void setPosicion(Posicion unLugar){
