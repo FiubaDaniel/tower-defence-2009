@@ -71,8 +71,12 @@ public abstract class Enemigo {
 		return velocidad;
 	}
 	
-	protected void setPosicion(Posicion unLugar){
-		lugarQueOcupa = unLugar;
+	protected void setPosicion(Posicion entrada) throws NoEsEntradaException{
+		Escenario escenario = Escenario.obtenerEscenario();
+		if (entrada != escenario.getEntrada())
+			throw new NoEsEntradaException();
+		else
+			lugarQueOcupa = entrada;
 	}
 	
 	public void cambiarPosicion(Posicion unLugar){

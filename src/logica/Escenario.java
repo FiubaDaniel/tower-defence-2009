@@ -11,6 +11,7 @@ import customExceptions.InvalidMapFormatException;
 import customExceptions.MapNotCreatedException;
 import customExceptions.MapaSinEnemigosExcepion;
 import customExceptions.NoteHagaselVivoException;
+import mapas.*;
 
 /**
  * Esta clase controla todos los aspectos generales del manejo del mapa, desde

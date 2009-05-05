@@ -4,7 +4,7 @@ import customExceptions.*;
 
 public class Hormiga extends Enemigo {
 
-	public Hormiga(Posicion unLugar){
+	public Hormiga(Posicion unLugar)throws NoEsEntradaException{
 		this.setPosicion(unLugar);
 		try{
 			this.setVelocidad(1);

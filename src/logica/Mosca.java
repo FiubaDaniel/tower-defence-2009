@@ -4,7 +4,7 @@ import customExceptions.*;
 
 public class Mosca extends Enemigo {
 
-	public Mosca(Posicion unLugar){
+	public Mosca(Posicion unLugar) throws NoEsEntradaException{
 		this.setPosicion(unLugar);
 		this.setVolador();
 		try{
@@ -12,6 +12,7 @@ public class Mosca extends Enemigo {
 			this.setVida(5);
 		}
 		catch (ValorNegativoException error){}
+		
 	}
 	
 	public void avanzar(Escenario terreno){
