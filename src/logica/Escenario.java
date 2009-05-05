@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import customExceptions.BaseMapNotFoundException;
+import customExceptions.InvalidEnemyPositionException;
 import customExceptions.InvalidMapFormatException;
 import customExceptions.MapNotCreatedException;
 import customExceptions.MapaSinEnemigosExcepion;
@@ -449,7 +450,7 @@ public class Escenario {
 
 	}
 
-	public Posicion obtenerSiguientePosicionCaminable(Posicion ubicacion) {
+	public Posicion obtenerSiguientePosicionCaminable(Posicion ubicacion){
 
 		Iterator it = CaminoAlaSalida.iterator();
 
@@ -459,6 +460,9 @@ public class Escenario {
 				|| (Aux.getCoordY() != ubicacion.getCoordY()))) {
 			Aux = (Posicion) it.next();
 		}
+		
+		if (Aux.equals(Salida))
+			throw new InvalidEnemyPositionException();
 
 		return (Posicion) it.next();
 
