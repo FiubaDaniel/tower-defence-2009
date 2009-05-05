@@ -38,4 +38,6 @@ public abstract class Obstaculo {
 		return this.lugarQueOcupa;
 	}
 	
+	public abstract void atacar() ;
+	
 }

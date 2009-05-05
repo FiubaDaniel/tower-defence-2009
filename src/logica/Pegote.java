@@ -8,12 +8,11 @@ public class Pegote extends Obstaculo {
 	public Pegote(Posicion posActual) {
 		this.setPrecio(20);
 		this.setPosicion(posActual);
-		this.setAlcance(1);
+		this.setAlcance(0);
 		
 	}
 	
-	public void atacar(Enemigo bicho) {
-		
+	public void atacar() {	
 		Iterator it = Escenario.obtenerEscenario().getIteradordeEnemigos();
 		while ( it.hasNext()) {
 			Enemigo Aux = (Enemigo) it.next();
