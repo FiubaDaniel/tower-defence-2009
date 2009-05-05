@@ -1,12 +1,16 @@
 package logica;
 
+import customExceptions.*;
+
 public class Cucaracha extends Enemigo {
 	
-	public Cucaracha(Posicion unLugar){
+	public Cucaracha(Posicion unLugar) {
 		this.setPosicion(unLugar);
-		this.setResistencia(4);
-		this.setVelocidad(5);
-		this.setvida(10);
+		try{
+			this.setVelocidad(5);
+			this.setVida(10);
+		}
+		catch (ValorNegativoException error){}
 	}
 	
 	public void avanzar(Escenario terreno){

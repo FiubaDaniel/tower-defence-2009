@@ -1,4 +1,4 @@
-package pruebas;
+package pruebasIndividuales;
 
 import customExceptions.DineroMuyBajoException;
 import junit.framework.TestCase;

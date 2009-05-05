@@ -1,12 +1,17 @@
 package logica;
 
+import customExceptions.*;
+
 public class Hormiga extends Enemigo {
 
 	public Hormiga(Posicion unLugar){
 		this.setPosicion(unLugar);
-		this.setResistencia(1);
-		this.setVelocidad(1);
-		this.setvida(1);
+		try{
+			this.setVelocidad(1);
+			this.setVida(1);
+		}
+		catch (ValorNegativoException error){}
+		
 	}
 	
 	public void avanzar(Escenario terreno){
