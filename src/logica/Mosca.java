@@ -1,13 +1,17 @@
 package logica;
 
+import customExceptions.*;
+
 public class Mosca extends Enemigo {
 
 	public Mosca(Posicion unLugar){
 		this.setPosicion(unLugar);
-		this.setResistencia(3);
-		this.setVelocidad(4);
 		this.setVolador();
-		this.setvida(5);
+		try{
+			this.setVelocidad(4);
+			this.setVida(5);
+		}
+		catch (ValorNegativoException error){}
 	}
 	
 	public void avanzar(Escenario terreno){

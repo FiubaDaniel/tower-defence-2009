@@ -1,12 +1,16 @@
 package logica;
 
+import customExceptions.*;
+
 public class Araña extends Enemigo {
 	
 	public Araña(Posicion unLugar){
 		this.setPosicion(unLugar);
-		this.setVelocidad(3);
-		this.setResistencia(2);
-		this.setvida(2);
+		try{
+			this.setVelocidad(3);
+			this.setVida(2);
+		}
+		catch (ValorNegativoException error){}
 	}
 	
 	public void avanzar(Escenario terreno){

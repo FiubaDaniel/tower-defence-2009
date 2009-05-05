@@ -1,4 +1,4 @@
-package pruebas;
+package pruebasIndividuales;
 
 import java.util.Iterator;
 

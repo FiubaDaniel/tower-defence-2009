@@ -1,6 +1,6 @@
 package customExceptions;
 
-public class PorcentajeNegativoException extends Exception {
+public class ValorNegativoException extends Exception {
 
 	/**
 	 * 
