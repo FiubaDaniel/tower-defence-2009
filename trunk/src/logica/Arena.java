@@ -9,11 +9,11 @@ public class Arena extends Obstaculo {
 	public Arena(Posicion posActual) {
 		this.setPrecio(10);
 		this.setPosicion(posActual);
-		this.setAlcance(1);
+		this.setAlcance(0);
 		
 	}
 	
-	public void atacar(Enemigo bicho) {
+	public void atacar() {
 		
 		Iterator it = Escenario.obtenerEscenario().getIteradordeEnemigos();
 		while ( it.hasNext()) {
