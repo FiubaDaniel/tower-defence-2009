@@ -8,8 +8,7 @@ public class EnemigoYEscenarioTest {
 	@Test
 	public void avanzar(){
 		Escenario escenario = Escenario.obtenerEscenario();
-		Posicion unLugar = new Posicion(1,1,true);
-		Enemigo bicho1 = new Araña(unLugar);
+		Enemigo bicho1 = new Araña(escenario.getEntrada());
 		bicho1.avanzar(escenario);
 	}
 
