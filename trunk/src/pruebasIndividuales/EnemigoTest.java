@@ -1,10 +1,12 @@
 package pruebasIndividuales;
 
+import junit.framework.TestCase;
+
 import org.junit.*;
 import logica.*;
 import customExceptions.*;
 
-public class EnemigoTest {
+public class EnemigoTest extends TestCase{
 	
 	Escenario escenario = Escenario.obtenerEscenario();
 	Enemigo bicho1 = new Araña(escenario.getEntrada());
@@ -12,8 +14,8 @@ public class EnemigoTest {
 	Enemigo bicho3 = new Hormiga(escenario.getEntrada());
 	Enemigo bicho4 = new Mosca(escenario.getEntrada());
 	
-	@Test
-	public void crearEnemigos(){
+	//@Test
+	public void testcrearEnemigos(){
 		Escenario escenario = Escenario.obtenerEscenario();
 		Enemigo bicho1 = new Araña(escenario.getEntrada());
 		Enemigo bicho2 = new Cucaracha(escenario.getEntrada());
@@ -21,8 +23,8 @@ public class EnemigoTest {
 		Enemigo bicho4 = new Mosca(escenario.getEntrada());
 	}
 	
-	@Test
-	public void disminuirVida(){
+	//@Test
+	public void testdisminuirVida(){
 		int vidaRestada = 10;
 		try{
 			bicho1.disminuirVida(vidaRestada);
@@ -33,8 +35,8 @@ public class EnemigoTest {
 		catch (EnemigoYaMuerto error){}
 	}
 	
-	@Test
-	public void disminuirVelocidad(){
+	//@Test
+	public void testdisminuirVelocidad(){
 		int porcentaje = -1;
 		try{
 			bicho1.disminuirVelocidad(porcentaje);
@@ -42,8 +44,8 @@ public class EnemigoTest {
 		catch (ValorNegativoException error){}
 	}
 	
-	@Test
-	public void frenarPorUnTiempo(){
+	//@Test
+	public void testfrenarPorUnTiempo(){
 		long tiempo = 1000;
 		try{
 			bicho1.frenarPorUnTiempo(tiempo);
