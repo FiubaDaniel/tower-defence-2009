@@ -12,6 +12,7 @@ public class AllTests {
 		//$JUnit-BEGIN$
 		suite.addTestSuite(JugadorTest.class);
 		suite.addTestSuite(EscenarioTest.class);
+		suite.addTestSuite(PosicionTest.class);
 		suite.addTest(new JUnit4TestAdapter(EnemigoTest.class));
 		suite.addTest(new JUnit4TestAdapter(EnemigoYEscenarioTest.class));
 		//$JUnit-END$

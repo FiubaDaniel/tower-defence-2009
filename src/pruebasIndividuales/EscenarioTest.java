@@ -14,7 +14,7 @@ import logica.Posicion;
 public class EscenarioTest extends TestCase {
 
 	Escenario escenario = Escenario.obtenerEscenario();
-	Posicion PosicionGenerica = new Posicion();
+	Posicion PosicionGenerica = escenario.getEntrada();
 	Enemigo Cobayo = new Araña(PosicionGenerica);
 
 	public void testAgregarEnemigoALista() {
@@ -53,7 +53,7 @@ public class EscenarioTest extends TestCase {
 		Enemigo Auxiliar2 = new Araña(PosicionGenerica);
 		Enemigo Auxiliar3 = new Araña(PosicionGenerica);
 		Enemigo Auxiliar4 = new Araña(PosicionGenerica);
-		
+			
 		try {
 			Auxiliar2.disminuirVida(20);
 			Auxiliar4.disminuirVida(20);
