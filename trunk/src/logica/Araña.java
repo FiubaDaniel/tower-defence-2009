@@ -4,10 +4,10 @@ import customExceptions.*;
 
 public class Araña extends Enemigo {
 	
-	public Araña(Posicion unLugar){
+	public Araña(Posicion unLugar) throws NoEsEntradaException{
 		this.setPosicion(unLugar);
 		try{
-			this.setVelocidad(3);
+			this.setVelocidad(-3);
 			this.setVida(2);
 		}
 		catch (ValorNegativoException error){}

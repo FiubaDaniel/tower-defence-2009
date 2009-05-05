@@ -56,7 +56,6 @@ public class EnemigoTest {
 		catch (ValorNegativoException error){}
 	}
 	
-		
 } 
 	  
 

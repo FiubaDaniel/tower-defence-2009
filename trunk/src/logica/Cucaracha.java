@@ -4,7 +4,7 @@ import customExceptions.*;
 
 public class Cucaracha extends Enemigo {
 	
-	public Cucaracha(Posicion unLugar) {
+	public Cucaracha(Posicion unLugar) throws NoEsEntradaException{
 		this.setPosicion(unLugar);
 		try{
 			this.setVelocidad(5);
