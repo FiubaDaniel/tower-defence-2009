@@ -6,21 +6,19 @@ import customExceptions.*;
 
 public class EnemigoTest {
 	
-	boolean valor = true;
-	Posicion lugar = new Posicion(1,1,valor);
-	Enemigo bicho1 = new Araña(lugar);
-	Enemigo bicho2 = new Cucaracha(lugar);
-	Enemigo bicho3 = new Hormiga(lugar);
-	Enemigo bicho4 = new Mosca(lugar);
+	Escenario escenario = Escenario.obtenerEscenario();
+	Enemigo bicho1 = new Araña(escenario.getEntrada());
+	Enemigo bicho2 = new Cucaracha(escenario.getEntrada());
+	Enemigo bicho3 = new Hormiga(escenario.getEntrada());
+	Enemigo bicho4 = new Mosca(escenario.getEntrada());
 	
 	@Test
 	public void crearEnemigos(){
-		boolean valor = true;
-		Posicion lugar = new Posicion(1,1,valor);
-		Enemigo bicho1 = new Araña(lugar);
-		Enemigo bicho2 = new Cucaracha(lugar);
-		Enemigo bicho3 = new Hormiga(lugar);
-		Enemigo bicho4 = new Mosca(lugar);
+		Escenario escenario = Escenario.obtenerEscenario();
+		Enemigo bicho1 = new Araña(escenario.getEntrada());
+		Enemigo bicho2 = new Cucaracha(escenario.getEntrada());
+		Enemigo bicho3 = new Hormiga(escenario.getEntrada());
+		Enemigo bicho4 = new Mosca(escenario.getEntrada());
 	}
 	
 	@Test
