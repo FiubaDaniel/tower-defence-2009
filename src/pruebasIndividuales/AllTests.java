@@ -3,6 +3,7 @@ package pruebasIndividuales;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.framework.JUnit4TestAdapter;
+import pruebasIntegradas.*;
 
 public class AllTests {
 		
@@ -12,6 +13,7 @@ public class AllTests {
 		suite.addTestSuite(JugadorTest.class);
 		suite.addTestSuite(EscenarioTest.class);
 		suite.addTest(new JUnit4TestAdapter(EnemigoTest.class));
+		suite.addTest(new JUnit4TestAdapter(EnemigoYEscenarioTest.class));
 		//$JUnit-END$
 		return suite;
 	}
