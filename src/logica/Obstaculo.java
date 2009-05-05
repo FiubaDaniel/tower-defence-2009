@@ -2,7 +2,7 @@ package logica;
 
 public abstract class Obstaculo {
 	private int precio;
-	private int daÃ±oQueGenera;
+	private int dañoQueGenera;
 	private int alcance;
 	private Posicion lugarQueOcupa;
 	
@@ -14,12 +14,12 @@ public abstract class Obstaculo {
 		return this.precio;
 	}
 	
-	public void setDaÃ±oQueGenera(int unDaÃ±o) {
-		this.daÃ±oQueGenera = unDaÃ±o;
+	public void setDañoQueGenera(int unDaño) {
+		this.dañoQueGenera = unDaño;
 	}
 	
-	public int getDaÃ±oQueGenera() {
-		return this.daÃ±oQueGenera;
+	public int getDañoQueGenera() {
+		return this.dañoQueGenera;
 	}
 	
 	public void setAlcance(int unAlcance) {
@@ -38,6 +38,6 @@ public abstract class Obstaculo {
 		return this.lugarQueOcupa;
 	}
 	
-	public abstract void atacar() ;
+	public abstract void atacar()throws Exception ;
 	
 }
