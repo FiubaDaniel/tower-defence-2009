@@ -20,7 +20,7 @@ public class Hormiga extends Enemigo {
 		this.cambiarPosicion(siguiente);
 		} 
 		else {
-			setFrenado(false);
+			frenarOAvanzar();
 		}
 		
 	}
