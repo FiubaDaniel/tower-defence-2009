@@ -19,7 +19,7 @@ public class Arania extends Enemigo {
 		this.cambiarPosicion(siguiente);
 		}
 		else {
-			setFrenado(false);
+			frenarOAvanzar();
 		}
 	}
 

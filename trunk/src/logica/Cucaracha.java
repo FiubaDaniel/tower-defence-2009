@@ -19,7 +19,7 @@ public class Cucaracha extends Enemigo {
 		this.cambiarPosicion(siguiente);
 		} 
 		else {
-			setFrenado(false);
+			frenarOAvanzar();
 		}
 	}
 
