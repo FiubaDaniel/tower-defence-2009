@@ -14,6 +14,7 @@ public class JugadorTest extends TestCase {
 		assertEquals(30, jugador1.getCantidadVidas());
 
 	}
+
 	public void testModificarDinero() {
 		try {
 			jugador1.ModificarDinero(100);
@@ -24,6 +25,7 @@ public class JugadorTest extends TestCase {
 		}
 		assertEquals(150, (long) jugador1.getDinero());
 	}
+
 	public void testAgregarPuntos() {
 		try {
 			jugador1.agregarPuntos(100);

@@ -1,6 +1,5 @@
 package pruebasIndividuales;
 
-import customExceptions.DineroMuyBajoException;
 import junit.framework.*;
 import logica.*;
 
@@ -19,7 +18,6 @@ public class PegoteTest extends TestCase {
 		/* Tomo tres posiciones caminables del mapa comenzando con la entrada */
 		Posicion primeraPosicion = escenario.getEntrada();
 		Posicion segundaPosicion = Escenario.obtenerEscenario().obtenerSiguientePosicionCaminable(primeraPosicion);
-		Posicion terceraPosicion = Escenario.obtenerEscenario().obtenerSiguientePosicionCaminable(segundaPosicion);
 		
 		/* Posiciono los bichos y el pegote */
 		Enemigo unaMosca = new Mosca(primeraPosicion);
