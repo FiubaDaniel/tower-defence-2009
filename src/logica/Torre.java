@@ -18,21 +18,6 @@ import customExceptions.TerminoAtaqueException;
 		/*instancio el escenario*/
 		private Escenario escenario = Escenario.obtenerEscenario();
 		
-		public int getCosto(){
-			return costo;
-		}
-		
-		public Posicion getPosicion(){
-			return lugarQueOcupa;
-		}
-		
-		public int getDanio(){
-			return danioQueGenera;
-		}
-		
-		public int getAlcance(){
-			return alcance;
-		}
 		
 		public int getEvolucion(){
 			return evolucion;
@@ -41,15 +26,7 @@ import customExceptions.TerminoAtaqueException;
 		public int getCostoEvolucion(){
 			return costoEvolucion;
 		}
-		
-		protected void setDanio(int danio){
-			 danioQueGenera= danio;
-		}
 
-		protected void setCosto(int presio){
-			 costo=presio;
-		}
-		
 		protected void setCostoEvolucion(int costoEvolucionTorre){
 			costoEvolucion=costoEvolucionTorre;
 		}
@@ -58,7 +35,7 @@ import customExceptions.TerminoAtaqueException;
 	    	evolucion=cantidadQueEvoluvciona;
 	    }
 	    
-		//Rea�lizar Ataque
+		//Realizar Ataque
 		
 	    public void atacar() throws Exception{
 	    	Iterator itEnemigos= escenario.getIteradordeEnemigos(); /*lo puse como static ver lo de singleton*/
@@ -70,11 +47,8 @@ import customExceptions.TerminoAtaqueException;
 	    			catch( ClassCastException e){   				
                       throw  new ErrorEnemigoException();
 	    			}
-	    			/*catch (NoSuchElementException e){
-	    			  throw new TerminoAtaqueException();
-	    			}*/
-	    			if (this.lugarQueOcupa.getDistancia(enemigoAatacar.getPosicion())<this.alcance){
-	    				enemigoAatacar.disminuirVida(danioQueGenera);   					
+	    			if (this.getPosicion().getDistancia(enemigoAatacar.getPosicion())<this.getAlcance()){
+	    				enemigoAatacar.disminuirVida(this.getDanioQueGenera());   					
 	    				if(enemigoAatacar.getVida()==0)
 	    					escenario.eliminarEnemigosSinVidadelaLista();
 	    			}
@@ -83,4 +57,3 @@ import customExceptions.TerminoAtaqueException;
 		abstract public void evolucionarce();
 					
 }
-

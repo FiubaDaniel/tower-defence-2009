@@ -12,15 +12,15 @@ public class TorrePlateada extends Torre{
 	
 	/*constructor*/
 	public TorrePlateada(Posicion posicionEnEscenario){
-	     if(this.getCosto()>=jugador.getDinero()){
+	     if(this.getPrecio()>=jugador.getDinero()){
 	    	 throw new DineroMuyBajoException();
 	     }
 	     else{
 	   	 	this.setPosicion(posicionEnEscenario);	 	
 	     }
 	     this.setAlcance(5);
-	     this.setCosto(20);
-	     this.setDanio(2);
+	     this.setPrecio(20);
+	     this.setDanioQueGenera(2);
 	     this.setCostoEvolucion(15);
 	     this.setEvolucion(3);
 	
@@ -31,7 +31,7 @@ public class TorrePlateada extends Torre{
 		if (jugador.getDinero()>this.getCostoEvolucion()){
 		    this.setAlcance(this.getAlcance()+this.getEvolucion());
 		    this.setCostoEvolucion(this.getCostoEvolucion()+this.getEvolucion());
-		    this.setDanio(this.getDanio()+this.getDanio());
+		    this.setDanioQueGenera(this.getDanioQueGenera()+this.getDanioQueGenera());
 		}
 			else{
 				throw new DineroMuyBajoException();

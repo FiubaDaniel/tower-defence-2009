@@ -16,7 +16,7 @@ import logica.Posicion;
 public class TorreAzul extends Torre {
 	
 	private Posicion salida;
-	private Hormiga enemigoAatacar;
+	private Enemigo enemigoAatacar;
 	
 	/*instancio un jugador y un escenario*/
 	private Jugador jugador= Jugador.obtenerJugador(1,1.5,"Daniel");
@@ -25,14 +25,14 @@ public class TorreAzul extends Torre {
 	/*constructor*/
 	public TorreAzul(Posicion posicionEnEscenario){ /*ver lo dell costructor*/
 
-		if(this.getCosto()>=jugador.getDinero()){
+		if(this.getPrecio()>=jugador.getDinero()){
 	    	 throw new DineroMuyBajoException();
 	     }
 	     else{
 	    		this.setPosicion(posicionEnEscenario);	 	
 	     }
-	     this.setCosto(15);
-	     this.setDanio(6);
+	     this.setPrecio(15);
+	     this.setDanioQueGenera(6);
 	     this.setCostoEvolucion(10);
 	     this.setEvolucion(4);
 	} 
@@ -49,7 +49,7 @@ public class TorreAzul extends Torre {
     	
     	while(itEnemigos.hasNext()){
 			try{
-				enemigoAatacar=(Hormiga) itEnemigos.next();
+				enemigoAatacar=(Enemigo) itEnemigos.next();
 			}
 			catch( ClassCastException e){   				
               throw  new ErrorEnemigoException();
@@ -60,12 +60,12 @@ public class TorreAzul extends Torre {
 		
     	if(this.getPosicion().getDistancia(salida)>salida.getDistancia(enemigoAatacar.getPosicion())){
     		if ((3<this.getPosicion().getDistancia(enemigoAatacar.getPosicion()))&& (this.getPosicion().getDistancia(enemigoAatacar.getPosicion())<7)){
-   			     enemigoAatacar.disminuirVida(this.getDanio());
+   			     enemigoAatacar.disminuirVida(this.getDanioQueGenera());
     		}
     	else{
     		if ((this.getPosicion().getDistancia(enemigoAatacar.getPosicion())<8)&& (this.getPosicion().getDistancia(enemigoAatacar.getPosicion())>5)){
     			
-    			     enemigoAatacar.disminuirVida(this.getDanio());
+    			     enemigoAatacar.disminuirVida(this.getDanioQueGenera());
     			}
     		}
     	}
@@ -78,7 +78,7 @@ public class TorreAzul extends Torre {
     	/*nombre aca tambien*/
     	if (jugador.getDinero()>getCostoEvolucion()){
     		this.setAlcance(this.getAlcance()+this.getAlcance());
-    		this.setDanio(this.getDanio()*this.getEvolucion());
+    		this.setDanioQueGenera(this.getDanioQueGenera()*this.getEvolucion());
     		}	
     		else{
     			throw new DineroMuyBajoException();
