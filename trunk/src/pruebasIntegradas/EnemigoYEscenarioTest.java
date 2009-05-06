@@ -1,20 +1,22 @@
 package pruebasIntegradas;
 
 import junit.framework.TestCase;
-
+import customExceptions.*;
 import org.junit.*;
 import logica.*;
 
-public class EnemigoYEscenarioTest extends TestCase{
+public class EnemigoYEscenarioTest {
 	
-	//@Test
-	public void testavanzar(){
+	@Test
+	public void avanzar(){
 		try{
 			Escenario escenario = Escenario.obtenerEscenario();
 			Enemigo bicho1 = new Arania(escenario.getEntrada());
 			bicho1.avanzar(escenario);
 		}
-		catch (Exception error){}
+		catch (NoEsEntradaException error){
+			System.out.println("Error: No se puede entrar por cualquier lado");
+		}
 	}
 
 }
