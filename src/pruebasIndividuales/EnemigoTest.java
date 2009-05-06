@@ -14,7 +14,7 @@ public class EnemigoTest extends TestCase{
 	Enemigo bicho3 = new Hormiga(escenario.getEntrada());
 	Enemigo bicho4 = new Mosca(escenario.getEntrada());
 	
-	//@Test
+	@Test
 	public void testcrearEnemigos(){
 		Escenario escenario = Escenario.obtenerEscenario();
 		try{
@@ -28,7 +28,7 @@ public class EnemigoTest extends TestCase{
 		}
 	}
 	
-	//@Test
+	@Test
 	public void testdisminuirVida(){
 		int vidaRestada = 10;
 		try{
@@ -40,11 +40,12 @@ public class EnemigoTest extends TestCase{
 		catch (EnemigoYaMuerto error){
 			System.out.println("disminuirVida: El enemigo ya esta muerto");
 		}
+		
 	}
 	
-	//@Test
+	@Test
 	public void testdisminuirVelocidad(){
-		int porcentaje = -1;
+		int porcentaje = 1;
 		try{
 			bicho1.disminuirVelocidad(porcentaje);
 		}
@@ -53,9 +54,9 @@ public class EnemigoTest extends TestCase{
 		}
 	}
 	
-	//@Test
+	@Test
 	public void testfrenarPorUnTiempo(){
-		long tiempo = -1000;
+		long tiempo = 1000;
 		try{
 			bicho1.frenarPorUnTiempo(tiempo);
 			bicho2.frenarPorUnTiempo(tiempo);
