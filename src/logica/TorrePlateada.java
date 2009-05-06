@@ -20,7 +20,7 @@ public class TorrePlateada extends Torre{
 	     }
 	     this.setAlcance(5);
 	     this.setCosto(20);
-	     this.setDaño(2);
+	     this.setDanio(2);
 	     this.setCostoEvolucion(15);
 	     this.setEvolucion(3);
 	
@@ -31,7 +31,7 @@ public class TorrePlateada extends Torre{
 		if (jugador.getDinero()>this.getCostoEvolucion()){
 		    this.setAlcance(this.getAlcance()+this.getEvolucion());
 		    this.setCostoEvolucion(this.getCostoEvolucion()+this.getEvolucion());
-		    this.setDaño(this.getDaño()+this.getDaño());
+		    this.setDanio(this.getDanio()+this.getDanio());
 		}
 			else{
 				throw new DineroMuyBajoException();

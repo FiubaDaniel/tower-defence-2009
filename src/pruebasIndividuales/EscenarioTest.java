@@ -6,7 +6,7 @@ import customExceptions.EnemigoYaMuerto;
 import customExceptions.MapaSinEnemigosExcepion;
 
 import junit.framework.TestCase;
-import logica.Araña;
+import logica.Arania;
 import logica.Enemigo;
 import logica.Escenario;
 import logica.Posicion;
@@ -15,13 +15,13 @@ public class EscenarioTest extends TestCase {
 
 	Escenario escenario = Escenario.obtenerEscenario();
 	Posicion PosicionGenerica = escenario.getEntrada();
-	Enemigo Cobayo = new Araña(PosicionGenerica);
+	Enemigo Cobayo = new Arania(PosicionGenerica);
 
 	public void testAgregarEnemigoALista() {
 
 		escenario.agregarEnemigoALista(Cobayo);
 		Iterator it = escenario.getIteradordeEnemigos();
-		Enemigo Auxiliar = new Araña(PosicionGenerica);
+		Enemigo Auxiliar = new Arania(PosicionGenerica);
 
 		boolean enemigoencontrado = false;
 
@@ -49,10 +49,10 @@ public class EscenarioTest extends TestCase {
 
 	public void testEliminarEnemigosSinVidadelaLista() {
 
-		Enemigo Auxiliar1 = new Araña(PosicionGenerica);
-		Enemigo Auxiliar2 = new Araña(PosicionGenerica);
-		Enemigo Auxiliar3 = new Araña(PosicionGenerica);
-		Enemigo Auxiliar4 = new Araña(PosicionGenerica);
+		Enemigo Auxiliar1 = new Arania(PosicionGenerica);
+		Enemigo Auxiliar2 = new Arania(PosicionGenerica);
+		Enemigo Auxiliar3 = new Arania(PosicionGenerica);
+		Enemigo Auxiliar4 = new Arania(PosicionGenerica);
 			
 		try {
 			Auxiliar2.disminuirVida(20);

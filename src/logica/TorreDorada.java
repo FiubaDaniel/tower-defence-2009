@@ -20,7 +20,7 @@ public class TorreDorada extends Torre{
 	     }
 	     this.setAlcance(7);
 	     this.setCosto(50);
-	     this.setDaño(4);
+	     this.setDanio(4);
 	     this.setCostoEvolucion(25);
 	     this.setEvolucion(6);
 	}

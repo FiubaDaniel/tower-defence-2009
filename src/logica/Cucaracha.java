@@ -8,7 +8,7 @@ public class Cucaracha extends Enemigo {
 		this.setPosicion(unLugar);
 		try{
 			this.setVelocidad(5);
-			this.setVida(10);
+			this.setVida(4);
 		}
 		catch (ValorNegativoException error){}
 	}

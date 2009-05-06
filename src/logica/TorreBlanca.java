@@ -21,7 +21,7 @@ public class TorreBlanca extends Torre{
 	     }
 	     this.setAlcance(3);
 	     this.setCosto(10);
-	     this.setDaño(1);
+	     this.setDanio(1);
 	     this.setCostoEvolucion(3);
 	     this.setEvolucion(2);
 	}

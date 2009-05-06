@@ -32,7 +32,7 @@ public class TorreAzul extends Torre {
 	    		this.setPosicion(posicionEnEscenario);	 	
 	     }
 	     this.setCosto(15);
-	     this.setDaño(6);
+	     this.setDanio(6);
 	     this.setCostoEvolucion(10);
 	     this.setEvolucion(4);
 	} 
@@ -60,12 +60,12 @@ public class TorreAzul extends Torre {
 		
     	if(this.getPosicion().getDistancia(salida)>salida.getDistancia(enemigoAatacar.getPosicion())){
     		if ((3<this.getPosicion().getDistancia(enemigoAatacar.getPosicion()))&& (this.getPosicion().getDistancia(enemigoAatacar.getPosicion())<7)){
-   			     enemigoAatacar.disminuirVida(this.getDaño());
+   			     enemigoAatacar.disminuirVida(this.getDanio());
     		}
     	else{
     		if ((this.getPosicion().getDistancia(enemigoAatacar.getPosicion())<8)&& (this.getPosicion().getDistancia(enemigoAatacar.getPosicion())>5)){
     			
-    			     enemigoAatacar.disminuirVida(this.getDaño());
+    			     enemigoAatacar.disminuirVida(this.getDanio());
     			}
     		}
     	}
@@ -78,7 +78,7 @@ public class TorreAzul extends Torre {
     	/*nombre aca tambien*/
     	if (jugador.getDinero()>getCostoEvolucion()){
     		this.setAlcance(this.getAlcance()+this.getAlcance());
-    		this.setDaño(this.getDaño()*this.getEvolucion());
+    		this.setDanio(this.getDanio()*this.getEvolucion());
     		}	
     		else{
     			throw new DineroMuyBajoException();
