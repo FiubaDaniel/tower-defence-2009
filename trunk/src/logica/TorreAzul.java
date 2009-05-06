@@ -31,15 +31,15 @@ public class TorreAzul extends Torre {
 	     else{
 	    		this.setPosicion(posicionEnEscenario);	 	
 	     }
-	     this.setPrecio(15);
-	     this.setDanioQueGenera(6);
-	     this.setCostoEvolucion(10);
-	     this.setEvolucion(4);
+	     this.setPrecio(6);
+	     this.setDanioQueGenera(1);
+	     this.setCostoEvolucion(6);
+	     this.setEvolucion(2);
 	} 
 	
 	
 	/*
-	la torre azul ataca a una distancia de entre 3 y 7 si el enemigo esta mas cerca de la salida q la torre y 
+	la torre azul ataca a una distancia de entre 3 y 8 si el enemigo esta mas cerca de la salida q la torre y 
 	 entre 5 y 8 si esta por delante
 	 */
     public void atacar() throws ErrorEnemigoException, TerminoAtaqueException, EnemigoYaMuerto{
@@ -59,7 +59,7 @@ public class TorreAzul extends Torre {
 			}
 		
     	if(this.getPosicion().getDistancia(salida)>salida.getDistancia(enemigoAatacar.getPosicion())){
-    		if ((3<this.getPosicion().getDistancia(enemigoAatacar.getPosicion()))&& (this.getPosicion().getDistancia(enemigoAatacar.getPosicion())<7)){
+    		if ((3<this.getPosicion().getDistancia(enemigoAatacar.getPosicion()))&& (this.getPosicion().getDistancia(enemigoAatacar.getPosicion())<8)){
    			     enemigoAatacar.disminuirVida(this.getDanioQueGenera());
     		}
     	else{
@@ -77,8 +77,8 @@ public class TorreAzul extends Torre {
     public void evolucionarce(){	
     	/*nombre aca tambien*/
     	if (jugador.getDinero()>getCostoEvolucion()){
-    		this.setAlcance(this.getAlcance()+this.getAlcance());
     		this.setDanioQueGenera(this.getDanioQueGenera()*this.getEvolucion());
+    		this.setCostoEvolucion(this.getCostoEvolucion()+this.getCostoEvolucion());
     		}	
     		else{
     			throw new DineroMuyBajoException();
