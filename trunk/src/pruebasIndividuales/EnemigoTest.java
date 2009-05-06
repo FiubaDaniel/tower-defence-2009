@@ -9,7 +9,7 @@ import customExceptions.*;
 public class EnemigoTest extends TestCase{
 	
 	Escenario escenario = Escenario.obtenerEscenario();
-	Enemigo bicho1 = new Araña(escenario.getEntrada());
+	Enemigo bicho1 = new Arania(escenario.getEntrada());
 	Enemigo bicho2 = new Cucaracha(escenario.getEntrada());
 	Enemigo bicho3 = new Hormiga(escenario.getEntrada());
 	Enemigo bicho4 = new Mosca(escenario.getEntrada());
@@ -17,10 +17,15 @@ public class EnemigoTest extends TestCase{
 	//@Test
 	public void testcrearEnemigos(){
 		Escenario escenario = Escenario.obtenerEscenario();
-		Enemigo bicho1 = new Araña(escenario.getEntrada());
-		Enemigo bicho2 = new Cucaracha(escenario.getEntrada());
-		Enemigo bicho3 = new Hormiga(escenario.getEntrada());
-		Enemigo bicho4 = new Mosca(escenario.getEntrada());
+		try{
+			Enemigo bicho1 = new Arania(escenario.getEntrada());
+			Enemigo bicho2 = new Cucaracha(escenario.getEntrada());
+			Enemigo bicho3 = new Hormiga(escenario.getEntrada());
+			Enemigo bicho4 = new Mosca(escenario.getEntrada());
+		}
+		catch (NoEsEntradaException error){
+			System.out.println("crearEnemigos: La posicion pasada no es la entrada al mapa");
+		}
 	}
 	
 	//@Test
@@ -32,7 +37,9 @@ public class EnemigoTest extends TestCase{
 			bicho3.disminuirVida(vidaRestada);
 			bicho4.disminuirVida(vidaRestada);
 		}
-		catch (EnemigoYaMuerto error){}
+		catch (EnemigoYaMuerto error){
+			System.out.println("disminuirVida: El enemigo ya esta muerto");
+		}
 	}
 	
 	//@Test
@@ -41,21 +48,25 @@ public class EnemigoTest extends TestCase{
 		try{
 			bicho1.disminuirVelocidad(porcentaje);
 		}
-		catch (ValorNegativoException error){}
+		catch (ValorNegativoException error){
+			System.out.println("disminuirVelocidad: El valor pasado es negativo");
+		}
 	}
 	
 	//@Test
 	public void testfrenarPorUnTiempo(){
-		long tiempo = 1000;
+		long tiempo = -1000;
 		try{
 			bicho1.frenarPorUnTiempo(tiempo);
 			bicho2.frenarPorUnTiempo(tiempo);
 			bicho3.frenarPorUnTiempo(tiempo);
 			bicho4.frenarPorUnTiempo(tiempo);
 		}
-		catch (ValorNegativoException error){}
+		catch (ValorNegativoException error){
+			System.out.println("frenarPorUnTiempo: El valor pasado es negativo");
+		}
 	}
 	
-} 
+}
 	  
 

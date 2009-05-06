@@ -2,9 +2,9 @@ package logica;
 
 import customExceptions.*;
 
-public class Araña extends Enemigo {
+public class Arania extends Enemigo {
 	
-	public Araña(Posicion unLugar) throws NoEsEntradaException{
+	public Arania(Posicion unLugar) throws NoEsEntradaException{
 		this.setPosicion(unLugar);
 		try{
 			this.setVelocidad(3);

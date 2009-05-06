@@ -11,7 +11,7 @@ import customExceptions.TerminoAtaqueException;
 
 	public abstract class Torre extends Obstaculo{
 	
-		private int dañoQueGenera, alcance,costo,costoEvolucion,evolucion;;
+		private int danioQueGenera, alcance,costo,costoEvolucion,evolucion;;
 		private Posicion lugarQueOcupa;
 		private Enemigo enemigoAatacar; 
 		
@@ -26,8 +26,8 @@ import customExceptions.TerminoAtaqueException;
 			return lugarQueOcupa;
 		}
 		
-		public int getDaño(){
-			return dañoQueGenera;
+		public int getDanio(){
+			return danioQueGenera;
 		}
 		
 		public int getAlcance(){
@@ -42,8 +42,8 @@ import customExceptions.TerminoAtaqueException;
 			return costoEvolucion;
 		}
 		
-		protected void setDaño(int daño){
-			 dañoQueGenera= daño;
+		protected void setDanio(int danio){
+			 danioQueGenera= danio;
 		}
 
 		protected void setCosto(int presio){
@@ -58,7 +58,7 @@ import customExceptions.TerminoAtaqueException;
 	    	evolucion=cantidadQueEvoluvciona;
 	    }
 	    
-		//Reañlizar Ataque
+		//Reaï¿½lizar Ataque
 		
 	    public void atacar() throws Exception{
 	    	Iterator itEnemigos= escenario.getIteradordeEnemigos(); /*lo puse como static ver lo de singleton*/
@@ -74,7 +74,7 @@ import customExceptions.TerminoAtaqueException;
 	    			  throw new TerminoAtaqueException();
 	    			}*/
 	    			if (this.lugarQueOcupa.getDistancia(enemigoAatacar.getPosicion())<this.alcance){
-	    				enemigoAatacar.disminuirVida(dañoQueGenera);   					
+	    				enemigoAatacar.disminuirVida(danioQueGenera);   					
 	    				if(enemigoAatacar.getVida()==0)
 	    					escenario.eliminarEnemigosSinVidadelaLista();
 	    			}
