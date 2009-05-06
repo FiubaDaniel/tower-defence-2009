@@ -29,28 +29,15 @@ public abstract class Enemigo {
 			velocidad = porcentaje * velocidad / 100;
 	}
 	
-	public void frenarPorUnTiempo(long tiempoEnMilisegundos) throws ValorNegativoException {
-		if (tiempoEnMilisegundos < 0)
-			throw new ValorNegativoException();
-		else{
-			long t0, t1;
-			t0 = System.currentTimeMillis();
-			do
-				t1 = System.currentTimeMillis();
-			while(t1-t0 < tiempoEnMilisegundos);
-		}
-	}
-	
 	public boolean getFrenado() {
-		return this.frenado;
+		return frenado;
 	}
 	
-	public void setFrenado(boolean frenado) {
-		this.frenado=frenado;
-	}
-	
-	public void frenar() {
-		setFrenado(true);
+	public void frenarOAvanzar() {
+		if (frenado)
+			frenado = false;
+		else
+			frenado = true;
 	}
 	
 	public Posicion getPosicion(){
