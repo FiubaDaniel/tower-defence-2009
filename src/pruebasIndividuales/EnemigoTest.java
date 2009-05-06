@@ -1,27 +1,24 @@
 package pruebasIndividuales;
 
 import junit.framework.TestCase;
-
+import java.util.*;
 import org.junit.*;
 import logica.*;
 import customExceptions.*;
 
-public class EnemigoTest extends TestCase{
+public class EnemigoTest {
 	
 	Escenario escenario = Escenario.obtenerEscenario();
-	Enemigo bicho1 = new Arania(escenario.getEntrada());
-	Enemigo bicho2 = new Cucaracha(escenario.getEntrada());
-	Enemigo bicho3 = new Hormiga(escenario.getEntrada());
-	Enemigo bicho4 = new Mosca(escenario.getEntrada());
-	
+	ArrayList<Enemigo> listaDeEnemigos = new ArrayList<Enemigo>();
+		
 	@Test
-	public void testcrearEnemigos(){
+	public void crearEnemigos(){
 		Escenario escenario = Escenario.obtenerEscenario();
 		try{
-			Enemigo bicho1 = new Arania(escenario.getEntrada());
-			Enemigo bicho2 = new Cucaracha(escenario.getEntrada());
-			Enemigo bicho3 = new Hormiga(escenario.getEntrada());
-			Enemigo bicho4 = new Mosca(escenario.getEntrada());
+			listaDeEnemigos.add(new Arania(escenario.getEntrada()));
+			listaDeEnemigos.add(new Cucaracha(escenario.getEntrada()));
+			listaDeEnemigos.add(new Hormiga(escenario.getEntrada()));
+			listaDeEnemigos.add(new Mosca(escenario.getEntrada()));
 		}
 		catch (NoEsEntradaException error){
 			System.out.println("crearEnemigos: La posicion pasada no es la entrada al mapa");
@@ -29,13 +26,25 @@ public class EnemigoTest extends TestCase{
 	}
 	
 	@Test
-	public void testdisminuirVida(){
-		int vidaRestada = 10;
+	public void datosCargadosDeEnemigos(){
+		Iterator<Enemigo> it = listaDeEnemigos.iterator();
+		while (it.hasNext()){
+			if (((Enemigo)it).getVida() <= 0)
+				System.out.println("Vida mal seteada");
+		}
+	}
+	
+	@Test
+	public void disminuirVida(){
+		Iterator<Enemigo> it = listaDeEnemigos.iterator();
+		int vidaRestada = 1;
 		try{
-			bicho1.disminuirVida(vidaRestada);
-			bicho2.disminuirVida(vidaRestada);
-			bicho3.disminuirVida(vidaRestada);
-			bicho4.disminuirVida(vidaRestada);
+			while (it.hasNext()){
+				int valor = ((Enemigo)it).getVida() - vidaRestada;
+				((Enemigo)it).disminuirVida(vidaRestada);
+				if (((Enemigo)it).getVida() != valor)
+					System.out.println("Error al disminuir vida");
+			}
 		}
 		catch (EnemigoYaMuerto error){
 			System.out.println("disminuirVida: El enemigo ya esta muerto");
@@ -44,10 +53,16 @@ public class EnemigoTest extends TestCase{
 	}
 	
 	@Test
-	public void testdisminuirVelocidad(){
-		int porcentaje = 1;
+	public void disminuirVelocidad(){
+		Iterator<Enemigo> it = listaDeEnemigos.iterator();
+		int porcentaje = 50;
 		try{
-			bicho1.disminuirVelocidad(porcentaje);
+			while (it.hasNext()){
+				int valor = ((Enemigo)it).getVelocidad() * porcentaje / 100;
+				((Enemigo)it).disminuirVelocidad(porcentaje);
+				if (((Enemigo)it).getVelocidad() != valor)
+					System.out.println("Error: disminuirVelocidad");
+			}
 		}
 		catch (ValorNegativoException error){
 			System.out.println("disminuirVelocidad: El valor pasado es negativo");
@@ -56,12 +71,12 @@ public class EnemigoTest extends TestCase{
 	
 	@Test
 	public void testfrenarPorUnTiempo(){
+		Iterator<Enemigo> it = listaDeEnemigos.iterator();
 		long tiempo = 1000;
 		try{
-			bicho1.frenarPorUnTiempo(tiempo);
-			bicho2.frenarPorUnTiempo(tiempo);
-			bicho3.frenarPorUnTiempo(tiempo);
-			bicho4.frenarPorUnTiempo(tiempo);
+			while (it.hasNext()){
+				((Enemigo)it).frenarPorUnTiempo(tiempo);
+			}
 		}
 		catch (ValorNegativoException error){
 			System.out.println("frenarPorUnTiempo: El valor pasado es negativo");
