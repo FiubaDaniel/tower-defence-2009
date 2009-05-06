@@ -4,19 +4,20 @@ import customExceptions.*;
 
 public class Mosca extends Enemigo {
 
-	public Mosca(Posicion unLugar) throws NoEsEntradaException{
+	public Mosca(Posicion unLugar) throws NoEsEntradaException {
 		this.setPosicion(unLugar);
 		this.setVolador();
-		try{
+		try {
 			this.setVelocidad(4);
 			this.setVida(3);
+		} catch (ValorNegativoException error) {
 		}
-		catch (ValorNegativoException error){}
-		
+
 	}
-	
-	public void avanzar(Escenario terreno){
-		Posicion siguiente= terreno.obtenerSiguientePosicionCaminable(this.getPosicion());
-		this.cambiarPosicion(siguiente);		
+
+	public void avanzar(Escenario terreno) {
+		Posicion siguiente = terreno.obtenerSiguientePosicionCaminable(this
+				.getPosicion());
+		this.cambiarPosicion(siguiente);
 	}
 }
