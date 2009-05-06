@@ -14,8 +14,13 @@ public class Cucaracha extends Enemigo {
 	}
 	
 	public void avanzar(Escenario terreno){
+		if (getFrenado() == false) {
 		Posicion siguiente= terreno.obtenerSiguientePosicionCaminable(this.getPosicion());
-		this.cambiarPosicion(siguiente);		
+		this.cambiarPosicion(siguiente);
+		} 
+		else {
+			setFrenado(false);
+		}
 	}
 
 }

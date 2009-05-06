@@ -19,12 +19,7 @@ public class Arena extends Obstaculo {
 		while ( it.hasNext()) {
 			Enemigo Aux = (Enemigo) it.next();
 			if (!Aux.getVolador() && this.getPosicion().getDistancia(Aux.getPosicion()) == this.getAlcance()) {
-				try {
-				Aux.frenarPorUnTiempo(1000);
-				}
-				catch (ValorNegativoException e) {
-					System.out.println("La capturo para que no se queje el compilador");															
-				}
+					Aux.frenar();															
 			}
 		}		
 	}
