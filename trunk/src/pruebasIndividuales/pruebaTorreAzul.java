@@ -1,10 +1,11 @@
 package pruebasIndividuales;
 
 import java.util.Iterator;
+
 import customExceptions.DineroMuyBajoException;
 import customExceptions.ErrorEnemigoException;
 import junit.framework.*;
-import logica.Arania;
+import logica.Araña;
 import logica.Cucaracha;
 import logica.Enemigo;
 import logica.Escenario;
@@ -12,18 +13,18 @@ import logica.Hormiga;
 import logica.Jugador;
 import logica.Mosca;
 import logica.Posicion;
-import logica.TorreDorada;
+import logica.TorreAzul;
 
-public class pruebaTorreDorada extends TestCase {
+public class pruebaTorreAzul extends TestCase {
 
-	private TorreDorada torre;
+	private TorreAzul torre;
 	private Enemigo enemigo,enemigo2,enemigo3,enemigo4,enemigo5;
 	private Posicion posicionTorre,posicionEnemigo,posicionEnemigo2,posicionEnemigo3,posicionEnemigo4,posicionEnemigo5;
 	private Jugador jugador;
 	private Escenario escenario;
 
 	
-	public pruebaTorreDorada(String name){
+	public pruebaTorreAzul(String name){
 		super(name);   
 	}
 
@@ -32,10 +33,10 @@ public class pruebaTorreDorada extends TestCase {
 		escenario= Escenario.obtenerEscenario();
 		posicionTorre= new Posicion(5,5,true);
         posicionEnemigo=new Posicion(20,6,true);	
-        posicionEnemigo2=new Posicion(18,3,true);
+        posicionEnemigo2=new Posicion(5,3,true);
         posicionEnemigo3=new Posicion(5,18,true);
-        posicionEnemigo4=new Posicion(5,16,true);
-        posicionEnemigo5=new Posicion(5,15,true);
+        posicionEnemigo4=new Posicion(5,6,true);
+        posicionEnemigo5=new Posicion(5,7,true);
    
 	    jugador= Jugador.obtenerJugador(1,55.60,"Daniel");
 	    
@@ -43,7 +44,7 @@ public class pruebaTorreDorada extends TestCase {
 	         enemigo.cambiarPosicion(posicionEnemigo);
 	    enemigo2=new Cucaracha(escenario.getEntrada());
 	         enemigo2.cambiarPosicion(posicionEnemigo2);
-	    enemigo3=new Arania(escenario.getEntrada());
+	    enemigo3=new Araña(escenario.getEntrada());
 	         enemigo3.cambiarPosicion(posicionEnemigo3);
 	    enemigo4=new Mosca(escenario.getEntrada());
 	         enemigo4.cambiarPosicion(posicionEnemigo4);    
@@ -56,13 +57,14 @@ public class pruebaTorreDorada extends TestCase {
 		escenario.agregarEnemigoALista(enemigo4);
 		escenario.agregarEnemigoALista(enemigo5);
 		
-	    torre = new TorreDorada(posicionTorre);   
+		
+	    torre = new TorreAzul(posicionTorre);   
 	}
 	
 	public void testVerificarInicializacion(){
-		Assert.assertEquals(50,torre.getPrecio());
-		Assert.assertEquals(7,torre.getAlcance());
-		Assert.assertEquals(4,torre.getDanioQueGenera());
+		Assert.assertEquals(,torre.getPrecio());
+		Assert.assertEquals(,torre.getAlcance());
+		Assert.assertEquals(,torre.getDañoQueGenera());
 	}
 	
 	public void testAtacar() throws ErrorEnemigoException{
@@ -72,10 +74,10 @@ public class pruebaTorreDorada extends TestCase {
 			e.printStackTrace();
 		}
 		Assert.assertEquals(1, enemigo.getVida());
-		Assert.assertEquals(4, enemigo2.getVida());
+		Assert.assertEquals(6, enemigo2.getVida());
 		Assert.assertEquals(2, enemigo3.getVida());
-		Assert.assertEquals(3, enemigo4.getVida());
-		Assert.assertEquals(4, enemigo5.getVida());
+		Assert.assertEquals(1, enemigo4.getVida());
+		Assert.assertEquals(6, enemigo5.getVida());
 	}
 
 	public void testEvolucionar(){
@@ -85,5 +87,16 @@ public class pruebaTorreDorada extends TestCase {
 		Assert.assertEquals(31,torre.getCostoEvolucion());	
 	}
 	
+	public void TestNoTienedinero(){
+		
+	jugador= Jugador.obtenerJugador(1,15,"Daniel");
+	int i=0;
+	try{
+	    torre.evolucionarce();
+	}catch(DineroMuyBajoException e){
+		 i= 1;
+	}
+	Assert.assertEquals(1, i);
+       }
 
 }
