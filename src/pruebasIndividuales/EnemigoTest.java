@@ -69,20 +69,7 @@ public class EnemigoTest {
 		}
 	}
 	
-	@Test
-	public void testfrenarPorUnTiempo(){
-		Iterator<Enemigo> it = listaDeEnemigos.iterator();
-		long tiempo = 1000;
-		try{
-			while (it.hasNext()){
-				((Enemigo)it).frenarPorUnTiempo(tiempo);
-			}
-		}
-		catch (ValorNegativoException error){
-			System.out.println("frenarPorUnTiempo: El valor pasado es negativo");
-		}
-	}
-	
+		
 }
 	  
 
