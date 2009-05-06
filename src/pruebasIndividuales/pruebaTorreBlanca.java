@@ -74,10 +74,10 @@ public class pruebaTorreBlanca extends TestCase {
 			e.printStackTrace();
 		}
 		Assert.assertEquals(1, enemigo.getVida());
-		Assert.assertEquals(9, enemigo2.getVida());
+		Assert.assertEquals(3, enemigo2.getVida());
 		Assert.assertEquals(1, enemigo3.getVida());
-		Assert.assertEquals(4, enemigo4.getVida());
-		Assert.assertEquals(9, enemigo5.getVida());
+		Assert.assertEquals(2, enemigo4.getVida());
+		Assert.assertEquals(3, enemigo5.getVida());
 	}
 
 	public void testEvolucionar(){
