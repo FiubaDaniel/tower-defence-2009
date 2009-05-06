@@ -19,7 +19,7 @@ public class Arena extends Obstaculo {
 		while ( it.hasNext()) {
 			Enemigo Aux = (Enemigo) it.next();
 			if (!Aux.getVolador() && this.getPosicion().getDistancia(Aux.getPosicion()) == this.getAlcance()) {
-					Aux.frenar();															
+					Aux.frenarOAvanzar();															
 			}
 		}		
 	}
