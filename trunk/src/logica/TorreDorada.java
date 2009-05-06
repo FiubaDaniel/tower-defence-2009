@@ -12,15 +12,15 @@ public class TorreDorada extends Torre{
 	
 	/*constructor*/
 	public TorreDorada(Posicion posicionEnEscenario){
-	     if(this.getCosto()>=jugador.getDinero()){
+	     if(this.getPrecio()>=jugador.getDinero()){
 	    	 throw new DineroMuyBajoException();
 	     }
 	     else{
 	    	 	this.setPosicion(posicionEnEscenario);	 	
 	     }
 	     this.setAlcance(7);
-	     this.setCosto(50);
-	     this.setDanio(4);
+	     this.setPrecio(50);
+	     this.setDanioQueGenera(4);
 	     this.setCostoEvolucion(25);
 	     this.setEvolucion(6);
 	}
@@ -36,3 +36,4 @@ public class TorreDorada extends Torre{
 			}
 		}
 }
+

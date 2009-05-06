@@ -13,15 +13,15 @@ public class TorreBlanca extends Torre{
 	
 	/*constructor*/
 	public TorreBlanca(Posicion posicionEnEscenario){
-	     if(this.getCosto()>=jugador.getDinero()){
+	     if(this.getPrecio()>=jugador.getDinero()){
 	    	 throw new DineroMuyBajoException();
 	     }
 	     else{
 	    	 this.setPosicion(posicionEnEscenario);	 	
 	     }
 	     this.setAlcance(3);
-	     this.setCosto(10);
-	     this.setDanio(1);
+	     this.setPrecio(10);
+	     this.setDanioQueGenera(1);
 	     this.setCostoEvolucion(3);
 	     this.setEvolucion(2);
 	}
