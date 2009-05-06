@@ -4,7 +4,7 @@ import java.util.Iterator;
 import customExceptions.DineroMuyBajoException;
 import customExceptions.ErrorEnemigoException;
 import junit.framework.*;
-import logica.Araña;
+import logica.Arania;
 import logica.Cucaracha;
 import logica.Enemigo;
 import logica.Escenario;
@@ -43,7 +43,7 @@ public class pruebaTorreDorada extends TestCase {
 	         enemigo.cambiarPosicion(posicionEnemigo);
 	    enemigo2=new Cucaracha(escenario.getEntrada());
 	         enemigo2.cambiarPosicion(posicionEnemigo2);
-	    enemigo3=new Araña(escenario.getEntrada());
+	    enemigo3=new Arania(escenario.getEntrada());
 	         enemigo3.cambiarPosicion(posicionEnemigo3);
 	    enemigo4=new Mosca(escenario.getEntrada());
 	         enemigo4.cambiarPosicion(posicionEnemigo4);    
