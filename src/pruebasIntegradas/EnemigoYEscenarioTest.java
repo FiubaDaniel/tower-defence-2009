@@ -1,6 +1,7 @@
 package pruebasIntegradas;
 
 import junit.framework.TestCase;
+import org.junit.*;
 import customExceptions.*;
 import logica.*;
 
