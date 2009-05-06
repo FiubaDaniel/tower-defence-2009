@@ -8,6 +8,7 @@ public abstract class Enemigo {
 	private boolean bichoVolador = false;
 	private int velocidad;
 	private Posicion lugarQueOcupa;
+	private boolean frenado = false;
 
 	public abstract void avanzar(Escenario terreno);
 	
@@ -38,6 +39,18 @@ public abstract class Enemigo {
 				t1 = System.currentTimeMillis();
 			while(t1-t0 < tiempoEnMilisegundos);
 		}
+	}
+	
+	public boolean getFrenado() {
+		return this.frenado;
+	}
+	
+	public void setFrenado(boolean frenado) {
+		this.frenado=frenado;
+	}
+	
+	public void frenar() {
+		setFrenado(true);
 	}
 	
 	public Posicion getPosicion(){
