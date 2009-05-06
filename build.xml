@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TowerDefense" default="dist" basedir=".">
+	<description>
+
+        build.xml para compilar todo el proyecto
+    
+</description>
+	<!-- variables a utilizar -->
+	<property name="app.name" value="TowerDefense" />
+	<property name="build.dir" value="build/" />
+	<property name="dist.dir" location="${build.dir}/dist" />
+	<property name="src.dir" value="src/" />
+	<property name="test1.dir" value="src/pruebasIndividuales/" />
+	<property name="test2.dir" value="src/pruebasIntegradas/" />
+	<property name="lib.dir" value="lib/" />
+	<property name="junit.dir" value="lib/junit.jar" />
+	<property name="junit.output.dir" value="${build.dir}junit" />
+
+	<target name="clean" description="limpia lo compilado">
+		<!--Borra los directorios ${build} y ${dist} completos -->
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="init">
+		<!-- Hace una marca de tiempo -->
+		<tstamp />
+	</target>
+
+	<target name="compile" depends="init" description="compila el codigo ">
+		<!-- Compila el codigo java de ${src} a ${build} -->
+		<delete dir="${build.dir}" />
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${junit.output.dir}" />
+		<javac srcdir="${src.dir}" destdir="${build.dir}" />
+		<javac srcdir="${src.dir}" classpath="${junit.dir}" destdir="${build.dir}" />
+		<javac srcdir="${test1.dir}" classpath="${junit.dir}" destdir="${build.dir}" />
+		<javac srcdir="${test2.dir}" classpath="${junit.dir}" destdir="${build.dir}" />
+	</target>
+
+	<target name="dist" depends="compile" description="genera el jar">
+		<!-- Crea el directorio para distribuir -->
+		<mkdir dir="${dist.dir}/lib" />
+
+		<!--Pone todo lo que está en ${build} en Civ-${DSTAMP}.jar 
+	     (es decir, el archivo jar lleva la fecha del dia) -->
+		<jar jarfile="${dist.dir}/lib/Juego-${DSTAMP}.jar" basedir="${build.dir}" />
+	</target>
+
+	<target name="AllTests">
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="pruebasIndividuales.AllTests" todir="${junit.output.dir}" />
+			<classpath refid="Tower-Defense-2009.classpath" />
+		</junit>
+	</target>
+	<target name="junitreport">
+		<junitreport todir="${junit.output.dir}">
+			<fileset dir="${junit.output.dir}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${junit.output.dir}" />
+		</junitreport>
+	</target>
+
+</project>
