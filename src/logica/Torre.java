@@ -33,9 +33,7 @@ public abstract class Torre extends Obstaculo {
 
 	public void atacar() throws Exception {
 		Iterator itEnemigos = escenario.getIteradordeEnemigos();
-		/*
-		 * lo puse como static ver lo de singleton
-		 */
+	
 		while (itEnemigos.hasNext()) {
 
 			try {
