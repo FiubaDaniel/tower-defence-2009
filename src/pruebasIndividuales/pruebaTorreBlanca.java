@@ -84,16 +84,5 @@ public class pruebaTorreBlanca extends TestCase {
 		Assert.assertEquals(5, torre.getCostoEvolucion());
 	}
 
-	public void TestNoTienedinero() {
-
-		jugador = Jugador.obtenerJugador(1, 1, "Daniel");
-		int i = 0;
-		try {
-			torre.evolucionarce();
-		} catch (DineroMuyBajoException e) {
-			i = 1;
-		}
-		Assert.assertEquals(1, i);
-	}
 
 }
