@@ -1,65 +1,77 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="TowerDefense" default="dist" basedir=".">
-	<description>
+<!-- build.xml -->
+<project name="TowerDefense2009" default="build" basedir=".">
 
-        build.xml para compilar todo el proyecto
-    
-</description>
-	<!-- variables a utilizar -->
-	<property name="app.name" value="TowerDefense" />
-	<property name="build.dir" value="build/" />
-	<property name="dist.dir" location="${build.dir}/dist" />
-	<property name="src.dir" value="src/" />
-	<property name="test1.dir" value="src/pruebasIndividuales/" />
-	<property name="test2.dir" value="src/pruebasIntegradas/" />
-	<property name="lib.dir" value="lib/" />
-	<property name="junit.dir" value="lib/junit.jar" />
-	<property name="junit.output.dir" value="${build.dir}junit" />
+	<!-- Variables de configuracion -->
+	<!-- Directorios -->
+	<property name="src"		value="${basedir}/src" />
+	<property name="classes"	value="${basedir}/classes" />
+	<property name="lib"		value="${basedir}/lib" />
+	<property name="dist"		value="${basedir}/dist" />
+	<property name="mapas"		value="${basedir}/Mapas" />
+	
+	<!-- Otras variables -->
+	<property name="main.class" value="TowerDefens.TP" />
+	<property name="test.class" value="pruebasIndividuales.AllTests" />
+	
+	<!-- init -->
+	<target name="init" description="Crea el entorno de trabajo">
 
-	<target name="clean" description="limpia lo compilado">
-		<!--Borra los directorios ${build} y ${dist} completos -->
-		<delete dir="${build.dir}" />
+		<echo message="Proyecto *** ${ant.project.name} *** " />
+		<echo message="Ant = ${ant.version}" />
+		<echo message="VM = ${ant.java.version}" />
+		
+		<mkdir dir="${src}"/>
+		<mkdir dir="${classes}"/>
+		<mkdir dir="${lib}"/>
+		<mkdir dir="${dist}"/>
 	</target>
 
-	<target name="init">
-		<!-- Hace una marca de tiempo -->
-		<tstamp />
+	<path id="idClasspath">
+		<pathelement location="${classes}" />
+		<fileset dir="${lib}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<!-- classpath -->
+	<target name="setClasspath" depends="init" description="Establece el classpath">
+		<property name="classpath" refid="idClasspath" />
+		<echo message="Classpath = ${classpath}" />
 	</target>
 
-	<target name="compile" depends="init" description="compila el codigo ">
-		<!-- Compila el codigo java de ${src} a ${build} -->
-		<delete dir="${build.dir}" />
-		<mkdir dir="${build.dir}" />
-		<mkdir dir="${junit.output.dir}" />
-		<javac srcdir="${src.dir}" destdir="${build.dir}" />
-		<javac srcdir="${src.dir}" classpath="${junit.dir}" destdir="${build.dir}" />
-		<javac srcdir="${test1.dir}" classpath="${junit.dir}" destdir="${build.dir}" />
-		<javac srcdir="${test2.dir}" classpath="${junit.dir}" destdir="${build.dir}" />
+	<!-- build -->
+	<target name="build" depends="setClasspath" description="Compila todos los fuentes del proyecto.">
+		<javac srcdir="${src}" destdir="${classes}" classpath="${classpath}" debug="on" fork="yes"/>
 	</target>
 
-	<target name="dist" depends="compile" description="genera el jar">
-		<!-- Crea el directorio para distribuir -->
-		<mkdir dir="${dist.dir}/lib" />
-
-		<!--Pone todo lo que está en ${build} en Civ-${DSTAMP}.jar 
-	     (es decir, el archivo jar lleva la fecha del dia) -->
-		<jar jarfile="${dist.dir}/lib/Juego-${DSTAMP}.jar" basedir="${build.dir}" />
+	<!-- run -->
+	<target name="run" depends="build" description="Ejecuta la aplicacion">
+		<java
+			classname="${main.class}"
+			classpathref="idClasspath"
+			fork="true"
+			dir="${basedir}">
+		</java>
 	</target>
+	
+	<!-- test -->
+	<!-- REQUIERE tener junit.jar en el subdirectorio lib de la instalacion de ANT -->
+	<target name="test" depends="build" description="Ejecuta un test del proyecto.">
 
-	<target name="AllTests">
-		<junit fork="yes" printsummary="withOutAndErr">
-			<formatter type="xml" />
-			<test name="pruebasIndividuales.AllTests" todir="${junit.output.dir}" />
-			<classpath refid="Tower-Defense-2009.classpath" />
+		<junit>
+			<classpath refid="idClasspath" />
+			<formatter type="brief" usefile="false" />
+			<test name="${test.class}" />
 		</junit>
 	</target>
-	<target name="junitreport">
-		<junitreport todir="${junit.output.dir}">
-			<fileset dir="${junit.output.dir}">
-				<include name="TEST-*.xml" />
-			</fileset>
-			<report format="frames" todir="${junit.output.dir}" />
-		</junitreport>
-	</target>
 
+	<target name="dist" depends="test" description="Crea un archivo para distribuir el proyecto">
+		<zip destfile="${dist}/${ant.project.name}.zip">
+			<zipfileset dir="${src}" prefix="src"/>
+			<zipfileset dir="${classes}" prefix="classes"/>
+			<zipfileset dir="${lib}" prefix="lib"/>
+			<zipfileset dir="${mapas}" prefix="Mapas"/>
+			<zipfileset file="build.xml"/>
+		</zip>	
+	</target>	
 </project>
