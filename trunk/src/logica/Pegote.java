@@ -15,12 +15,12 @@ public class Pegote extends Obstaculo {
 	public void atacar() {
 		Iterator it = Escenario.obtenerEscenario().getIteradordeEnemigos();
 		while (it.hasNext()) {
-			Enemigo Aux = (Enemigo) it.next();
-			if (!Aux.getVolador()
-					&& this.getPosicion().getDistancia(Aux.getPosicion()) == this
+			Enemigo enemigoAux = (Enemigo) it.next();
+			if (!enemigoAux.getVolador()
+					&& this.getPosicion().getDistancia(enemigoAux.getPosicion()) == this
 							.getAlcance()) {
 				try {
-					Aux.disminuirVelocidad(50);
+					enemigoAux.disminuirVelocidad(50);
 				} catch (ValorNegativoException e) {
 					System.out
 							.println("La capturo para que no se queje el compilador");

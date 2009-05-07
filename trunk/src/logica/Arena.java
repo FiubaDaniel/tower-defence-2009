@@ -15,11 +15,11 @@ public class Arena extends Obstaculo {
 
 		Iterator it = Escenario.obtenerEscenario().getIteradordeEnemigos();
 		while (it.hasNext()) {
-			Enemigo Aux = (Enemigo) it.next();
-			if (!Aux.getVolador()
-					&& this.getPosicion().getDistancia(Aux.getPosicion()) == this
+			Enemigo enemigoAux = (Enemigo) it.next();
+			if (!enemigoAux.getVolador()
+					&& this.getPosicion().getDistancia(enemigoAux.getPosicion()) == this
 							.getAlcance()) {
-				Aux.frenarOAvanzar();
+				enemigoAux.frenarOAvanzar();
 			}
 		}
 	}
