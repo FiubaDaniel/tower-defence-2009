@@ -21,8 +21,7 @@ public abstract class Enemigo {
 			vida -= vidaRestada;
 	}
 
-	public void disminuirVelocidad(int porcentaje)
-			throws ValorNegativoException {
+	public void disminuirVelocidad(int porcentaje) throws ValorNegativoException {
 		if (porcentaje < 0)
 			throw new ValorNegativoException();
 		else
@@ -48,8 +47,7 @@ public abstract class Enemigo {
 		return vida;
 	}
 
-	protected void setVelocidad(int velocidadInicial)
-			throws ValorNegativoException {
+	protected void setVelocidad(int velocidadInicial) throws ValorNegativoException {
 		if (velocidadInicial < 0)
 			throw new ValorNegativoException();
 		else
