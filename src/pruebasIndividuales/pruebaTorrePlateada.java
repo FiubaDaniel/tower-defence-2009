@@ -85,16 +85,5 @@ public class pruebaTorrePlateada extends TestCase {
 		Assert.assertEquals(4, torre.getDanioQueGenera());
 	}
 
-	public void TestNoTienedinero() {
-
-		jugador = Jugador.obtenerJugador(1, 15, "Daniel");
-		int i = 0;
-		try {
-			torre.evolucionarce();
-		} catch (DineroMuyBajoException e) {
-			i = 1;
-		}
-		Assert.assertEquals(1, i);
-	}
 
 }
