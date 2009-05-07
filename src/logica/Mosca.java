@@ -10,7 +10,8 @@ public class Mosca extends Enemigo {
 		try {
 			this.setVelocidad(4);
 			this.setVida(3);
-		} catch (ValorNegativoException error) {
+		}
+		catch (ValorNegativoException error) {
 		}
 
 	}
