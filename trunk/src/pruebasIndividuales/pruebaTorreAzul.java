@@ -15,11 +15,12 @@ import logica.TorreAzul;
 public class pruebaTorreAzul extends TestCase {
 
 	private TorreAzul torre;
-	private Enemigo enemigo, enemigo2, enemigo3, enemigo4, enemigo5;
+	private Enemigo enemigo, enemigo2, enemigo3, enemigo4, enemigo5,enemigo6,enemigo7,enemigo8,enemigo9;
 	private Posicion posicionTorre, posicionEnemigo, posicionEnemigo2,
 			posicionEnemigo3, posicionEnemigo4, posicionEnemigo5;
 	private Jugador jugador;
 	private Escenario escenario;
+	private int vida,vida2,vida3,vida4;
 
 	public pruebaTorreAzul(String name) {
 		super(name);
@@ -63,7 +64,7 @@ public class pruebaTorreAzul extends TestCase {
 		Assert.assertEquals(1, torre.getDanioQueGenera());
 	}
 
-	public void testAtacar() throws ErrorEnemigoException {
+	public void testAtacarGenerico() throws ErrorEnemigoException {
 		try {
 			torre.atacar();
 		} catch (Exception e) {
@@ -75,6 +76,163 @@ public class pruebaTorreAzul extends TestCase {
 		Assert.assertEquals(1, enemigo3.getVida());
 		Assert.assertEquals(2, enemigo4.getVida());
 		Assert.assertEquals(3, enemigo5.getVida());
+	}
+	
+	public void testNoAtacoPorFueraDeRangoGenerico(){
+		
+		enemigo6 = new Hormiga(escenario.getEntrada());
+		enemigo6.cambiarPosicion(posicionEnemigo);
+		enemigo7 = new Cucaracha(escenario.getEntrada());
+		enemigo7.cambiarPosicion(posicionEnemigo);
+		enemigo8 = new Mosca(escenario.getEntrada());
+		enemigo8.cambiarPosicion(posicionEnemigo);
+		enemigo9 = new Arania(escenario.getEntrada());
+		enemigo9.cambiarPosicion(posicionEnemigo);
+		escenario.agregarEnemigoALista(enemigo6);
+		escenario.agregarEnemigoALista(enemigo7);
+		escenario.agregarEnemigoALista(enemigo8);
+		escenario.agregarEnemigoALista(enemigo9);
+		
+		vida=enemigo6.getVida();
+		vida2=enemigo7.getVida();
+		vida3=enemigo8.getVida();
+		vida4=enemigo9.getVida();
+		
+		try {
+			torre.atacar();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Assert.assertEquals(vida, enemigo6.getVida());
+		Assert.assertEquals(vida2, enemigo7.getVida());
+		Assert.assertEquals(vida3, enemigo8.getVida());
+		Assert.assertEquals(vida4, enemigo9.getVida());
+		
+	}
+		
+	public void testNoAtacoPorFueraDeRangoHormiga(){
+		
+		enemigo6 = new Hormiga(escenario.getEntrada());
+		enemigo6.cambiarPosicion(posicionEnemigo);
+		enemigo7 = new Hormiga(escenario.getEntrada());
+		enemigo7.cambiarPosicion(posicionEnemigo);
+		enemigo8 = new Hormiga(escenario.getEntrada());
+		enemigo8.cambiarPosicion(posicionEnemigo);
+		enemigo9 = new Hormiga(escenario.getEntrada());
+		enemigo9.cambiarPosicion(posicionEnemigo);
+		escenario.agregarEnemigoALista(enemigo6);
+		escenario.agregarEnemigoALista(enemigo7);
+		escenario.agregarEnemigoALista(enemigo8);
+		escenario.agregarEnemigoALista(enemigo9);
+		
+		vida=enemigo6.getVida();
+		vida2=enemigo7.getVida();
+		vida3=enemigo8.getVida();
+		vida4=enemigo9.getVida();
+		
+		try {
+			torre.atacar();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Assert.assertEquals(vida, enemigo6.getVida());
+		Assert.assertEquals(vida2, enemigo7.getVida());
+		Assert.assertEquals(vida3, enemigo8.getVida());
+		Assert.assertEquals(vida4, enemigo9.getVida());
+		
+	}
+	
+	public void testNoAtacoPorFueraDeRangoMosca()	{
+		enemigo6 = new Mosca(escenario.getEntrada());
+		enemigo6.cambiarPosicion(posicionEnemigo);
+		enemigo7 = new Mosca(escenario.getEntrada());
+		enemigo7.cambiarPosicion(posicionEnemigo);
+		enemigo8 = new Mosca(escenario.getEntrada());
+		enemigo8.cambiarPosicion(posicionEnemigo);
+		enemigo9 = new Mosca(escenario.getEntrada());
+		enemigo9.cambiarPosicion(posicionEnemigo);
+		escenario.agregarEnemigoALista(enemigo6);
+		escenario.agregarEnemigoALista(enemigo7);
+		escenario.agregarEnemigoALista(enemigo8);
+		escenario.agregarEnemigoALista(enemigo9);
+		
+		vida=enemigo6.getVida();
+		vida2=enemigo7.getVida();
+		vida3=enemigo8.getVida();
+		vida4=enemigo9.getVida();
+		
+		try {
+			torre.atacar();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Assert.assertEquals(vida, enemigo6.getVida());
+		Assert.assertEquals(vida2, enemigo7.getVida());
+		Assert.assertEquals(vida3, enemigo8.getVida());
+		Assert.assertEquals(vida4, enemigo9.getVida());
+		
+	}
+	
+	public void testNoAtacoPorFueraDeRangoCucaracha(){
+		enemigo6 = new Cucaracha(escenario.getEntrada());
+		enemigo6.cambiarPosicion(posicionEnemigo);
+		enemigo7 = new Cucaracha(escenario.getEntrada());
+		enemigo7.cambiarPosicion(posicionEnemigo);
+		enemigo8 = new Cucaracha(escenario.getEntrada());
+		enemigo8.cambiarPosicion(posicionEnemigo);
+		enemigo9 = new Cucaracha(escenario.getEntrada());
+		enemigo9.cambiarPosicion(posicionEnemigo);
+		escenario.agregarEnemigoALista(enemigo6);
+		escenario.agregarEnemigoALista(enemigo7);
+		escenario.agregarEnemigoALista(enemigo8);
+		escenario.agregarEnemigoALista(enemigo9);
+		
+		vida=enemigo6.getVida();
+		vida2=enemigo7.getVida();
+		vida3=enemigo8.getVida();
+		vida4=enemigo9.getVida();
+		
+		try {
+			torre.atacar();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Assert.assertEquals(vida, enemigo6.getVida());
+		Assert.assertEquals(vida2, enemigo7.getVida());
+		Assert.assertEquals(vida3, enemigo8.getVida());
+		Assert.assertEquals(vida4, enemigo9.getVida());
+		
+	}
+	
+	public void testNoAtacoPorFueraDeRangoArania(){
+		enemigo6 = new Arania(escenario.getEntrada());
+		enemigo6.cambiarPosicion(posicionEnemigo);
+		enemigo7 = new Arania(escenario.getEntrada());
+		enemigo7.cambiarPosicion(posicionEnemigo);
+		enemigo8 = new Arania(escenario.getEntrada());
+		enemigo8.cambiarPosicion(posicionEnemigo);
+		enemigo9 = new Arania(escenario.getEntrada());
+		enemigo9.cambiarPosicion(posicionEnemigo);
+		escenario.agregarEnemigoALista(enemigo6);
+		escenario.agregarEnemigoALista(enemigo7);
+		escenario.agregarEnemigoALista(enemigo8);
+		escenario.agregarEnemigoALista(enemigo9);
+		
+		vida=enemigo6.getVida();
+		vida2=enemigo7.getVida();
+		vida3=enemigo8.getVida();
+		vida4=enemigo9.getVida();
+		
+		try {
+			torre.atacar();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Assert.assertEquals(vida, enemigo6.getVida());
+		Assert.assertEquals(vida2, enemigo7.getVida());
+		Assert.assertEquals(vida3, enemigo8.getVida());
+		Assert.assertEquals(vida4, enemigo9.getVida());
+		
 	}
 
 	public void testEvolucionar() {

@@ -3,6 +3,7 @@ package logica;
 import java.util.Iterator;
 import logica.Enemigo;
 import logica.Escenario;
+import customExceptions.EnemigoYaMuerto;
 import customExceptions.ErrorEnemigoException;
 
 public abstract class Torre extends Obstaculo {
@@ -31,16 +32,11 @@ public abstract class Torre extends Obstaculo {
 
 	// Realizar Ataque
 
-	public void atacar() throws Exception {
+	public void atacar() throws EnemigoYaMuerto{
 		Iterator itEnemigos = escenario.getIteradordeEnemigos();
 	
 		while (itEnemigos.hasNext()) {
-
-			try {
-				enemigoAatacar = (Enemigo) itEnemigos.next();
-			} catch (ClassCastException e) {
-				throw new ErrorEnemigoException();
-			}
+				enemigoAatacar = (Enemigo) itEnemigos.next();		
 			if (this.getPosicion().getDistancia(enemigoAatacar.getPosicion()) < this
 					.getAlcance()) {
 				enemigoAatacar.disminuirVida(this.getDanioQueGenera());

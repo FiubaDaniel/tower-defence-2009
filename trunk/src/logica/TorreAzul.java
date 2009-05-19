@@ -38,21 +38,13 @@ public class TorreAzul extends Torre {
 	 * la torre azul ataca a una distancia de entre 3 y 8 si el enemigo esta mas
 	 * cerca de la salida q la torre y entre 5 y 8 si esta por delante
 	 */
-	public void atacar() throws ErrorEnemigoException, TerminoAtaqueException,
-			EnemigoYaMuerto {
+	public void atacar() throws EnemigoYaMuerto {
 		Iterator itEnemigos = escenario.getIteradordeEnemigos();
 
 		salida = escenario.getSalida();
 
 		while (itEnemigos.hasNext()) {
-			try {
 				enemigoAatacar = (Enemigo) itEnemigos.next();
-			} catch (ClassCastException e) {
-				throw new ErrorEnemigoException();
-			} catch (NoSuchElementException e) {
-				throw new TerminoAtaqueException();
-			}
-
 			if (this.getPosicion().getDistancia(salida) > salida
 					.getDistancia(enemigoAatacar.getPosicion())) {
 				if ((3 < this.getPosicion().getDistancia(
