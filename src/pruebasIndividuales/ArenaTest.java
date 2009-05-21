@@ -1,81 +1,136 @@
 package pruebasIndividuales;
 
-import customExceptions.DineroMuyBajoException;
 import junit.framework.*;
 import logica.*;
 
 
+
 public class ArenaTest extends TestCase {
 	
+	private Escenario escenario;
+	private Posicion primeraPosicion, segundaPosicion, terceraPosicion;
+	private Obstaculo obstaculo1;
+
 	
-	public void testElementoVoladorNoVolador() {
+	protected void setUp() throws Exception {
+		super.setUp();
+		escenario = Escenario.obtenerEscenario();
+		primeraPosicion = escenario.getEntrada();
+		segundaPosicion = Escenario.obtenerEscenario().obtenerSiguientePosicionCaminable(primeraPosicion);
+		terceraPosicion = Escenario.obtenerEscenario().obtenerSiguientePosicionCaminable(segundaPosicion);
+		obstaculo1 = new Arena(segundaPosicion);
+	
+	}	
+	
+	/* El objetivo de la prueba, es comprobar como frena
+	 * para los diferentes tipos de enemigos voladores/novoladores
+	 * el pasar sobre un obstaculo del tipo Arena. Supongo que lo detiene al 
+	 * menos por un avanzar.
+	 */
+	
+	public void testMosca() {
 		
-		/* El objetivo de la prueba, es comprobar como frena
-		 * para los diferentes tipos de enemigos voladores/novoladores
-		 * el pasar sobre un obstaculo del tipo Arena. Supongo que lo detiene al 
-		 * menos por un avanzar.
-		 */
-		Escenario escenario = Escenario.obtenerEscenario();
-		Posicion primeraPosicion = escenario.getEntrada();
-		Posicion segundaPosicion = Escenario.obtenerEscenario().obtenerSiguientePosicionCaminable(primeraPosicion);
-		Posicion terceraPosicion = Escenario.obtenerEscenario().obtenerSiguientePosicionCaminable(segundaPosicion);
-		
-		Enemigo unaMosca = new Mosca(primeraPosicion);		
-		Enemigo unaCucaracha = new Cucaracha(primeraPosicion);
-		Enemigo unaHormiga = new Hormiga(primeraPosicion);
-		
+		Enemigo unaMosca = new Mosca(primeraPosicion);
 		escenario.agregarEnemigoALista(unaMosca);
-		escenario.agregarEnemigoALista(unaCucaracha);
-		escenario.agregarEnemigoALista(unaHormiga);
 		
-		Obstaculo obstaculo1 = new Arena(segundaPosicion);
-		
-		/* Luego del primer ataque no se debieran producir cambios
-		 * ya que no están en el alcance de la Arena 
-		 */
 		try {
-		obstaculo1.atacar();
-		} catch (Exception e) {
-			System.out.println("Capturo excepcion");
-		}
+			obstaculo1.atacar();
+			} catch (Exception e) {
+				System.out.println("Capturo excepcion");
+			}
 		
 		Assert.assertEquals(primeraPosicion, unaMosca.getPosicion());
-		Assert.assertEquals(primeraPosicion, unaHormiga.getPosicion());
-		Assert.assertEquals(primeraPosicion, unaCucaracha.getPosicion());
-		
-		/* Avanzan todos los bichos, valido se mueven a la segunda Posicion */
 		unaMosca.avanzar(escenario);
-		unaHormiga.avanzar(escenario);
-		unaCucaracha.avanzar(escenario);
-		
 		Assert.assertEquals(segundaPosicion, unaMosca.getPosicion());
-		Assert.assertEquals(segundaPosicion, unaHormiga.getPosicion());
-		Assert.assertEquals(segundaPosicion, unaCucaracha.getPosicion());
-		
-		/* Atacamos a los bichos que se encuentran en nuestra posición.
-		 * Luego el próximo avance, debería dejar a los bichos no voladores
-		 * en su lugar y a los voladores pasar a la siguiente posición. 
-		 */
+
 		try {
-		obstaculo1.atacar();
-		} catch (Exception e) {
-			System.out.println("Capturo excepcion");
-		}
+			obstaculo1.atacar();
+			} catch (Exception e) {
+				System.out.println("Capturo excepcion");
+			}
 		
 		unaMosca.avanzar(escenario);
-		unaHormiga.avanzar(escenario);
-		unaCucaracha.avanzar(escenario);
-		
 		Assert.assertEquals(terceraPosicion, unaMosca.getPosicion());
-		Assert.assertEquals(segundaPosicion, unaHormiga.getPosicion());
-		Assert.assertEquals(segundaPosicion, unaCucaracha.getPosicion());
+	}
+	
+	public void testCucaracha() {
+				
+		Enemigo unaCucaracha = new Cucaracha(primeraPosicion);
+		escenario.agregarEnemigoALista(unaCucaracha);
 		
-		/* Validamos que el avance los posiciona en la misma ubicación */
-		unaHormiga.avanzar(escenario);
+		try {
+			obstaculo1.atacar();
+			} catch (Exception e) {
+				System.out.println("Capturo excepcion");
+			}
+		Assert.assertEquals(primeraPosicion, unaCucaracha.getPosicion());
 		unaCucaracha.avanzar(escenario);
+		Assert.assertEquals(segundaPosicion, unaCucaracha.getPosicion());	
+
+		try {
+			obstaculo1.atacar();
+			} catch (Exception e) {
+				System.out.println("Capturo excepcion");
+			}
 		
-		Assert.assertEquals(terceraPosicion, unaHormiga.getPosicion());
+		unaCucaracha.avanzar(escenario);		
+		Assert.assertEquals(segundaPosicion, unaCucaracha.getPosicion());
+		unaCucaracha.avanzar(escenario);
 		Assert.assertEquals(terceraPosicion, unaCucaracha.getPosicion());
+
+	}
+	
+	public void testHormiga() {
 		
+		Enemigo unaHormiga = new Hormiga(primeraPosicion);
+		escenario.agregarEnemigoALista(unaHormiga);
+		
+		try {
+			obstaculo1.atacar();
+			} catch (Exception e) {
+				System.out.println("Capturo excepcion");
+			}
+			
+		Assert.assertEquals(primeraPosicion, unaHormiga.getPosicion());
+		unaHormiga.avanzar(escenario);
+		Assert.assertEquals(segundaPosicion, unaHormiga.getPosicion());
+
+		try {
+			obstaculo1.atacar();
+			} catch (Exception e) {
+				System.out.println("Capturo excepcion");
+			}
+		
+		unaHormiga.avanzar(escenario);		
+		Assert.assertEquals(segundaPosicion, unaHormiga.getPosicion());
+		unaHormiga.avanzar(escenario);
+		Assert.assertEquals(terceraPosicion, unaHormiga.getPosicion());
+	}
+	
+	public void testArania() {
+		
+		Enemigo unaArania = new Arania(primeraPosicion);
+		escenario.agregarEnemigoALista(unaArania);
+		
+		try {
+			obstaculo1.atacar();
+			} catch (Exception e) {
+				System.out.println("Capturo excepcion");
+			}
+			
+		Assert.assertEquals(primeraPosicion, unaArania.getPosicion());
+		unaArania.avanzar(escenario);
+		Assert.assertEquals(segundaPosicion, unaArania.getPosicion());
+
+		try {
+			obstaculo1.atacar();
+			} catch (Exception e) {
+				System.out.println("Capturo excepcion");
+			}
+		
+		unaArania.avanzar(escenario);		
+		Assert.assertEquals(segundaPosicion, unaArania.getPosicion());
+		unaArania.avanzar(escenario);
+		Assert.assertEquals(terceraPosicion, unaArania.getPosicion());
 	}
 }

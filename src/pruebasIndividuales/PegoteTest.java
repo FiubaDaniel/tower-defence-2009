@@ -117,4 +117,36 @@ public class PegoteTest extends TestCase {
 			}
 		Assert.assertEquals(velocidadHormiga/2, unaHormiga.getVelocidad());
 	}
+	
+	public void testArania() {
+		
+		Enemigo unaArania = new Arania(primeraPosicion);
+		int velocidadArania = unaArania.getVelocidad();
+		escenario.agregarEnemigoALista(unaArania);
+					
+		try {
+			obstaculo1.atacar();
+			} catch (Exception e) {
+				System.out.println("Capturo excepcion");
+			}
+			
+		Assert.assertEquals(velocidadArania, unaArania.getVelocidad());
+		unaArania.avanzar(escenario);
+		
+		try {
+			obstaculo1.atacar();
+			} catch (Exception e) {
+				System.out.println("Capturo excepcion");
+			}			
+		
+		Assert.assertEquals(velocidadArania/2, unaArania.getVelocidad());
+		unaArania.avanzar(escenario);
+		
+		try {
+			obstaculo1.atacar();
+			} catch (Exception e) {
+				System.out.println("Capturo excepcion");
+			}
+		Assert.assertEquals(velocidadArania/2, unaArania.getVelocidad());
+	}
 }
