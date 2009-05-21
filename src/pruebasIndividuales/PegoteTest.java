@@ -86,7 +86,7 @@ public class PegoteTest extends TestCase {
 		Assert.assertEquals(velocidadCucaracha/2, unaCucaracha.getVelocidad());
 	}
 	
-	public void TestHormiga() {
+	public void testHormiga() {
 		
 		Enemigo unaHormiga = new Hormiga(primeraPosicion);
 		int velocidadHormiga = unaHormiga.getVelocidad();
