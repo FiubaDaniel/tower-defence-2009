@@ -5,6 +5,8 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
+import modelo.Escenario;
+
 public class Mapa extends JPanel implements Observer {
 
 	/**
@@ -12,6 +14,10 @@ public class Mapa extends JPanel implements Observer {
 	 */
 	private static final long serialVersionUID = 3996408967876688000L;
 
+	private static final int UNIDADANCHO = 10;
+	private static final int UNIDADALTO = 15;
+	
+	
 	public Mapa() {
 		setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1,
 				new java.awt.Color(255, 0, 0)));
@@ -19,11 +25,12 @@ public class Mapa extends JPanel implements Observer {
 		javax.swing.GroupLayout PanelMapaLayout = new javax.swing.GroupLayout(
 				this);
 		setLayout(PanelMapaLayout);
+		
 		PanelMapaLayout.setHorizontalGroup(PanelMapaLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 512,
+				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, Escenario.getMapColumns() * UNIDADANCHO,
 				Short.MAX_VALUE));
 		PanelMapaLayout.setVerticalGroup(PanelMapaLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 470,
+				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, Escenario.getMapRows() * UNIDADALTO,
 				Short.MAX_VALUE));
 	}
 

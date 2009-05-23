@@ -546,4 +546,12 @@ public class Escenario extends Observable{
         return Mapa[pos.getCoordX()][pos.getCoordY()].isCaminable();
     }
     
+    public static int getMapColumns() {
+    	return MAPCOLUMNS;
+    }
+    
+    public static int getMapRows() {
+    	return MAPROWS;
+    }
+    
 }

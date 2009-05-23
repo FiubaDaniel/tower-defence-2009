@@ -2,7 +2,6 @@ package vista.menu;
 
 import javax.swing.JPanel;
 
-import controlador.BotonUpdate;
 
 public class PanelDatosDeSeleccion extends JPanel {
 

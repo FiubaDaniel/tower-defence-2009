@@ -4,13 +4,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JSeparator;
 
-import controlador.BotonAcercaDe;
-import controlador.BotonAyuda;
-import controlador.BotonCargarPartida;
-import controlador.BotonGuardarPartida;
-import controlador.BotonIniciarPartida;
-import controlador.BotonMenuOpciones;
-import controlador.BotonSalir;
 
 
 /**

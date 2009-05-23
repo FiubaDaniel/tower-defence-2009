@@ -2,6 +2,9 @@ package vista.menu;
 
 import javax.swing.JPanel;
 
+import modelo.Escenario;
+import modelo.Jugador;
+
 public class PanelDeDatos extends JPanel {
 
 	/**
@@ -44,7 +47,10 @@ public class PanelDeDatos extends JPanel {
 		setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1,
 				1, 1, new java.awt.Color(255, 0, 0)));
 		
-		LinkVidaJugador.setText("InsertarVidaAqui");
+		Jugador jugador = Jugador.obtenerJugador(50, 1000, "Exus");
+		Escenario escenario = Escenario.obtenerEscenario();
+		
+		LinkVidaJugador.setText(String.valueOf(jugador.getCantidadVidas()));
 
 		LabelPuntos.setText("Puntos:");
 
@@ -54,11 +60,11 @@ public class PanelDeDatos extends JPanel {
 
 		LabelDinero.setText("Dinero:");
 
-		LinkPuntosJugador.setText("PuntosAqui");
+		LinkPuntosJugador.setText(String.valueOf(jugador.getPuntos()));
 
-		LinkCantEnemigosEscenario.setText("CantEnemigos");
+		LinkCantEnemigosEscenario.setText(String.valueOf(escenario.getCantBichos()));
 
-		LinkDineroJugador.setText("Dinero Aqui");
+		LinkDineroJugador.setText(String.valueOf(jugador.getDinero()));
 
 		LabelTorres.setText("Torres:");
 
