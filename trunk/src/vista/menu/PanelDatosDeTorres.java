@@ -122,4 +122,16 @@ public class PanelDatosDeTorres extends JPanel {
 										.addContainerGap()));
 	}
 	
+	public void setLinkLabelDañoText(String str) {
+		LinkDañoTorre.setText(str);
+	}
+	
+	public void setLinkLabelRangoText(String str) {
+		LinkRangoTorre.setText(str);
+	}
+	
+	public void setLinkLabelPrecioText(String str) {
+		LinkPrecioTorre.setText(str);
+	}
+	
 }
