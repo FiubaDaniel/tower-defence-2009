@@ -1,4 +1,4 @@
-package logica;
+package modelo;
 
 import customExceptions.*;
 

@@ -1,17 +1,16 @@
-package logica;
+package modelo;
 
 import customExceptions.*;
 
-public class Hormiga extends Enemigo {
+public class Arania extends Enemigo {
 
-	public Hormiga(Posicion unLugar) throws NoEsEntradaException {
+	public Arania(Posicion unLugar) throws NoEsEntradaException {
 		this.setPosicion(unLugar);
 		try {
-			this.setVelocidad(1);
-			this.setVida(1);
+			this.setVelocidad(3);
+			this.setVida(2);
 		} catch (ValorNegativoException error) {
 		}
-
 	}
 
 	public void avanzar(Escenario terreno) {
@@ -22,6 +21,6 @@ public class Hormiga extends Enemigo {
 		} else {
 			frenarOAvanzar();
 		}
-
 	}
+
 }

@@ -1,4 +1,4 @@
-package logica;
+package modelo;
 
 /**
  * Esta clase controla todos los aspectos generales de las posiciones, desde su

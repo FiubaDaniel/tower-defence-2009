@@ -1,15 +1,12 @@
-package logica;
+package modelo;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import customExceptions.DineroMuyBajoException;
 import customExceptions.EnemigoYaMuerto;
-import customExceptions.ErrorEnemigoException;
-import customExceptions.TerminoAtaqueException;
-import logica.Escenario;
-import logica.Jugador;
-import logica.Posicion;
+import modelo.Escenario;
+import modelo.Jugador;
+import modelo.Posicion;
 
 public class TorreAzul extends Torre {
 

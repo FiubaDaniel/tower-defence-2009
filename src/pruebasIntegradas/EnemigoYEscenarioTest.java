@@ -3,7 +3,7 @@ package pruebasIntegradas;
 import junit.framework.TestCase;
 import org.junit.*;
 import customExceptions.*;
-import logica.*;
+import modelo.*;
 
 public class EnemigoYEscenarioTest {
 	

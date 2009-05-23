@@ -1,14 +1,14 @@
-package logica;
+package modelo;
 
 import customExceptions.*;
 
-public class Arania extends Enemigo {
+public class Cucaracha extends Enemigo {
 
-	public Arania(Posicion unLugar) throws NoEsEntradaException {
+	public Cucaracha(Posicion unLugar) throws NoEsEntradaException {
 		this.setPosicion(unLugar);
 		try {
-			this.setVelocidad(3);
-			this.setVida(2);
+			this.setVelocidad(5);
+			this.setVida(4);
 		} catch (ValorNegativoException error) {
 		}
 	}
