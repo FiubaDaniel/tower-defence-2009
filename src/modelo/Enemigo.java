@@ -1,8 +1,10 @@
 package modelo;
 
+import java.util.Observable;
+
 import customExceptions.*;
 
-public abstract class Enemigo {
+public abstract class Enemigo extends Observable {
 
 	private int vida;
 	private boolean bichoVolador = false;
