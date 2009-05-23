@@ -1,9 +1,17 @@
 package vista.menu;
 
 import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import modelo.Escenario;
 import modelo.Jugador;
+import modelo.Posicion;
+import modelo.Torre;
+import modelo.TorreAzul;
+import modelo.TorreBlanca;
+import modelo.TorreDorada;
+import modelo.TorrePlateada;
 
 public class PanelDeDatos extends JPanel {
 
@@ -68,27 +76,12 @@ public class PanelDeDatos extends JPanel {
 
 		LabelTorres.setText("Torres:");
 
-		ListaTorres.setModel(new javax.swing.AbstractListModel() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = -7096865753750230691L;
-			String[] strings = { "Torre Blanca", "Torre Plateada",
-					"Torre Dorada", "Torre Azul" };
-
-			public int getSize() {
-				return strings.length;
-			}
-
-			public Object getElementAt(int i) {
-				return strings[i];
-			}
-		});
+		ListaDeCompras ListaCompras = new ListaDeCompras();
+		
+		ListaTorres.setModel(ListaCompras);
+		
+		ListaTorres.addListSelectionListener(new ListaDeTorresListener());
 		ScrollTorres.setViewportView(ListaTorres);
-
-		
-
-		
 
 		javax.swing.GroupLayout PanelDatosLayout = new javax.swing.GroupLayout(
 				this);
@@ -259,6 +252,32 @@ public class PanelDeDatos extends JPanel {
 										.addGap(18, 18, 18)));
 
 		
+	}
+	
+	public class ListaDeTorresListener implements ListSelectionListener {
+
+		public void valueChanged(ListSelectionEvent e) {
+			Posicion auxp = new Posicion();
+			Torre aux = null;
+			
+			//TODO Aprender Reflexion
+			
+			if (ListaTorres.getSelectedIndex() == 0) {
+				aux = new TorreBlanca(auxp);
+			} else if (ListaTorres.getSelectedIndex() == 1) {
+				aux = new TorrePlateada(auxp);
+			} else if (ListaTorres.getSelectedIndex() == 2) {
+				aux = new TorreDorada(auxp);
+			} else if (ListaTorres.getSelectedIndex() == 3) {
+				aux = new TorreAzul(auxp);
+			}
+		
+			PanelDatosTorres.setLinkLabelDañoText(String.valueOf(aux.getDanioQueGenera()));
+			PanelDatosTorres.setLinkLabelPrecioText(String.valueOf(aux.getPrecio()));
+			PanelDatosTorres.setLinkLabelRangoText(String.valueOf(aux.getAlcance()));
+		
+		}
+
 	}
 
 }
