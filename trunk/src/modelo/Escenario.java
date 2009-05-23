@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Observable;
+
 import customExceptions.BaseMapNotFoundException;
 import customExceptions.InvalidEnemyPositionException;
 import customExceptions.InvalidMapFormatException;
@@ -21,7 +23,7 @@ import customExceptions.NoteHagaselVivoException;
  * @author hector
  * 
  */
-public class Escenario {
+public class Escenario extends Observable{
 
     private static final int MAPCOLUMNS = 80;
     private static final int MAPROWS = 30;

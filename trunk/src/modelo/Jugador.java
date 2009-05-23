@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Observable;
+
 import customExceptions.DineroMuyBajoException;
 
 
@@ -10,7 +12,7 @@ import customExceptions.DineroMuyBajoException;
  * @author hector
  * 
  */
-public class Jugador {
+public class Jugador extends Observable{
 
 	private static Jugador jugador;
 	private int CantidadVidas;

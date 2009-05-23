@@ -1,9 +1,11 @@
 package modelo;
 
+import java.util.Observable;
+
 import titiritero.ObjetoVivo;
 import titiritero.Posicionable;
 
-public abstract class Obstaculo implements ObjetoVivo, Posicionable{
+public abstract class Obstaculo extends Observable implements ObjetoVivo, Posicionable{
 	private int precio;
 	private int danioQueGenera;
 	private int alcance;

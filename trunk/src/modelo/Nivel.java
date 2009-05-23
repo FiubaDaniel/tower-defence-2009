@@ -1,5 +1,6 @@
 package modelo;
 
+
 public class Nivel {
 
 	private Escenario Escenario1;
