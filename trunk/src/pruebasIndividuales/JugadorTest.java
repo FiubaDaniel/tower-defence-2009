@@ -2,7 +2,7 @@ package pruebasIndividuales;
 
 import customExceptions.DineroMuyBajoException;
 import junit.framework.TestCase;
-import logica.Jugador;
+import modelo.Jugador;
 
 public class JugadorTest extends TestCase {
 

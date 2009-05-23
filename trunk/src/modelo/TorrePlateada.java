@@ -1,8 +1,8 @@
-package logica;
+package modelo;
 
 import customExceptions.DineroMuyBajoException;
-import logica.Jugador;
-import logica.Posicion;
+import modelo.Jugador;
+import modelo.Posicion;
 
 public class TorrePlateada extends Torre {
 

@@ -1,4 +1,4 @@
-package logica;
+package modelo;
 
 import customExceptions.*;
 
@@ -84,6 +84,18 @@ public abstract class Enemigo {
 
 	public boolean getVolador() {
 		return bichoVolador;
+	}
+	
+	public void vivir() {
+		Escenario escenario = Escenario.obtenerEscenario();
+		this.avanzar(escenario);
+	}
+	
+	public int getX() {
+		return lugarQueOcupa.getCoordX();
+	}
+	public int getY() {
+		return lugarQueOcupa.getCoordY();
 	}
 
 }

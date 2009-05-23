@@ -1,7 +1,7 @@
 package pruebasIndividuales;
 
 import junit.framework.TestCase;
-import logica.Posicion;
+import modelo.Posicion;
 
 public class PosicionTest extends TestCase {
 

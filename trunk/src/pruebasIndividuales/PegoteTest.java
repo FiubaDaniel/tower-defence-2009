@@ -1,7 +1,7 @@
 package pruebasIndividuales;
 
 import junit.framework.*;
-import logica.*;
+import modelo.*;
 
 
 public class PegoteTest extends TestCase {

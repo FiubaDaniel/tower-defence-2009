@@ -2,15 +2,15 @@ package pruebasIndividuales;
 
 import customExceptions.ErrorEnemigoException;
 import junit.framework.*;
-import logica.Arania;
-import logica.Cucaracha;
-import logica.Enemigo;
-import logica.Escenario;
-import logica.Hormiga;
-import logica.Jugador;
-import logica.Mosca;
-import logica.Posicion;
-import logica.TorreDorada;
+import modelo.Arania;
+import modelo.Cucaracha;
+import modelo.Enemigo;
+import modelo.Escenario;
+import modelo.Hormiga;
+import modelo.Jugador;
+import modelo.Mosca;
+import modelo.Posicion;
+import modelo.TorreDorada;
 
 public class pruebaTorreDorada extends TestCase {
 

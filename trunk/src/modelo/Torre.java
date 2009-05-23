@@ -1,10 +1,10 @@
-package logica;
+package modelo;
 
 import java.util.Iterator;
-import logica.Enemigo;
-import logica.Escenario;
+
+import modelo.Enemigo;
+import modelo.Escenario;
 import customExceptions.EnemigoYaMuerto;
-import customExceptions.ErrorEnemigoException;
 
 public abstract class Torre extends Obstaculo {
 

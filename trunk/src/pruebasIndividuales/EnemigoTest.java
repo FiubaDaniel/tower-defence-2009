@@ -3,7 +3,7 @@ package pruebasIndividuales;
 import junit.framework.TestCase;
 import java.util.*;
 import org.junit.*;
-import logica.*;
+import modelo.*;
 import customExceptions.*;
 
 public class EnemigoTest {

@@ -1,4 +1,4 @@
-package logica;
+package modelo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -6,10 +6,10 @@ import customExceptions.EnemigoYaMuerto;
 import customExceptions.MapaSinEnemigosExcepion;
 
 import junit.framework.TestCase;
-import logica.Arania;
-import logica.Enemigo;
-import logica.Escenario;
-import logica.Posicion;
+import modelo.Arania;
+import modelo.Enemigo;
+import modelo.Escenario;
+import modelo.Posicion;
 
 public class EscenarioTest extends TestCase {
 
