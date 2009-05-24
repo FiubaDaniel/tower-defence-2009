@@ -37,7 +37,7 @@ public class Escenario extends Observable{
     private LinkedList ObstaculosEnElMapa;
     private Posicion Salida,  Entrada;
     private Posicion[][] Mapa;
-    private int NumeroNivel;
+    private int NumeroNivel = 1;
     private File ArchivodeMapa;
 
     /**
@@ -59,6 +59,20 @@ public class Escenario extends Observable{
         }
         return escenario;
     }
+    
+    private void configurarMapa() throws FileNotFoundException {
+    	 try {
+             ArchivodeMapa = new File("Mapas/Mapa" + NumeroNivel + ".mp");
+             this.cargarMapa(); // Este método tira una excepción si el formato
+             // del archivo está mal
+             this.crearListaAlaSalida();
+             EnemigosEnElMapa = new LinkedList();
+         } catch (NullPointerException e) {
+             throw new FileNotFoundException();
+         } catch (IllegalStateException e) {
+             throw new InvalidMapFormatException();
+         }
+    }
 
     /**
      * Este es el constructor de Escenario. Es privado para evitar las multiples
@@ -73,19 +87,7 @@ public class Escenario extends Observable{
      *             configurado
      */
     private Escenario() throws FileNotFoundException {
-        this.NumeroNivel = 1;
-        try {
-            ArchivodeMapa = new File("Mapas/Mapa" + NumeroNivel + ".mp");
-            this.cargarMapa(); // Este método tira una excepción si el formato
-            // del archivo está mal
-            this.crearListaAlaSalida();
-            EnemigosEnElMapa = new LinkedList();
-        } catch (NullPointerException e) {
-            throw new FileNotFoundException();
-        } catch (IllegalStateException e) {
-            throw new InvalidMapFormatException();
-        }
-
+       configurarMapa();
     }
 
     private void cargarValorenPosiciondeMatriz(int fila, int columna,
@@ -213,9 +215,11 @@ public class Escenario extends Observable{
         return Entrada;
     }
 
-    public void setNumeroNivel(int numeroNivel) {
+    public void setNumeroNivel(int numeroNivel) throws FileNotFoundException {
         // nose si debería ser publico o privado
         this.NumeroNivel = numeroNivel;
+        configurarMapa();
+		
     }
 
     public int getNumeroNivel() {
@@ -541,7 +545,11 @@ public class Escenario extends Observable{
                 throw new InvalidPositionException();
             }
     }
-    
+    /**
+     * Este método devuelve TRUE si la posicion es caminable
+     * @param pos
+     * @return
+     */
     public boolean obtener_tipo_de_terreno(Posicion pos) {
         return Mapa[pos.getCoordX()][pos.getCoordY()].isCaminable();
     }
