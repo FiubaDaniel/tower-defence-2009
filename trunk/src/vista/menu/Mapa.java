@@ -1,11 +1,14 @@
 package vista.menu;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
 
 import modelo.Escenario;
+import modelo.Posicion;
 
 public class Mapa extends JPanel implements Observer {
 
@@ -19,6 +22,11 @@ public class Mapa extends JPanel implements Observer {
 	
 	
 	public Mapa() {
+		
+		Escenario escenario = Escenario.obtenerEscenario();
+		
+		escenario.addObserver(this);
+		
 		setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1,
 				new java.awt.Color(255, 0, 0)));
 
@@ -35,7 +43,32 @@ public class Mapa extends JPanel implements Observer {
 	}
 
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		this.repaint();
+		
+	}
+	
+	public void paint(Graphics g) {
+		
+		super.paint(g);
+		
+		Escenario escenario = Escenario.obtenerEscenario();
+		
+		for (int i = 0; i < Escenario.getMapRows(); i ++)
+			for (int j = 0; j < Escenario.getMapColumns(); j ++) {
+				
+				Posicion aux = new Posicion(i, j, true);
+				
+				if (escenario.obtener_tipo_de_terreno(aux))
+					g.setColor(Color.getHSBColor(0.1f, 0.5f, 1));
+				else
+					g.setColor(Color.GREEN);
+				
+				g.fillRect(j * UNIDADANCHO, i * UNIDADALTO, UNIDADANCHO + j * UNIDADANCHO, UNIDADALTO + i * UNIDADALTO);
+			}
+		
+		g.setColor(Color.BLACK);
+		
+		
 		
 	}
 	
