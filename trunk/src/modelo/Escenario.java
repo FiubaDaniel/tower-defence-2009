@@ -25,8 +25,8 @@ import customExceptions.NoteHagaselVivoException;
  */
 public class Escenario extends Observable{
 
-    private static final int MAPCOLUMNS = 80;
-    private static final int MAPROWS = 30;
+    private static final int MAPCOLUMNS = 50;
+    private static final int MAPROWS = 50;
     private static final double DINEROBASEMAX = 2000;
     private static Escenario escenario;
     private int CantBichos;

@@ -14,7 +14,7 @@ public class Mapa extends JPanel implements Observer {
 	 */
 	private static final long serialVersionUID = 3996408967876688000L;
 
-	private static final int UNIDADANCHO = 10;
+	private static final int UNIDADANCHO = 15;
 	private static final int UNIDADALTO = 15;
 	
 	
@@ -37,6 +37,11 @@ public class Mapa extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void dibujar() {
+		/*Graphics aux = new Graphics();
+		this.print(aux);*/
 	}
 
 }

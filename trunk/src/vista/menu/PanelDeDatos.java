@@ -94,24 +94,24 @@ public class PanelDeDatos extends JPanel {
 								PanelDatosLayout
 										.createSequentialGroup()
 										.addComponent(LabelVida)
-										.addGap(18, 18, 18)
+										.addGap(100, 100, 100)
 										.addComponent(
 												LinkVidaJugador,
 												javax.swing.GroupLayout.DEFAULT_SIZE,
 												218, Short.MAX_VALUE).addGap(
-												87, 87, 87))
+												100, 100, 100))
 						.addGroup(
 								PanelDatosLayout
 										.createSequentialGroup()
 										.addComponent(LabelPuntos)
 										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(
 												LinkPuntosJugador,
 												javax.swing.GroupLayout.PREFERRED_SIZE,
-												139,
+												318,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(155, Short.MAX_VALUE))
+										.addContainerGap(300, Short.MAX_VALUE))
 						.addGroup(
 								PanelDatosLayout
 										.createSequentialGroup()
@@ -167,10 +167,7 @@ public class PanelDeDatos extends JPanel {
 																												javax.swing.GroupLayout.PREFERRED_SIZE,
 																												129,
 																												javax.swing.GroupLayout.PREFERRED_SIZE)
-																										.addGap(
-																												6,
-																												6,
-																												6)
+																										.addGap(20, 20, 20)
 																										.addComponent(
 																												PanelDatosTorres,
 																												javax.swing.GroupLayout.PREFERRED_SIZE,

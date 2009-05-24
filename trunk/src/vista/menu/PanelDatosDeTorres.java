@@ -15,16 +15,18 @@ public class PanelDatosDeTorres extends JPanel {
 	private javax.swing.JLabel LinkDañoTorre;
 	private javax.swing.JLabel LinkPrecioTorre;
 	private javax.swing.JLabel LinkRangoTorre;
-	
+	private javax.swing.JButton BotonComprar;
+
 	public PanelDatosDeTorres() {
 		setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-		
+
 		LabelDaño = new javax.swing.JLabel();
 		LabelRango = new javax.swing.JLabel();
 		LabelPrecio = new javax.swing.JLabel();
 		LinkDañoTorre = new javax.swing.JLabel();
 		LinkRangoTorre = new javax.swing.JLabel();
 		LinkPrecioTorre = new javax.swing.JLabel();
+		BotonComprar = new javax.swing.JButton();
 
 		LabelDaño.setText("Daño:");
 
@@ -38,9 +40,14 @@ public class PanelDatosDeTorres extends JPanel {
 
 		LinkPrecioTorre.setText("PrecioAqui");
 
+		BotonComprar.setText("Comprar");
+
 		javax.swing.GroupLayout PanelDatosTorresLayout = new javax.swing.GroupLayout(
 				this);
 		setLayout(PanelDatosTorresLayout);
+		
+		//Creo las relaciones paralelas entre los componentes
+		
 		PanelDatosTorresLayout
 				.setHorizontalGroup(PanelDatosTorresLayout
 						.createParallelGroup(
@@ -82,8 +89,19 @@ public class PanelDatosDeTorres extends JPanel {
 																						.addComponent(
 																								LinkRangoTorre)
 																						.addComponent(
-																								LinkPrecioTorre))))
+																								LinkPrecioTorre))
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		.addGroup(
+																				PanelDatosTorresLayout
+																						.createParallelGroup(
+																								javax.swing.GroupLayout.Alignment.TRAILING)
+																						.addComponent(
+																								BotonComprar))))
 										.addContainerGap()));
+		
+		//Creo las relaciones verticales entre los componentes
+		
 		PanelDatosTorresLayout
 				.setVerticalGroup(PanelDatosTorresLayout
 						.createParallelGroup(
@@ -119,19 +137,27 @@ public class PanelDatosDeTorres extends JPanel {
 																LabelPrecio)
 														.addComponent(
 																LinkPrecioTorre))
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(
+												PanelDatosTorresLayout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																BotonComprar))
 										.addContainerGap()));
 	}
-	
+
 	public void setLinkLabelDañoText(String str) {
 		LinkDañoTorre.setText(str);
 	}
-	
+
 	public void setLinkLabelRangoText(String str) {
 		LinkRangoTorre.setText(str);
 	}
-	
+
 	public void setLinkLabelPrecioText(String str) {
 		LinkPrecioTorre.setText(str);
 	}
-	
+
 }
