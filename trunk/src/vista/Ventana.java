@@ -2,12 +2,13 @@ package vista;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
 
 import titiritero.ControladorJuego;
 import titiritero.SuperficieDeDibujo;
@@ -16,7 +17,7 @@ import titiritero.SuperficieDeDibujo;
  * principal de la aplicaci�n y donde se dibujar� la vista.
  * Esta clase utiliza la tecnica de doble buffering para evitar los efectos de flicking
  */
-public class Ventana extends Frame implements SuperficieDeDibujo{
+public class Ventana extends JFrame implements SuperficieDeDibujo{
 
 	/**
 	 * Esta yerba es generada autom�tica y a�n no se su utilidad

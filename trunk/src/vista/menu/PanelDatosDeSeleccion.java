@@ -2,7 +2,10 @@ package vista.menu;
 
 import javax.swing.JPanel;
 
-public class PanelDatosDeSeleccion extends JPanel {
+import titiritero.MouseClickObservador;
+
+
+public class PanelDatosDeSeleccion extends JPanel implements MouseClickObservador {
 
 	/**
 	 * 
@@ -206,4 +209,9 @@ public class PanelDatosDeSeleccion extends JPanel {
 
 	}
 
+	public void MouseClick(int x, int y) {
+		
+		
+	}
+	
 }
