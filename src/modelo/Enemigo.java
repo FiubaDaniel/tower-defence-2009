@@ -2,9 +2,12 @@ package modelo;
 
 import java.util.Observable;
 
+import titiritero.ObjetoVivo;
+import titiritero.Posicionable;
+
 import customExceptions.*;
 
-public abstract class Enemigo extends Observable {
+public abstract class Enemigo extends Observable implements Posicionable, ObjetoVivo {
 
 	private int vida;
 	private boolean bichoVolador = false;

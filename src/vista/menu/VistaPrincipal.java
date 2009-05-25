@@ -1,43 +1,38 @@
 package vista.menu;
 
+import javax.swing.JFrame;
 
 /**
  * 
  * @author exus
  */
-public class VistaPrincipal extends javax.swing.JFrame {
+public class VistaPrincipal extends JFrame {
 	/** Creates new form VistaPrincipal */
 
 	private static final long serialVersionUID = 3L;
 
 	private static VistaPrincipal frame;
-
 	private MenuSuperior MenuArchivoAyuda;
-	
-	
-	
 	private PanelDeDatos PanelDatos;
-	
 	private Mapa PanelMapa;
 	
-	
-	
-	public static VistaPrincipal obtenerVistaPrincipal() {
+	public static VistaPrincipal obtenerVistaPrincipal(MenuSuperior menuArchivoAyuda, PanelDeDatos paneldedatos, Mapa mapa) {
 		if (frame == null) {
-			frame = new VistaPrincipal();
+			frame = new VistaPrincipal(menuArchivoAyuda, paneldedatos, mapa);
 		}
 		return frame;
 	}
 
-	private VistaPrincipal() {
-		initComponents();
+	private VistaPrincipal(MenuSuperior menuArchivoAyuda, PanelDeDatos paneldedatos, Mapa mapa) {
+		initComponents(menuArchivoAyuda, paneldedatos, mapa);
+
 	}
 
-	private void initComponents() {
+	private void initComponents(MenuSuperior menuArchivoAyuda, PanelDeDatos paneldedatos, Mapa mapa) {
 
-		PanelMapa = new Mapa();
-		PanelDatos = new PanelDeDatos();
-		MenuArchivoAyuda = new MenuSuperior();
+		PanelMapa = mapa;
+		PanelDatos = paneldedatos;
+		MenuArchivoAyuda = menuArchivoAyuda;
 		
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Tower Defense");
@@ -85,4 +80,28 @@ public class VistaPrincipal extends javax.swing.JFrame {
 		pack();
 	}
 
+	public Mapa getMapa() {
+		return PanelMapa;
+	}
+	
+	public void setMapa(Mapa mapa) {
+		PanelMapa = mapa;
+	}
+	
+	public MenuSuperior getMenuArchivoAyuda() {
+		return MenuArchivoAyuda;
+	}
+
+	public void setMenuArchivoAyuda(MenuSuperior menuArchivoAyuda) {
+		MenuArchivoAyuda = menuArchivoAyuda;
+	}
+	
+	public PanelDeDatos getPanelDatos() {
+		return PanelDatos;
+	}
+
+	public void setPanelDatos(PanelDeDatos panelDatos) {
+		PanelDatos = panelDatos;
+	}
+	
 }

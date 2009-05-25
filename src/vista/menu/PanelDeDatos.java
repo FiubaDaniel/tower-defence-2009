@@ -1,5 +1,9 @@
 package vista.menu;
 
+import java.awt.Graphics;
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -13,7 +17,7 @@ import modelo.TorreBlanca;
 import modelo.TorreDorada;
 import modelo.TorrePlateada;
 
-public class PanelDeDatos extends JPanel {
+public class PanelDeDatos extends JPanel implements Observer {
 
 	/**
 	 * 
@@ -36,7 +40,7 @@ public class PanelDeDatos extends JPanel {
 	private PanelDatosDeTorres PanelDatosTorres;
 	
 	
-	public PanelDeDatos() {
+	public PanelDeDatos(PanelDatosDeSeleccion panelDatosSeleccion, PanelDatosDeTorres panelDatosTorres) {
 
 		LinkVidaJugador = new javax.swing.JLabel();
 		LabelPuntos = new javax.swing.JLabel();
@@ -49,8 +53,8 @@ public class PanelDeDatos extends JPanel {
 		LabelTorres = new javax.swing.JLabel();
 		ScrollTorres = new javax.swing.JScrollPane();
 		ListaTorres = new javax.swing.JList();
-		PanelDatosTorres = new PanelDatosDeTorres();
-		PanelDatosSeleccion = new PanelDatosDeSeleccion();
+		PanelDatosTorres = panelDatosTorres;
+		PanelDatosSeleccion = panelDatosSeleccion;
 		
 		setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1,
 				1, 1, new java.awt.Color(255, 0, 0)));
@@ -249,6 +253,8 @@ public class PanelDeDatos extends JPanel {
 										.addGap(18, 18, 18)));
 
 		
+		jugador.addObserver(this);
+		
 	}
 	
 	public class ListaDeTorresListener implements ListSelectionListener {
@@ -275,6 +281,19 @@ public class PanelDeDatos extends JPanel {
 		
 		}
 
+	};
+
+	public void update(Observable o, Object arg) {
+		LinkDineroJugador.setText(String.valueOf(((Jugador)o).getDinero()));
+		LinkPuntosJugador.setText(String.valueOf(((Jugador)o).getPuntos()));
+		LinkVidaJugador.setText(String.valueOf(((Jugador)o).getCantidadVidas()));
+		
+		
+		this.repaint();
+	}
+	
+	public void update(Graphics g) {
+		paint(g);
 	}
 
 }

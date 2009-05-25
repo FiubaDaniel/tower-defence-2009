@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.Observable;
 
 import customExceptions.BaseMapNotFoundException;
-import customExceptions.InvalidEnemyPositionException;
 import customExceptions.InvalidMapFormatException;
 import customExceptions.InvalidPositionException;
 import customExceptions.MapNotCreatedException;
@@ -67,6 +66,7 @@ public class Escenario extends Observable{
              // del archivo está mal
              this.crearListaAlaSalida();
              EnemigosEnElMapa = new LinkedList();
+             ObstaculosEnElMapa = new LinkedList();
          } catch (NullPointerException e) {
              throw new FileNotFoundException();
          } catch (IllegalStateException e) {
@@ -465,7 +465,11 @@ public class Escenario extends Observable{
         }
 
     }
-
+    /**
+     * Este método devuelve la siguiente posicion a dónde debe dirigirse el enemigo.
+     * @param ubicacion Posicion de la posicion actual del enemigo.
+     * @return La posicion siguiente a la actual. Si se llego al final del camino, se devuelve el comienzo.
+     */
     public Posicion obtenerSiguientePosicionCaminable(Posicion ubicacion) {
 
         Iterator it = CaminoAlaSalida.iterator();
@@ -476,8 +480,8 @@ public class Escenario extends Observable{
             Aux = (Posicion) it.next();
         }
 
-        if (Aux.equals(Salida)) {
-            throw new InvalidEnemyPositionException();
+        if (Aux.getCoordX() == Salida.getCoordX() && Aux.getCoordY() == Salida.getCoordY()) {
+            return Entrada;
         }
         return (Posicion) it.next();
 

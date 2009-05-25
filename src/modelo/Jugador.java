@@ -39,14 +39,17 @@ public class Jugador extends Observable{
 
 	private void setCantidadVidas(int cantidadVidas) {
 			this.CantidadVidas = cantidadVidas;
+			this.notifyObservers();
 	}
 
 	public int getCantidadVidas() {
 		return CantidadVidas;
 	}
 	private void setDinero(double dinero){
-		if (dinero >= 0)
+		if (dinero >= 0) {
 			this.Dinero = dinero;
+			this.notifyObservers();
+		}
 		else
 			throw new IllegalArgumentException();
 	}
@@ -56,8 +59,10 @@ public class Jugador extends Observable{
 	}
 
 	public void setNombre(String nombre) {
-		if (!nombre.isEmpty())
+		if (!nombre.isEmpty()) {
 			this.Nombre = nombre;
+			this.notifyObservers();
+		}
 		else
 			throw new IllegalArgumentException();
 	}
@@ -67,8 +72,10 @@ public class Jugador extends Observable{
 	}
 
 	private void setPuntos(double puntos) {
-		if (puntos >= 0)
+		if (puntos >= 0) {
 			this.Puntos = puntos;
+			this.notifyObservers();
+		}
 		else
 			throw new IllegalArgumentException();
 	}
