@@ -23,4 +23,12 @@ public class Arena extends Obstaculo {
 			}
 		}
 	}
+
+	public String getNombre() {
+		return "Arena";
+	}
+
+	public int getValorEvolucion() {
+		return 0;
+	}
 }

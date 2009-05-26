@@ -2,10 +2,9 @@ package modelo;
 
 import java.util.Observable;
 
-import titiritero.ObjetoVivo;
-import titiritero.Posicionable;
+import vista.Seleccionable;
 
-public abstract class Obstaculo extends Observable implements ObjetoVivo, Posicionable{
+public abstract class Obstaculo extends Observable implements Seleccionable {
 	private int precio;
 	private int danioQueGenera;
 	private int alcance;
@@ -43,14 +42,6 @@ public abstract class Obstaculo extends Observable implements ObjetoVivo, Posici
 		return this.lugarQueOcupa;
 	}
 	
-	public void vivir() {
-		try {
-			this.atacar();
-		} catch (Exception e) {
-			//El enemigo ya murio, por lo que no hace nada;
-		}
-	}
-	
 	public int getX() {
 		return lugarQueOcupa.getCoordX();
 	}
@@ -59,5 +50,13 @@ public abstract class Obstaculo extends Observable implements ObjetoVivo, Posici
 	}
 
 	public abstract void atacar() throws Exception;
+
+	public int getRango_Velocidad() {
+		return alcance;
+	}
+
+	public int getVida_Daño() {
+		return danioQueGenera;
+	}
 
 }

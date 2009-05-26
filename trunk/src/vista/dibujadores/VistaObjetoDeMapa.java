@@ -23,14 +23,22 @@ public abstract class VistaObjetoDeMapa implements Dibujable {
 	protected Image_Observer Observador;
 	
 	public void dibujar(SuperficieDeDibujo superfice) {
+		
 		Graphics grafico = ((Mapa)superfice).getGraphics();
 		
 		ImageIcon aux = new ImageIcon(this.getDir_imagen());
-
+		
+		//Creación buffer
+		Image buffer = ((Mapa)superfice).createImage(((Mapa)superfice).getUNIDADANCHO(), ((Mapa)superfice).getUNIDADALTO());
+		Graphics graph_buffer = buffer.getGraphics();
+		//Creación buffer
+		
 		int ANCHOUNITARIO = ((Mapa)superfice).getUNIDADANCHO();
 		int ALTOUNITARIO = ((Mapa)superfice).getUNIDADANCHO();
 		
-		grafico.drawImage(aux.getImage(), this.getX() * ANCHOUNITARIO,this.getY() * ALTOUNITARIO, Observador);
+		
+		graph_buffer.drawImage(aux.getImage(), 0, 0, Observador);
+		grafico.drawImage(buffer, this.getX() * ANCHOUNITARIO,this.getY() * ALTOUNITARIO, Observador);
 
 	}
 	

@@ -18,7 +18,14 @@ public class Mosca extends Enemigo {
 
 	public void avanzar(Escenario terreno) {
 		Posicion siguiente = terreno.obtenerSiguientePosicionCaminable(this
-				.getPosicion());
+				.getPosicion(), cant_avanzada);
 		this.cambiarPosicion(siguiente);
+		cant_avanzada++;
+		if(cant_avanzada > terreno.getCaminoAlaSalida().size())
+			cant_avanzada = 0;
+	}
+
+	public String getNombre() {
+		return "Mosca";
 	}
 }

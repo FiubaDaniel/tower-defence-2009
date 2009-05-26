@@ -47,4 +47,8 @@ public abstract class Torre extends Obstaculo {
 
 	abstract public void evolucionarce();
 
+	public int getValorEvolucion() {
+		return costoEvolucion;
+	}
+
 }
