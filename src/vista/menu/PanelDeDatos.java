@@ -1,9 +1,13 @@
 package vista.menu;
 
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -35,6 +39,9 @@ public class PanelDeDatos extends JPanel implements Observer {
 	private javax.swing.JLabel LinkVidaJugador;
 	private javax.swing.JList ListaTorres;
 	private javax.swing.JScrollPane ScrollTorres;
+	private javax.swing.JLabel LabelNombreJugador;
+	private javax.swing.JLabel LinkNombreJugador;
+	
 	
 	private PanelDatosDeSeleccion PanelDatosSeleccion;
 	private PanelDatosDeTorres PanelDatosTorres;
@@ -42,6 +49,8 @@ public class PanelDeDatos extends JPanel implements Observer {
 	
 	public PanelDeDatos(PanelDatosDeSeleccion panelDatosSeleccion, PanelDatosDeTorres panelDatosTorres) {
 
+		LabelNombreJugador = new javax.swing.JLabel();
+		LinkNombreJugador = new javax.swing.JLabel();
 		LinkVidaJugador = new javax.swing.JLabel();
 		LabelPuntos = new javax.swing.JLabel();
 		LabelVida = new javax.swing.JLabel();
@@ -59,13 +68,22 @@ public class PanelDeDatos extends JPanel implements Observer {
 		setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1,
 				1, 1, new java.awt.Color(255, 0, 0)));
 		
-		Jugador jugador = Jugador.obtenerJugador(50, 1000, "Exus");
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+		
+		Jugador jugador = Jugador.obtenerJugador(50, 1000, "fafa");
 		Escenario escenario = Escenario.obtenerEscenario();
+		
+		jugador.addObserver(this);
 		
 		LinkVidaJugador.setText(String.valueOf(jugador.getCantidadVidas()));
 
 		LabelPuntos.setText("Puntos:");
 
+		LabelNombreJugador.setText("Nombre Jugador: ");
+		
+		LinkNombreJugador.setText(jugador.getNombre());
+		
 		LabelVida.setText("Vida:");
 
 		LabelEnemigos.setText("Enemigos Restantes:");
@@ -87,171 +105,42 @@ public class PanelDeDatos extends JPanel implements Observer {
 		ListaTorres.addListSelectionListener(new ListaDeTorresListener());
 		ScrollTorres.setViewportView(ListaTorres);
 
-		javax.swing.GroupLayout PanelDatosLayout = new javax.swing.GroupLayout(
-				this);
-		setLayout(PanelDatosLayout);
-		PanelDatosLayout
-				.setHorizontalGroup(PanelDatosLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								PanelDatosLayout
-										.createSequentialGroup()
-										.addComponent(LabelVida)
-										.addGap(100, 100, 100)
-										.addComponent(
-												LinkVidaJugador,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												218, Short.MAX_VALUE).addGap(
-												100, 100, 100))
-						.addGroup(
-								PanelDatosLayout
-										.createSequentialGroup()
-										.addComponent(LabelPuntos)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(
-												LinkPuntosJugador,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												318,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(300, Short.MAX_VALUE))
-						.addGroup(
-								PanelDatosLayout
-										.createSequentialGroup()
-										.addComponent(LabelEnemigos)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(
-												LinkCantEnemigosEscenario,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												203, Short.MAX_VALUE)
-										.addContainerGap())
-						.addGroup(
-								PanelDatosLayout
-										.createSequentialGroup()
-										.addComponent(LabelDinero)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(
-												LinkDineroJugador,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												176,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGap(127, 127, 127))
-						.addGroup(
-								PanelDatosLayout
-										.createSequentialGroup()
-										.addGroup(
-												PanelDatosLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addComponent(
-																LabelTorres,
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addGroup(
-																javax.swing.GroupLayout.Alignment.LEADING,
-																PanelDatosLayout
-																		.createSequentialGroup()
-																		.addContainerGap()
-																		.addGroup(
-																				PanelDatosLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING)
-																						.addComponent(
-																								PanelDatosSeleccion,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								279,
-																								javax.swing.GroupLayout.PREFERRED_SIZE)
-																						.addGroup(
-																								PanelDatosLayout
-																										.createSequentialGroup()
-																										.addComponent(
-																												ScrollTorres,
-																												javax.swing.GroupLayout.PREFERRED_SIZE,
-																												129,
-																												javax.swing.GroupLayout.PREFERRED_SIZE)
-																										.addGap(20, 20, 20)
-																										.addComponent(
-																												PanelDatosTorres,
-																												javax.swing.GroupLayout.PREFERRED_SIZE,
-																												javax.swing.GroupLayout.DEFAULT_SIZE,
-																												javax.swing.GroupLayout.PREFERRED_SIZE)))))
-										.addContainerGap(54, Short.MAX_VALUE)));
-		PanelDatosLayout
-				.setVerticalGroup(PanelDatosLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								PanelDatosLayout
-										.createSequentialGroup()
-										.addGroup(
-												PanelDatosLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(LabelVida)
-														.addComponent(
-																LinkVidaJugador))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												PanelDatosLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																LabelPuntos)
-														.addComponent(
-																LinkPuntosJugador))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												PanelDatosLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																LabelEnemigos)
-														.addComponent(
-																LinkCantEnemigosEscenario))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												PanelDatosLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																LabelDinero)
-														.addComponent(
-																LinkDineroJugador))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-												8, Short.MAX_VALUE)
-										.addComponent(LabelTorres)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												PanelDatosLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING,
-																false)
-														.addComponent(
-																PanelDatosTorres,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																130,
-																Short.MAX_VALUE)
-														.addComponent(
-																ScrollTorres,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																130,
-																Short.MAX_VALUE))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(
-												PanelDatosSeleccion,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGap(18, 18, 18)));
-
+		LabelVida.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		LabelDinero.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		LabelPuntos.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		LabelTorres.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		LabelEnemigos.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		LabelNombreJugador.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		PanelDatosSeleccion.setAlignmentX(Component.CENTER_ALIGNMENT);
+		PanelDatosTorres.setAlignmentX(Component.CENTER_ALIGNMENT);
+			
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(LabelNombreJugador);
+		add(Box.createHorizontalGlue());
+		add(LinkNombreJugador);
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(LabelDinero);
+		add(Box.createHorizontalGlue());
+		add(LinkDineroJugador);
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(LabelEnemigos);
+		add(Box.createHorizontalGlue());
+		add(LinkCantEnemigosEscenario);
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(LabelPuntos);
+		add(Box.createHorizontalGlue());
+		add(LinkPuntosJugador);
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(LabelVida);
+		add(Box.createHorizontalGlue());
+		add(LinkVidaJugador);
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(LabelTorres);
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(ScrollTorres);
+		add(PanelDatosTorres);
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(PanelDatosSeleccion);
 		
 		jugador.addObserver(this);
 		

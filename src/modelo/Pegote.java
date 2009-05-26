@@ -30,4 +30,12 @@ public class Pegote extends Obstaculo {
 		}
 	}
 
+	public String getNombre() {
+		return "Pegote";
+	}
+
+	public int getValorEvolucion() {
+		return 0;
+	}
+
 }

@@ -410,6 +410,9 @@ public class Escenario extends Observable{
         if (Entrada != null) {
             // Si entrada es null, quiere decir que no se cargo el mapa
 
+        	if (CaminoAlaSalida != null)
+        		CaminoAlaSalida.clear();
+        	
             LinkedList ListaProvisoria = new LinkedList();
             LinkedList OpcionesdeCamino = new LinkedList();
 
@@ -470,14 +473,17 @@ public class Escenario extends Observable{
      * @param ubicacion Posicion de la posicion actual del enemigo.
      * @return La posicion siguiente a la actual. Si se llego al final del camino, se devuelve el comienzo.
      */
-    public Posicion obtenerSiguientePosicionCaminable(Posicion ubicacion) {
+    public Posicion obtenerSiguientePosicionCaminable(Posicion ubicacion, int cant_avanzada) {
 
         Iterator it = CaminoAlaSalida.iterator();
 
         Posicion Aux = new Posicion(MAPROWS + 1, MAPCOLUMNS + 1, false);
+        
+        int indice_actual = 0;
 
-        while (it.hasNext() && ((Aux.getCoordX() != ubicacion.getCoordX()) || (Aux.getCoordY() != ubicacion.getCoordY()))) {
+        while (indice_actual != cant_avanzada) {
             Aux = (Posicion) it.next();
+            indice_actual++;
         }
 
         if (Aux.getCoordX() == Salida.getCoordX() && Aux.getCoordY() == Salida.getCoordY()) {

@@ -37,4 +37,8 @@ public class TorrePlateada extends Torre {
 		}
 	}
 
+	public String getNombre() {
+		return "Torre Plateada";
+	}
+
 }

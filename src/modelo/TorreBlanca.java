@@ -33,4 +33,8 @@ public class TorreBlanca extends Torre {
 			throw new DineroMuyBajoException();
 		}
 	}
+
+	public String getNombre() {
+		return "Torre Blanca";
+	}
 }

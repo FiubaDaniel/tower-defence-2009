@@ -2,18 +2,18 @@ package modelo;
 
 import java.util.Observable;
 
-import titiritero.ObjetoVivo;
-import titiritero.Posicionable;
+import vista.Seleccionable;
 
 import customExceptions.*;
 
-public abstract class Enemigo extends Observable implements Posicionable, ObjetoVivo {
+public abstract class Enemigo extends Observable implements Seleccionable {
 
 	private int vida;
 	private boolean bichoVolador = false;
 	private int velocidad;
 	private Posicion lugarQueOcupa;
 	private boolean frenado = false;
+	protected int cant_avanzada = 0;
 
 	public abstract void avanzar(Escenario terreno);
 
@@ -91,9 +91,12 @@ public abstract class Enemigo extends Observable implements Posicionable, Objeto
 		return bichoVolador;
 	}
 	
-	public void vivir() {
-		Escenario escenario = Escenario.obtenerEscenario();
-		this.avanzar(escenario);
+	public void setCant_avanzada(int cant_avanzada) {
+		this.cant_avanzada = cant_avanzada;
+	}
+
+	public int getCant_avanzada() {
+		return cant_avanzada;
 	}
 	
 	public int getX() {
@@ -101,6 +104,18 @@ public abstract class Enemigo extends Observable implements Posicionable, Objeto
 	}
 	public int getY() {
 		return lugarQueOcupa.getCoordY();
+	}
+
+	public int getRango_Velocidad() {
+		return velocidad;
+	}
+
+	public int getVida_Daño() {
+		return vida;
+	}
+
+	public int getValorEvolucion() {
+		return 0;
 	}
 
 }

@@ -15,6 +15,9 @@ public class EnemigoListener implements Observer {
 		Escenario escenario = Escenario.obtenerEscenario();
 		Posicion salida = escenario.getSalida();
 		Posicion actual = ((Enemigo) arg0).getPosicion();
+		
+		
+		
 		if (actual.getCoordX() == salida.getCoordX()
 				&& actual.getCoordY() == salida.getCoordY()) {
 

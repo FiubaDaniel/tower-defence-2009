@@ -1,11 +1,13 @@
 package vista.menu;
 
+import java.awt.Component;
+import java.awt.Dimension;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import titiritero.MouseClickObservador;
-
-
-public class PanelDatosDeSeleccion extends JPanel implements MouseClickObservador {
+public class PanelDatosDeSeleccion extends JPanel {
 
 	/**
 	 * 
@@ -36,16 +38,10 @@ public class PanelDatosDeSeleccion extends JPanel implements MouseClickObservado
 
 		ImagenSeleccion.setBorder(javax.swing.BorderFactory
 				.createTitledBorder(""));
+		
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		javax.swing.GroupLayout ImagenSeleccionLayout = new javax.swing.GroupLayout(
-				ImagenSeleccion);
-		ImagenSeleccion.setLayout(ImagenSeleccionLayout);
-		ImagenSeleccionLayout.setHorizontalGroup(ImagenSeleccionLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 63, Short.MAX_VALUE));
-		ImagenSeleccionLayout.setVerticalGroup(ImagenSeleccionLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 62, Short.MAX_VALUE));
+		
 
 		LabelNombreSeleccion.setText("Obj_Seleccionado");
 
@@ -58,160 +54,56 @@ public class PanelDatosDeSeleccion extends JPanel implements MouseClickObservado
 		LinkVida_danio.setText("Vida_danio");
 
 		LinkRango_Vel.setText("Rango_Vel");
+		
+		LabelNombreSeleccion.setAlignmentX(Component.CENTER_ALIGNMENT);
+		LabelVida_danio.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		LabelRango_Vel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		LabelUpdate.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(LabelNombreSeleccion);
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(ImagenSeleccion);
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(LabelVida_danio);
+		add(LinkVida_danio);
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(LabelRango_Vel);
+		add(LinkRango_Vel);
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(LabelUpdate);
+		add(ButtonUpdate);
+		
+	}
 
-		javax.swing.GroupLayout PanelDatosSeleccionLayout = new javax.swing.GroupLayout(
-				this);
-		setLayout(PanelDatosSeleccionLayout);
-		PanelDatosSeleccionLayout
-				.setHorizontalGroup(PanelDatosSeleccionLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								PanelDatosSeleccionLayout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												PanelDatosSeleccionLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(
-																LabelNombreSeleccion,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																118,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addGroup(
-																PanelDatosSeleccionLayout
-																		.createSequentialGroup()
-																		.addGap(
-																				6,
-																				6,
-																				6)
-																		.addComponent(
-																				ImagenSeleccion,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addGroup(
-																				PanelDatosSeleccionLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING)
-																						.addGroup(
-																								PanelDatosSeleccionLayout
-																										.createSequentialGroup()
-																										.addGroup(
-																												PanelDatosSeleccionLayout
-																														.createParallelGroup(
-																																javax.swing.GroupLayout.Alignment.LEADING)
-																														.addComponent(
-																																LabelVida_danio)
-																														.addComponent(
-																																LabelRango_Vel))
-																										.addGap(
-																												29,
-																												29,
-																												29)
-																										.addGroup(
-																												PanelDatosSeleccionLayout
-																														.createParallelGroup(
-																																javax.swing.GroupLayout.Alignment.TRAILING)
-																														.addComponent(
-																																LinkRango_Vel)
-																														.addComponent(
-																																LinkVida_danio))
-																										.addGap(
-																												35,
-																												35,
-																												35))
-																						.addGroup(
-																								PanelDatosSeleccionLayout
-																										.createSequentialGroup()
-																										.addComponent(
-																												LabelUpdate)
-																										.addPreferredGap(
-																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																										.addComponent(
-																												ButtonUpdate)))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-										.addContainerGap(26, Short.MAX_VALUE)));
+	public void setLabelVida_danio_Text(String s) {
+		if (s != null)
+			LinkVida_danio.setText(s);
+	}
 
-		PanelDatosSeleccionLayout
-				.setVerticalGroup(PanelDatosSeleccionLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								javax.swing.GroupLayout.Alignment.TRAILING,
-								PanelDatosSeleccionLayout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(LabelNombreSeleccion)
-										.addGroup(
-												PanelDatosSeleccionLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING,
-																PanelDatosSeleccionLayout
-																		.createSequentialGroup()
-																		.addGap(
-																				6,
-																				6,
-																				6)
-																		.addGroup(
-																				PanelDatosSeleccionLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.BASELINE)
-																						.addComponent(
-																								LabelVida_danio)
-																						.addComponent(
-																								LinkVida_danio))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE)
-																		.addGroup(
-																				PanelDatosSeleccionLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.BASELINE)
-																						.addComponent(
-																								LabelRango_Vel)
-																						.addComponent(
-																								LinkRango_Vel))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addGroup(
-																				PanelDatosSeleccionLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.BASELINE)
-																						.addComponent(
-																								LabelUpdate)
-																						.addComponent(
-																								ButtonUpdate))
-																		.addGap(
-																				38,
-																				38,
-																				38))
-														.addGroup(
-																PanelDatosSeleccionLayout
-																		.createSequentialGroup()
-																		.addGap(
-																				18,
-																				18,
-																				18)
-																		.addComponent(
-																				ImagenSeleccion,
-																				javax.swing.GroupLayout.PREFERRED_SIZE,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				javax.swing.GroupLayout.PREFERRED_SIZE)))
-										.addContainerGap()));
+	public void setLabelRango_Vel_Text(String s) {
+		if (s != null)
+			LinkRango_Vel.setText(s);
+	}
+
+	public void setBottonUpdate_Text(String s) {
+		if (s != null)
+			if (s != "0") {
+				ButtonUpdate.setVisible(true);
+				ButtonUpdate.setText(s);
+			} else {
+				ButtonUpdate.setVisible(false);
+			}
 
 	}
 
-	public void MouseClick(int x, int y) {
-		
+	public void setLabelSeleccion_Text(String s) {
+		if (s != null)
+			LabelNombreSeleccion.setText(s);
+	}
+
+	public void setImagen_Seleccion(String s) {
 		
 	}
-	
+
 }

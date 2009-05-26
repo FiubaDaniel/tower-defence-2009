@@ -1,5 +1,8 @@
 package vista.menu;
 
+import java.awt.Component;
+
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 public class PanelDatosDeTorres extends JPanel {
@@ -42,110 +45,22 @@ public class PanelDatosDeTorres extends JPanel {
 
 		BotonComprar.setText("Comprar");
 
-		javax.swing.GroupLayout PanelDatosTorresLayout = new javax.swing.GroupLayout(
-				this);
-		setLayout(PanelDatosTorresLayout);
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-		//Creo las relaciones paralelas entre los componentes
+		LabelDaño.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		LabelRango.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		LabelPrecio.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		
-		PanelDatosTorresLayout
-				.setHorizontalGroup(PanelDatosTorresLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								PanelDatosTorresLayout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												PanelDatosTorresLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addGroup(
-																PanelDatosTorresLayout
-																		.createSequentialGroup()
-																		.addComponent(
-																				LabelDaño)
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																		.addComponent(
-																				LinkDañoTorre))
-														.addGroup(
-																PanelDatosTorresLayout
-																		.createSequentialGroup()
-																		.addGroup(
-																				PanelDatosTorresLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING)
-																						.addComponent(
-																								LabelRango)
-																						.addComponent(
-																								LabelPrecio))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addGroup(
-																				PanelDatosTorresLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.TRAILING)
-																						.addComponent(
-																								LinkRangoTorre)
-																						.addComponent(
-																								LinkPrecioTorre))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addGroup(
-																				PanelDatosTorresLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.TRAILING)
-																						.addComponent(
-																								BotonComprar))))
-										.addContainerGap()));
+
+		add(LabelDaño);
+		add(LinkDañoTorre);
+		add(LabelRango);
+		add(LinkRangoTorre);
+		add(LabelPrecio);
+		add(LinkPrecioTorre);
+		add(BotonComprar);
 		
-		//Creo las relaciones verticales entre los componentes
 		
-		PanelDatosTorresLayout
-				.setVerticalGroup(PanelDatosTorresLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								PanelDatosTorresLayout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												PanelDatosTorresLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(LabelDaño)
-														.addComponent(
-																LinkDañoTorre))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												PanelDatosTorresLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																LabelRango)
-														.addComponent(
-																LinkRangoTorre))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												PanelDatosTorresLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																LabelPrecio)
-														.addComponent(
-																LinkPrecioTorre))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												PanelDatosTorresLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																BotonComprar))
-										.addContainerGap()));
 	}
 
 	public void setLinkLabelDañoText(String str) {
