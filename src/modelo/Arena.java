@@ -8,6 +8,7 @@ public class Arena extends Obstaculo {
 		this.setPrecio(10);
 		this.setPosicion(posActual);
 		this.setAlcance(0);
+		this.setDanioQueGenera(0);
 
 	}
 

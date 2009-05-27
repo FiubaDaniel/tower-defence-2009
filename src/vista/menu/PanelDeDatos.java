@@ -3,6 +3,7 @@ package vista.menu;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,10 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import modelo.Arena;
 import modelo.Escenario;
 import modelo.Jugador;
+import modelo.Obstaculo;
+import modelo.Pegote;
 import modelo.Posicion;
-import modelo.Torre;
 import modelo.TorreAzul;
 import modelo.TorreBlanca;
 import modelo.TorreDorada;
@@ -148,22 +151,28 @@ public class PanelDeDatos extends JPanel implements Observer {
 	
 	public class ListaDeTorresListener implements ListSelectionListener {
 
-		public void valueChanged(ListSelectionEvent e) {
-			Posicion auxp = new Posicion();
-			Torre aux = null;
-			
-			//TODO Aprender Reflexion
-			
-			if (ListaTorres.getSelectedIndex() == 0) {
-				aux = new TorreBlanca(auxp);
-			} else if (ListaTorres.getSelectedIndex() == 1) {
-				aux = new TorrePlateada(auxp);
-			} else if (ListaTorres.getSelectedIndex() == 2) {
-				aux = new TorreDorada(auxp);
-			} else if (ListaTorres.getSelectedIndex() == 3) {
-				aux = new TorreAzul(auxp);
-			}
+		private HashMap TablaEquivalencias;
 		
+		private void cargarTabla() {
+			TablaEquivalencias = new HashMap ();
+			Posicion auxp = new Posicion();
+			TablaEquivalencias.put("0", new TorreBlanca(auxp));
+			TablaEquivalencias.put("1", new TorrePlateada(auxp));
+			TablaEquivalencias.put("2", new TorreDorada(auxp));
+			TablaEquivalencias.put("3", new TorreAzul(auxp));
+			TablaEquivalencias.put("4", new Pegote(auxp));
+			TablaEquivalencias.put("5", new Arena(auxp));
+		}
+		
+		public ListaDeTorresListener() {
+			cargarTabla();
+		}
+		
+		public void valueChanged(ListSelectionEvent e) {
+			Obstaculo aux = null;
+			
+			aux = (Obstaculo)TablaEquivalencias.get(String.valueOf(ListaTorres.getSelectedIndex()));
+			
 			PanelDatosTorres.setLinkLabelDañoText(String.valueOf(aux.getDanioQueGenera()));
 			PanelDatosTorres.setLinkLabelPrecioText(String.valueOf(aux.getPrecio()));
 			PanelDatosTorres.setLinkLabelRangoText(String.valueOf(aux.getAlcance()));
@@ -183,6 +192,14 @@ public class PanelDeDatos extends JPanel implements Observer {
 	
 	public void update(Graphics g) {
 		paint(g);
+	}
+	
+	public PanelDatosDeSeleccion getPanelDatosSeleccion() {
+		return PanelDatosSeleccion;
+	}
+	
+	public PanelDatosDeTorres getPanelDatosTorres() {
+		return PanelDatosTorres;
 	}
 
 }
