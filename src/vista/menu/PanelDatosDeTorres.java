@@ -20,6 +20,10 @@ public class PanelDatosDeTorres extends JPanel {
 	private javax.swing.JLabel LinkRangoTorre;
 	private javax.swing.JButton BotonComprar;
 
+	public javax.swing.JButton getBotonComprar() {
+		return BotonComprar;
+	}
+
 	public PanelDatosDeTorres() {
 		setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -30,6 +34,7 @@ public class PanelDatosDeTorres extends JPanel {
 		LinkRangoTorre = new javax.swing.JLabel();
 		LinkPrecioTorre = new javax.swing.JLabel();
 		BotonComprar = new javax.swing.JButton();
+		
 
 		LabelDaño.setText("Daño:");
 

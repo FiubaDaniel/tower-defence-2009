@@ -2,10 +2,11 @@ package vista;
 
 import java.io.FileNotFoundException;
 
+import controlador.ControladorDios;
+
 import modelo.Escenario;
 import modelo.Jugador;
 import modelo.Nivel;
-import vista.menu.ControladorDios;
 import vista.menu.Mapa;
 import vista.menu.MenuSuperior;
 import vista.menu.PanelDatosDeSeleccion;
@@ -49,7 +50,7 @@ public class Main {
 
 		jugador.addObserver(PanelDatos);
 		
-		ControladorDios Dios = new ControladorDios();
+		ControladorDios Dios = ControladorDios.obtenerControlador();
 		
 		Dios.setPausado(false);
 		
