@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -14,6 +15,8 @@ import customExceptions.InvalidPositionException;
 import customExceptions.MapNotCreatedException;
 import customExceptions.MapaSinEnemigosExcepion;
 import customExceptions.NoteHagaselVivoException;
+
+import modelo.terrenos.*;
 
 /**
  * Esta clase controla todos los aspectos generales del manejo del mapa, desde
@@ -38,6 +41,7 @@ public class Escenario extends Observable{
     private Posicion[][] Mapa;
     private int NumeroNivel = 1;
     private File ArchivodeMapa;
+    private HashMap MapaTerreno;
 
     /**
      * Este metodo se encarga de la implementacion de Escenario como singleton.
@@ -59,8 +63,19 @@ public class Escenario extends Observable{
         return escenario;
     }
     
+    private void cargarMapaConfiguracion() {
+    	MapaTerreno = new HashMap();
+    	MapaTerreno.put("-", new CaracterLinea());
+    	MapaTerreno.put("c", new CaracterC());
+    	MapaTerreno.put("S", new CaracterS());
+    	MapaTerreno.put("E", new CaracterE());
+    }
+    
     private void configurarMapa() throws FileNotFoundException {
-    	 try {
+    	 
+    	cargarMapaConfiguracion();
+    	
+    	try {
              ArchivodeMapa = new File("Mapas/Mapa" + NumeroNivel + ".mp");
              this.cargarMapa(); // Este método tira una excepción si el formato
              // del archivo está mal
@@ -118,6 +133,8 @@ public class Escenario extends Observable{
         int i = 0, j = 0;
 
         Mapa = new Posicion[MAPROWS][MAPCOLUMNS];
+        
+        LectorCaracteres Lector;
 
         try {
             fl = new FileReader(ArchivodeMapa);
@@ -131,30 +148,12 @@ public class Escenario extends Observable{
                     if (i > 0 && j == 0) {
                         auxiliardeLecturadeChars = (char) fl.read();
                     }
-                    switch (auxiliardeLecturadeChars) {
-                        case '-':
-                            cargarValorenPosiciondeMatriz(i, j, false);
-                            break;
-                        case 'c':
-                            cargarValorenPosiciondeMatriz(i, j, true);
-                            break;
-                        case 'S':
-                            cargarValorenPosiciondeMatriz(i, j, true);
-                            if (Salida == null) {
-                                Salida = new Posicion(Mapa[i][j]);
-                            } else {
-                                this.setSalida(Mapa[i][j]);
-                            }
-                            break;
-                        case 'E':
-                            cargarValorenPosiciondeMatriz(i, j, true);
-                            if (Entrada == null) {
-                                Entrada = new Posicion(Mapa[i][j]);
-                            } else {
-                                this.setEntrada(Mapa[i][j]);
-                            }
-                            break;
-                    }
+                    
+                    Lector = (LectorCaracteres)MapaTerreno.get(String.valueOf(auxiliardeLecturadeChars));
+                    
+                    cargarValorenPosiciondeMatriz(i, j, Lector.setearCaminable());
+                    Entrada = Lector.setearEntrada(j, i, Entrada);
+                    Salida = Lector.setearSalida(j, i, Salida);
                 }
             }
 
@@ -197,14 +196,6 @@ public class Escenario extends Observable{
 
     public LinkedList getCaminoAlaSalida() {
         return CaminoAlaSalida;
-    }
-
-    private void setSalida(Posicion salida) {
-        this.Salida = salida;
-    }
-
-    private void setEntrada(Posicion entrada) {
-        this.Entrada = entrada;
     }
 
     public Posicion getSalida() {

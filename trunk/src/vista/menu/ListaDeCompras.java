@@ -10,7 +10,7 @@ public class ListaDeCompras extends AbstractListModel {
 	private static final long serialVersionUID = -3114730816784248789L;
 	
 	String[] strings = { "Torre Blanca", "Torre Plateada",
-			"Torre Dorada", "Torre Azul" };
+			"Torre Dorada", "Torre Azul", "Pegote", "Arena" };
 
 	public Object getElementAt(int arg0) {
 		return strings[arg0];

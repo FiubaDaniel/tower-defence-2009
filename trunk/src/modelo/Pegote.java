@@ -9,6 +9,7 @@ public class Pegote extends Obstaculo {
 		this.setPrecio(20);
 		this.setPosicion(posActual);
 		this.setAlcance(0);
+		this.setDanioQueGenera(0);
 
 	}
 

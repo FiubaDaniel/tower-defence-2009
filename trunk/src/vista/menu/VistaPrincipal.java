@@ -15,34 +15,41 @@ public class VistaPrincipal extends JFrame {
 	private MenuSuperior MenuArchivoAyuda;
 	private PanelDeDatos PanelDatos;
 	private Mapa PanelMapa;
-	
-	public static VistaPrincipal obtenerVistaPrincipal(MenuSuperior menuArchivoAyuda, PanelDeDatos paneldedatos, Mapa mapa) {
+
+	public static VistaPrincipal obtenerVistaPrincipal(
+			MenuSuperior menuArchivoAyuda, PanelDeDatos paneldedatos, Mapa mapa) {
 		if (frame == null) {
 			frame = new VistaPrincipal(menuArchivoAyuda, paneldedatos, mapa);
 		}
 		return frame;
 	}
 
-	private VistaPrincipal(MenuSuperior menuArchivoAyuda, PanelDeDatos paneldedatos, Mapa mapa) {
+	private VistaPrincipal(MenuSuperior menuArchivoAyuda,
+			PanelDeDatos paneldedatos, Mapa mapa) {
 		initComponents(menuArchivoAyuda, paneldedatos, mapa);
 
 	}
 
-	private void initComponents(MenuSuperior menuArchivoAyuda, PanelDeDatos paneldedatos, Mapa mapa) {
+	private void initComponents(MenuSuperior menuArchivoAyuda,
+			PanelDeDatos paneldedatos, Mapa mapa) {
 
 		PanelMapa = mapa;
 		PanelDatos = paneldedatos;
 		MenuArchivoAyuda = menuArchivoAyuda;
-		
+
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Tower Defense");
 
 		setJMenuBar(MenuArchivoAyuda);
-		MenuArchivoAyuda.getAccessibleContext().setAccessibleName("BarraMenuInicial");
+		MenuArchivoAyuda.getAccessibleContext().setAccessibleName(
+				"BarraMenuInicial");
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
 		getContentPane().setLayout(layout);
+
+		// Establecezco un grupo horizontal para relacionar las alineaciones de
+		// los componentes de la pantalla
 		layout
 				.setHorizontalGroup(layout
 						.createParallelGroup(
@@ -63,6 +70,8 @@ public class VistaPrincipal extends JFrame {
 												javax.swing.GroupLayout.DEFAULT_SIZE,
 												317, Short.MAX_VALUE)
 										.addContainerGap()));
+		// Establecezco un grupo vertical para relacionar las alineaciones de
+		// los componentes de la pantalla
 		layout.setVerticalGroup(layout.createParallelGroup(
 				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup().addContainerGap().addGroup(
@@ -83,11 +92,11 @@ public class VistaPrincipal extends JFrame {
 	public Mapa getMapa() {
 		return PanelMapa;
 	}
-	
+
 	public void setMapa(Mapa mapa) {
 		PanelMapa = mapa;
 	}
-	
+
 	public MenuSuperior getMenuArchivoAyuda() {
 		return MenuArchivoAyuda;
 	}
@@ -95,7 +104,7 @@ public class VistaPrincipal extends JFrame {
 	public void setMenuArchivoAyuda(MenuSuperior menuArchivoAyuda) {
 		MenuArchivoAyuda = menuArchivoAyuda;
 	}
-	
+
 	public PanelDeDatos getPanelDatos() {
 		return PanelDatos;
 	}
@@ -103,5 +112,5 @@ public class VistaPrincipal extends JFrame {
 	public void setPanelDatos(PanelDeDatos panelDatos) {
 		PanelDatos = panelDatos;
 	}
-	
+
 }
