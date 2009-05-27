@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
+import javax.swing.event.MouseInputListener;
 
 import titiritero.SuperficieDeDibujo;
 import vista.Seleccionable;
@@ -21,7 +21,7 @@ import modelo.Obstaculo;
 import modelo.Posicion;
 
 public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
-		MouseListener {
+		MouseInputListener {
 
 	/**
 	 * 
@@ -32,6 +32,19 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 	private static final int UNIDADALTO = 15;
 
 	private boolean dibujar_habilitado = true;
+	
+	private boolean insetar_objeto = false;
+	
+	private int RepresentacionMouseEnMapa_X;
+	private int RepresentacionMouseEnMapa_Y;
+
+	public boolean isInsetar_objeto() {
+		return insetar_objeto;
+	}
+
+	public void setInsetar_objeto(boolean insetar_objeto) {
+		this.insetar_objeto = insetar_objeto;
+	}
 
 	private Seleccionable Objeto_seleccionado;
 
@@ -46,6 +59,7 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 	public Mapa() {
 
 		addMouseListener(this);
+		addMouseMotionListener(this);
 
 		Escenario escenario = Escenario.obtenerEscenario();
 
@@ -172,6 +186,8 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 			}
 
 		}
+		else if (arg0.getButton() == MouseEvent.BUTTON3 )
+			insetar_objeto = false;
 
 	}
 
@@ -200,6 +216,44 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 
 	public Seleccionable getObjeto_seleccionado() {
 		return Objeto_seleccionado;
+	}
+
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mouseMoved(MouseEvent e) {
+		if (insetar_objeto) {
+			Graphics grafico = this.getGraphics();
+			
+			grafico.setColor(Color.RED);
+			grafico.fillRect(e.getX(), e.getY(), UNIDADANCHO, UNIDADALTO);
+			
+			setX_representacion(e.getX() / UNIDADANCHO);
+			setY_representacion(e.getY() / UNIDADALTO);
+			
+			grafico.setColor(Color.BLACK);
+			
+		}
+		
+		
+	}
+
+	public void setX_representacion(int x_mouse) {
+		RepresentacionMouseEnMapa_X = x_mouse;
+	}
+
+	public int getX_representacion() {
+		return RepresentacionMouseEnMapa_X;
+	}
+
+	public void setY_representacion(int y_mouse) {
+		RepresentacionMouseEnMapa_Y = y_mouse;
+	}
+
+	public int getY_representacion() {
+		return RepresentacionMouseEnMapa_Y;
 	}
 
 }

@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import controlador.ControladorDios;
+
 import modelo.Arena;
 import modelo.Escenario;
 import modelo.Jugador;
@@ -44,6 +46,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 	private javax.swing.JScrollPane ScrollTorres;
 	private javax.swing.JLabel LabelNombreJugador;
 	private javax.swing.JLabel LinkNombreJugador;
+	private javax.swing.JButton BotonIniciar_Pausar;
 	
 	
 	private PanelDatosDeSeleccion PanelDatosSeleccion;
@@ -62,6 +65,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 		LinkPuntosJugador = new javax.swing.JLabel();
 		LinkCantEnemigosEscenario = new javax.swing.JLabel();
 		LinkDineroJugador = new javax.swing.JLabel();
+		BotonIniciar_Pausar = new javax.swing.JButton();
 		LabelTorres = new javax.swing.JLabel();
 		ScrollTorres = new javax.swing.JScrollPane();
 		ListaTorres = new javax.swing.JList();
@@ -100,6 +104,10 @@ public class PanelDeDatos extends JPanel implements Observer {
 		LinkDineroJugador.setText(String.valueOf(jugador.getDinero()));
 
 		LabelTorres.setText("Torres:");
+		
+		BotonIniciar_Pausar.setText("Iniciar");
+		
+		BotonIniciar_Pausar.addActionListener(ControladorDios.obtenerControlador());
 
 		ListaDeCompras ListaCompras = new ListaDeCompras();
 		
@@ -108,6 +116,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 		ListaTorres.addListSelectionListener(new ListaDeTorresListener());
 		ScrollTorres.setViewportView(ListaTorres);
 
+		BotonIniciar_Pausar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		LabelVida.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		LabelDinero.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		LabelPuntos.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -117,6 +126,8 @@ public class PanelDeDatos extends JPanel implements Observer {
 		PanelDatosSeleccion.setAlignmentX(Component.CENTER_ALIGNMENT);
 		PanelDatosTorres.setAlignmentX(Component.CENTER_ALIGNMENT);
 			
+		add(Box.createRigidArea(new Dimension(10,10)));
+		add(BotonIniciar_Pausar);
 		add(Box.createRigidArea(new Dimension(10,10)));
 		add(LabelNombreJugador);
 		add(Box.createHorizontalGlue());

@@ -9,6 +9,11 @@ public abstract class Obstaculo extends Observable implements Seleccionable {
 	private int danioQueGenera;
 	private int alcance;
 	private Posicion lugarQueOcupa;
+	private int velocidadDisparo = 1;
+
+	public void setVelocidadDisparo(int velocidadDisparo) {
+		this.velocidadDisparo = velocidadDisparo;
+	}
 
 	public void setPrecio(int unPrecio) {
 		this.precio = unPrecio;
@@ -57,6 +62,10 @@ public abstract class Obstaculo extends Observable implements Seleccionable {
 
 	public int getVida_Daño() {
 		return danioQueGenera;
+	}
+	
+	public int getVelocidadDisparo() {
+		return velocidadDisparo;
 	}
 
 }

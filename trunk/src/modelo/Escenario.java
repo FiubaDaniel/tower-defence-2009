@@ -510,7 +510,7 @@ public class Escenario extends Observable{
      */
     
     public void insertarObstaculoEnMapa(Obstaculo obstaculo) {
-        if (Mapa[obstaculo.getPosicion().getCoordX()][obstaculo.getPosicion().getCoordY()].isCaminable()) {
+        if (Mapa[obstaculo.getPosicion().getCoordY()][obstaculo.getPosicion().getCoordX()].isCaminable()) {
            if (obstaculo.getAlcance() == 0) {
                //Si entra aca, es que es un pegote o arena.
                 ObstaculosEnElMapa.add(obstaculo);

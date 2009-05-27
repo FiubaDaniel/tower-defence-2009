@@ -2,6 +2,8 @@ package vista.menu;
 
 import javax.swing.JFrame;
 
+import controlador.BotonComprarListener;
+
 /**
  * 
  * @author exus
@@ -87,6 +89,9 @@ public class VistaPrincipal extends JFrame {
 										Short.MAX_VALUE)).addContainerGap()));
 
 		pack();
+		
+		PanelDatos.getPanelDatosTorres().getBotonComprar().addActionListener(new BotonComprarListener());
+		
 	}
 
 	public Mapa getMapa() {

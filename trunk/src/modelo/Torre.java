@@ -10,7 +10,6 @@ public abstract class Torre extends Obstaculo {
 
 	private int costoEvolucion, evolucion;
 	private Enemigo enemigoAatacar;
-	private int velocidadDisparo = 1;
 
 	/* instancio el escenario */
 	private Escenario escenario = Escenario.obtenerEscenario();
@@ -51,9 +50,5 @@ public abstract class Torre extends Obstaculo {
 	public int getValorEvolucion() {
 		return costoEvolucion;
 	}
-
-	public int getVelocidadDisparo() {
-		return velocidadDisparo;
-	}
-
+	
 }

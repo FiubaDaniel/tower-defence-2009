@@ -3,6 +3,11 @@ package controlador;
 import java.util.Observable;
 import java.util.Observer;
 
+import vista.menu.Mapa;
+import vista.menu.MenuSuperior;
+import vista.menu.PanelDeDatos;
+import vista.menu.VistaPrincipal;
+
 import modelo.Enemigo;
 import modelo.Escenario;
 import modelo.Jugador;
@@ -28,6 +33,15 @@ public class EnemigoListener implements Observer {
 
 			jugador.AgregarQuitarVida(-1);
 			((Enemigo) arg0).cambiarPosicion(escenario.getEntrada());
+			
+			MenuSuperior menuArchivoAyuda = null;
+			PanelDeDatos paneldedatos = null;
+			Mapa mapa = null;
+			
+			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal(menuArchivoAyuda, paneldedatos, mapa);
+			
+			vistaP.getPanelDatos().paint(vistaP.getPanelDatos().getGraphics());
+			
 		}
 
 	}
