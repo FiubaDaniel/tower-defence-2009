@@ -77,7 +77,7 @@ public abstract class Enemigo extends Observable implements Seleccionable {
 
 	protected void setPosicion(Posicion entrada) throws NoEsEntradaException {
 		Escenario escenario = Escenario.obtenerEscenario();
-		if (entrada != escenario.getEntrada())
+		if (entrada.getCoordX() != escenario.getEntrada().getCoordX() || entrada.getCoordY() != escenario.getEntrada().getCoordY())
 			throw new NoEsEntradaException();
 		else
 			lugarQueOcupa = entrada;

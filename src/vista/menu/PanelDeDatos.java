@@ -48,6 +48,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 	private javax.swing.JLabel LinkNombreJugador;
 	private javax.swing.JButton BotonIniciar_Pausar;
 	
+	private Obstaculo Obs_seleccionado;
 	
 	private PanelDatosDeSeleccion PanelDatosSeleccion;
 	private PanelDatosDeTorres PanelDatosTorres;
@@ -160,6 +161,38 @@ public class PanelDeDatos extends JPanel implements Observer {
 		
 	}
 	
+	public void update(Observable o, Object arg) {
+		LinkDineroJugador.setText(String.valueOf(((Jugador)o).getDinero()));
+		LinkPuntosJugador.setText(String.valueOf(((Jugador)o).getPuntos()));
+		LinkVidaJugador.setText(String.valueOf(((Jugador)o).getCantidadVidas()));
+		
+		this.repaint();
+	}
+	
+	public void update(Graphics g) {
+		
+		Jugador jugador = Jugador.obtenerJugador(1, 1, "");
+		
+		LinkDineroJugador.setText(String.valueOf(jugador.getDinero()));
+		LinkPuntosJugador.setText(String.valueOf(jugador.getPuntos()));
+		LinkVidaJugador.setText(String.valueOf(jugador.getCantidadVidas()));
+		
+		this.repaint();
+	}
+	
+	public PanelDatosDeSeleccion getPanelDatosSeleccion() {
+		return PanelDatosSeleccion;
+	}
+	
+	public PanelDatosDeTorres getPanelDatosTorres() {
+		return PanelDatosTorres;
+	}
+
+	public Obstaculo getObs_seleccionado() {
+		return Obs_seleccionado;
+	}
+
+	
 	public class ListaDeTorresListener implements ListSelectionListener {
 
 		private HashMap TablaEquivalencias;
@@ -180,37 +213,14 @@ public class PanelDeDatos extends JPanel implements Observer {
 		}
 		
 		public void valueChanged(ListSelectionEvent e) {
-			Obstaculo aux = null;
 			
-			aux = (Obstaculo)TablaEquivalencias.get(String.valueOf(ListaTorres.getSelectedIndex()));
+			Obs_seleccionado = (Obstaculo)TablaEquivalencias.get(String.valueOf(ListaTorres.getSelectedIndex()));
 			
-			PanelDatosTorres.setLinkLabelDañoText(String.valueOf(aux.getDanioQueGenera()));
-			PanelDatosTorres.setLinkLabelPrecioText(String.valueOf(aux.getPrecio()));
-			PanelDatosTorres.setLinkLabelRangoText(String.valueOf(aux.getAlcance()));
+			PanelDatosTorres.setLinkLabelDañoText(String.valueOf(Obs_seleccionado.getDanioQueGenera()));
+			PanelDatosTorres.setLinkLabelPrecioText(String.valueOf(Obs_seleccionado.getPrecio()));
+			PanelDatosTorres.setLinkLabelRangoText(String.valueOf(Obs_seleccionado.getAlcance()));
 		
 		}
 
 	};
-
-	public void update(Observable o, Object arg) {
-		LinkDineroJugador.setText(String.valueOf(((Jugador)o).getDinero()));
-		LinkPuntosJugador.setText(String.valueOf(((Jugador)o).getPuntos()));
-		LinkVidaJugador.setText(String.valueOf(((Jugador)o).getCantidadVidas()));
-		
-		
-		this.repaint();
-	}
-	
-	public void update(Graphics g) {
-		paint(g);
-	}
-	
-	public PanelDatosDeSeleccion getPanelDatosSeleccion() {
-		return PanelDatosSeleccion;
-	}
-	
-	public PanelDatosDeTorres getPanelDatosTorres() {
-		return PanelDatosTorres;
-	}
-
 }

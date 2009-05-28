@@ -52,8 +52,6 @@ public class Main {
 		
 		ControladorDios Dios = ControladorDios.obtenerControlador();
 		
-		Dios.setPausado(false);
-		
 		Dios.iniciar_juego();
 		
 	}

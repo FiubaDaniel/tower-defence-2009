@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Observable;
@@ -12,11 +14,14 @@ import java.util.Observer;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 
+import customExceptions.InvalidPositionException;
+
 import titiritero.SuperficieDeDibujo;
 import vista.Seleccionable;
 
 import modelo.Enemigo;
 import modelo.Escenario;
+import modelo.Jugador;
 import modelo.Obstaculo;
 import modelo.Posicion;
 
@@ -32,9 +37,9 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 	private static final int UNIDADALTO = 15;
 
 	private boolean dibujar_habilitado = true;
-	
+
 	private boolean insetar_objeto = false;
-	
+
 	private int RepresentacionMouseEnMapa_X;
 	private int RepresentacionMouseEnMapa_Y;
 
@@ -146,6 +151,10 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 
 	public void mouseClicked(MouseEvent arg0) {
 
+		
+		/**
+		 * Esta parte se encarga de la seleccion de enemigos por el click del mouse
+		 */
 		if (arg0.getButton() == MouseEvent.BUTTON1) {
 			int posX = (int) (arg0.getX() / UNIDADANCHO);
 			int posY = (int) (arg0.getY() / UNIDADALTO);
@@ -185,9 +194,63 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 				}
 			}
 
-		}
-		else if (arg0.getButton() == MouseEvent.BUTTON3 )
+		} else if (arg0.getButton() == MouseEvent.BUTTON3)
 			insetar_objeto = false;
+
+		/**
+		 * Este método se encarga de la generación de torres nuevas.
+		 */
+		if (insetar_objeto && arg0.getButton() == MouseEvent.BUTTON1) {
+			Escenario escenario = Escenario.obtenerEscenario();
+			Jugador jugador = Jugador.obtenerJugador(0, 0, "");
+			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal(null,
+					null, null);
+
+			
+			Obstaculo aux = vistaP.getPanelDatos().getObs_seleccionado();
+
+			if (jugador.getDinero() >= aux.getPrecio()) {
+
+				Posicion aux_pos = new Posicion(RepresentacionMouseEnMapa_X,
+						RepresentacionMouseEnMapa_Y, false);
+
+				aux_pos.setCaminable(escenario.obtener_tipo_de_terreno(aux_pos));
+
+				/* Como necesito crear nuevas torres con cada click, uso reflexion para
+				 * conseguir el constructor y crear una neuva clase del mismo tipo
+				 */
+				
+				// Creo un array de constructores
+				Constructor[] constructor = aux.getClass().getConstructors();
+			
+				/*
+				 *  Creo un array de Objects, que van a ser los argumentos 
+				 *  del constructor a usar. Y le digo que la posicion 0 
+				 *  hay un objeto del tipo posicion
+				 */
+				Object args[] = new Object[1];
+				args[0] = aux_pos;
+				
+				try {
+					
+					//Llamo al constructor con el argumento seleccionado.
+					aux = (Obstaculo) constructor[0].newInstance(args);
+					
+					aux.setPosicion(aux_pos);
+					
+					escenario.insertarObstaculoEnMapa(aux);
+					jugador.ModificarDinero(-aux.getPrecio());
+					
+				} catch (InvalidPositionException e) {
+					insetar_objeto = false;	
+				} catch (InstantiationException e1) {
+				} catch (IllegalAccessException e1) {
+				} catch (IllegalArgumentException e) {
+				} catch (InvocationTargetException e) {
+				}
+				
+			}
+		}
 
 	}
 
@@ -220,24 +283,23 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void mouseMoved(MouseEvent e) {
 		if (insetar_objeto) {
 			Graphics grafico = this.getGraphics();
-			
+
 			grafico.setColor(Color.RED);
 			grafico.fillRect(e.getX(), e.getY(), UNIDADANCHO, UNIDADALTO);
-			
+
 			setX_representacion(e.getX() / UNIDADANCHO);
 			setY_representacion(e.getY() / UNIDADALTO);
-			
+
 			grafico.setColor(Color.BLACK);
-			
+
 		}
-		
-		
+
 	}
 
 	public void setX_representacion(int x_mouse) {
