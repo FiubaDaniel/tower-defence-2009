@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Observer;
 
 import javax.swing.JButton;
 
@@ -33,8 +32,6 @@ import modelo.Hormiga;
 import modelo.Mosca;
 import modelo.Obstaculo;
 import modelo.Posicion;
-import modelo.Torre;
-import modelo.TorreBlanca;
 import customExceptions.EnemigoYaMuerto;
 
 /**
@@ -98,30 +95,27 @@ public class ControladorDios implements ActionListener {
 
 		Escenario escenario = Escenario.obtenerEscenario();
 
-		Posicion aux_pos = escenario.getEntrada();
+	/*	Posicion aux_pos = escenario.getEntrada();
 		Hormiga hormiga = new Hormiga(aux_pos);
 		Mosca mosca = new Mosca(aux_pos);
 
 		escenario.agregarEnemigoALista(hormiga);
-		escenario.agregarEnemigoALista(mosca);
-
-		Posicion aux_pos2 = new Posicion(9, 21, true);
-		Torre Blanca = new TorreBlanca(aux_pos2);
-		Posicion aux_pos3 = new Posicion(20, 47, true);
-		Arena pegote = new Arena(aux_pos3);
-
-		escenario.insertarObstaculoEnMapa(Blanca);
-		escenario.insertarObstaculoEnMapa(pegote);
-		Observer EnemigoObserver = new EnemigoListener();
-
-		hormiga.addObserver(EnemigoObserver);
-
-		VistaObjetoDeMapa vistaObjeto;
-
+		escenario.agregarEnemigoALista(mosca);*/
+		
+		FabricaDeEnemigos fabrica = new FabricaDeEnemigos(escenario.getCantBichos(), escenario.getNumeroNivel());
+		
 		double tiempo_pasado = 0;
+		
+		VistaObjetoDeMapa vistaObjeto;
 
 		while (!termino_nivel) {
 			while (!isPausado()) {
+				
+				if (((tiempo_pasado * SleepTime) % fabrica.getIntervalo_entre_salidas()) == 0) {
+					Enemigo aux_enemigo = fabrica.getSiguienteEnemigoParaCrear();
+					if (aux_enemigo != null)
+						escenario.agregarEnemigoALista(aux_enemigo);
+				}
 
 				mapa.paint(mapa.getGraphics());
 
@@ -182,6 +176,8 @@ public class ControladorDios implements ActionListener {
 				}
 
 				tiempo_pasado++;
+				if (tiempo_pasado > 60000)
+					tiempo_pasado = 0;
 
 			}
 		}
