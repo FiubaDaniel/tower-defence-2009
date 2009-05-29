@@ -14,7 +14,7 @@ public class PegoteTest extends TestCase {
 		super.setUp();
 		escenario = Escenario.obtenerEscenario();
 		primeraPosicion = escenario.getEntrada();
-		segundaPosicion = Escenario.obtenerEscenario().obtenerSiguientePosicionCaminable(primeraPosicion);
+		segundaPosicion = Escenario.obtenerEscenario().obtenerSiguientePosicionCaminable(primeraPosicion,1);
 		obstaculo1 = new Pegote(segundaPosicion);
 	}
 	

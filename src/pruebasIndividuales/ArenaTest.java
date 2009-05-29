@@ -16,8 +16,8 @@ public class ArenaTest extends TestCase {
 		super.setUp();
 		escenario = Escenario.obtenerEscenario();
 		primeraPosicion = escenario.getEntrada();
-		segundaPosicion = Escenario.obtenerEscenario().obtenerSiguientePosicionCaminable(primeraPosicion);
-		terceraPosicion = Escenario.obtenerEscenario().obtenerSiguientePosicionCaminable(segundaPosicion);
+		segundaPosicion = Escenario.obtenerEscenario().obtenerSiguientePosicionCaminable(primeraPosicion,1);
+		terceraPosicion = Escenario.obtenerEscenario().obtenerSiguientePosicionCaminable(segundaPosicion,1);
 		obstaculo1 = new Arena(segundaPosicion);
 	
 	}	
