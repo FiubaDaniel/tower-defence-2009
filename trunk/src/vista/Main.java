@@ -7,22 +7,21 @@ import controlador.ControladorDios;
 import modelo.Escenario;
 import modelo.Jugador;
 import modelo.Nivel;
+import vista.audio.ReproductorAudio;
 import vista.menu.Mapa;
 import vista.menu.MenuSuperior;
 import vista.menu.PanelDatosDeSeleccion;
 import vista.menu.PanelDatosDeTorres;
 import vista.menu.PanelDeDatos;
 import vista.menu.VistaPrincipal;
-
+/**
+ * Clase dónde se encuentran las declaraciones de todos los objetos principales
+ * de la aplicación.
+ * 
+ * @author exus
+ *
+ */
 public class Main {
-
-	/**
-	 * 
-	 * Dónde llamare a todo.
-	 * 
-	 * @param args
-	 *            the command line arguments
-	 */
 
 	public static void main(String args[]) {
 
@@ -37,21 +36,32 @@ public class Main {
 		Jugador jugador = Jugador.obtenerJugador(50, 1000, "Exus");
 		Nivel NivelGeneral = Nivel.obtenerNivel(escenario, jugador);
 
+		
+		//Instancio el reproductor de Audio
+		
+	/*	ReproductorAudio repro = ReproductorAudio.getInstancia();
+		repro.reproducirCancion(ReproductorAudio.CANCION_INTRO);*/
+		
 		// Instancio los objetos de la ventana
 		PanelDatosDeTorres PanelTorres = new PanelDatosDeTorres();
 		PanelDatosDeSeleccion PanelSeleccion = new PanelDatosDeSeleccion();
 		MenuSuperior MenuArchivoAyuda = new MenuSuperior();
 		PanelDeDatos PanelDatos = new PanelDeDatos(PanelSeleccion, PanelTorres);
 		Mapa PanelMapa = new Mapa();
-
+		
+		
+		//Cargo el Frame Principal
 		VistaPrincipal VentanaPrincipal = VistaPrincipal.obtenerVistaPrincipal(
 				MenuArchivoAyuda, PanelDatos, PanelMapa);
 		VentanaPrincipal.setVisible(true);
 
+		//Agrego un Observador de jugador
 		jugador.addObserver(PanelDatos);
 		
+		//Instancio el controlador del GameLoop
 		ControladorDios Dios = ControladorDios.obtenerControlador();
 		
+		//Corro el Simulador
 		Dios.iniciar_juego();
 		
 	}

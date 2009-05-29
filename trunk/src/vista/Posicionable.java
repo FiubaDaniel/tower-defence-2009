@@ -1,4 +1,4 @@
-package titiritero;
+package vista;
 
 /*
  * Esta es la interface que debe implementar todo objeto del modelo que desee ser 

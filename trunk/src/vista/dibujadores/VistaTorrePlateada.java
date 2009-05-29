@@ -1,5 +1,10 @@
 package vista.dibujadores;
 
+/**
+ * Esta clase guarda la ubicacion de la imagen de la torre plateada
+ * @author exus
+ *
+ */
 public class VistaTorrePlateada extends VistaObjetoDeMapa {
 
 	public VistaTorrePlateada(int x, int y) {

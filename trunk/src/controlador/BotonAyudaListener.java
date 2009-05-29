@@ -3,6 +3,11 @@ package controlador;
 import javax.swing.event.MenuKeyEvent;
 import javax.swing.event.MenuKeyListener;
 
+/**
+ * Clase encargada del funcionamiento del Botón Ayuda
+ * @author exus
+ *
+ */
 public class BotonAyudaListener implements MenuKeyListener {
 
 	public void menuKeyPressed(MenuKeyEvent e) {

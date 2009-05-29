@@ -1,5 +1,10 @@
 package vista.dibujadores;
 
+/**
+ * Esta clase guarda la ubicacion de la imagen de la cucaracha
+ * @author exus
+ *
+ */
 public class VistaCucaracha extends VistaObjetoDeMapa {
 
 	public VistaCucaracha(int x, int y) {

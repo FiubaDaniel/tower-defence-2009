@@ -26,13 +26,20 @@ import modelo.TorreBlanca;
 import modelo.TorreDorada;
 import modelo.TorrePlateada;
 
+/**
+ * Esta clase forma el panel izquierdo del juego. Contiene la informacion
+ * general del juego y los menus de comprar y seleccion de objetos del mapa.
+ * 
+ * @author exus
+ * 
+ */
 public class PanelDeDatos extends JPanel implements Observer {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1980001560016222467L;
-	
+
 	private javax.swing.JLabel LabelDinero;
 	private javax.swing.JLabel LabelEnemigos;
 	private javax.swing.JLabel LabelPuntos;
@@ -47,14 +54,15 @@ public class PanelDeDatos extends JPanel implements Observer {
 	private javax.swing.JLabel LabelNombreJugador;
 	private javax.swing.JLabel LinkNombreJugador;
 	private javax.swing.JButton BotonIniciar_Pausar;
-	
+
+	// Atributo que representa el objeto seleccionado en el mapa.
 	private Obstaculo Obs_seleccionado;
-	
+
 	private PanelDatosDeSeleccion PanelDatosSeleccion;
 	private PanelDatosDeTorres PanelDatosTorres;
-	
-	
-	public PanelDeDatos(PanelDatosDeSeleccion panelDatosSeleccion, PanelDatosDeTorres panelDatosTorres) {
+
+	public PanelDeDatos(PanelDatosDeSeleccion panelDatosSeleccion,
+			PanelDatosDeTorres panelDatosTorres) {
 
 		LabelNombreJugador = new javax.swing.JLabel();
 		LinkNombreJugador = new javax.swing.JLabel();
@@ -72,26 +80,28 @@ public class PanelDeDatos extends JPanel implements Observer {
 		ListaTorres = new javax.swing.JList();
 		PanelDatosTorres = panelDatosTorres;
 		PanelDatosSeleccion = panelDatosSeleccion;
-		
-		setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1,
-				1, 1, new java.awt.Color(255, 0, 0)));
-		
+
+		// Coloco un borde rojo
+		setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1,
+				new java.awt.Color(255, 0, 0)));
+
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-		
 		Jugador jugador = Jugador.obtenerJugador(50, 1000, "fafa");
 		Escenario escenario = Escenario.obtenerEscenario();
-		
+
+		// Coloco esta clase como observador de la clase jugador.
 		jugador.addObserver(this);
-		
+
+		// Seteo los nombres de los controles.
 		LinkVidaJugador.setText(String.valueOf(jugador.getCantidadVidas()));
 
 		LabelPuntos.setText("Puntos:");
 
 		LabelNombreJugador.setText("Nombre Jugador: ");
-		
+
 		LinkNombreJugador.setText(jugador.getNombre());
-		
+
 		LabelVida.setText("Vida:");
 
 		LabelEnemigos.setText("Enemigos Restantes:");
@@ -100,23 +110,28 @@ public class PanelDeDatos extends JPanel implements Observer {
 
 		LinkPuntosJugador.setText(String.valueOf(jugador.getPuntos()));
 
-		LinkCantEnemigosEscenario.setText(String.valueOf(escenario.getCantBichos()));
+		LinkCantEnemigosEscenario.setText(String.valueOf(escenario
+				.getCantBichos()));
 
 		LinkDineroJugador.setText(String.valueOf(jugador.getDinero()));
 
 		LabelTorres.setText("Torres:");
-		
+
 		BotonIniciar_Pausar.setText("Iniciar");
-		
-		BotonIniciar_Pausar.addActionListener(ControladorDios.obtenerControlador());
+
+		// Agrego un Listener del boton Iniciar_Pausar
+		BotonIniciar_Pausar.addActionListener(ControladorDios
+				.obtenerControlador());
 
 		ListaDeCompras ListaCompras = new ListaDeCompras();
-		
+
 		ListaTorres.setModel(ListaCompras);
-		
+
+		// Agrego un Listener de la lista de compras.
 		ListaTorres.addListSelectionListener(new ListaDeTorresListener());
 		ScrollTorres.setViewportView(ListaTorres);
 
+		// Alineo los componentes.
 		BotonIniciar_Pausar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		LabelVida.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		LabelDinero.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -126,64 +141,69 @@ public class PanelDeDatos extends JPanel implements Observer {
 		LabelNombreJugador.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		PanelDatosSeleccion.setAlignmentX(Component.CENTER_ALIGNMENT);
 		PanelDatosTorres.setAlignmentX(Component.CENTER_ALIGNMENT);
-			
-		add(Box.createRigidArea(new Dimension(10,10)));
+
+		// Organizo los componentes.
+
+		// Creo una zona rigida entre componentes de tamaño 10 x 10 pixels.
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(BotonIniciar_Pausar);
-		add(Box.createRigidArea(new Dimension(10,10)));
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(LabelNombreJugador);
+		// Creo una zona que se amolda para ocupar toda la zona vacia.
 		add(Box.createHorizontalGlue());
 		add(LinkNombreJugador);
-		add(Box.createRigidArea(new Dimension(10,10)));
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(LabelDinero);
 		add(Box.createHorizontalGlue());
 		add(LinkDineroJugador);
-		add(Box.createRigidArea(new Dimension(10,10)));
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(LabelEnemigos);
 		add(Box.createHorizontalGlue());
 		add(LinkCantEnemigosEscenario);
-		add(Box.createRigidArea(new Dimension(10,10)));
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(LabelPuntos);
 		add(Box.createHorizontalGlue());
 		add(LinkPuntosJugador);
-		add(Box.createRigidArea(new Dimension(10,10)));
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(LabelVida);
 		add(Box.createHorizontalGlue());
 		add(LinkVidaJugador);
-		add(Box.createRigidArea(new Dimension(10,10)));
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(LabelTorres);
-		add(Box.createRigidArea(new Dimension(10,10)));
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(ScrollTorres);
 		add(PanelDatosTorres);
-		add(Box.createRigidArea(new Dimension(10,10)));
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(PanelDatosSeleccion);
-		
+
 		jugador.addObserver(this);
-		
+
 	}
-	
+
 	public void update(Observable o, Object arg) {
-		LinkDineroJugador.setText(String.valueOf(((Jugador)o).getDinero()));
-		LinkPuntosJugador.setText(String.valueOf(((Jugador)o).getPuntos()));
-		LinkVidaJugador.setText(String.valueOf(((Jugador)o).getCantidadVidas()));
-		
+		LinkDineroJugador.setText(String.valueOf(((Jugador) o).getDinero()));
+		LinkPuntosJugador.setText(String.valueOf(((Jugador) o).getPuntos()));
+		LinkVidaJugador.setText(String
+				.valueOf(((Jugador) o).getCantidadVidas()));
+
 		this.repaint();
 	}
-	
+
 	public void update(Graphics g) {
-		
+
 		Jugador jugador = Jugador.obtenerJugador(1, 1, "");
-		
+
 		LinkDineroJugador.setText(String.valueOf(jugador.getDinero()));
 		LinkPuntosJugador.setText(String.valueOf(jugador.getPuntos()));
 		LinkVidaJugador.setText(String.valueOf(jugador.getCantidadVidas()));
-		
+
 		this.repaint();
 	}
-	
+
 	public PanelDatosDeSeleccion getPanelDatosSeleccion() {
 		return PanelDatosSeleccion;
 	}
-	
+
 	public PanelDatosDeTorres getPanelDatosTorres() {
 		return PanelDatosTorres;
 	}
@@ -192,13 +212,14 @@ public class PanelDeDatos extends JPanel implements Observer {
 		return Obs_seleccionado;
 	}
 
-	
+	// Creo el observador de la liste de torres, para poder acceder de forma
+	// directa a los datos en el panel de datos de torres
 	public class ListaDeTorresListener implements ListSelectionListener {
 
 		private HashMap TablaEquivalencias;
-		
+
 		private void cargarTabla() {
-			TablaEquivalencias = new HashMap ();
+			TablaEquivalencias = new HashMap();
 			Posicion auxp = new Posicion();
 			TablaEquivalencias.put("0", new TorreBlanca(auxp));
 			TablaEquivalencias.put("1", new TorrePlateada(auxp));
@@ -207,19 +228,23 @@ public class PanelDeDatos extends JPanel implements Observer {
 			TablaEquivalencias.put("4", new Pegote(auxp));
 			TablaEquivalencias.put("5", new Arena(auxp));
 		}
-		
+
 		public ListaDeTorresListener() {
 			cargarTabla();
 		}
-		
+
 		public void valueChanged(ListSelectionEvent e) {
-			
-			Obs_seleccionado = (Obstaculo)TablaEquivalencias.get(String.valueOf(ListaTorres.getSelectedIndex()));
-			
-			PanelDatosTorres.setLinkLabelDañoText(String.valueOf(Obs_seleccionado.getDanioQueGenera()));
-			PanelDatosTorres.setLinkLabelPrecioText(String.valueOf(Obs_seleccionado.getPrecio()));
-			PanelDatosTorres.setLinkLabelRangoText(String.valueOf(Obs_seleccionado.getAlcance()));
-		
+
+			Obs_seleccionado = (Obstaculo) TablaEquivalencias.get(String
+					.valueOf(ListaTorres.getSelectedIndex()));
+
+			PanelDatosTorres.setLinkLabelDañoText(String
+					.valueOf(Obs_seleccionado.getDanioQueGenera()));
+			PanelDatosTorres.setLinkLabelPrecioText(String
+					.valueOf(Obs_seleccionado.getPrecio()));
+			PanelDatosTorres.setLinkLabelRangoText(String
+					.valueOf(Obs_seleccionado.getAlcance()));
+
 		}
 
 	};

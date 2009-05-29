@@ -1,5 +1,10 @@
 package vista.dibujadores;
 
+/**
+ * Esta clase guarda la ubicacion de la imagen de la torre azul
+ * @author exus
+ *
+ */
 public class VistaTorreAzul extends VistaObjetoDeMapa {
 
 	public VistaTorreAzul(int x, int y) {

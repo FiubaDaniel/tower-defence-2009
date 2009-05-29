@@ -3,6 +3,12 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Clase encargada del funcionamiento del Botón Actualizar Torre
+ * @author exus
+ *
+ */
+
 public class BotonUpdateListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {

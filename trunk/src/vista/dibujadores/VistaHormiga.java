@@ -1,5 +1,10 @@
 package vista.dibujadores;
 
+/**
+ * Esta clase guarda la ubicacion de la imagen de la hormiga
+ * @author exus
+ *
+ */
 public class VistaHormiga extends VistaObjetoDeMapa {
 
 	

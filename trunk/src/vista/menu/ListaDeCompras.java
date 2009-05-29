@@ -2,6 +2,11 @@ package vista.menu;
 
 import javax.swing.AbstractListModel;
 
+/**
+ * Esta clase guarda los valores a mostrar en la lista de obstaculos.
+ * @author exus
+ *
+ */
 public class ListaDeCompras extends AbstractListModel {
 
 	/**

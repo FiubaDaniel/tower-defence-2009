@@ -2,6 +2,12 @@ package modelo.terrenos;
 
 import modelo.Posicion;
 
+/**
+ * Esta clase representa al Caracter "E", es decir el terreno de Entrada.
+ * Para datos sobre los metodos, leer la interfaz
+ * @author exus
+ * 
+ */
 public class CaracterE implements LectorCaracteres {
 
 	public boolean setearCaminable() {

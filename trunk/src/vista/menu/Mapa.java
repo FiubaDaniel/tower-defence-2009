@@ -16,7 +16,7 @@ import javax.swing.event.MouseInputListener;
 
 import customExceptions.InvalidPositionException;
 
-import titiritero.SuperficieDeDibujo;
+import vista.SuperficieDeDibujo;
 import vista.Seleccionable;
 
 import modelo.Enemigo;
