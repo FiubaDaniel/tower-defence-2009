@@ -1,4 +1,4 @@
-package titiritero;
+package vista;
 
 /*
  * Esta abstraccion representa a todos los objetos Vista de la aplicacion

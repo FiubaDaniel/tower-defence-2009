@@ -3,6 +3,12 @@ package controlador;
 import javax.swing.event.MenuKeyEvent;
 import javax.swing.event.MenuKeyListener;
 
+/**
+ * Clase encargada del funcionamiento del Botón Salir
+ * @author exus
+ *
+ */
+
 public class BotonSalirListener implements MenuKeyListener {
 
 	public void menuKeyPressed(MenuKeyEvent e) {

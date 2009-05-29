@@ -13,6 +13,13 @@ import modelo.Escenario;
 import modelo.Jugador;
 import modelo.Posicion;
 
+/**
+ * Clase encargada de observar los cambios de la clase enemigos, para así 
+ * cambiar los valores del menú izquierdo.
+ * @author exus
+ *
+ */
+
 public class EnemigoListener implements Observer {
 
 	public void update(Observable arg0, Object arg1) {

@@ -7,44 +7,66 @@ import java.util.Observable;
 
 import javax.swing.ImageIcon;
 
-import titiritero.Dibujable;
-import titiritero.Posicionable;
-import titiritero.SuperficieDeDibujo;
+import vista.Dibujable;
+import vista.Posicionable;
+import vista.SuperficieDeDibujo;
 import vista.menu.Mapa;
 
+/**
+ * Esta clase contiene todos los datos en comun de las vista de obstaculos y
+ * Enemigos.
+ * 
+ * @author exus
+ * 
+ */
 public abstract class VistaObjetoDeMapa implements Dibujable {
 
 	private String dir_imagen;
-	
+
 	private int X_pos, Y_pos;
-	
+
 	private Posicionable posicionable;
-	
+
 	protected Image_Observer Observador;
-	
+
+	/**
+	 * Este metodo dibuja la imagen en la superficie de DIbujo.
+	 */
 	public void dibujar(SuperficieDeDibujo superfice) {
-		
-		Graphics grafico = ((Mapa)superfice).getGraphics();
-		
+
+		// Pido una superficie donde dibujar, es decir un graphics.
+		Graphics grafico = ((Mapa) superfice).getGraphics();
+
+		// Cargo una imagen, para ser dibujada.
 		ImageIcon aux = new ImageIcon(this.getDir_imagen());
-		
-		//Creación buffer
-		Image buffer = ((Mapa)superfice).createImage(((Mapa)superfice).getUNIDADANCHO(), ((Mapa)superfice).getUNIDADALTO());
+
+		// Creación buffer
+		Image buffer = ((Mapa) superfice).createImage(((Mapa) superfice)
+				.getUNIDADANCHO(), ((Mapa) superfice).getUNIDADALTO());
 		Graphics graph_buffer = buffer.getGraphics();
-		//Creación buffer
-		
-		int ANCHOUNITARIO = ((Mapa)superfice).getUNIDADANCHO();
-		int ALTOUNITARIO = ((Mapa)superfice).getUNIDADANCHO();
-		
-		
+		// Creación buffer
+
+		// Obtengo el ancho y alto de las iamgenes a crear.
+		int ANCHOUNITARIO = ((Mapa) superfice).getUNIDADANCHO();
+		int ALTOUNITARIO = ((Mapa) superfice).getUNIDADANCHO();
+
+		// Dibujo la iamgen en el buffer y luego la copio al mapa, para evitar
+		// del destello de la imagen
 		graph_buffer.drawImage(aux.getImage(), 0, 0, Observador);
-		grafico.drawImage(buffer, this.getX() * ANCHOUNITARIO,this.getY() * ALTOUNITARIO, Observador);
+		grafico.drawImage(buffer, this.getX() * ANCHOUNITARIO, this.getY()
+				* ALTOUNITARIO, Observador);
 
 	}
-	
-	public VistaObjetoDeMapa(int x, int y) {
+
+	/**
+	 * Contructor generico. Recibe las coordenadas en donde poner la imagen.
+	 * 
+	 * @param x
+	 * @param y
+	 */
+	protected VistaObjetoDeMapa(int x, int y) {
 		Observador = new Image_Observer();
-		
+
 		this.setX(x);
 		this.setY(y);
 	}
@@ -88,20 +110,21 @@ public abstract class VistaObjetoDeMapa implements Dibujable {
 	public Image_Observer getObservador() {
 		return Observador;
 	}
-	
-	public class Image_Observer implements ImageObserver{
+
+	// Este observador esta para que el compilador no me moleste. Me lo pedia el
+	// metodo para dibujar, pero no lo necesitaba, asi que cree uno que no hace
+	// nada.
+	public class Image_Observer implements ImageObserver {
 
 		public void update(Observable arg0, Object arg1) {
-			// TODO Auto-generated method stub
-			
+
 		}
 
 		public boolean imageUpdate(Image img, int infoflags, int x, int y,
 				int width, int height) {
-			// TODO Auto-generated method stub
 			return false;
 		}
-		
+
 	};
 
 }

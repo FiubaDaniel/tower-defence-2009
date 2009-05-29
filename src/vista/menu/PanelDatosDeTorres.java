@@ -5,6 +5,11 @@ import java.awt.Component;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+/**
+ * Este panel muestra la informacion de la torre mostrada en la lista de compras.
+ * @author exus
+ *
+ */
 public class PanelDatosDeTorres extends JPanel {
 
 	/**

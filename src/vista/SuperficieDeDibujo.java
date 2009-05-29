@@ -1,4 +1,4 @@
-package titiritero;
+package vista;
 
 /*
  * Esta abstraccion es solo a fin de poder abstraerse de la API grafica de Java

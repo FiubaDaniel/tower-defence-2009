@@ -5,6 +5,12 @@ import java.awt.event.ActionListener;
 
 import vista.menu.VistaPrincipal;
 
+/**
+ * Clase encargada del funcionamiento del Botón Comprar Obstaculos
+ * @author exus
+ *
+ */
+
 public class BotonComprarListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
@@ -12,6 +18,10 @@ public class BotonComprarListener implements ActionListener {
 
 	}
 
+	/**
+	 * Este método activa el modo Insertar_Objeto de la clase Mapa
+	 * @param evt
+	 */
 	public void BotonComprar_Apretado(ActionEvent evt) {
 		VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal(null, null, null);
 		

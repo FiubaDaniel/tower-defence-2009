@@ -3,6 +3,12 @@ package controlador;
 import javax.swing.event.MenuKeyEvent;
 import javax.swing.event.MenuKeyListener;
 
+/**
+ * Clase encargada del funcionamiento del Botón Cargar Partida
+ * @author exus
+ *
+ */
+
 public class BotonCargarPartidaListener implements MenuKeyListener {
 
 	public void menuKeyPressed(MenuKeyEvent e) {

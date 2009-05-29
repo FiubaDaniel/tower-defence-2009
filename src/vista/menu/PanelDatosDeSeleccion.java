@@ -7,6 +7,13 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+/**
+ * Esta clase se encarga de la presentacion de datos del objeto seleccionado en
+ * el mapa. Además de la organizacion de los componentes en este Panel.
+ * 
+ * @author exus
+ * 
+ */
 public class PanelDatosDeSeleccion extends JPanel {
 
 	/**
@@ -33,15 +40,15 @@ public class PanelDatosDeSeleccion extends JPanel {
 		LinkRango_Vel = new javax.swing.JLabel();
 		ButtonUpdate = new BotonUpdate();
 
+		//Coloco un borde al panel
 		setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1,
 				new java.awt.Color(255, 0, 0)));
 
+		//Coloco un borde al panel de la imagen.
 		ImagenSeleccion.setBorder(javax.swing.BorderFactory
 				.createTitledBorder(""));
-		
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		LabelNombreSeleccion.setText("Obj_Seleccionado");
 
@@ -54,26 +61,26 @@ public class PanelDatosDeSeleccion extends JPanel {
 		LinkVida_danio.setText("Vida_danio");
 
 		LinkRango_Vel.setText("Rango_Vel");
-		
+
 		LabelNombreSeleccion.setAlignmentX(Component.CENTER_ALIGNMENT);
 		LabelVida_danio.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		LabelRango_Vel.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		LabelUpdate.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		
-		add(Box.createRigidArea(new Dimension(10,10)));
+
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(LabelNombreSeleccion);
-		add(Box.createRigidArea(new Dimension(10,10)));
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(ImagenSeleccion);
-		add(Box.createRigidArea(new Dimension(10,10)));
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(LabelVida_danio);
 		add(LinkVida_danio);
-		add(Box.createRigidArea(new Dimension(10,10)));
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(LabelRango_Vel);
 		add(LinkRango_Vel);
-		add(Box.createRigidArea(new Dimension(10,10)));
+		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(LabelUpdate);
 		add(ButtonUpdate);
-		
+
 	}
 
 	public void setLabelVida_danio_Text(String s) {
@@ -103,7 +110,7 @@ public class PanelDatosDeSeleccion extends JPanel {
 	}
 
 	public void setImagen_Seleccion(String s) {
-		
+
 	}
 
 }
