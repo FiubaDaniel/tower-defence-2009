@@ -83,7 +83,7 @@ public class EscenarioTest extends TestCase {
 
 		Posicion Origen = new Posicion(22, 20, true);
 
-		Posicion Destino = escenario.obtenerSiguientePosicionCaminable(Origen,1);
+		Posicion Destino = escenario.obtenerSiguientePosicionCaminable(Origen);
 
 		if (Destino.getCoordX() != 22 || Destino.getCoordY() != 19)
 			fail("Error en posicion siguiente");

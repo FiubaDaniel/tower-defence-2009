@@ -3,7 +3,6 @@ package pruebasIndividuales;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.framework.JUnit4TestAdapter;
-import pruebasIntegradas.*;
 
 public class AllTests {
 
