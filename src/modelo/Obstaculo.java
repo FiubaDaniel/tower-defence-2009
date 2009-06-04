@@ -2,9 +2,7 @@ package modelo;
 
 import java.util.Observable;
 
-import vista.Seleccionable;
-
-public abstract class Obstaculo extends Observable implements Seleccionable {
+public abstract class Obstaculo extends Observable {
 	private int precio;
 	private int danioQueGenera;
 	private int alcance;
@@ -44,26 +42,11 @@ public abstract class Obstaculo extends Observable implements Seleccionable {
 	}
 
 	public Posicion getPosicion() {
-		return this.lugarQueOcupa;
+		return lugarQueOcupa;
 	}
 	
-	public int getX() {
-		return lugarQueOcupa.getCoordX();
-	}
-	public int getY() {
-		return lugarQueOcupa.getCoordY();
-	}
+	public abstract void atacar();
 
-	public abstract void atacar() throws Exception;
-
-	public int getRango_Velocidad() {
-		return alcance;
-	}
-
-	public int getVida_Daño() {
-		return danioQueGenera;
-	}
-	
 	public int getVelocidadDisparo() {
 		return velocidadDisparo;
 	}

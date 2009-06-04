@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import customExceptions.DineroMuyBajoException;
 import customExceptions.EnemigoYaMuerto;
+import customExceptions.NoteHagaselVivoException;
 import modelo.Escenario;
 import modelo.Jugador;
 import modelo.Posicion;
@@ -14,17 +15,18 @@ public class TorreAzul extends Torre {
 	private Enemigo enemigoAatacar;
 
 	/* instancio un jugador y un escenario */
-	private Jugador jugador = Jugador.obtenerJugador(1, 1.5, "Daniel");
+	private Jugador jugador = Jugador.obtenerJugador();
 	private Escenario escenario = Escenario.obtenerEscenario();
 
 	/* constructor */
 	public TorreAzul(Posicion posicionEnEscenario) { /* ver lo dell costructor */
-
-		if (this.getPrecio() >= jugador.getDinero()) {
+		if (this.getPrecio() >= jugador.getDinero())
 			throw new DineroMuyBajoException();
-		} else {
-			this.setPosicion(posicionEnEscenario);
-		}
+		else
+			if (!posicionEnEscenario.isCaminable())
+				this.setPosicion(posicionEnEscenario);
+			else
+				throw new NoteHagaselVivoException();
 		this.setPrecio(6);
 		this.setDanioQueGenera(1);
 		this.setCostoEvolucion(6);
@@ -76,7 +78,7 @@ public class TorreAzul extends Torre {
 		}
 	}
 
-	public String getNombre() {
+	public String toString() {
 		return "Torre Azul";
 	}
 }

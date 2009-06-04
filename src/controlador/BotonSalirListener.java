@@ -12,7 +12,7 @@ import javax.swing.event.MenuKeyListener;
 public class BotonSalirListener implements MenuKeyListener {
 
 	public void menuKeyPressed(MenuKeyEvent e) {
-		Boton_Salir_Handler(e);
+		
 
 	}
 

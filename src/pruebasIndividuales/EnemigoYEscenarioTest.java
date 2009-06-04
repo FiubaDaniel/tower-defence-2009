@@ -1,4 +1,4 @@
-package pruebasIntegradas;
+package pruebasIndividuales;
 
 import junit.framework.TestCase;
 import org.junit.*;

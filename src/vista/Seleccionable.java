@@ -16,5 +16,5 @@ public interface Seleccionable {
 	 * @return
 	 */
 	public int getValorEvolucion();
-	public String getNombre();
+	
 }

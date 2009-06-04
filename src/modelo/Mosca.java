@@ -1,31 +1,27 @@
 package modelo;
 
-import customExceptions.*;
+import customExceptions.NoEsEntradaException;
 
 public class Mosca extends Enemigo {
 
 	public Mosca(Posicion unLugar) throws NoEsEntradaException {
 		this.setPosicion(unLugar);
 		this.setVolador();
-		try {
-			this.setVelocidad(4);
-			this.setVida(3);
-		}
-		catch (ValorNegativoException error) {
-		}
-
+		this.setVelocidad(4);
+		this.setVida(3);
 	}
 
+	/**
+	 * Avanza a la siguiente posicion que puede ocupar del camino definido.
+	 *
+	 */
 	public void avanzar(Escenario terreno) {
-		Posicion siguiente = terreno.obtenerSiguientePosicionCaminable(this
-				.getPosicion(), cant_avanzada);
+		Posicion siguiente;
+		siguiente = terreno.obtenerSiguientePosicionCaminable(this.getPosicion());
 		this.cambiarPosicion(siguiente);
-		cant_avanzada++;
-		if(cant_avanzada > terreno.getCaminoAlaSalida().size())
-			cant_avanzada = 0;
 	}
 
-	public String getNombre() {
+	public String toString() {
 		return "Mosca";
 	}
 }

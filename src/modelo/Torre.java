@@ -32,7 +32,7 @@ public abstract class Torre extends Obstaculo {
 
 	// Realizar Ataque
 
-	public void atacar() throws EnemigoYaMuerto{
+	public void atacar(){
 		Iterator itEnemigos = escenario.getIteradordeEnemigos();
 	
 		while (itEnemigos.hasNext()) {

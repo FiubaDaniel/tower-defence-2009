@@ -1,32 +1,26 @@
 package modelo;
 
-import customExceptions.*;
+import customExceptions.NoEsEntradaException;
 
 public class Arania extends Enemigo {
 
 	public Arania(Posicion unLugar) throws NoEsEntradaException {
 		this.setPosicion(unLugar);
-		try {
-			this.setVelocidad(3);
-			this.setVida(2);
-		} catch (ValorNegativoException error) {
-		}
+		this.setVelocidad(3);
+		this.setVida(2);
 	}
-
+	/**
+	 * Avanza a la siguiente posicion que puede ocupar del camino definido.
+	 *
+	 */
 	public void avanzar(Escenario terreno) {
 		if (getFrenado() == false) {
-			Posicion siguiente = terreno.obtenerSiguientePosicionCaminable(this
-					.getPosicion(), cant_avanzada);
+			Posicion siguiente = terreno.obtenerSiguientePosicionCaminable(this.getPosicion());
 			this.cambiarPosicion(siguiente);
-			cant_avanzada++;
-			if(cant_avanzada > terreno.getCaminoAlaSalida().size())
-				cant_avanzada = 0;
-		} else {
-			frenarOAvanzar();
 		}
 	}
 
-	public String getNombre() {
+	public String toString() {
 		return "Arania";
 	}
 

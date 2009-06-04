@@ -1,21 +1,24 @@
 package modelo;
 
 import customExceptions.DineroMuyBajoException;
+import customExceptions.NoteHagaselVivoException;
 import modelo.Jugador;
 import modelo.Posicion;
 
 public class TorreDorada extends Torre {
 
 	/* instancio un jugador */
-	private Jugador jugador = Jugador.obtenerJugador(1, 60, "Daniel");
+	private Jugador jugador = Jugador.obtenerJugador();
 
 	/* constructor */
 	public TorreDorada(Posicion posicionEnEscenario) {
-		if (this.getPrecio() >= jugador.getDinero()) {
+		if (this.getPrecio() >= jugador.getDinero())
 			throw new DineroMuyBajoException();
-		} else {
-			this.setPosicion(posicionEnEscenario);
-		}
+		else
+			if (!posicionEnEscenario.isCaminable())
+				this.setPosicion(posicionEnEscenario);
+			else
+				throw new NoteHagaselVivoException();
 		this.setAlcance(7);
 		this.setPrecio(50);
 		this.setDanioQueGenera(4);
@@ -34,7 +37,7 @@ public class TorreDorada extends Torre {
 		}
 	}
 
-	public String getNombre() {
+	public String toString() {
 		return "Torre Dorada";
 	}
 }

@@ -17,7 +17,7 @@ import javax.swing.event.MouseInputListener;
 import customExceptions.InvalidPositionException;
 
 import vista.SuperficieDeDibujo;
-import vista.Seleccionable;
+//import vista.Seleccionable;
 
 import modelo.Enemigo;
 import modelo.Escenario;
@@ -51,7 +51,7 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 		this.insetar_objeto = insetar_objeto;
 	}
 
-	private Seleccionable Objeto_seleccionado;
+	private Object Objeto_seleccionado;
 
 	public int getUNIDADANCHO() {
 		return UNIDADANCHO;
@@ -67,8 +67,6 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 		addMouseMotionListener(this);
 
 		Escenario escenario = Escenario.obtenerEscenario();
-
-		setObjeto_seleccionado(null);
 
 		escenario.addObserver(this);
 
@@ -202,7 +200,7 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 		 */
 		if (insetar_objeto && arg0.getButton() == MouseEvent.BUTTON1) {
 			Escenario escenario = Escenario.obtenerEscenario();
-			Jugador jugador = Jugador.obtenerJugador(0, 0, "");
+			Jugador jugador = Jugador.obtenerJugador();
 			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal(null,
 					null, null);
 
@@ -273,11 +271,11 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 
 	}
 
-	private void setObjeto_seleccionado(Seleccionable objeto_seleccionado) {
-		Objeto_seleccionado = objeto_seleccionado;
+	private void setObjeto_seleccionado(Object aux_en) {
+		Objeto_seleccionado = aux_en;
 	}
-
-	public Seleccionable getObjeto_seleccionado() {
+	
+	public Object getObjeto_seleccionado() {
 		return Objeto_seleccionado;
 	}
 

@@ -1,38 +1,54 @@
 package modelo;
 
+import java.io.FileNotFoundException;
+
 
 public class Nivel {
 
-	private static Nivel nivel;
-	private Escenario Escenario1;
-	private Jugador Jugador1;
+	private int Dificultad;
+	private static Nivel instancia = null;	
 	
-	
-	public static Nivel obtenerNivel(Escenario escenario, Jugador jugador) {
-		if (nivel == null)
-			nivel = new Nivel(escenario, jugador);
-		
-		return nivel;
+	public static Nivel obtenerNivel(){
+		if (instancia == null)
+			instancia = new Nivel();
+		return instancia;
 	}
 	
-	private Nivel(Escenario escenario, Jugador jugador) {
-		Escenario1 = escenario;
-		Jugador1 = jugador;
+	private Nivel(){}
+	
+	/**
+	 * Recibe un entero, puede ser 1,2 o 3 segun:
+	 * 
+	 * 1 - Facil
+	 * 2 - Normal
+	 * 3 - Dificil
+	 * 
+	 * @param dificultad
+	 * @throws FileNotFoundException 
+	 */
+	public int setDificultad(int dificultad) throws FileNotFoundException{
+		Escenario escenario = Escenario.obtenerEscenario();
+		Dificultad = dificultad;
+		if (dificultad == 1){
+			escenario.setCantBichos(20);
+			escenario.elegirMapa(dificultad);
+			throw new FileNotFoundException();
+		}
+		else
+			if (dificultad == 2){
+				escenario.setCantBichos(50);
+				escenario.elegirMapa(dificultad);
+				throw new FileNotFoundException();
+			}
+			else{
+				escenario.setCantBichos(75);
+				escenario.elegirMapa(dificultad);
+				throw new FileNotFoundException();
+			}
 	}
 	
-	public void setEscenario1(Escenario escenario1) {
-		Escenario1 = escenario1;
+	public int getDificultad(){
+		return Dificultad;
 	}
-	public Escenario getEscenario1() {
-		return Escenario1;
-	}
-	public void setJugador1(Jugador jugador1) {
-		Jugador1 = jugador1;
-	}
-	public Jugador getJugador1() {
-		return Jugador1;
-	}
+}	
 	
-	
-	
-}

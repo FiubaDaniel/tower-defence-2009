@@ -34,14 +34,14 @@ public class Escenario extends Observable {
 	private int CantBichos;
 	private double DineroBase;
 	private int CantidadDeVidaBase;
-	private LinkedList CaminoAlaSalida;
-	private LinkedList EnemigosEnElMapa;
-	private LinkedList ObstaculosEnElMapa;
+	private LinkedList<Posicion> CaminoAlaSalida;
+	private LinkedList<Enemigo> EnemigosEnElMapa;
+	private LinkedList<Obstaculo> ObstaculosEnElMapa;
 	private Posicion Salida, Entrada;
 	private Posicion[][] Mapa;
-	private int NumeroNivel = 1;
+	private int NumeroDeMapa;
 	private File ArchivodeMapa;
-	private HashMap MapaTerreno;
+	private HashMap<String, LectorCaracteres> MapaTerreno;
 
 	/**
 	 * Este metodo se encarga de la implementacion de Escenario como singleton.
@@ -64,7 +64,7 @@ public class Escenario extends Observable {
 	}
 
 	private void cargarMapaConfiguracion() {
-		MapaTerreno = new HashMap();
+		MapaTerreno = new HashMap<String, LectorCaracteres>();
 		MapaTerreno.put("-", new CaracterLinea());
 		MapaTerreno.put("c", new CaracterC());
 		MapaTerreno.put("S", new CaracterS());
@@ -73,15 +73,15 @@ public class Escenario extends Observable {
 
 	private void configurarMapa() throws FileNotFoundException {
 
-		cargarMapaConfiguracion();
+		this.cargarMapaConfiguracion();
 
 		try {
-			ArchivodeMapa = new File("Mapas/Mapa" + NumeroNivel + ".mp");
+			ArchivodeMapa = new File("Mapas/Mapa" + NumeroDeMapa + ".mp");
 			this.cargarMapa(); // Este método tira una excepción si el formato
 			// del archivo está mal
 			this.crearListaAlaSalida();
-			EnemigosEnElMapa = new LinkedList();
-			ObstaculosEnElMapa = new LinkedList();
+			EnemigosEnElMapa = new LinkedList<Enemigo>();
+			ObstaculosEnElMapa = new LinkedList<Obstaculo>();
 		} catch (NullPointerException e) {
 			throw new FileNotFoundException();
 		} catch (IllegalStateException e) {
@@ -128,16 +128,19 @@ public class Escenario extends Observable {
 	private void cargarMapa() throws InvalidMapFormatException {
 		FileReader fl = null;
 
+		
 		char auxiliardeLecturadeChars = 0;
 
 		int i = 0, j = 0;
 
+		
 		Mapa = new Posicion[MAPROWS][MAPCOLUMNS];
 
 		LectorCaracteres Lector;
 
 		try {
 			fl = new FileReader(ArchivodeMapa);
+			
 
 			int EOF = 0;
 
@@ -208,15 +211,10 @@ public class Escenario extends Observable {
 		return Entrada;
 	}
 
-	public void setNumeroNivel(int numeroNivel) throws FileNotFoundException {
-		// nose si debería ser publico o privado
-		this.NumeroNivel = numeroNivel;
+	public void elegirMapa(int numeroDeMapa) throws FileNotFoundException {
+		this.NumeroDeMapa = numeroDeMapa;
 		configurarMapa();
 
-	}
-
-	public int getNumeroNivel() {
-		return NumeroNivel;
 	}
 
 	private void setDineroBase(double dineroBase) {
@@ -359,7 +357,7 @@ public class Escenario extends Observable {
 
 	/**
 	 * Este algoritmos se encarga de elegir el camino correcto ante una
-	 * bifurcación. Esto se logra bsucando cual de las opciones de camino sigue
+	 * bifurcación. Esto se logra buscando cual de las opciones de camino sigue
 	 * la misma dirreción con la que venía la ultima posicion. Esto es más que
 	 * nada para los "rulos".
 	 * <p>
@@ -427,15 +425,14 @@ public class Escenario extends Observable {
 			if (CaminoAlaSalida != null)
 				CaminoAlaSalida.clear();
 
-			LinkedList ListaProvisoria = new LinkedList();
-			LinkedList OpcionesdeCamino = new LinkedList();
+			LinkedList<Posicion> ListaProvisoria = new LinkedList<Posicion>();
+			LinkedList<Posicion> OpcionesdeCamino = new LinkedList<Posicion>();
 
 			ListaProvisoria.add(Entrada);
 
 			Posicion Aux = Entrada;
 
-			while ((Aux.getCoordX() != Salida.getCoordX())
-					|| (Aux.getCoordY() != Salida.getCoordY())) {
+			while (!Aux.equals(Salida)) {
 
 				OpcionesdeCamino.clear();
 
@@ -443,8 +440,7 @@ public class Escenario extends Observable {
 
 				if (!OpcionesdeCamino.isEmpty()) {
 					if (OpcionesdeCamino.size() == 1) {
-						ListaProvisoria.add((Posicion) OpcionesdeCamino
-								.getLast());
+						ListaProvisoria.add(OpcionesdeCamino.getLast());
 						Aux = (Posicion) OpcionesdeCamino.getLast();
 					} else {
 						Aux = SiguientePosicionenCamino(ListaProvisoria,
@@ -494,10 +490,15 @@ public class Escenario extends Observable {
 	 * @return La posicion siguiente a la actual. Si se llego al final del
 	 *         camino, se devuelve el comienzo.
 	 */
-	public Posicion obtenerSiguientePosicionCaminable(Posicion ubicacion,
-			int cant_avanzada) {
+	public Posicion obtenerSiguientePosicionCaminable(Posicion ubicacion) {
 
-		Iterator it = CaminoAlaSalida.iterator();
+		Iterator<Posicion> it = CaminoAlaSalida.iterator();
+		while (!ubicacion.equals((Posicion)it))
+			it.next();
+		
+		return (Posicion) it;
+		
+		/*
 
 		Posicion Aux = new Posicion(MAPROWS + 1, MAPCOLUMNS + 1, false);
 
@@ -508,28 +509,36 @@ public class Escenario extends Observable {
 			indice_actual++;
 		}
 
+		boolean encontrado = false;
+		while (!encontrado){
+			it.next()
+		}
 		if (Aux.getCoordX() == Salida.getCoordX()
 				&& Aux.getCoordY() == Salida.getCoordY()) {
 			return Entrada;
-		}
-		return (Posicion) it.next();
-
+		}*/
 	}
 
+	/**
+	 * El iterador que devuelve este método itera sobre objects,
+	 * por lo tanto habra que castearlo para usarlo.
+	 * 
+	 * @return Iterador de enemigos. 
+	 */
 	public Iterator getIteradordeEnemigos() {
-
-		// El iterador que devuelve este método, itera sobre objects, por lo que
-		// al usar lo que devuelva habrá que cartearlo.
 
 		Iterator it = EnemigosEnElMapa.iterator();
 		return it;
 
 	}
-
+	
+	/**
+	 * El iterador que devuelve este método itera sobre objects,
+	 * por lo tanto habra que castearlo para usarlo.
+	 * 
+	 * @return Iterador de obstaculos.
+	 */
 	public Iterator getIteradordeObstaculos() {
-
-		// El iterador que devuelve este método, itera sobre objects, por lo que
-		// al usar lo que devuelva habrá que cartearlo.
 
 		Iterator it = ObstaculosEnElMapa.iterator();
 		return it;
@@ -548,9 +557,9 @@ public class Escenario extends Observable {
 		boolean insertar = true;
 		Iterator it_obs = ObstaculosEnElMapa.iterator();
 		while (it_obs.hasNext()) {
-			Obstaculo actual = (Obstaculo) it_obs.next();
-			if (actual.getX() == obstaculo.getX()
-					&& actual.getY() == obstaculo.getY())
+			Obstaculo ObstaculoActual = (Obstaculo) it_obs.next();
+			Posicion posicion = ObstaculoActual.getPosicion();
+			if (posicion.equals(obstaculo.getPosicion()))
 				insertar = false;
 		}
 

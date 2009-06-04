@@ -2,21 +2,28 @@ package modelo;
 
 import java.util.Observable;
 
-import vista.Seleccionable;
+//import vista.Seleccionable;
 
-import customExceptions.*;
+import customExceptions.EnemigoYaMuerto;
+import customExceptions.NoEsEntradaException;
+import customExceptions.ValorNegativoException;
 
-public abstract class Enemigo extends Observable implements Seleccionable {
+public abstract class Enemigo extends Observable {
 
 	private int vida;
 	private boolean bichoVolador = false;
 	private int velocidad;
 	private Posicion lugarQueOcupa;
 	private boolean frenado = false;
-	protected int cant_avanzada = 0;
-
+	
 	public abstract void avanzar(Escenario terreno);
 
+	/**
+	 * Si el enemigo ya esta muerto lanza una excepcion, sino le disminuye la vida
+	 * 
+	 * @param vidaRestada
+	 * @throws EnemigoYaMuerto
+	 */
 	public void disminuirVida(int vidaRestada) throws EnemigoYaMuerto {
 		if (vida == 0)
 			throw new EnemigoYaMuerto();
@@ -26,6 +33,13 @@ public abstract class Enemigo extends Observable implements Seleccionable {
 			vida -= vidaRestada;
 	}
 
+	/**
+	 * Disminuye la velocidad, se le debe pasar el porcentaje de velocidad que 
+	 * se desee que le quede para moverse. Cuidado!! que no sea negativo.
+	 * 
+	 * @param porcentaje
+	 * @throws ValorNegativoException
+	 */
 	public void disminuirVelocidad(int porcentaje) throws ValorNegativoException {
 		if (porcentaje < 0)
 			throw new ValorNegativoException();
@@ -37,6 +51,12 @@ public abstract class Enemigo extends Observable implements Seleccionable {
 		return frenado;
 	}
 
+	/**
+	 * Si el enemigo se encuentra en movimiento es frenado con este metodo y luego
+	 * se lo vuelve a animar con en el mismo
+	 * 
+	 * @author dario
+	 */
 	public void frenarOAvanzar() {
 		if (frenado)
 			frenado = false;
@@ -75,6 +95,12 @@ public abstract class Enemigo extends Observable implements Seleccionable {
 		return velocidad;
 	}
 
+	/**
+	 * La posicion inicial del enemigo debe ser una entrada del mapa.
+	 * 
+	 * @param entrada
+	 * @throws NoEsEntradaException
+	 */
 	protected void setPosicion(Posicion entrada) throws NoEsEntradaException {
 		Escenario escenario = Escenario.obtenerEscenario();
 		if (entrada.getCoordX() != escenario.getEntrada().getCoordX() || entrada.getCoordY() != escenario.getEntrada().getCoordY())
@@ -91,7 +117,7 @@ public abstract class Enemigo extends Observable implements Seleccionable {
 		return bichoVolador;
 	}
 	
-	public void setCant_avanzada(int cant_avanzada) {
+	/*public void setCant_avanzada(int cant_avanzada) {
 		this.cant_avanzada = cant_avanzada;
 	}
 
@@ -99,23 +125,13 @@ public abstract class Enemigo extends Observable implements Seleccionable {
 		return cant_avanzada;
 	}
 	
-	public int getX() {
-		return lugarQueOcupa.getCoordX();
-	}
-	public int getY() {
-		return lugarQueOcupa.getCoordY();
-	}
-
 	public int getRango_Velocidad() {
 		return velocidad;
 	}
 
-	public int getVida_Daño() {
+	public int getVida_Danio() {
 		return vida;
-	}
-
-	public int getValorEvolucion() {
-		return 0;
-	}
+	}*/
+	
 
 }
