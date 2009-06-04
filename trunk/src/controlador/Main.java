@@ -2,7 +2,7 @@ package controlador;
 
 
 /**
- * Clase principal donde se lanzan los threads sobre los que corre la aplicación.
+ * Clase principal donde se lanza la aplicación.
  * 
  * @author Grupo 4
  *
@@ -11,14 +11,11 @@ public class Main {
 
 	public static void main(String args[]) {
 
-		//Instancio el controladores
+		//Instancio el controlador
 		ControlSimulacion Simulacion = ControlSimulacion.obtenerControl();
-		//ControlVista Graficos = ControlVista.obtenerControl();
-		
+				
 		//Inicio los controladores
 		Simulacion.run();
-		//Graficos.run();
-		
-						
+								
 	}
 }

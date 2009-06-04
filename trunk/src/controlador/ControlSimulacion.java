@@ -15,7 +15,7 @@ import modelo.Obstaculo;
  *   
  */
 
-public class ControlSimulacion implements ActionListener, Runnable {
+public class ControlSimulacion implements ActionListener {
 
 	private static ControlSimulacion instancia;
 
