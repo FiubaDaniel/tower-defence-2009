@@ -28,7 +28,7 @@ import vista.menu.PanelDatosDeTorres;
 import vista.menu.PanelDeDatos;
 import vista.menu.VistaPrincipal;
 
-public class ControlVista implements Runnable{
+public class ControlVista {
 	
 	private static ControlVista instancia = null;
 	
