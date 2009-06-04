@@ -65,6 +65,14 @@ public class Posicion {
 		return CoordY;
 	}
 
+	public boolean equals (Object posicion){
+		Posicion Auxiliar = (Posicion)posicion;
+		if ((CoordX == Auxiliar.getCoordX()) && (CoordY == Auxiliar.getCoordY()))
+			return true;
+		else
+			return false;
+	}
+	
 	/**
 	 * Este método calcula la distancia entre las coordenadas de "this" con
 	 * "posicion"

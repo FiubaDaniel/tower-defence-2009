@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 /**
  * Esta clase se encarga de la presentacion de datos del objeto seleccionado en
@@ -22,22 +23,22 @@ public class PanelDatosDeSeleccion extends JPanel {
 	private static final long serialVersionUID = 3561771492386756083L;
 
 	private BotonUpdate ButtonUpdate;
-	private javax.swing.JPanel ImagenSeleccion;
-	private javax.swing.JLabel LabelNombreSeleccion;
-	private javax.swing.JLabel LabelRango_Vel;
-	private javax.swing.JLabel LabelVida_danio;
-	private javax.swing.JLabel LabelUpdate;
-	private javax.swing.JLabel LinkRango_Vel;
-	private javax.swing.JLabel LinkVida_danio;
+	private JPanel ImagenSeleccion;
+	private JLabel LabelNombreSeleccion;
+	private JLabel LabelRango_Vel;
+	private JLabel LabelVida_danio;
+	private JLabel LabelUpdate;
+	private JLabel LinkRango_Vel;
+	private JLabel LinkVida_danio;
 
 	public PanelDatosDeSeleccion() {
-		ImagenSeleccion = new javax.swing.JPanel();
-		LabelNombreSeleccion = new javax.swing.JLabel();
-		LabelVida_danio = new javax.swing.JLabel();
-		LabelRango_Vel = new javax.swing.JLabel();
-		LabelUpdate = new javax.swing.JLabel();
-		LinkVida_danio = new javax.swing.JLabel();
-		LinkRango_Vel = new javax.swing.JLabel();
+		ImagenSeleccion = new JPanel();
+		LabelNombreSeleccion = new JLabel();
+		LabelVida_danio = new JLabel();
+		LabelRango_Vel = new JLabel();
+		LabelUpdate = new JLabel();
+		LinkVida_danio = new JLabel();
+		LinkRango_Vel = new JLabel();
 		ButtonUpdate = new BotonUpdate();
 
 		//Coloco un borde al panel

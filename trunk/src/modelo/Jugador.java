@@ -20,9 +20,9 @@ public class Jugador extends Observable{
 	private String Nombre;
 	private double Puntos;
 
-	public static Jugador obtenerJugador(int vida, double dinero, String nombre){
+	public static Jugador obtenerJugador(){
 		if (jugador == null)
-			jugador = new Jugador(vida, dinero, nombre);
+			jugador = new Jugador(50, 1000, "Grupo 4");
 		return jugador;
 	}
 

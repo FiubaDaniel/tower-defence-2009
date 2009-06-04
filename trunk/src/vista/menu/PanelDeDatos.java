@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import controlador.ControladorDios;
+import controlador.ControlSimulacion;
 
 import modelo.Arena;
 import modelo.Escenario;
@@ -30,7 +30,7 @@ import modelo.TorrePlateada;
  * Esta clase forma el panel izquierdo del juego. Contiene la informacion
  * general del juego y los menus de comprar y seleccion de objetos del mapa.
  * 
- * @author exus
+ * @author grupo 4
  * 
  */
 public class PanelDeDatos extends JPanel implements Observer {
@@ -87,7 +87,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-		Jugador jugador = Jugador.obtenerJugador(50, 1000, "fafa");
+		Jugador jugador = Jugador.obtenerJugador();
 		Escenario escenario = Escenario.obtenerEscenario();
 
 		// Coloco esta clase como observador de la clase jugador.
@@ -120,8 +120,8 @@ public class PanelDeDatos extends JPanel implements Observer {
 		BotonIniciar_Pausar.setText("Iniciar");
 
 		// Agrego un Listener del boton Iniciar_Pausar
-		BotonIniciar_Pausar.addActionListener(ControladorDios
-				.obtenerControlador());
+		BotonIniciar_Pausar.addActionListener(ControlSimulacion
+				.obtenerControl());
 
 		ListaDeCompras ListaCompras = new ListaDeCompras();
 
@@ -191,7 +191,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 
 	public void update(Graphics g) {
 
-		Jugador jugador = Jugador.obtenerJugador(1, 1, "");
+		Jugador jugador = Jugador.obtenerJugador();
 
 		LinkDineroJugador.setText(String.valueOf(jugador.getDinero()));
 		LinkPuntosJugador.setText(String.valueOf(jugador.getPuntos()));

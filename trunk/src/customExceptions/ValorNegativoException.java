@@ -1,6 +1,6 @@
 package customExceptions;
 
-public class ValorNegativoException extends Exception {
+public class ValorNegativoException extends RuntimeException {
 
 	/**
 	 * 
