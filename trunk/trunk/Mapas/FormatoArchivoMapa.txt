@@ -1,0 +1,6 @@
+Mapa 50 filas X 50 columnas
+Dinero Inicial / 5
+CantidadDeBichosBase
+CantidadDeVidaBase
+
+Los valores están se toman del equivalente decimal en ascii de las letras.
