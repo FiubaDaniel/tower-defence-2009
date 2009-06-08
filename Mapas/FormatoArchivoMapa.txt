@@ -1,4 +1,0 @@
-Mapa 50 filas X 50 columnas
-S = Salida
-E = Entrada
-C = Caminable
