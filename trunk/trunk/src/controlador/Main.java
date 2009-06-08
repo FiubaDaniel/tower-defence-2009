@@ -1,8 +1,7 @@
-package vista;
+package controlador;
 
 import java.io.FileNotFoundException;
 
-import controlador.ControladorDios;
 
 import modelo.Escenario;
 import modelo.Jugador;
