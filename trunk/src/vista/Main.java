@@ -18,7 +18,7 @@ import vista.menu.VistaPrincipal;
  * Clase dónde se encuentran las declaraciones de todos los objetos principales
  * de la aplicación.
  * 
- * @author exus
+ * @author grupo 4
  *
  */
 public class Main {
