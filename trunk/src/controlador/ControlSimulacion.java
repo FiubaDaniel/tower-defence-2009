@@ -1,7 +1,11 @@
 package controlador;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
+
+import javax.swing.JButton;
 
 import customExceptions.EnemigoYaMuerto;
 
@@ -11,11 +15,14 @@ import modelo.Jugador;
 import modelo.Nivel;
 import modelo.Obstaculo;
 
-public class ControlSimulacion {
+public class ControlSimulacion  implements ActionListener{
 
 	private static ControlSimulacion instancia = null;
 	
-	private boolean termino_nivel = false;
+	// Este atributo establece si la simulacion se detiene o si ocntinua
+	private boolean pausado = true;
+	
+	private boolean terminoNivel = false;
 	
 	private FabricaDeEnemigos fabrica;
 	
@@ -53,7 +60,15 @@ public class ControlSimulacion {
 		fabrica = new FabricaDeEnemigos(escenario.getCantBichos(), escenario.getNumeroNivel());
 	}
 	
-	public void agregarEnemigos(){
+	public boolean isTerminoNivel(){
+		return terminoNivel;
+	}
+	
+	public boolean isPausado(){
+		return pausado;
+	}
+	
+	private void agregarEnemigos(){
 		
 		// Calculo si el tiempo pasado es un multiplo del intervalo
 		// entre salida, para ver si saco un enemigo de la fabrica o no
@@ -69,6 +84,7 @@ public class ControlSimulacion {
 	}
 	
 	public void actuar(){
+		this.agregarEnemigos();
 		Iterator it_en = escenario.getIteradordeEnemigos();
 		while (it_en.hasNext()){
 			Enemigo aux = (Enemigo) it_en.next();
@@ -98,4 +114,16 @@ public class ControlSimulacion {
 			tiempo_pasado = 0;
 	}
 	
+	/**
+	 * Este metodo es llamado si el boton de Pausar-Iniciar es activado.
+	 */
+	public void actionPerformed(ActionEvent e) {
+		pausado = !pausado;
+		JButton aux = (JButton) (e.getSource());
+		if (pausado)
+			aux.setText("Iniciar");
+		else
+			aux.setText("Pausa");
+
+	}
 }

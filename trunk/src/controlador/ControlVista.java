@@ -30,14 +30,11 @@ import vista.menu.PanelDatosDeTorres;
 import vista.menu.PanelDeDatos;
 import vista.menu.VistaPrincipal;
 
-public class ControlVista implements ActionListener{
+public class ControlVista {
 
 	private static ControlVista instancia = null;
 	
 	private HashMap TablaVistas;
-	
-	// Este atributo establece si la simulacion se detiene o si ocntinua
-	private boolean pausado = true;
 	
 	private Escenario escenario = Escenario.obtenerEscenario();
 	
@@ -68,6 +65,7 @@ public class ControlVista implements ActionListener{
 		//Agrego un Observador de jugador
 		Jugador jugador = Jugador.obtenerJugador(50, 1000, "Grupo 4");
 		jugador.addObserver(PanelDatos);
+		this.CargarTabla();
 	}
 
 	/**
@@ -179,19 +177,5 @@ public class ControlVista implements ActionListener{
 		// En cada GameLoop tengo que redibujar el mapa, para mostrar
 		// los cambios en el mismo
 		mapa.paint(mapa.getGraphics());
-	}
-	
-	
-	/**
-	 * Este metodo es llamado si el boton de Pausar-Iniciar es activado.
-	 */
-	public void actionPerformed(ActionEvent e) {
-		pausado = !pausado;
-		JButton aux = (JButton) (e.getSource());
-		if (pausado)
-			aux.setText("Iniciar");
-		else
-			aux.setText("Pausa");
-
 	}
 }
