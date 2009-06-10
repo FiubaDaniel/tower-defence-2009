@@ -1,6 +1,6 @@
 package customExceptions;
 
-public class EnemigoYaMuerto extends Exception {
+public class EnemigoYaMuerto extends RuntimeException {
 
 	/**
 	 * 

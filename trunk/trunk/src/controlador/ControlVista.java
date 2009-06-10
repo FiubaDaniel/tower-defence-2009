@@ -1,12 +1,7 @@
 package controlador;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Iterator;
-
-import javax.swing.JButton;
-
 import modelo.Enemigo;
 import modelo.Escenario;
 import modelo.Jugador;
@@ -30,11 +25,17 @@ import vista.menu.PanelDatosDeTorres;
 import vista.menu.PanelDeDatos;
 import vista.menu.VistaPrincipal;
 
+/**
+ * Esta clase se encarga de manejar los refresh de la vista y de instanciarla.
+ * 
+ * @author Grupo 4
+ *
+ */
 public class ControlVista {
 
 	private static ControlVista instancia = null;
 	
-	private HashMap TablaVistas;
+	private HashMap<String, VistaObjetoDeMapa> TablaVistas;
 	
 	private Escenario escenario = Escenario.obtenerEscenario();
 	
@@ -94,22 +95,29 @@ public class ControlVista {
 		this.actualizarPaneles();
 		
 	}
-	
+	/**
+	 * Dibuja los enemigos despues de cada movimiento, se invoca al metodo desde
+	 * actualizaVista.
+	 * 
+	 */
 	private void dibujarEnemigos(){
 		
-		// Instancio un obsjeto de vista, para usar como auxiliar y manejar las
-		// vistas necesarias
+		/* Instancio un obsjeto de vista, para usar como auxiliar y manejar las
+		 * vistas necesarias
+		 */
 		VistaObjetoDeMapa vistaObjeto;
 		
-		// Aqui consigo un iterador de enemigos en el mapa, apra
-		// recorrerlos e ir dibujandolos
+		/* Aqui consigo un iterador de enemigos en el mapa, apra
+		 * recorrerlos e ir dibujandolos
+		 */
 		Iterator it_en = escenario.getIteradordeEnemigos();
 		while (it_en.hasNext()) {
 			// Saco un enemigo de la lista
 			Enemigo aux = (Enemigo) it_en.next();
-			// Pido el tipo de "Dibujador" necesario para el enemigo
-			// conseguido de la lista y le seteo la posicion donde debe
-			// dibujar.
+			/* Pido el tipo de "Dibujador" necesario para el enemigo
+			 * conseguido de la lista y le seteo la posicion donde debe
+			 * dibujar.
+			 */
 			vistaObjeto = (VistaObjetoDeMapa) TablaVistas.get(aux
 					.getNombre());
 			vistaObjeto.setX(aux.getX());
@@ -120,14 +128,18 @@ public class ControlVista {
 		}
 	}
 	
+	/**
+	 * Dibuja los obstaculos, se llama desde actualizarVista.
+	 */
 	private void dibujarObstaculos(){
 		
 		VistaObjetoDeMapa vistaObjeto;
 		
-		// De la misma forma que con los enemigos, pido un iterador para
-		// los obstaculos. Con este, recorro la lsita de osbtaculos de
-		// la lista, y uno por uno, pido el "dibujador" adecuado de la
-		// Tabla de Vistas y dibujo el osbtaculo
+		/* De la misma forma que con los enemigos, pido un iterador para
+		 * los obstaculos. Con este, recorro la lsita de osbtaculos de
+		 * la lista, y uno por uno, pido el "dibujador" adecuado de la
+		 * Tabla de Vistas y dibujo el osbtaculo
+		 */
 		Iterator it_obs = escenario.getIteradordeObstaculos();
 		while (it_obs.hasNext()) {
 			Obstaculo aux = (Obstaculo) it_obs.next();
@@ -141,10 +153,11 @@ public class ControlVista {
 	}
 	
 	private void actualizarPaneles(){
-		// Aqui busco el objeto seleccionado en el mapa, y con sus
-		// datos, escribo los datos en el menu de seleccion. Se hace de
-		// esta forma, para poder percibir en "tiempo real" los cambios
-		// en el objeto seleccionado, como cuando lastimo a un enemigo
+		/* Aqui busco el objeto seleccionado en el mapa, y con sus
+		 * datos, escribo los datos en el menu de seleccion. Se hace de
+		 * esta forma, para poder percibir en "tiempo real" los cambios
+		 * en el objeto seleccionado, como cuando lastimo a un enemigo
+		 */
 		PanelDatosDeSeleccion panel = VentanaPrincipal.getPanelDatos()
 				.getPanelDatosSeleccion();
 		if (VentanaPrincipal.getMapa().getObjeto_seleccionado() != null) {
@@ -161,21 +174,18 @@ public class ControlVista {
 		}
 	}
 	
+	/**
+	 * Se llama desde actualizarVista para actualizar el mapa,
+	 * esto es para visualizar los cambios. 
+	 */
 	private void dibujarMapa(){
-		MenuSuperior menuArchivoAyuda = null;
-		PanelDeDatos paneldedatos = null;
-		Mapa mapa = null;
-
-		// Obtengo el Frame principal del juego, desde el cual puedo obtener
-		// todos los componentes del mismo. Lo llamo con arguementos nulos,
-		// porque solo busco la instancia ya creada, no crear una nueva
-		VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal(
-				menuArchivoAyuda, paneldedatos, mapa);
-
-		mapa = vistaP.getMapa();
+		Mapa mapa = VentanaPrincipal.getMapa();
 		
-		// En cada GameLoop tengo que redibujar el mapa, para mostrar
-		// los cambios en el mismo
+		/* En cada GameLoop tengo que redibujar el mapa, para mostrar
+		 * los cambios en el mismo
+		 */
 		mapa.paint(mapa.getGraphics());
+		
+		
 	}
 }
