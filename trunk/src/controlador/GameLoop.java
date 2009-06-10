@@ -10,16 +10,16 @@ public class GameLoop {
 	 * Clase principal donde se realiza el ciclo del juego.
 	 */
 	public static void main(String[] args) {
-		
-		//Instancio el reproductor de Audio
-		
+		/*
+		//Instancio el reproductor de Audio.
 		ReproductorAudio repro = ReproductorAudio.getInstancia();
 		repro.reproducirCancion(ReproductorAudio.CANCION_INTRO);
-		
-		
+		*/
+		//Instancio los controladores.
 		ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
 		ControlVista vista = ControlVista.obtenerControl();
 		
+		//Corazón del GameLoop
 		while (!simulacion.isTerminoNivel())
 				while (!simulacion.isPausado()){
 					simulacion.actuar();
