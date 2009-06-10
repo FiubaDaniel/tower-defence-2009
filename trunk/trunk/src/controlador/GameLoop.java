@@ -16,11 +16,14 @@ public class GameLoop {
 		ReproductorAudio repro = ReproductorAudio.getInstancia();
 		repro.reproducirCancion(ReproductorAudio.CANCION_INTRO);
 		
-		ControlVista vista = ControlVista.obtenerControl();
-		ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
 		
-		while (){
-			
+		ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
+		ControlVista vista = ControlVista.obtenerControl();
+		
+		while (!simulacion.isTerminoNivel())
+				while (!simulacion.isPausado()){
+					simulacion.actuar();
+					vista.actualizarVista();
 		}
 
 	}

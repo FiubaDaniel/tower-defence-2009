@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import controlador.ControladorDios;
+import controlador.ControlSimulacion;
 
 import modelo.Arena;
 import modelo.Escenario;
@@ -120,8 +120,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 		BotonIniciar_Pausar.setText("Iniciar");
 
 		// Agrego un Listener del boton Iniciar_Pausar
-		BotonIniciar_Pausar.addActionListener(ControladorDios
-				.obtenerControlador());
+		BotonIniciar_Pausar.addActionListener(ControlSimulacion.obtenerControl());
 
 		ListaDeCompras ListaCompras = new ListaDeCompras();
 
