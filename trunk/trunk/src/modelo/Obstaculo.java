@@ -60,7 +60,7 @@ public abstract class Obstaculo extends Observable implements Seleccionable {
 		return alcance;
 	}
 
-	public int getVida_Daño() {
+	public int getVida_Danio() {
 		return danioQueGenera;
 	}
 	

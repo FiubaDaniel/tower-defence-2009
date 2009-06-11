@@ -2,7 +2,7 @@ package vista.dibujadores;
 
 /**
  * Esta clase guarda la ubicacion de la imagen de la mosca
- * @author exus
+
  *
  */
 public class VistaMosca extends VistaObjetoDeMapa {

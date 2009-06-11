@@ -8,7 +8,7 @@ package vista;
 
 public interface Seleccionable {
 	
-	public int getVida_Daño();
+	public int getVida_Danio();
 	public int getRango_Velocidad();
 	
 	/**

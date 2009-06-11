@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  * Esta clase se encarga de la presentacion de datos del objeto seleccionado en
  * el mapa. Además de la organizacion de los componentes en este Panel.
  * 
- * @author exus
+
  * 
  */
 public class PanelDatosDeSeleccion extends JPanel {

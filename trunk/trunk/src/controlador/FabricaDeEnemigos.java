@@ -19,7 +19,7 @@ import modelo.Posicion;
  * sea el nivel del mapa, se busca la cantidad adecuada de enemigos de cada
  * clase a crear.
  * 
- * @author exus
+
  * 
  */
 public class FabricaDeEnemigos {

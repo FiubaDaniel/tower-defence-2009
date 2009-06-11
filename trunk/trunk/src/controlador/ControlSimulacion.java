@@ -19,7 +19,7 @@ import modelo.Obstaculo;
  * Desede esta clase se realizan las invocaciones necesarias,
  * para hacer fincionar el modelo.
  * 
- * @author grupo 4
+
  *
  */
 public class ControlSimulacion  implements ActionListener{

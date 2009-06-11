@@ -7,7 +7,7 @@ import vista.menu.VistaPrincipal;
 
 /**
  * Clase encargada del funcionamiento del Botón Comprar Obstaculos
- * @author exus
+
  *
  */
 

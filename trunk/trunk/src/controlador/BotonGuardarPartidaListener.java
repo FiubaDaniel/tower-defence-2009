@@ -5,8 +5,7 @@ import javax.swing.event.MenuKeyListener;
 
 /**
  * Clase encargada del funcionamiento del Botón Guardar
- * @author exus
- *
+
  */
 
 public class BotonGuardarPartidaListener implements MenuKeyListener {

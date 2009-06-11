@@ -2,8 +2,7 @@ package vista.dibujadores;
 
 /**
  * Esta clase guarda la ubicacion de la imagen de la torre dorada
- * @author exus
- *
+
  */
 public class VistaTorreDorada extends VistaObjetoDeMapa {
 

@@ -5,8 +5,7 @@ import javax.swing.event.MenuKeyListener;
 
 /**
  * Clase encargada del funcionamiento del Botón Opciones
- * @author exus
- *
+ 
  */
 
 public class BotonMenuOpcionesListener implements MenuKeyListener {
