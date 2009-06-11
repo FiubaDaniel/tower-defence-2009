@@ -16,8 +16,7 @@ import vista.menu.Mapa;
  * Esta clase contiene todos los datos en comun de las vista de obstaculos y
  * Enemigos.
  * 
- * @author exus
- * 
+
  */
 public abstract class VistaObjetoDeMapa implements Dibujable {
 

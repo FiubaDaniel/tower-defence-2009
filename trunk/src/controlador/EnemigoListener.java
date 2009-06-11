@@ -16,7 +16,7 @@ import modelo.Posicion;
 /**
  * Clase encargada de observar los cambios de la clase enemigos, para así 
  * cambiar los valores del menú izquierdo.
- * @author exus
+
  *
  */
 

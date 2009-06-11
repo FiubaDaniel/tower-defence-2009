@@ -167,7 +167,7 @@ public class ControlVista {
 			panel.setLabelRango_Vel_Text(String.valueOf(seleccionado
 					.getRango_Velocidad()));
 			panel.setLabelVida_danio_Text(String.valueOf(seleccionado
-					.getVida_Daño()));
+					.getVida_Danio()));
 			panel.setBottonUpdate_Text(String.valueOf(seleccionado
 					.getValorEvolucion()));
 			panel.setLabelSeleccion_Text(seleccionado.getNombre());

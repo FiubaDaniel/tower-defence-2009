@@ -30,7 +30,7 @@ import modelo.TorrePlateada;
  * Esta clase forma el panel izquierdo del juego. Contiene la informacion
  * general del juego y los menus de comprar y seleccion de objetos del mapa.
  * 
- * @author exus
+
  * 
  */
 public class PanelDeDatos extends JPanel implements Observer {
@@ -237,7 +237,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 			Obs_seleccionado = (Obstaculo) TablaEquivalencias.get(String
 					.valueOf(ListaTorres.getSelectedIndex()));
 
-			PanelDatosTorres.setLinkLabelDañoText(String
+			PanelDatosTorres.setLinkLabelDanioText(String
 					.valueOf(Obs_seleccionado.getDanioQueGenera()));
 			PanelDatosTorres.setLinkLabelPrecioText(String
 					.valueOf(Obs_seleccionado.getPrecio()));

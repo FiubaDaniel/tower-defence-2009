@@ -2,8 +2,7 @@ package vista.dibujadores;
 
 /**
  * Esta clase guarda la ubicacion de la imagen de la arena
- * @author exus
- *
+
  */
 public class VistaArena extends VistaObjetoDeMapa {
 

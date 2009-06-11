@@ -8,7 +8,7 @@ import controlador.BotonComprarListener;
  * Esta clase es el Frame principal, en el cual serán ubicados todo los
  * componentes de la vista. Implementa la patron Singleton
  * 
- * @author exus
+
  */
 public class VistaPrincipal extends JFrame {
 

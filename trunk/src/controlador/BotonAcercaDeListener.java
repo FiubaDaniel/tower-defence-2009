@@ -4,7 +4,7 @@ import javax.swing.event.MenuKeyEvent;
 import javax.swing.event.MenuKeyListener;
 /**
  * Clase encargada del funcionamiento del Botón AcercaDe
- * @author exus
+
  *
  */
 public class BotonAcercaDeListener implements MenuKeyListener {

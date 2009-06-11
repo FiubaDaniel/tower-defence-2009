@@ -110,7 +110,7 @@ public abstract class Enemigo extends Observable implements Seleccionable {
 		return velocidad;
 	}
 
-	public int getVida_Daño() {
+	public int getVida_Danio() {
 		return vida;
 	}
 
