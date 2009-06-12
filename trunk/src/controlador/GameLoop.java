@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.Jugador;
 import vista.audio.ReproductorAudio;
 import controlador.ControlVista;
 import controlador.ControlSimulacion;
@@ -25,7 +26,7 @@ public class GameLoop {
 					simulacion.actuar();
 					vista.actualizarVista();
 		}
-
+		vista.finDeJuego();
 	}
 
 }

@@ -14,6 +14,7 @@ public abstract class Enemigo extends Observable implements Seleccionable {
 	private Posicion lugarQueOcupa;
 	private boolean frenado = false;
 	protected int cant_avanzada = 0;
+	private int premioDinero;
 
 	public abstract void avanzar(Escenario terreno);
 
@@ -77,7 +78,7 @@ public abstract class Enemigo extends Observable implements Seleccionable {
 
 	protected void setPosicion(Posicion entrada) throws NoEsEntradaException {
 		Escenario escenario = Escenario.obtenerEscenario();
-		if (entrada.getCoordX() != escenario.getEntrada().getCoordX() || entrada.getCoordY() != escenario.getEntrada().getCoordY())
+		if (!entrada.equals(escenario.getEntrada()))
 			throw new NoEsEntradaException();
 		else
 			lugarQueOcupa = entrada;
@@ -99,13 +100,6 @@ public abstract class Enemigo extends Observable implements Seleccionable {
 		return cant_avanzada;
 	}
 	
-	public int getX() {
-		return lugarQueOcupa.getCoordX();
-	}
-	public int getY() {
-		return lugarQueOcupa.getCoordY();
-	}
-
 	public int getRango_Velocidad() {
 		return velocidad;
 	}
@@ -116,6 +110,14 @@ public abstract class Enemigo extends Observable implements Seleccionable {
 
 	public int getValorEvolucion() {
 		return 0;
+	}
+
+	protected void setPremioDinero(int premioDinero) {
+		this.premioDinero = premioDinero;
+	}
+
+	public int getPremioDinero() {
+		return premioDinero;
 	}
 
 }

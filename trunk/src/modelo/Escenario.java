@@ -461,13 +461,13 @@ public class Escenario extends Observable {
 		}
 	}
 
-	public boolean eliminarEnemigodeLista(Enemigo paraeliminar) {
+	/*public boolean eliminarEnemigodeLista(Enemigo paraeliminar) {
 		if (!EnemigosEnElMapa.isEmpty()) {
 			return EnemigosEnElMapa.remove(paraeliminar);
 		} else {
 			throw new MapaSinEnemigosExcepion();
 		}
-	}
+	}*/
 
 	public void eliminarEnemigosSinVidadelaLista() {
 		Iterator it = EnemigosEnElMapa.iterator();
@@ -479,6 +479,8 @@ public class Escenario extends Observable {
 			PosibleVictima = (Enemigo) it.next();
 
 			if (PosibleVictima.getVida() <= 0) {
+				Jugador player = Jugador.obtenerJugador();
+				player.ModificarDinero(PosibleVictima.getPremioDinero());
 				it.remove();
 			}
 		}
@@ -549,8 +551,8 @@ public class Escenario extends Observable {
 		Iterator it_obs = ObstaculosEnElMapa.iterator();
 		while (it_obs.hasNext()) {
 			Obstaculo actual = (Obstaculo) it_obs.next();
-			if (actual.getX() == obstaculo.getX()
-					&& actual.getY() == obstaculo.getY())
+			if (actual.getPosicion().getCoordX() == obstaculo.getPosicion().getCoordX()
+					&& actual.getPosicion().getCoordY() == obstaculo.getPosicion().getCoordY())
 				insertar = false;
 		}
 

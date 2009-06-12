@@ -11,6 +11,7 @@ public class Cucaracha extends Enemigo {
 			this.setVida(4);
 		} catch (ValorNegativoException error) {
 		}
+		this.setPremioDinero(30);
 	}
 
 	public void avanzar(Escenario terreno) {
@@ -26,7 +27,7 @@ public class Cucaracha extends Enemigo {
 		}
 	}
 
-	public String getNombre() {
+	public String toString() {
 		return "Cucaracha";
 	}
 

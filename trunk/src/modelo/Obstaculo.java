@@ -47,13 +47,6 @@ public abstract class Obstaculo extends Observable implements Seleccionable {
 		return this.lugarQueOcupa;
 	}
 	
-	public int getX() {
-		return lugarQueOcupa.getCoordX();
-	}
-	public int getY() {
-		return lugarQueOcupa.getCoordY();
-	}
-
 	public abstract void atacar() throws Exception;
 
 	public int getRango_Velocidad() {

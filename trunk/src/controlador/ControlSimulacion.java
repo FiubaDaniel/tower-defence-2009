@@ -14,6 +14,7 @@ import modelo.Escenario;
 import modelo.Jugador;
 import modelo.Nivel;
 import modelo.Obstaculo;
+import modelo.Posicion;
 
 /**
  * Desede esta clase se realizan las invocaciones necesarias,
@@ -64,7 +65,7 @@ public class ControlSimulacion  implements ActionListener{
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		Jugador jugador = Jugador.obtenerJugador(50, 1000, "Grupo 4");
+		Jugador jugador = Jugador.obtenerJugador();
 		Nivel NivelGeneral = Nivel.obtenerNivel(escenario, jugador);
 		fabrica = new FabricaDeEnemigos(escenario.getCantBichos(), escenario.getNumeroNivel());
 	}
@@ -101,25 +102,45 @@ public class ControlSimulacion  implements ActionListener{
 	 */
 	public void actuar(){
 		this.agregarEnemigos();
-		Iterator it_en = escenario.getIteradordeEnemigos();
-		while (it_en.hasNext()){
-			Enemigo aux = (Enemigo) it_en.next();
-			if (((SleepTime * tiempo_pasado) % (200 / aux
-					.getVelocidad())) == 0)
-				aux.avanzar(escenario);
+		this.avanzarYatacar();
+		this.actualizarVida();
+		this.aumentarTiempoPasado();
+	}
+	
+	private void avanzarYatacar(){
+		Iterator itEnemigos = escenario.getIteradordeEnemigos();
+		while (itEnemigos.hasNext()){
+			Enemigo enemigo = (Enemigo) itEnemigos.next();
+			if (((SleepTime * tiempo_pasado) % (200 / enemigo.getVelocidad())) == 0)
+				enemigo.avanzar(escenario);
 		}
-		Iterator it_obs = escenario.getIteradordeObstaculos();
-		while (it_obs.hasNext()){
-			Obstaculo aux = (Obstaculo) it_obs.next();
-			if (((SleepTime * tiempo_pasado) % (200 / aux
-					.getVelocidadDisparo())) == 0)
+		Iterator itObstaculos = escenario.getIteradordeObstaculos();
+		while (itObstaculos.hasNext()){
+			Obstaculo obstaculo = (Obstaculo) itObstaculos.next();
+			if (((SleepTime * tiempo_pasado) % (200 / obstaculo.getVelocidadDisparo())) == 0)
 				try {
-					aux.atacar();
+					obstaculo.atacar();
 				} catch (EnemigoYaMuerto e) {
 				} catch (Exception e) {
 				}
 		}
-		this.aumentarTiempoPasado();
+	}
+	
+	private void actualizarVida(){
+		Iterator itEnemigos = escenario.getIteradordeEnemigos();
+		Posicion salida = escenario.getSalida();
+		Jugador player = Jugador.obtenerJugador();
+		while (itEnemigos.hasNext()){
+			Enemigo enemigo = (Enemigo)itEnemigos.next();
+			if (salida.equals(enemigo.getPosicion())){
+				player.quitarVida();
+			}
+			if (player.getCantidadVidas() == 0){
+				terminoNivel = true;
+				pausado = true;
+			}
+		}
+		
 	}
 	
 	/**

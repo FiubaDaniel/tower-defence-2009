@@ -1,6 +1,10 @@
 package vista.menu;
 
+import java.awt.Dialog;
+
 import javax.swing.JFrame;
+
+import modelo.Jugador;
 
 import controlador.BotonComprarListener;
 
@@ -15,7 +19,7 @@ public class VistaPrincipal extends JFrame {
 	private static final long serialVersionUID = 3L;
 
 	private static VistaPrincipal frame;
-	private MenuSuperior MenuArchivoAyuda;
+	//private MenuSuperior MenuArchivoAyuda;
 	private PanelDeDatos PanelDatos;
 	private Mapa PanelMapa;
 
@@ -28,35 +32,42 @@ public class VistaPrincipal extends JFrame {
 	 * @param mapa
 	 * @return
 	 */
-	public static VistaPrincipal obtenerVistaPrincipal(
-			MenuSuperior menuArchivoAyuda, PanelDeDatos paneldedatos, Mapa mapa) {
-		if (frame == null) {
-			frame = new VistaPrincipal(menuArchivoAyuda, paneldedatos, mapa);
-		}
+	public static VistaPrincipal obtenerVistaPrincipal() {
+		if (frame == null) 
+			frame = new VistaPrincipal();
 		return frame;
 	}
 
-	private VistaPrincipal(MenuSuperior menuArchivoAyuda,
-			PanelDeDatos paneldedatos, Mapa mapa) {
-		initComponents(menuArchivoAyuda, paneldedatos, mapa);
+	private VistaPrincipal() {
+		// Instancio los objetos de la ventana
+		PanelDatosDeTorres PanelTorres = new PanelDatosDeTorres();
+		PanelDatosDeSeleccion PanelSeleccion = new PanelDatosDeSeleccion();
+		//MenuSuperior menuArchivoAyuda = new MenuSuperior();
+		PanelDeDatos panelDedatos = new PanelDeDatos(PanelSeleccion, PanelTorres);
+		Mapa PanelMapa = new Mapa();
+		
+		//Agrego un Observador de jugador
+		Jugador jugador = Jugador.obtenerJugador();
+		jugador.addObserver(panelDedatos);
+		initComponents(/*menuArchivoAyuda,*/ panelDedatos, PanelMapa);
 
 	}
 
-	private void initComponents(MenuSuperior menuArchivoAyuda,
+	private void initComponents(/*MenuSuperior menuArchivoAyuda,*/
 			PanelDeDatos paneldedatos, Mapa mapa) {
 
 		PanelMapa = mapa;
 		PanelDatos = paneldedatos;
-		MenuArchivoAyuda = menuArchivoAyuda;
+		//MenuArchivoAyuda = menuArchivoAyuda;
 
 		// Seteo para que al apretar el botón de cerra, se cierre la aplicacion
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Tower Defense");
 
-		// Cargo el menu superior.
+		/* Cargo el menu superior.
 		setJMenuBar(MenuArchivoAyuda);
 		MenuArchivoAyuda.getAccessibleContext().setAccessibleName(
-				"BarraMenuInicial");
+				"BarraMenuInicial");*/
 
 		// Establezco un layout para los componentes incluidos en este Frame. EL
 		// layout funciona como un "organizador" de componentes, es decir
@@ -132,13 +143,13 @@ public class VistaPrincipal extends JFrame {
 		PanelMapa = mapa;
 	}
 
-	public MenuSuperior getMenuArchivoAyuda() {
+	/*public MenuSuperior getMenuArchivoAyuda() {
 		return MenuArchivoAyuda;
 	}
 
 	public void setMenuArchivoAyuda(MenuSuperior menuArchivoAyuda) {
 		MenuArchivoAyuda = menuArchivoAyuda;
-	}
+	}*/
 
 	public PanelDeDatos getPanelDatos() {
 		return PanelDatos;
