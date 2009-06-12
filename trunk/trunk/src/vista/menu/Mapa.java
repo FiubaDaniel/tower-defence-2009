@@ -202,9 +202,8 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 		 */
 		if (insetar_objeto && arg0.getButton() == MouseEvent.BUTTON1) {
 			Escenario escenario = Escenario.obtenerEscenario();
-			Jugador jugador = Jugador.obtenerJugador(0, 0, "");
-			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal(null,
-					null, null);
+			Jugador jugador = Jugador.obtenerJugador();
+			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
 
 			
 			Obstaculo aux = vistaP.getPanelDatos().getObs_seleccionado();
@@ -255,12 +254,12 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -269,7 +268,7 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 	}
 
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -282,7 +281,7 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 	}
 
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -291,8 +290,8 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 			Graphics grafico = this.getGraphics();
 
 			grafico.setColor(Color.RED);
-			grafico.fillRect(e.getX(), e.getY(), UNIDADANCHO, UNIDADALTO);
-
+			grafico.fillOval(e.getX(),e.getY(),UNIDADANCHO,UNIDADALTO);
+			
 			setX_representacion(e.getX() / UNIDADANCHO);
 			setY_representacion(e.getY() / UNIDADALTO);
 

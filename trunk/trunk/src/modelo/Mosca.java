@@ -13,7 +13,7 @@ public class Mosca extends Enemigo {
 		}
 		catch (ValorNegativoException error) {
 		}
-
+		this.setPremioDinero(20);
 	}
 
 	public void avanzar(Escenario terreno) {
@@ -25,7 +25,7 @@ public class Mosca extends Enemigo {
 			cant_avanzada = 0;
 	}
 
-	public String getNombre() {
+	public String toString() {
 		return "Mosca";
 	}
 }

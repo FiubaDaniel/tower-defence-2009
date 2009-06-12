@@ -32,7 +32,7 @@ public class Pegote extends Obstaculo {
 		}
 	}
 
-	public String getNombre() {
+	public String toString() {
 		return "Pegote";
 	}
 

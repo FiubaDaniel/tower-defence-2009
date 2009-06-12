@@ -18,23 +18,17 @@ public class Jugador extends Observable{
 	private int CantidadVidas;
 	private double Dinero;
 	private String Nombre;
-	private double Puntos;
-
-	public static Jugador obtenerJugador(int vida, double dinero, String nombre){
+	
+	public static Jugador obtenerJugador(){
 		if (jugador == null)
-			jugador = new Jugador(vida, dinero, nombre);
+			jugador = new Jugador();
 		return jugador;
 	}
 
-	private Jugador(int vida, double dinero, String nombre) {
-
-		if ((vida > 0) && (dinero > 0)) {
-			this.setCantidadVidas(vida);
-			this.setDinero(dinero);
-			this.setNombre(nombre);
-			this.setPuntos(0);
-		} else
-			throw new IllegalArgumentException();
+	private Jugador() {
+		this.setCantidadVidas(50);
+		this.setDinero(80);
+		this.setNombre("Grupo 4");
 	}
 
 	private void setCantidadVidas(int cantidadVidas) {
@@ -71,7 +65,7 @@ public class Jugador extends Observable{
 		return Nombre;
 	}
 
-	private void setPuntos(double puntos) {
+	/*private void setPuntos(double puntos) {
 		if (puntos >= 0) {
 			this.Puntos = puntos;
 			this.notifyObservers();
@@ -82,13 +76,14 @@ public class Jugador extends Observable{
 
 	public double getPuntos() {
 		return Puntos;
-	}
+	}*/
 
-	public void AgregarQuitarVida(int cantidad) {
-		// recibe un valor positivo o negativo según quiera agregar vida o
-		// quitar vida
-
-			this.setCantidadVidas(CantidadVidas + cantidad);
+	/**
+	 * Resta de a una unidad de vida.
+	 */
+	public void quitarVida() {
+		this.setCantidadVidas(CantidadVidas - 1);
+		this.setChanged();
 	}
 
 	public void ModificarDinero(double dinero) throws DineroMuyBajoException {
@@ -98,8 +93,10 @@ public class Jugador extends Observable{
 		} catch (IllegalArgumentException e) {
 			throw new DineroMuyBajoException();
 		}
+		this.setChanged();
 	}
 
+	/*
 	public void agregarPuntos(double puntos) {
 
 		if (puntos >= 0) {
@@ -107,5 +104,5 @@ public class Jugador extends Observable{
 		} else
 			throw new IllegalArgumentException();
 
-	}
+	}*/
 }

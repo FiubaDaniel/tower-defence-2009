@@ -26,7 +26,7 @@ public class Arena extends Obstaculo {
 		}
 	}
 
-	public String getNombre() {
+	public String toString() {
 		return "Arena";
 	}
 

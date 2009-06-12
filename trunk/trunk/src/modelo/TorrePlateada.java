@@ -7,7 +7,7 @@ import modelo.Posicion;
 public class TorrePlateada extends Torre {
 
 	/* instancio un jugador */
-	private Jugador jugador = Jugador.obtenerJugador(1, 1.5, "Daniel");
+	private Jugador jugador = Jugador.obtenerJugador();
 
 	/* constructor */
 	public TorrePlateada(Posicion posicionEnEscenario) {
@@ -37,7 +37,7 @@ public class TorrePlateada extends Torre {
 		}
 	}
 
-	public String getNombre() {
+	public String toString() {
 		return "Torre Plateada";
 	}
 

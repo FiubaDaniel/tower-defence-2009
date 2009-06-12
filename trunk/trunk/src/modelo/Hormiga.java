@@ -11,6 +11,7 @@ public class Hormiga extends Enemigo {
 			this.setVida(1);
 		} catch (ValorNegativoException error) {
 		}
+		this.setPremioDinero(5);
 
 	}
 
@@ -28,7 +29,7 @@ public class Hormiga extends Enemigo {
 
 	}
 
-	public String getNombre() {
+	public String toString() {
 		return "Hormiga";
 	}
 }

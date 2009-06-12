@@ -9,10 +9,13 @@ import java.util.Observer;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import controlador.BotonCargarPartidaListener;
+import controlador.BotonGuardarPartidaListener;
 import controlador.ControlSimulacion;
 
 import modelo.Arena;
@@ -54,7 +57,9 @@ public class PanelDeDatos extends JPanel implements Observer {
 	private javax.swing.JLabel LabelNombreJugador;
 	private javax.swing.JLabel LinkNombreJugador;
 	private javax.swing.JButton BotonIniciar_Pausar;
-
+	private javax.swing.JButton BotonGuardar;
+	private javax.swing.JButton BotonCargar;
+	
 	// Atributo que representa el objeto seleccionado en el mapa.
 	private Obstaculo Obs_seleccionado;
 
@@ -75,6 +80,8 @@ public class PanelDeDatos extends JPanel implements Observer {
 		LinkCantEnemigosEscenario = new javax.swing.JLabel();
 		LinkDineroJugador = new javax.swing.JLabel();
 		BotonIniciar_Pausar = new javax.swing.JButton();
+		BotonGuardar = new javax.swing.JButton();
+		BotonCargar = new javax.swing.JButton();
 		LabelTorres = new javax.swing.JLabel();
 		ScrollTorres = new javax.swing.JScrollPane();
 		ListaTorres = new javax.swing.JList();
@@ -82,12 +89,12 @@ public class PanelDeDatos extends JPanel implements Observer {
 		PanelDatosSeleccion = panelDatosSeleccion;
 
 		// Coloco un borde rojo
-		setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1,
+		/*setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1,
 				new java.awt.Color(255, 0, 0)));
-
+*/
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-		Jugador jugador = Jugador.obtenerJugador(50, 1000, "fafa");
+		Jugador jugador = Jugador.obtenerJugador();
 		Escenario escenario = Escenario.obtenerEscenario();
 
 		// Coloco esta clase como observador de la clase jugador.
@@ -96,7 +103,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 		// Seteo los nombres de los controles.
 		LinkVidaJugador.setText(String.valueOf(jugador.getCantidadVidas()));
 
-		LabelPuntos.setText("Puntos:");
+		//LabelPuntos.setText("Puntos:");
 
 		LabelNombreJugador.setText("Nombre Jugador: ");
 
@@ -108,7 +115,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 
 		LabelDinero.setText("Dinero:");
 
-		LinkPuntosJugador.setText(String.valueOf(jugador.getPuntos()));
+		//LinkPuntosJugador.setText(String.valueOf(jugador.getPuntos()));
 
 		LinkCantEnemigosEscenario.setText(String.valueOf(escenario
 				.getCantBichos()));
@@ -119,9 +126,17 @@ public class PanelDeDatos extends JPanel implements Observer {
 
 		BotonIniciar_Pausar.setText("Iniciar");
 
+		BotonGuardar.setText("Guardar");
+		
+		BotonCargar.setText("Cargar");
+		
 		// Agrego un Listener del boton Iniciar_Pausar
 		BotonIniciar_Pausar.addActionListener(ControlSimulacion.obtenerControl());
 
+		BotonGuardar.addActionListener(new BotonGuardarPartidaListener());
+		
+		BotonCargar.addActionListener(new BotonCargarPartidaListener());
+		
 		ListaDeCompras ListaCompras = new ListaDeCompras();
 
 		ListaTorres.setModel(ListaCompras);
@@ -132,6 +147,8 @@ public class PanelDeDatos extends JPanel implements Observer {
 
 		// Alineo los componentes.
 		BotonIniciar_Pausar.setAlignmentX(Component.CENTER_ALIGNMENT);
+		BotonGuardar.setAlignmentX(Component.CENTER_ALIGNMENT);
+		BotonCargar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		LabelVida.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		LabelDinero.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		LabelPuntos.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -146,6 +163,10 @@ public class PanelDeDatos extends JPanel implements Observer {
 		// Creo una zona rigida entre componentes de tamaño 10 x 10 pixels.
 		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(BotonIniciar_Pausar);
+		add(Box.createRigidArea(new Dimension(10, 10)));
+		add(BotonCargar);
+		add(Box.createRigidArea(new Dimension(10, 10)));
+		add(BotonGuardar);
 		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(LabelNombreJugador);
 		// Creo una zona que se amolda para ocupar toda la zona vacia.
@@ -181,7 +202,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 
 	public void update(Observable o, Object arg) {
 		LinkDineroJugador.setText(String.valueOf(((Jugador) o).getDinero()));
-		LinkPuntosJugador.setText(String.valueOf(((Jugador) o).getPuntos()));
+		//LinkPuntosJugador.setText(String.valueOf(((Jugador) o).getPuntos()));
 		LinkVidaJugador.setText(String
 				.valueOf(((Jugador) o).getCantidadVidas()));
 
@@ -190,10 +211,10 @@ public class PanelDeDatos extends JPanel implements Observer {
 
 	public void update(Graphics g) {
 
-		Jugador jugador = Jugador.obtenerJugador(1, 1, "");
+		Jugador jugador = Jugador.obtenerJugador();
 
 		LinkDineroJugador.setText(String.valueOf(jugador.getDinero()));
-		LinkPuntosJugador.setText(String.valueOf(jugador.getPuntos()));
+		//LinkPuntosJugador.setText(String.valueOf(jugador.getPuntos()));
 		LinkVidaJugador.setText(String.valueOf(jugador.getCantidadVidas()));
 
 		this.repaint();

@@ -1,5 +1,9 @@
 package controlador;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.event.MenuKeyEvent;
 import javax.swing.event.MenuKeyListener;
 
@@ -7,25 +11,10 @@ import javax.swing.event.MenuKeyListener;
  * Clase encargada del funcionamiento del Botón Guardar
 
  */
+public class BotonGuardarPartidaListener implements ActionListener {
 
-public class BotonGuardarPartidaListener implements MenuKeyListener {
-
-	public void menuKeyPressed(MenuKeyEvent arg0) {
-		Boton_Guardar_Apretado(arg0);
-	}
-
-	public void menuKeyReleased(MenuKeyEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {
 		
-	}
-
-	public void menuKeyTyped(MenuKeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void Boton_Guardar_Apretado(MenuKeyEvent evt) {
-		// TODO add your handling code here:
 	}
 	
 }

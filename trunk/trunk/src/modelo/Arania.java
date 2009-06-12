@@ -11,6 +11,7 @@ public class Arania extends Enemigo {
 			this.setVida(2);
 		} catch (ValorNegativoException error) {
 		}
+		this.setPremioDinero(15);
 	}
 
 	public void avanzar(Escenario terreno) {
@@ -26,7 +27,7 @@ public class Arania extends Enemigo {
 		}
 	}
 
-	public String getNombre() {
+	public String toString() {
 		return "Arania";
 	}
 

@@ -23,7 +23,7 @@ public class BotonComprarListener implements ActionListener {
 	 * @param evt
 	 */
 	public void BotonComprar_Apretado(ActionEvent evt) {
-		VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal(null, null, null);
+		VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
 		
 		boolean aux = !vistaP.getMapa().isInsetar_objeto();
 		vistaP.getMapa().setInsetar_objeto(aux);	

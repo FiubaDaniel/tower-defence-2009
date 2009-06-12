@@ -18,8 +18,9 @@ import vista.dibujadores.VistaTorreAzul;
 import vista.dibujadores.VistaTorreBlanca;
 import vista.dibujadores.VistaTorreDorada;
 import vista.dibujadores.VistaTorrePlateada;
+import vista.menu.GameOver;
 import vista.menu.Mapa;
-import vista.menu.MenuSuperior;
+//import vista.menu.MenuSuperior;
 import vista.menu.PanelDatosDeSeleccion;
 import vista.menu.PanelDatosDeTorres;
 import vista.menu.PanelDeDatos;
@@ -50,22 +51,9 @@ public class ControlVista {
 	}
 	
 	private ControlVista(){
-		// Instancio los objetos de la ventana
-		PanelDatosDeTorres PanelTorres = new PanelDatosDeTorres();
-		PanelDatosDeSeleccion PanelSeleccion = new PanelDatosDeSeleccion();
-		MenuSuperior MenuArchivoAyuda = new MenuSuperior();
-		PanelDeDatos PanelDatos = new PanelDeDatos(PanelSeleccion, PanelTorres);
-		Mapa PanelMapa = new Mapa();
-		
-		
 		//Cargo el Frame Principal
-		VentanaPrincipal = VistaPrincipal.obtenerVistaPrincipal(
-				MenuArchivoAyuda, PanelDatos, PanelMapa);
+		VentanaPrincipal = VistaPrincipal.obtenerVistaPrincipal();
 		VentanaPrincipal.setVisible(true);
-
-		//Agrego un Observador de jugador
-		Jugador jugador = Jugador.obtenerJugador(50, 1000, "Grupo 4");
-		jugador.addObserver(PanelDatos);
 		this.CargarTabla();
 	}
 
@@ -118,10 +106,9 @@ public class ControlVista {
 			 * conseguido de la lista y le seteo la posicion donde debe
 			 * dibujar.
 			 */
-			vistaObjeto = (VistaObjetoDeMapa) TablaVistas.get(aux
-					.getNombre());
-			vistaObjeto.setX(aux.getX());
-			vistaObjeto.setY(aux.getY());
+			vistaObjeto = (VistaObjetoDeMapa) TablaVistas.get(aux.toString());
+			vistaObjeto.setX(aux.getPosicion().getCoordX());
+			vistaObjeto.setY(aux.getPosicion().getCoordY());
 
 			// Dibujo el enemigo en el mapa.
 			vistaObjeto.dibujar(VentanaPrincipal.getMapa());
@@ -143,10 +130,9 @@ public class ControlVista {
 		Iterator it_obs = escenario.getIteradordeObstaculos();
 		while (it_obs.hasNext()) {
 			Obstaculo aux = (Obstaculo) it_obs.next();
-			vistaObjeto = (VistaObjetoDeMapa) TablaVistas.get(aux
-					.getNombre());
-			vistaObjeto.setX(aux.getX());
-			vistaObjeto.setY(aux.getY());
+			vistaObjeto = (VistaObjetoDeMapa) TablaVistas.get(aux.toString());
+			vistaObjeto.setX(aux.getPosicion().getCoordX());
+			vistaObjeto.setY(aux.getPosicion().getCoordY());
 
 			vistaObjeto.dibujar(VentanaPrincipal.getMapa());
 		}
@@ -170,7 +156,7 @@ public class ControlVista {
 					.getVida_Danio()));
 			panel.setBottonUpdate_Text(String.valueOf(seleccionado
 					.getValorEvolucion()));
-			panel.setLabelSeleccion_Text(seleccionado.getNombre());
+			panel.setLabelSeleccion_Text(seleccionado.toString());
 		}
 	}
 	
@@ -185,7 +171,10 @@ public class ControlVista {
 		 * los cambios en el mismo
 		 */
 		mapa.paint(mapa.getGraphics());
-		
-		
 	}
+	
+	public void finDeJuego(){
+		new GameOver();
+	}
+
 }

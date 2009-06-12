@@ -36,16 +36,12 @@ public class EnemigoListener implements Observer {
 			// Si el enemigo llego a la salida, vuelve a aparecer en la entrada
 			// y disminuye un punto de vida al jugador
 
-			Jugador jugador = Jugador.obtenerJugador(1, 1, "");
-
-			jugador.AgregarQuitarVida(-1);
+			Jugador jugador = Jugador.obtenerJugador();
+			
+			//jugador.AgregarQuitarVida(-1);
 			((Enemigo) arg0).cambiarPosicion(escenario.getEntrada());
 			
-			MenuSuperior menuArchivoAyuda = null;
-			PanelDeDatos paneldedatos = null;
-			Mapa mapa = null;
-			
-			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal(menuArchivoAyuda, paneldedatos, mapa);
+			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
 			
 			vistaP.getPanelDatos().paint(vistaP.getPanelDatos().getGraphics());
 			

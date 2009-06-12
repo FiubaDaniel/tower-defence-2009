@@ -80,4 +80,11 @@ public class Posicion {
 		return (Math.sqrt(sqrX + sqrY));
 	}
 
+	public boolean equals(Object posicion){
+		Posicion aux = (Posicion)posicion;
+		if ((aux.getCoordX() == CoordX)&&(aux.getCoordY() == CoordY))
+			return true;
+		else
+			return false;
+	}
 }

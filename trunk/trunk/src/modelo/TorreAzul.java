@@ -14,7 +14,7 @@ public class TorreAzul extends Torre {
 	private Enemigo enemigoAatacar;
 
 	/* instancio un jugador y un escenario */
-	private Jugador jugador = Jugador.obtenerJugador(1, 1.5, "Daniel");
+	private Jugador jugador = Jugador.obtenerJugador();
 	private Escenario escenario = Escenario.obtenerEscenario();
 
 	/* constructor */
@@ -76,7 +76,7 @@ public class TorreAzul extends Torre {
 		}
 	}
 
-	public String getNombre() {
+	public String toString() {
 		return "Torre Azul";
 	}
 }
