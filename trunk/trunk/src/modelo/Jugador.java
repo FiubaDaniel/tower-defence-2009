@@ -26,7 +26,7 @@ public class Jugador extends Observable{
 	}
 
 	private Jugador() {
-		this.setCantidadVidas(50);
+		this.setCantidadVidas(100);
 		this.setDinero(80);
 		this.setNombre("Grupo 4");
 	}
