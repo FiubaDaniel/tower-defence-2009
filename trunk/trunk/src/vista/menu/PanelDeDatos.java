@@ -96,7 +96,8 @@ public class PanelDeDatos extends JPanel implements Observer {
 
 		Jugador jugador = Jugador.obtenerJugador();
 		Escenario escenario = Escenario.obtenerEscenario();
-
+		escenario.addObserver(this);
+		
 		// Coloco esta clase como observador de la clase jugador.
 		jugador.addObserver(this);
 
@@ -111,7 +112,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 
 		LabelVida.setText("Vida:");
 
-		LabelEnemigos.setText("Enemigos Restantes:");
+		LabelEnemigos.setText("Enemigos:");
 
 		LabelDinero.setText("Dinero:");
 
@@ -197,7 +198,6 @@ public class PanelDeDatos extends JPanel implements Observer {
 		add(PanelDatosSeleccion);
 
 		jugador.addObserver(this);
-
 	}
 
 	public void update(Observable o, Object arg) {

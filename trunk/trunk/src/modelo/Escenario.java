@@ -13,11 +13,11 @@ import customExceptions.BaseMapNotFoundException;
 import customExceptions.InvalidMapFormatException;
 import customExceptions.InvalidPositionException;
 import customExceptions.MapNotCreatedException;
-import customExceptions.MapaSinEnemigosExcepion;
 import customExceptions.NoteHagaselVivoException;
 
 import modelo.terrenos.*;
 
+import org.jdom.*;
 /**
  * Esta clase controla todos los aspectos generales del manejo del mapa, desde
  * su creacion a su correcta configuracion.
@@ -482,6 +482,7 @@ public class Escenario extends Observable {
 				Jugador player = Jugador.obtenerJugador();
 				player.ModificarDinero(PosibleVictima.getPremioDinero());
 				it.remove();
+				
 			}
 		}
 
@@ -610,4 +611,7 @@ public class Escenario extends Observable {
 		return MAPROWS;
 	}
 
+	public void persistir(){
+		
+	}
 }
