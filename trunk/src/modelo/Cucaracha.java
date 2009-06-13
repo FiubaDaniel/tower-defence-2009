@@ -1,6 +1,9 @@
 package modelo;
 
-import customExceptions.*;
+import customExceptions.NoEsEntradaException;
+import customExceptions.ValorNegativoException;
+
+
 
 public class Cucaracha extends Enemigo {
 

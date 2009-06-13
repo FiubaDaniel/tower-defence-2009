@@ -1,6 +1,9 @@
 package modelo;
 
-import customExceptions.*;
+import customExceptions.NoEsEntradaException;
+import customExceptions.ValorNegativoException;
+import org.jdom.*;
+
 
 public class Arania extends Enemigo {
 
@@ -31,4 +34,7 @@ public class Arania extends Enemigo {
 		return "Arania";
 	}
 
+	public void persistir(String nombreArchivo){
+		
+	}
 }
