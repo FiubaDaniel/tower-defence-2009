@@ -1,7 +1,5 @@
 package vista.menu;
 
-import java.awt.Dialog;
-
 import javax.swing.JFrame;
 
 import modelo.Jugador;
@@ -63,7 +61,7 @@ public class VistaPrincipal extends JFrame {
 		// Seteo para que al apretar el botón de cerra, se cierre la aplicacion
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Tower Defense");
-
+		
 		/* Cargo el menu superior.
 		setJMenuBar(MenuArchivoAyuda);
 		MenuArchivoAyuda.getAccessibleContext().setAccessibleName(

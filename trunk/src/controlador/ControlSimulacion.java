@@ -102,45 +102,40 @@ public class ControlSimulacion  implements ActionListener{
 	 */
 	public void actuar(){
 		this.agregarEnemigos();
-		this.avanzarYatacar();
-		this.actualizarVida();
+		this.avanzar();
+		this.atacar();
 		this.aumentarTiempoPasado();
 	}
 	
-	private void avanzarYatacar(){
-		Iterator itEnemigos = escenario.getIteradordeEnemigos();
-		while (itEnemigos.hasNext()){
-			Enemigo enemigo = (Enemigo) itEnemigos.next();
-			if (((SleepTime * tiempo_pasado) % (200 / enemigo.getVelocidad())) == 0)
-				enemigo.avanzar(escenario);
-		}
-		Iterator itObstaculos = escenario.getIteradordeObstaculos();
-		while (itObstaculos.hasNext()){
-			Obstaculo obstaculo = (Obstaculo) itObstaculos.next();
-			if (((SleepTime * tiempo_pasado) % (200 / obstaculo.getVelocidadDisparo())) == 0)
-				try {
-					obstaculo.atacar();
-				} catch (EnemigoYaMuerto e) {
-				} catch (Exception e) {
-				}
-		}
-	}
-	
-	private void actualizarVida(){
+	private void avanzar(){
 		Iterator itEnemigos = escenario.getIteradordeEnemigos();
 		Posicion salida = escenario.getSalida();
 		Jugador player = Jugador.obtenerJugador();
 		while (itEnemigos.hasNext()){
-			Enemigo enemigo = (Enemigo)itEnemigos.next();
-			if (salida.equals(enemigo.getPosicion())){
-				player.quitarVida();
-			}
-			if (player.getCantidadVidas() == 0){
-				terminoNivel = true;
-				pausado = true;
+			Enemigo enemigo = (Enemigo) itEnemigos.next();
+			for (int i=0;i<enemigo.getVelocidad();i++){
+				enemigo.avanzar(escenario);
+				if (salida.equals(enemigo.getPosicion()))
+					player.quitarVida();
+				if (player.getCantidadVidas() == 0){
+					terminoNivel = true;
+					pausado = true;
+					break;
+				}
 			}
 		}
-		
+	}
+	
+	private void atacar(){
+		Iterator itObstaculos = escenario.getIteradordeObstaculos();
+		while (itObstaculos.hasNext()){
+			Obstaculo obstaculo = (Obstaculo) itObstaculos.next();
+			try {
+				obstaculo.atacar();
+			} catch (EnemigoYaMuerto e){
+			}catch (Exception e) {
+			}
+		}
 	}
 	
 	/**

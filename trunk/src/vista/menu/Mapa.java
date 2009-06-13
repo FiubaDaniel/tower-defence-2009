@@ -6,18 +6,32 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 
 import customExceptions.InvalidPositionException;
 
+import vista.Dibujable;
 import vista.SuperficieDeDibujo;
 import vista.Seleccionable;
+import vista.dibujadores.VistaArania;
+import vista.dibujadores.VistaArena;
+import vista.dibujadores.VistaCucaracha;
+import vista.dibujadores.VistaHormiga;
+import vista.dibujadores.VistaMosca;
+import vista.dibujadores.VistaObjetoDeMapa;
+import vista.dibujadores.VistaPegote;
+import vista.dibujadores.VistaTorreAzul;
+import vista.dibujadores.VistaTorreBlanca;
+import vista.dibujadores.VistaTorreDorada;
+import vista.dibujadores.VistaTorrePlateada;
 
 import modelo.Enemigo;
 import modelo.Escenario;
@@ -39,6 +53,8 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 	private boolean dibujar_habilitado = true;
 
 	private boolean insetar_objeto = false;
+	
+	private HashMap TablaVistas;
 
 	private int RepresentacionMouseEnMapa_X;
 	private int RepresentacionMouseEnMapa_Y;
@@ -63,6 +79,7 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 
 	public Mapa() {
 
+		this.CargarTabla();
 		addMouseListener(this);
 		addMouseMotionListener(this);
 
@@ -287,8 +304,9 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 
 	public void mouseMoved(MouseEvent e) {
 		if (insetar_objeto) {
+			
 			Graphics grafico = this.getGraphics();
-
+						
 			grafico.setColor(Color.RED);
 			grafico.fillOval(e.getX(),e.getY(),UNIDADANCHO,UNIDADALTO);
 			
@@ -317,4 +335,22 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 		return RepresentacionMouseEnMapa_Y;
 	}
 
+	/**
+	 * Carga la tabla de equivalencias entre un tipo de enemigos y su Vista
+	 * Correspondiente. Es decir al recibir el string especificado, la tabla
+	 * devuelve la clase que dibuja ese tipo de Objeto
+	 */
+	private void CargarTabla() {
+		TablaVistas = new HashMap();
+		TablaVistas.put("Hormiga", new VistaHormiga(0, 0));
+		TablaVistas.put("Arania", new VistaArania(0, 0));
+		TablaVistas.put("Cucaracha", new VistaCucaracha(0, 0));
+		TablaVistas.put("Mosca", new VistaMosca(0, 0));
+		TablaVistas.put("Torre Blanca", new VistaTorreBlanca(0, 0));
+		TablaVistas.put("Torre Azul", new VistaTorreAzul(0, 0));
+		TablaVistas.put("Torre Dorada", new VistaTorreDorada(0, 0));
+		TablaVistas.put("Torre Plateada", new VistaTorrePlateada(0, 0));
+		TablaVistas.put("Arena", new VistaArena(0, 0));
+		TablaVistas.put("Pegote", new VistaPegote(0, 0));
+	}
 }
