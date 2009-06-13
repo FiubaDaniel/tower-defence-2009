@@ -611,7 +611,7 @@ public class Escenario extends Observable {
 		return MAPROWS;
 	}
 
-	public void persistir(){
+	public void persistir(String nombreArchivo){
 		
 	}
 }

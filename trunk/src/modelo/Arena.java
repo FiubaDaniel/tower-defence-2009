@@ -33,4 +33,6 @@ public class Arena extends Obstaculo {
 	public int getValorEvolucion() {
 		return 0;
 	}
+	
+	
 }

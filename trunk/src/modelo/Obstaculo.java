@@ -61,4 +61,7 @@ public abstract class Obstaculo extends Observable implements Seleccionable {
 		return velocidadDisparo;
 	}
 
+	public void persistir(String nombreArchivo){
+		
+	}
 }

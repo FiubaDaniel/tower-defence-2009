@@ -33,8 +33,4 @@ public class Arania extends Enemigo {
 	public String toString() {
 		return "Arania";
 	}
-
-	public void persistir(String nombreArchivo){
-		
-	}
 }

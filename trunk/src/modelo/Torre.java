@@ -51,4 +51,7 @@ public abstract class Torre extends Obstaculo {
 		return costoEvolucion;
 	}
 	
+	public void persistir(String nombreArchivo){
+		
+	}
 }
