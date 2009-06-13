@@ -120,4 +120,7 @@ public abstract class Enemigo extends Observable implements Seleccionable {
 		return premioDinero;
 	}
 
+	public void persistir(String nombreArchivo){
+		
+	}
 }
