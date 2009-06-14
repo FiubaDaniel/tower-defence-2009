@@ -7,9 +7,6 @@ import java.util.Observable;
 
 import javax.swing.ImageIcon;
 
-import vista.Dibujable;
-import vista.Posicionable;
-import vista.SuperficieDeDibujo;
 import vista.menu.Mapa;
 
 /**
@@ -18,36 +15,33 @@ import vista.menu.Mapa;
  * 
 
  */
-public abstract class VistaObjetoDeMapa implements Dibujable {
+public abstract class VistaObjetoDeMapa {
 
 	private String dir_imagen;
 
 	private int X_pos, Y_pos;
-
-	private Posicionable posicionable;
 
 	protected Image_Observer Observador;
 
 	/**
 	 * Este metodo dibuja la imagen en la superficie de DIbujo.
 	 */
-	public void dibujar(SuperficieDeDibujo superfice) {
+	public void dibujar(Mapa superfice) {
 
 		// Pido una superficie donde dibujar, es decir un graphics.
-		Graphics grafico = ((Mapa) superfice).getGraphics();
+		Graphics grafico = superfice.getGraphics();
 
 		// Cargo una imagen, para ser dibujada.
 		ImageIcon aux = new ImageIcon(this.getDir_imagen());
 
 		// Creación buffer
-		Image buffer = ((Mapa) superfice).createImage(((Mapa) superfice)
-				.getUNIDADANCHO(), ((Mapa) superfice).getUNIDADALTO());
+		Image buffer = superfice.createImage(superfice.getUNIDADANCHO(), superfice.getUNIDADALTO());
 		Graphics graph_buffer = buffer.getGraphics();
 		// Creación buffer
 
 		// Obtengo el ancho y alto de las iamgenes a crear.
-		int ANCHOUNITARIO = ((Mapa) superfice).getUNIDADANCHO();
-		int ALTOUNITARIO = ((Mapa) superfice).getUNIDADANCHO();
+		int ANCHOUNITARIO = superfice.getUNIDADANCHO();
+		int ALTOUNITARIO = superfice.getUNIDADANCHO();
 
 		// Dibujo la iamgen en el buffer y luego la copio al mapa, para evitar
 		// del destello de la imagen
@@ -68,14 +62,6 @@ public abstract class VistaObjetoDeMapa implements Dibujable {
 
 		this.setX(x);
 		this.setY(y);
-	}
-
-	public Posicionable getPosicionable() {
-		return posicionable;
-	}
-
-	public void setPosicionable(Posicionable posicionable) {
-		this.posicionable = posicionable;
 	}
 
 	public void setDir_imagen(String dir_imagen) {

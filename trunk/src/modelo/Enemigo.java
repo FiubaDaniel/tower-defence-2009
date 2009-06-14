@@ -2,7 +2,6 @@ package modelo;
 
 import java.util.Observable;
 
-import vista.Seleccionable;
 
 import customExceptions.*;
 

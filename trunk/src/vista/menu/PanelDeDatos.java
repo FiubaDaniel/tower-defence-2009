@@ -4,12 +4,9 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -36,7 +33,7 @@ import modelo.TorrePlateada;
 
  * 
  */
-public class PanelDeDatos extends JPanel implements Observer {
+public class PanelDeDatos extends JPanel {
 
 	/**
 	 * 
@@ -88,23 +85,13 @@ public class PanelDeDatos extends JPanel implements Observer {
 		PanelDatosTorres = panelDatosTorres;
 		PanelDatosSeleccion = panelDatosSeleccion;
 
-		// Coloco un borde rojo
-		/*setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1,
-				new java.awt.Color(255, 0, 0)));
-*/
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 		Jugador jugador = Jugador.obtenerJugador();
 		Escenario escenario = Escenario.obtenerEscenario();
-		escenario.addObserver(this);
-		
-		// Coloco esta clase como observador de la clase jugador.
-		jugador.addObserver(this);
 
 		// Seteo los nombres de los controles.
 		LinkVidaJugador.setText(String.valueOf(jugador.getCantidadVidas()));
-
-		//LabelPuntos.setText("Puntos:");
 
 		LabelNombreJugador.setText("Nombre Jugador: ");
 
@@ -115,8 +102,6 @@ public class PanelDeDatos extends JPanel implements Observer {
 		LabelEnemigos.setText("Enemigos:");
 
 		LabelDinero.setText("Dinero:");
-
-		//LinkPuntosJugador.setText(String.valueOf(jugador.getPuntos()));
 
 		LinkCantEnemigosEscenario.setText(String.valueOf(escenario
 				.getCantBichos()));
@@ -197,16 +182,6 @@ public class PanelDeDatos extends JPanel implements Observer {
 		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(PanelDatosSeleccion);
 
-		jugador.addObserver(this);
-	}
-
-	public void update(Observable o, Object arg) {
-		LinkDineroJugador.setText(String.valueOf(((Jugador) o).getDinero()));
-		//LinkPuntosJugador.setText(String.valueOf(((Jugador) o).getPuntos()));
-		LinkVidaJugador.setText(String
-				.valueOf(((Jugador) o).getCantidadVidas()));
-
-		this.repaint();
 	}
 
 	public void update(Graphics g) {
@@ -214,10 +189,13 @@ public class PanelDeDatos extends JPanel implements Observer {
 		Jugador jugador = Jugador.obtenerJugador();
 
 		LinkDineroJugador.setText(String.valueOf(jugador.getDinero()));
-		//LinkPuntosJugador.setText(String.valueOf(jugador.getPuntos()));
 		LinkVidaJugador.setText(String.valueOf(jugador.getCantidadVidas()));
 
 		this.repaint();
+	}
+	
+	public javax.swing.JLabel getLabel_Cant_Enemigos(){
+		return LinkCantEnemigosEscenario;
 	}
 
 	public PanelDatosDeSeleccion getPanelDatosSeleccion() {
@@ -230,6 +208,10 @@ public class PanelDeDatos extends JPanel implements Observer {
 
 	public Obstaculo getObs_seleccionado() {
 		return Obs_seleccionado;
+	}
+	
+	public javax.swing.JButton getBotonIniciar_Pausar() {
+		return BotonIniciar_Pausar;
 	}
 
 	// Creo el observador de la liste de torres, para poder acceder de forma

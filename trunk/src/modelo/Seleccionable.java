@@ -1,4 +1,4 @@
-package vista;
+package modelo;
 
 /**
  * Esta interfaz está hecha para abstraerme de que estoy seleccionando en la pantalla

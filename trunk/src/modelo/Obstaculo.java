@@ -2,7 +2,6 @@ package modelo;
 
 import java.util.Observable;
 
-import vista.Seleccionable;
 
 public abstract class Obstaculo extends Observable implements Seleccionable {
 	private int precio;

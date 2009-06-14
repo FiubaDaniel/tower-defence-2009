@@ -2,7 +2,6 @@ package modelo;
 
 import customExceptions.NoEsEntradaException;
 import customExceptions.ValorNegativoException;
-import org.jdom.*;
 
 
 public class Arania extends Enemigo {
