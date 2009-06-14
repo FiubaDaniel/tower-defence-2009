@@ -2,6 +2,8 @@ package modelo;
 
 import java.util.Iterator;
 
+import org.jdom.Element;
+
 import modelo.Enemigo;
 import modelo.Escenario;
 import customExceptions.EnemigoYaMuerto;
@@ -51,7 +53,10 @@ public abstract class Torre extends Obstaculo {
 		return costoEvolucion;
 	}
 	
-	public void persistir(String nombreArchivo){
-		
+	public Element persistir() {
+		Element xmlElement = super.persistir();
+        xmlElement.setAttribute("Evolucion", String.valueOf(this.evolucion));
+        return xmlElement;
 	}
+	
 }

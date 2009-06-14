@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.jdom.Element;
 
@@ -640,8 +641,57 @@ public class Escenario implements Persistente {
 	public int getCant_Mapas_Disponibles() {
 		return Cant_Mapas_Disponibles;
 	}
+	
+	private Escenario(Element xmlElement) throws FileNotFoundException {
+		
+		this.NumeroNivel = Integer.parseInt(xmlElement.getAttributeValue("Nivel"));
+		
+		configurarMapa();
+		
+		List Element_list = xmlElement.getContent();
+		
+		Iterator it = Element_list.iterator();
+		
+		while (it.hasNext()) {
+			Object aux = it.next();
+			if (aux instanceof Obstaculo)
+				ObstaculosEnElMapa.add(aux);
+			else if (aux instanceof Enemigo)
+				EnemigosEnElMapa.add(aux);
+	
+		}
+		
+		this.CantBichos = EnemigosEnElMapa.size();
+		
+	}
+	
+	public Escenario obtenerEscenario(Element xmlElement) {
+		
+		if (escenario == null) {
+			try {
+				escenario = new Escenario(xmlElement);
+			} catch (FileNotFoundException e) {
+				throw new BaseMapNotFoundException();
+			}
+		}
+		return escenario;
+	}
 
 	public Element persistir() {
-		return null;
+		Element xmlElement = new Element("Escenario");
+        
+        Iterator it = EnemigosEnElMapa.iterator();
+        int i = 1;
+        while (it.hasNext()) {
+        	xmlElement.addContent(i, ((Enemigo)it.next()).persistir());
+        }
+        
+        it = ObstaculosEnElMapa.iterator();
+        while (it.hasNext())
+        	xmlElement.addContent(i, ((Obstaculo)it.next()).persistir());
+        
+        xmlElement.setAttribute("Nivel", String.valueOf(this.NumeroNivel));
+        
+        return xmlElement;
 	}
 }
