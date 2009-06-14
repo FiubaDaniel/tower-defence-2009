@@ -119,10 +119,6 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 		return premioDinero;
 	}
 
-	public void persistir(String nombreArchivo){
-		
-	}
-
 	public Element persistir() {
 		return null;
 	}

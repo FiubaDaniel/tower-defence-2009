@@ -13,8 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import controlador.BotonCargarPartidaListener;
-import controlador.BotonGuardarPartidaListener;
+import controlador.BotonPersistirPartidaListener;
 import controlador.ControlSimulacion;
 
 import modelo.Arena;
@@ -123,9 +122,9 @@ public class PanelDeDatos extends JPanel implements Observer {
 		// Agrego un Listener del boton Iniciar_Pausar
 		BotonIniciar_Pausar.addActionListener(ControlSimulacion.obtenerControl());
 
-		BotonGuardar.addActionListener(new BotonGuardarPartidaListener());
+		BotonGuardar.addActionListener(new BotonPersistirPartidaListener());
 		
-		BotonCargar.addActionListener(new BotonCargarPartidaListener());
+		BotonCargar.addActionListener(new BotonPersistirPartidaListener());
 		
 		ListaDeCompras ListaCompras = new ListaDeCompras();
 
@@ -186,6 +185,14 @@ public class PanelDeDatos extends JPanel implements Observer {
 		add(Box.createRigidArea(new Dimension(10, 10)));
 		add(PanelDatosSeleccion);
 
+	}
+
+	public javax.swing.JButton getBotonCargar() {
+		return BotonCargar;
+	}
+
+	public javax.swing.JButton getBotonGuardar() {
+		return BotonGuardar;
 	}
 
 	public void update(Graphics g) {
