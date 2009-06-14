@@ -4,6 +4,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -33,7 +35,7 @@ import modelo.TorrePlateada;
 
  * 
  */
-public class PanelDeDatos extends JPanel {
+public class PanelDeDatos extends JPanel implements Observer {
 
 	/**
 	 * 
@@ -89,6 +91,8 @@ public class PanelDeDatos extends JPanel {
 
 		Jugador jugador = Jugador.obtenerJugador();
 		Escenario escenario = Escenario.obtenerEscenario();
+		
+		jugador.addObserver(this);
 
 		// Seteo los nombres de los controles.
 		LinkVidaJugador.setText(String.valueOf(jugador.getCantidadVidas()));
@@ -194,6 +198,11 @@ public class PanelDeDatos extends JPanel {
 		this.repaint();
 	}
 	
+	public void update(Observable o, Object arg) {
+		LinkVidaJugador.setText(String.valueOf(((Jugador)o).getCantidadVidas()));
+		LinkDineroJugador.setText(String.valueOf(((Jugador)o).getDinero()));
+	};
+	
 	public javax.swing.JLabel getLabel_Cant_Enemigos(){
 		return LinkCantEnemigosEscenario;
 	}
@@ -249,5 +258,5 @@ public class PanelDeDatos extends JPanel {
 
 		}
 
-	};
+	}
 }

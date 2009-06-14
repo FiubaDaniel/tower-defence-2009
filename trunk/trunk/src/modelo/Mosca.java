@@ -25,9 +25,6 @@ public class Mosca extends Enemigo {
 		
 		if(cant_avanzada > terreno.getCaminoAlaSalida().size())
 			cant_avanzada = 0;
-		
-		this.setChanged();
-		this.notifyObservers();
 	}
 
 	public String toString() {

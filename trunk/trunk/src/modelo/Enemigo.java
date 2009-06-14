@@ -1,11 +1,11 @@
 package modelo;
 
-import java.util.Observable;
+import org.jdom.Element;
 
 
 import customExceptions.*;
 
-public abstract class Enemigo extends Observable implements Seleccionable {
+public abstract class Enemigo  implements Seleccionable, Persistente {
 
 	private int vida;
 	private boolean bichoVolador = false;
@@ -121,5 +121,9 @@ public abstract class Enemigo extends Observable implements Seleccionable {
 
 	public void persistir(String nombreArchivo){
 		
+	}
+
+	public Element persistir() {
+		return null;
 	}
 }

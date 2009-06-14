@@ -2,6 +2,8 @@ package modelo;
 
 import java.util.Observable;
 
+import org.jdom.Element;
+
 import customExceptions.DineroMuyBajoException;
 
 
@@ -12,7 +14,7 @@ import customExceptions.DineroMuyBajoException;
  * @author hector
  * 
  */
-public class Jugador extends Observable{
+public class Jugador extends Observable implements Persistente{
 
 	private static Jugador jugador;
 	private int CantidadVidas;
@@ -29,6 +31,12 @@ public class Jugador extends Observable{
 		this.setCantidadVidas(100);
 		this.setDinero(80);
 		this.setNombre("Grupo 4");
+	}
+	
+	private Jugador(String nombre, double dinero, int vidas) {
+		this.setCantidadVidas(vidas);
+		this.setDinero(dinero);
+		this.setNombre(nombre);
 	}
 
 	private void setCantidadVidas(int cantidadVidas) {
@@ -65,18 +73,6 @@ public class Jugador extends Observable{
 		return Nombre;
 	}
 
-	/*private void setPuntos(double puntos) {
-		if (puntos >= 0) {
-			this.Puntos = puntos;
-			this.notifyObservers();
-		}
-		else
-			throw new IllegalArgumentException();
-	}
-
-	public double getPuntos() {
-		return Puntos;
-	}*/
 
 	/**
 	 * Resta de a una unidad de vida.
@@ -96,13 +92,18 @@ public class Jugador extends Observable{
 		this.setChanged();
 	}
 
-	/*
-	public void agregarPuntos(double puntos) {
-
-		if (puntos >= 0) {
-			this.setPuntos(Puntos + puntos);
-		} else
-			throw new IllegalArgumentException();
-
-	}*/
+	public Jugador ObtenerJugador(Element xmlElement) {
+		if (jugador == null) {
+			jugador = new Jugador(xmlElement.getAttributeValue("Nombre"), Double.parseDouble(xmlElement.getAttributeValue("Dinero")), Integer.parseInt(xmlElement.getAttributeValue("Vidas")));
+		}
+		return jugador;
+	}
+	
+	public Element persistir() {
+		Element xmlElement = new Element("Jugador");
+        xmlElement.setAttribute("Nombre", this.Nombre);
+        xmlElement.setAttribute("Vidas", String.valueOf(this.CantidadVidas));
+        xmlElement.setAttribute("Dinero", String.valueOf(this.Dinero));
+        return xmlElement;
+	}
 }

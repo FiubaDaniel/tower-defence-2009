@@ -1,9 +1,8 @@
 package modelo;
 
-import java.util.Observable;
+import org.jdom.Element;
 
-
-public abstract class Obstaculo extends Observable implements Seleccionable {
+public abstract class Obstaculo implements Seleccionable, Persistente {
 	private int precio;
 	private int danioQueGenera;
 	private int alcance;
@@ -62,5 +61,16 @@ public abstract class Obstaculo extends Observable implements Seleccionable {
 
 	public void persistir(String nombreArchivo){
 		
+	}
+
+	public int getValorEvolucion() {
+		return 0;
+	}
+
+	public Element persistir() {
+		Element xmlElement = new Element("Obstaculo");
+        xmlElement.addContent(lugarQueOcupa.persistir());
+        xmlElement.setAttribute("Tipo", this.getClass().getCanonicalName());
+        return xmlElement;
 	}
 }

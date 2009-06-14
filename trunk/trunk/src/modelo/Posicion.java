@@ -1,5 +1,7 @@
 package modelo;
 
+import org.jdom.Element;
+
 /**
  * Esta clase controla todos los aspectos generales de las posiciones, desde su
  * creacion a su correcta configuracion.
@@ -7,7 +9,7 @@ package modelo;
  * @author hector
  * 
  */
-public class Posicion {
+public class Posicion implements Persistente{
 
 	private boolean Caminable; // Si es tipo = 1 es caminable
 	private int CoordX;
@@ -86,5 +88,19 @@ public class Posicion {
 			return true;
 		else
 			return false;
+	}
+
+	public Posicion(Element xmlElement) {
+		this.CoordX = Integer.parseInt(xmlElement.getAttributeValue("CoordX"));
+		this.CoordY = Integer.parseInt(xmlElement.getAttributeValue("CoordY"));
+		this.Caminable = Boolean.parseBoolean(xmlElement.getAttributeValue("Caminable"));
+	}
+	
+	public Element persistir() {
+		Element xmlElement = new Element("Posicion");
+        xmlElement.setAttribute("CoordX", String.valueOf(this.CoordX));
+        xmlElement.setAttribute("CoordY", String.valueOf(this.CoordX));
+        xmlElement.setAttribute("Caminable", String.valueOf(this.Caminable));
+        return xmlElement;
 	}
 }
