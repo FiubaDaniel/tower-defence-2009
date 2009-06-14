@@ -59,10 +59,6 @@ public abstract class Obstaculo implements Seleccionable, Persistente {
 		return velocidadDisparo;
 	}
 
-	public void persistir(String nombreArchivo){
-		
-	}
-
 	public int getValorEvolucion() {
 		return 0;
 	}

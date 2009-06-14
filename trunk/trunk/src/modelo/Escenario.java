@@ -630,10 +630,6 @@ public class Escenario implements Persistente {
 		}
 	}
 
-	public void persistir(String nombreArchivo){
-		
-	}
-
 	public void setCant_Mapas_Disponibles(int cant_Mapas_Disponibles) {
 		Cant_Mapas_Disponibles = cant_Mapas_Disponibles;
 	}
