@@ -1,18 +1,21 @@
 package controlador;
 
+import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
+import vista.menu.VistaPrincipal;
 
 import customExceptions.EnemigoYaMuerto;
 
 import modelo.Enemigo;
 import modelo.Escenario;
 import modelo.Jugador;
-import modelo.Nivel;
 import modelo.Obstaculo;
 import modelo.Posicion;
 
@@ -65,8 +68,6 @@ public class ControlSimulacion  implements ActionListener{
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		Jugador jugador = Jugador.obtenerJugador();
-		Nivel NivelGeneral = Nivel.obtenerNivel(escenario, jugador);
 		fabrica = new FabricaDeEnemigos(escenario.getCantBichos(), escenario.getNumeroNivel());
 	}
 	
@@ -94,6 +95,41 @@ public class ControlSimulacion  implements ActionListener{
 		}
 	}
 	
+	private void verificar_pasaje_de_nivel() {
+		if (escenario.getCantBichos() <= 0) {
+			pausado = true;
+			
+			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
+			vistaP.getPanelDatos().getBotonIniciar_Pausar().setText("Iniciar");
+			
+			
+			try {
+				if (escenario.getNumeroNivel() < escenario.getCant_Mapas_Disponibles())
+					escenario.setNumeroNivel(escenario.getNumeroNivel() + 1);
+				else {
+					JFrame Fin_Juego = new JFrame();
+					Dialog texto = new Dialog(Fin_Juego, "Ganaste!!");
+					texto.setSize(250,250);
+				    // Hace que el dialogo aparezca en la pantalla
+					texto.setVisible(true);
+					
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					
+					escenario.setNumeroNivel(1);
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+			fabrica.crearNuevosEnemigos(escenario.getNumeroNivel());
+			
+		}
+	}
+	
 	/**
 	 * Este metodo es el que se ocupa de llamar a las acciones
 	 * necesarias para mover, disparar e ir agregando enemigos
@@ -104,6 +140,7 @@ public class ControlSimulacion  implements ActionListener{
 		this.agregarEnemigos();
 		this.avanzar();
 		this.atacar();
+		this.verificar_pasaje_de_nivel();
 		this.aumentarTiempoPasado();
 	}
 	
@@ -136,6 +173,10 @@ public class ControlSimulacion  implements ActionListener{
 			}catch (Exception e) {
 			}
 		}
+	}
+	
+	public int getSleepTime() {
+		return SleepTime;
 	}
 	
 	/**

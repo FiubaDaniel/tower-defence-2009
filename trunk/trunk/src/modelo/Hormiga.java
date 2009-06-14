@@ -26,7 +26,8 @@ public class Hormiga extends Enemigo {
 		} else {
 			frenarOAvanzar();
 		}
-
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	public String toString() {

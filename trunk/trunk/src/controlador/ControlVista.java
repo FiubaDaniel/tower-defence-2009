@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import modelo.Enemigo;
 import modelo.Escenario;
-import modelo.Jugador;
 import modelo.Obstaculo;
-import vista.Seleccionable;
+import modelo.Seleccionable;
 import vista.dibujadores.VistaArania;
 import vista.dibujadores.VistaArena;
 import vista.dibujadores.VistaCucaracha;
@@ -20,10 +19,7 @@ import vista.dibujadores.VistaTorreDorada;
 import vista.dibujadores.VistaTorrePlateada;
 import vista.menu.GameOver;
 import vista.menu.Mapa;
-//import vista.menu.MenuSuperior;
 import vista.menu.PanelDatosDeSeleccion;
-import vista.menu.PanelDatosDeTorres;
-import vista.menu.PanelDeDatos;
 import vista.menu.VistaPrincipal;
 
 /**
@@ -36,7 +32,7 @@ public class ControlVista {
 
 	private static ControlVista instancia = null;
 	
-	private HashMap<String, VistaObjetoDeMapa> TablaVistas;
+	private HashMap TablaVistas;
 	
 	private Escenario escenario = Escenario.obtenerEscenario();
 	
@@ -111,7 +107,7 @@ public class ControlVista {
 			vistaObjeto.setY(aux.getPosicion().getCoordY());
 
 			// Dibujo el enemigo en el mapa.
-			vistaObjeto.dibujar(VentanaPrincipal.getMapa());
+			vistaObjeto.dibujar((VentanaPrincipal.getMapa()));
 		}
 	}
 	
@@ -158,6 +154,9 @@ public class ControlVista {
 					.getValorEvolucion()));
 			panel.setLabelSeleccion_Text(seleccionado.toString());
 		}
+		
+		
+		VentanaPrincipal.getPanelDatos().getLabel_Cant_Enemigos().setText(String.valueOf(escenario.getCantBichos()));
 	}
 	
 	/**

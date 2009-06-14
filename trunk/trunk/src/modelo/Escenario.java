@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Observable;
+
+import org.jdom.Element;
 
 import customExceptions.BaseMapNotFoundException;
 import customExceptions.InvalidMapFormatException;
@@ -16,8 +17,6 @@ import customExceptions.MapNotCreatedException;
 import customExceptions.NoteHagaselVivoException;
 
 import modelo.terrenos.*;
-
-import org.jdom.*;
 /**
  * Esta clase controla todos los aspectos generales del manejo del mapa, desde
  * su creacion a su correcta configuracion.
@@ -25,13 +24,14 @@ import org.jdom.*;
  * @author hector
  * 
  */
-public class Escenario extends Observable {
+public class Escenario implements Persistente {
 
 	private static final int MAPCOLUMNS = 50;
 	private static final int MAPROWS = 50;
 	private static final double DINEROBASEMAX = 2000;
 	private static Escenario escenario;
 	private int CantBichos;
+	private int Cant_Mapas_Disponibles;
 	private double DineroBase;
 	private int CantidadDeVidaBase;
 	private LinkedList CaminoAlaSalida;
@@ -74,6 +74,8 @@ public class Escenario extends Observable {
 	private void configurarMapa() throws FileNotFoundException {
 
 		cargarMapaConfiguracion();
+		
+		search_maps();
 
 		try {
 			ArchivodeMapa = new File("Mapas/Mapa" + NumeroNivel + ".mp");
@@ -212,6 +214,7 @@ public class Escenario extends Observable {
 		// nose si debería ser publico o privado
 		this.NumeroNivel = numeroNivel;
 		configurarMapa();
+		ObstaculosEnElMapa.clear();
 
 	}
 
@@ -461,14 +464,6 @@ public class Escenario extends Observable {
 		}
 	}
 
-	/*public boolean eliminarEnemigodeLista(Enemigo paraeliminar) {
-		if (!EnemigosEnElMapa.isEmpty()) {
-			return EnemigosEnElMapa.remove(paraeliminar);
-		} else {
-			throw new MapaSinEnemigosExcepion();
-		}
-	}*/
-
 	public void eliminarEnemigosSinVidadelaLista() {
 		Iterator it = EnemigosEnElMapa.iterator();
 
@@ -482,7 +477,7 @@ public class Escenario extends Observable {
 				Jugador player = Jugador.obtenerJugador();
 				player.ModificarDinero(PosibleVictima.getPremioDinero());
 				it.remove();
-				
+				CantBichos--;
 			}
 		}
 
@@ -610,8 +605,43 @@ public class Escenario extends Observable {
 	public static int getMapRows() {
 		return MAPROWS;
 	}
+	
+	/**
+	 * Este método verifica la cantidad de archivos de mapas disponibles que hay.
+	 * Esto lo hace, tratando de abrir todos los posibles, y cuando salta una
+	 *  excepcion quiere decir que ese archivo no existe.
+	 */
+	
+	private void search_maps() {
+		int numero_intento = 1;
+		File Mapas;
+		FileReader fl;
+		try {
+			while (true) {
+				Mapas = new File("Mapas/Mapa" + numero_intento + ".mp");
+				fl = new FileReader(Mapas);
+				numero_intento++;
+				fl.close();
+			}
+		} catch (FileNotFoundException e) {
+			this.setCant_Mapas_Disponibles(numero_intento - 1);
+		} catch (IOException e) {
+		}
+	}
 
 	public void persistir(String nombreArchivo){
 		
+	}
+
+	public void setCant_Mapas_Disponibles(int cant_Mapas_Disponibles) {
+		Cant_Mapas_Disponibles = cant_Mapas_Disponibles;
+	}
+
+	public int getCant_Mapas_Disponibles() {
+		return Cant_Mapas_Disponibles;
+	}
+
+	public Element persistir() {
+		return null;
 	}
 }

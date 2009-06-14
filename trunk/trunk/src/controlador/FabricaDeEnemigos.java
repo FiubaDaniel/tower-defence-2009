@@ -163,6 +163,10 @@ public class FabricaDeEnemigos {
 
 		crearNuevosEnemigos(numeroNivel);
 
+		Escenario escenario = Escenario.obtenerEscenario();
+		
+		escenario.setCantBichos(ColaEnemigos.size());
+		
 	}
 
 	/**

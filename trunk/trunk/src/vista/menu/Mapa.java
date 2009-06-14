@@ -12,21 +12,16 @@ import java.util.NoSuchElementException;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
 
 import customExceptions.InvalidPositionException;
 
-import vista.Dibujable;
-import vista.SuperficieDeDibujo;
-import vista.Seleccionable;
 import vista.dibujadores.VistaArania;
 import vista.dibujadores.VistaArena;
 import vista.dibujadores.VistaCucaracha;
 import vista.dibujadores.VistaHormiga;
 import vista.dibujadores.VistaMosca;
-import vista.dibujadores.VistaObjetoDeMapa;
 import vista.dibujadores.VistaPegote;
 import vista.dibujadores.VistaTorreAzul;
 import vista.dibujadores.VistaTorreBlanca;
@@ -38,8 +33,9 @@ import modelo.Escenario;
 import modelo.Jugador;
 import modelo.Obstaculo;
 import modelo.Posicion;
+import modelo.Seleccionable;
 
-public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
+public class Mapa extends JPanel implements Observer,
 		MouseInputListener {
 
 	/**
@@ -53,7 +49,7 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 	private boolean dibujar_habilitado = true;
 
 	private boolean insetar_objeto = false;
-	
+
 	private HashMap TablaVistas;
 
 	private int RepresentacionMouseEnMapa_X;
@@ -83,11 +79,8 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 		addMouseListener(this);
 		addMouseMotionListener(this);
 
-		Escenario escenario = Escenario.obtenerEscenario();
-
 		setObjeto_seleccionado(null);
 
-		escenario.addObserver(this);
 
 		setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1,
 				new java.awt.Color(255, 0, 0)));
@@ -168,9 +161,9 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 
 	public void mouseClicked(MouseEvent arg0) {
 
-		
 		/**
-		 * Esta parte se encarga de la seleccion de enemigos por el click del mouse
+		 * Esta parte se encarga de la seleccion de enemigos por el click del
+		 * mouse
 		 */
 		if (arg0.getButton() == MouseEvent.BUTTON1) {
 			int posX = (int) (arg0.getX() / UNIDADANCHO);
@@ -222,61 +215,62 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 			Jugador jugador = Jugador.obtenerJugador();
 			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
 
-			
 			Obstaculo aux = vistaP.getPanelDatos().getObs_seleccionado();
 
-			if (jugador.getDinero() >= aux.getPrecio()) {
+			if ((aux != null) && (jugador.getDinero() >= aux.getPrecio())) {
 
 				Posicion aux_pos = new Posicion(RepresentacionMouseEnMapa_X,
 						RepresentacionMouseEnMapa_Y, false);
 
-				aux_pos.setCaminable(escenario.obtener_tipo_de_terreno(aux_pos));
+				aux_pos
+						.setCaminable(escenario
+								.obtener_tipo_de_terreno(aux_pos));
 
-				/* Como necesito crear nuevas torres con cada click, uso reflexion para
-				 * conseguir el constructor y crear una neuva clase del mismo tipo
+				/*
+				 * Como necesito crear nuevas torres con cada click, uso
+				 * reflexion para conseguir el constructor y crear una neuva
+				 * clase del mismo tipo
 				 */
-				
+
 				// Creo un array de constructores
 				Constructor[] constructor = aux.getClass().getConstructors();
-			
+
 				/*
-				 *  Creo un array de Objects, que van a ser los argumentos 
-				 *  del constructor a usar. Y le digo que la posicion 0 
-				 *  hay un objeto del tipo posicion
+				 * Creo un array de Objects, que van a ser los argumentos del
+				 * constructor a usar. Y le digo que la posicion 0 hay un objeto
+				 * del tipo posicion
 				 */
 				Object args[] = new Object[1];
 				args[0] = aux_pos;
-				
+
 				try {
-					
-					//Llamo al constructor con el argumento seleccionado.
+
+					// Llamo al constructor con el argumento seleccionado.
 					aux = (Obstaculo) constructor[0].newInstance(args);
-					
+
 					aux.setPosicion(aux_pos);
-					
+
 					escenario.insertarObstaculoEnMapa(aux);
 					jugador.ModificarDinero(-aux.getPrecio());
-					
+
 				} catch (InvalidPositionException e) {
-					insetar_objeto = false;	
+					insetar_objeto = false;
 				} catch (InstantiationException e1) {
 				} catch (IllegalAccessException e1) {
 				} catch (IllegalArgumentException e) {
 				} catch (InvocationTargetException e) {
 				}
-				
+
 			}
 		}
 
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-		
 
 	}
 
 	public void mouseExited(MouseEvent arg0) {
-		
 
 	}
 
@@ -285,7 +279,6 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 	}
 
 	public void mouseReleased(MouseEvent arg0) {
-		
 
 	}
 
@@ -298,18 +291,23 @@ public class Mapa extends JPanel implements Observer, SuperficieDeDibujo,
 	}
 
 	public void mouseDragged(MouseEvent e) {
-		
 
 	}
 
 	public void mouseMoved(MouseEvent e) {
 		if (insetar_objeto) {
-			
+
 			Graphics grafico = this.getGraphics();
-						
+
+			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
+			Obstaculo aux = vistaP.getPanelDatos().getObs_seleccionado();
+
 			grafico.setColor(Color.RED);
-			grafico.fillOval(e.getX(),e.getY(),UNIDADANCHO,UNIDADALTO);
-			
+			grafico.drawOval(e.getX() - UNIDADANCHO * aux.getAlcance()
+					/ 2, e.getY() - UNIDADALTO * aux.getAlcance() / 2,
+					UNIDADANCHO * aux.getAlcance(), UNIDADALTO
+							* aux.getAlcance());
+
 			setX_representacion(e.getX() / UNIDADANCHO);
 			setY_representacion(e.getY() / UNIDADALTO);
 
