@@ -33,7 +33,9 @@ public class ControlSimulacion  implements ActionListener{
 	// Este atributo establece si la simulacion se detiene o si continua
 	private boolean pausado = true;
 	
-	private boolean terminoNivel = false;
+	private boolean terminoJuego = false;
+	
+	private boolean FinDeNivel = false;
 	
 	private FabricaDeEnemigos fabrica;
 	
@@ -71,8 +73,16 @@ public class ControlSimulacion  implements ActionListener{
 		fabrica = new FabricaDeEnemigos(escenario.getCantBichos(), escenario.getNumeroNivel());
 	}
 	
-	public boolean isTerminoNivel(){
-		return terminoNivel;
+	public boolean isTerminoJuego(){
+		return terminoJuego;
+	}
+	
+	public boolean isFinDeNivel() {
+		return FinDeNivel;
+	}
+	
+	public void nuevoNivel() {
+		FinDeNivel = false;
 	}
 	
 	public void pausarJuego(){
@@ -101,33 +111,13 @@ public class ControlSimulacion  implements ActionListener{
 	
 	private void verificar_pasaje_de_nivel() {
 		if (escenario.getCantBichos() <= 0) {
+			FinDeNivel = true;			
 			pausado = true;
 			
 			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
 			vistaP.getPanelDatos().cambiarEtiquetaIniciar_Pausar();
 			
 			
-			try {
-				if (escenario.getNumeroNivel() < escenario.getCant_Mapas_Disponibles())
-					escenario.setNumeroNivel(escenario.getNumeroNivel() + 1);
-				else {
-					JFrame Fin_Juego = new JFrame();
-					Dialog texto = new Dialog(Fin_Juego, "Ganaste!!");
-					texto.setSize(250,250);
-				    // Hace que el dialogo aparezca en la pantalla
-					texto.setVisible(true);
-					
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					
-					escenario.setNumeroNivel(1);
-				}
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
 			
 			fabrica.crearNuevosEnemigos(escenario.getNumeroNivel());
 			
@@ -159,7 +149,7 @@ public class ControlSimulacion  implements ActionListener{
 				if (salida.equals(enemigo.getPosicion()))
 					player.quitarVida();
 				if (player.getCantidadVidas() == 0){
-					terminoNivel = true;
+					terminoJuego = true;
 					pausado = true;
 					break;
 				}

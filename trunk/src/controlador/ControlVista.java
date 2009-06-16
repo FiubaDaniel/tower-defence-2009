@@ -1,7 +1,12 @@
 package controlador;
 
+import java.awt.Dialog;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import javax.swing.JFrame;
+
 import modelo.Enemigo;
 import modelo.Escenario;
 import modelo.Obstaculo;
@@ -77,6 +82,7 @@ public class ControlVista {
 		this.dibujarEnemigos();
 		this.dibujarObstaculos();
 		this.actualizarPaneles();
+		this.nuevoNivel();
 		
 	}
 	/**
@@ -170,6 +176,34 @@ public class ControlVista {
 		 * los cambios en el mismo
 		 */
 		mapa.paint(mapa.getGraphics());
+	}
+	
+	public void nuevoNivel(){
+		ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
+		if (simulacion.isFinDeNivel()){
+			simulacion.nuevoNivel();
+			try {
+				if (escenario.getNumeroNivel() < escenario.getCant_Mapas_Disponibles())
+					escenario.setNumeroNivel(escenario.getNumeroNivel() + 1);
+				else {
+					JFrame Fin_Juego = new JFrame();
+					Dialog texto = new Dialog(Fin_Juego, "Ganaste!!");
+					texto.setSize(250,250);
+					// Hace que el dialogo aparezca en la pantalla
+					texto.setVisible(true);
+				
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				
+					escenario.setNumeroNivel(1);
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void finDeJuego(){
