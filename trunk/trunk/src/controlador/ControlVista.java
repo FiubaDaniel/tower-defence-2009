@@ -173,7 +173,7 @@ public class ControlVista {
 	}
 	
 	public void finDeJuego(){
-		new GameOver();
+		new GameOver(VentanaPrincipal);
 	}
 
 }
