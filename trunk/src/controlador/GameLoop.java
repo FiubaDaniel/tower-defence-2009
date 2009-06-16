@@ -5,12 +5,8 @@ import controlador.ControlVista;
 import controlador.ControlSimulacion;
 
 public class GameLoop {
-
-	/**
-	 * Clase principal donde se realiza el ciclo del juego.
-	 */
-	public static void main(String[] args) {
-		
+	
+	public void Jugar() {
 		//Instancio el reproductor de Audio.
 		ReproductorAudio repro = ReproductorAudio.getInstancia();
 		//repro.reproducirCancion(ReproductorAudio.CANCION_INTRO);
@@ -34,6 +30,15 @@ public class GameLoop {
 			
 		}
 		vista.finDeJuego();
+	}
+
+	/**
+	 * Clase principal donde se realiza el ciclo del juego.
+	 */
+	public static void main(String[] args) {
+		GameLoop juego = new GameLoop();
+		juego.Jugar();
+		
 	}
 
 }
