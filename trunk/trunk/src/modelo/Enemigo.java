@@ -120,6 +120,17 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 	}
 
 	public Element persistir() {
+		Element xmlElement = new Element("Enemigo");
+        xmlElement.addContent(lugarQueOcupa.persistir());
+        xmlElement.setAttribute("Tipo", this.getClass().getCanonicalName());
+        return xmlElement;
+	}
+
+	public static Enemigo recuperar(Element actual) {
+		
+		String tipo=actual.getAttributeValue("Tipo");
+		if(tipo=="TorreAzul"){
+		}
 		return null;
 	}
 }

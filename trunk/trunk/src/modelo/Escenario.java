@@ -1,15 +1,20 @@
 package modelo;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.input.SAXBuilder;
+import org.jdom.output.XMLOutputter;
 
 import customExceptions.BaseMapNotFoundException;
 import customExceptions.InvalidMapFormatException;
@@ -638,30 +643,65 @@ public class Escenario implements Persistente {
 		return Cant_Mapas_Disponibles;
 	}
 	
+	public void guardar(String archivo) throws IOException{
+		Escenario escenario = Escenario.obtenerEscenario();
+		PrintStream archDeTexto= new PrintStream(archivo);
+		Document doc = new Document(escenario.persistir());   
+		try {
+		      XMLOutputter serializer = new XMLOutputter();
+		      serializer.output(doc, archDeTexto);
+		    }
+		    catch (IOException e) {
+		      
+		    }
+    }
+	
+	public static Escenario recuperar(String archivo) throws IOException{	 
+		FileInputStream archRecu;
+				try {
+					archRecu = new FileInputStream(archivo);
+					SAXBuilder parser = new SAXBuilder();
+					Document doc = parser.build(archivo);
+					Element raiz=doc.getRootElement();
+		               /*  */
+		 			return recuperar(raiz);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}return null;
+			}
+
+	 
 	private Escenario(Element xmlElement) throws FileNotFoundException {
 		
 		this.NumeroNivel = Integer.parseInt(xmlElement.getAttributeValue("Nivel"));
 		
 		configurarMapa();
 		
-		List Element_list = xmlElement.getContent();
+		List Element_list = xmlElement.getChildren();
 		
 		Iterator it = Element_list.iterator();
 		
 		while (it.hasNext()) {
-			Object aux = it.next();
-			if (aux instanceof Obstaculo)
+			Element actual=(Element) it.next();
+			if(actual.getName()=="Obstaculo"){
+		        Obstaculo obstaculo=Obstaculo.recuperar(actual);
+		        ObstaculosEnElMapa.add(obstaculo);
+		   }
+			if (actual.getName()=="Enemigo"){
+                Enemigo enemigo= Enemigo.recuperar(actual);
+                EnemigosEnElMapa.add(enemigo);
+			}
+			/*if (aux instanceof Obstaculo)
 				ObstaculosEnElMapa.add(aux);
 			else if (aux instanceof Enemigo)
-				EnemigosEnElMapa.add(aux);
-	
+				EnemigosEnElMapa.add(aux);*/
 		}
-		
-		this.CantBichos = EnemigosEnElMapa.size();
-		
+			
+		this.CantBichos = EnemigosEnElMapa.size();	
 	}
 	
-	public Escenario obtenerEscenario(Element xmlElement) {
+	public static Escenario recuperar(Element xmlElement) {
 		
 		if (escenario == null) {
 			try {
@@ -690,4 +730,5 @@ public class Escenario implements Persistente {
         
         return xmlElement;
 	}
+	
 }
