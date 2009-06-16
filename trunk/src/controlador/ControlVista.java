@@ -186,12 +186,7 @@ public class ControlVista {
 				if (escenario.getNumeroNivel() < escenario.getCant_Mapas_Disponibles())
 					escenario.setNumeroNivel(escenario.getNumeroNivel() + 1);
 				else {
-					JFrame Fin_Juego = new JFrame();
-					Dialog texto = new Dialog(Fin_Juego, "Ganaste!!");
-					texto.setSize(250,250);
-					// Hace que el dialogo aparezca en la pantalla
-					texto.setVisible(true);
-				
+					this.finDeJuego(false);
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {
@@ -206,8 +201,8 @@ public class ControlVista {
 		}
 	}
 	
-	public void finDeJuego(){
-		new GameOver(VentanaPrincipal);
+	public void finDeJuego(boolean gane){
+		new GameOver(VentanaPrincipal,gane);
 	}
 
 }

@@ -29,7 +29,7 @@ public class GameLoop {
 			}
 			
 		}
-		vista.finDeJuego();
+		vista.finDeJuego(true);
 	}
 
 	/**
