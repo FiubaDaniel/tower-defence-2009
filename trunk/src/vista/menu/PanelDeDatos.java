@@ -226,8 +226,11 @@ public class PanelDeDatos extends JPanel implements Observer {
 		return Obs_seleccionado;
 	}
 	
-	public javax.swing.JButton getBotonIniciar_Pausar() {
-		return BotonIniciar_Pausar;
+	public void cambiarEtiquetaIniciar_Pausar() {
+		if (BotonIniciar_Pausar.getText() == "Iniciar")
+			BotonIniciar_Pausar.setText("Pausa");
+		else if (BotonIniciar_Pausar.getText() == "Pausa")
+			BotonIniciar_Pausar.setText("Iniciar");
 	}
 
 	// Creo el observador de la liste de torres, para poder acceder de forma
