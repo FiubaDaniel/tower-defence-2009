@@ -69,4 +69,9 @@ public abstract class Obstaculo implements Seleccionable, Persistente {
         xmlElement.setAttribute("Tipo", this.getClass().getCanonicalName());
         return xmlElement;
 	}
+	
+	public static Obstaculo recuperar(Element actual) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
