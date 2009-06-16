@@ -75,6 +75,10 @@ public class ControlSimulacion  implements ActionListener{
 		return terminoNivel;
 	}
 	
+	public void pausarJuego(){
+		pausado = !pausado;
+	}
+	
 	public boolean isPausado(){
 		return pausado;
 	}
@@ -100,7 +104,7 @@ public class ControlSimulacion  implements ActionListener{
 			pausado = true;
 			
 			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
-			vistaP.getPanelDatos().getBotonIniciar_Pausar().setText("Iniciar");
+			vistaP.getPanelDatos().cambiarEtiquetaIniciar_Pausar();
 			
 			
 			try {
