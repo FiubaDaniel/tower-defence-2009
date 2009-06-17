@@ -76,6 +76,10 @@ public class Escenario implements Persistente {
 		MapaTerreno.put("S", new CaracterS());
 		MapaTerreno.put("E", new CaracterE());
 	}
+	
+	public void reIniciar() {
+		this.escenario=null;
+	}
 
 	private void configurarMapa() throws FileNotFoundException {
 
