@@ -91,6 +91,7 @@ public class Posicion implements Persistente{
 	}
 
 	public Posicion(Element xmlElement) {
+
 		this.CoordX = Integer.parseInt(xmlElement.getAttributeValue("CoordX"));
 		this.CoordY = Integer.parseInt(xmlElement.getAttributeValue("CoordY"));
 		this.Caminable = Boolean.parseBoolean(xmlElement.getAttributeValue("Caminable"));
@@ -99,7 +100,7 @@ public class Posicion implements Persistente{
 	public Element persistir() {
 		Element xmlElement = new Element("Posicion");
         xmlElement.setAttribute("CoordX", String.valueOf(this.CoordX));
-        xmlElement.setAttribute("CoordY", String.valueOf(this.CoordX));
+        xmlElement.setAttribute("CoordY", String.valueOf(this.CoordY));
         xmlElement.setAttribute("Caminable", String.valueOf(this.Caminable));
         return xmlElement;
 	}

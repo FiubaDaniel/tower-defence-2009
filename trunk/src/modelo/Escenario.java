@@ -670,7 +670,7 @@ public class Escenario implements Persistente {
 		        Obstaculo obstaculo=Obstaculo.recuperar(actual);
 		        ObstaculosEnElMapa.add(obstaculo);
 		   }
-			if (actual.getName()=="Enemigo"){
+			else if (actual.getName()=="Enemigo"){
                 Enemigo enemigo= Enemigo.recuperar(actual);
                 EnemigosEnElMapa.add(enemigo);
 			}

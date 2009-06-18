@@ -79,7 +79,8 @@ public abstract class Obstaculo implements Seleccionable, Persistente {
 	}
 	
 	public static Obstaculo recuperar(Element actual) throws ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
-		Posicion pos=new Posicion(actual);
+		Element posXML=actual.getChild("posicion");
+		Posicion pos=new Posicion(posXML);
 		Class<?> claseActual = Class.forName(actual.getName());
 		Constructor<?> constructor = claseActual.getDeclaredConstructor(Posicion.class);
 		Obstaculo Obs = (Obstaculo) constructor.newInstance((Object)pos);
