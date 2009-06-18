@@ -23,7 +23,10 @@ public class BotonComprarListener implements ActionListener {
 	 * @param evt
 	 */
 	public void BotonComprar_Apretado(ActionEvent evt) {
-		VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
-		vistaP.getMapa().Insetar_objeto();	
+		ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
+		if (!simulacion.isPausado()){
+			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
+			vistaP.getMapa().Insetar_objeto();	
+		}
 	}
 }

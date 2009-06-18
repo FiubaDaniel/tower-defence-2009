@@ -122,9 +122,7 @@ public class ControlSimulacion  implements ActionListener{
 			
 			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
 			vistaP.getPanelDatos().cambiarEtiquetaIniciar_Pausar();
-			//vistaP.getPanelDatos().
-			
-			
+						
 			fabrica.crearNuevosEnemigos(escenario.getNumeroNivel());
 			
 		}
