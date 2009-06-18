@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -647,36 +648,7 @@ public class Escenario implements Persistente {
 		return Cant_Mapas_Disponibles;
 	}
 	
-	public void guardar(String archivo) throws IOException{
-		Escenario escenario = Escenario.obtenerEscenario();
-		PrintStream archDeTexto= new PrintStream(archivo);
-		Document doc = new Document(escenario.persistir());   
-		try {
-		      XMLOutputter serializer = new XMLOutputter();
-		      serializer.output(doc, archDeTexto);
-		    }
-		    catch (IOException e) {
-		      
-		    }
-    }
-	
-	public static Escenario recuperar(String archivo) throws IOException{	 
-		FileInputStream archRecu;
-				try {
-					archRecu = new FileInputStream(archivo);
-					SAXBuilder parser = new SAXBuilder();
-					Document doc = parser.build(archivo);
-					Element raiz=doc.getRootElement();
-		               /*  */
-		 			return recuperar(raiz);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}return null;
-			}
-
-	 
-	private Escenario(Element xmlElement) throws FileNotFoundException {
+	private Escenario(Element xmlElement) throws FileNotFoundException, ClassNotFoundException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
 		
 		this.NumeroNivel = Integer.parseInt(xmlElement.getAttributeValue("Nivel"));
 		
@@ -712,6 +684,40 @@ public class Escenario implements Persistente {
 				escenario = new Escenario(xmlElement);
 			} catch (FileNotFoundException e) {
 				throw new BaseMapNotFoundException();
+			} catch (SecurityException e) {
+				
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			} catch (IllegalArgumentException e) {
+			
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			} catch (ClassNotFoundException e) {
+				
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			} catch (NoSuchMethodException e) {
+				
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			} catch (InstantiationException e) {
+				
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			} catch (IllegalAccessException e) {
+				
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			} catch (InvocationTargetException e) {
+				
+				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		}
 		return escenario;
@@ -719,19 +725,18 @@ public class Escenario implements Persistente {
 
 	public Element persistir() {
 		Element xmlElement = new Element("Escenario");
-        
+		//Jugador jugador= Jugador.obtenerJugador();
+		int i=1;
+		//xmlElement.addContent(i,jugador.persistir());
         Iterator it = EnemigosEnElMapa.iterator();
-        int i = 1;
         while (it.hasNext()) {
         	xmlElement.addContent(i, ((Enemigo)it.next()).persistir());
         }
-        
         it = ObstaculosEnElMapa.iterator();
         while (it.hasNext())
         	xmlElement.addContent(i, ((Obstaculo)it.next()).persistir());
         
         xmlElement.setAttribute("Nivel", String.valueOf(this.NumeroNivel));
-        
         return xmlElement;
 	}
 	

@@ -257,8 +257,15 @@ public class FabricaDeEnemigos {
 	 * @param xmlElement
 	 *            El elemento XML que representa la Fabrica
 	 * @return Una instancia de la Fabrica de Enemigos con los datos del XML
+	 * @throws InvocationTargetException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws NoSuchMethodException 
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalArgumentException 
+	 * @throws SecurityException 
 	 */
-	public static FabricaDeEnemigos recuperar(Element xmlElement) {
+	public static FabricaDeEnemigos recuperar(Element xmlElement) throws SecurityException, IllegalArgumentException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
 
 		// Cargo los datos principales del XML
 		int cant_enemigos = Integer.parseInt(xmlElement

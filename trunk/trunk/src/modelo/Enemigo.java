@@ -1,6 +1,10 @@
 package modelo;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import org.jdom.Element;
+import org.omg.CORBA.Object;
 
 
 import customExceptions.*;
@@ -122,15 +126,15 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 	public Element persistir() {
 		Element xmlElement = new Element("Enemigo");
         xmlElement.addContent(lugarQueOcupa.persistir());
-        xmlElement.setAttribute("Tipo", this.getClass().getCanonicalName());
+        xmlElement.setAttribute("Tipo", this.getClass().getName());
         return xmlElement;
 	}
 
-	public static Enemigo recuperar(Element actual) {
-		
-		String tipo=actual.getAttributeValue("Tipo");
-		if(tipo=="TorreAzul"){
-		}
-		return null;
+	public static Enemigo recuperar(Element actual) throws ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+		Posicion pos=new Posicion(actual);
+		Class<?> claseActual = Class.forName(actual.getName());
+		Constructor<?> constructor = claseActual.getDeclaredConstructor(Posicion.class);
+		Enemigo enemigo = (Enemigo) constructor.newInstance((Object)pos);
+		return enemigo;
 	}
 }
