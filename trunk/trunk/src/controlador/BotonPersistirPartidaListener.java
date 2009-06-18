@@ -92,7 +92,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
 		Document doc = new Document(raiz);   
 		try {
   	          XMLOutputter serializer = new XMLOutputter();
-  	        serializer.output(raiz, System.out);
+  	          serializer.output(raiz, System.out);
 		      serializer.output(doc, archDeTexto);
 		    }
 		  catch (IOException e) {
@@ -114,7 +114,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
 					Element raiz=doc.getRootElement();
 					escenario=escenario.recuperar(raiz.getChild("Escenario"));
                     jugador = jugador.recuperar(raiz.getChild("Jugador"));
-                    fabrica = fabrica.recuperar(raiz.getChild("FabricaDeEnemigos"));
+                    //fabrica = fabrica.recuperar(raiz.getChild("FabricaDeEnemigos"));
 
 				} catch (Exception e) {
 					e.printStackTrace();
