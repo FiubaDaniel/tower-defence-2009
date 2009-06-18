@@ -77,6 +77,10 @@ public class ControlSimulacion  implements ActionListener{
 		return terminoJuego;
 	}
 	
+	public void setTerminado() {
+		terminoJuego=false;
+	}
+	
 	public boolean isFinDeNivel() {
 		return FinDeNivel;
 	}

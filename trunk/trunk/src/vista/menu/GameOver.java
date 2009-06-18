@@ -1,10 +1,14 @@
 package vista.menu;
 
 import java.awt.Dialog;
+import java.io.FileNotFoundException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import modelo.Escenario;
+import modelo.Jugador;
+import controlador.*;
 public class GameOver extends JFrame {
 
 	/**
@@ -33,6 +37,19 @@ public class GameOver extends JFrame {
 	    if (n==1) {
 	    	System.exit(0);
 	    } else {
+	    	
+	    	Escenario nuevoEscenario = Escenario.obtenerEscenario();
+	  		nuevoEscenario.reIniciar();
+	  		try {
+				nuevoEscenario.setNumeroNivel(1);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	  		ControlSimulacion simul = ControlSimulacion.obtenerControl();
+	  		simul.setTerminado();
+	  		Jugador jugador = Jugador.obtenerJugador();
+	  		jugador.matarJugador();
 	    	controlador.GameLoop nuevoJuego = new controlador.GameLoop();
 	    	nuevoJuego.Jugar();
 	    }
