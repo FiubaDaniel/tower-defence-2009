@@ -1,6 +1,14 @@
 package modelo;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+
+
 import org.jdom.Element;
+import org.omg.CORBA.Object;
+
+
 
 public abstract class Obstaculo implements Seleccionable, Persistente {
 	private int precio;
@@ -66,12 +74,15 @@ public abstract class Obstaculo implements Seleccionable, Persistente {
 	public Element persistir() {
 		Element xmlElement = new Element("Obstaculo");
         xmlElement.addContent(lugarQueOcupa.persistir());
-        xmlElement.setAttribute("Tipo", this.getClass().getCanonicalName());
+        xmlElement.setAttribute("Tipo", this.getClass().getName());
         return xmlElement;
 	}
 	
-	public static Obstaculo recuperar(Element actual) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Obstaculo recuperar(Element actual) throws ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+		Posicion pos=new Posicion(actual);
+		Class<?> claseActual = Class.forName(actual.getName());
+		Constructor<?> constructor = claseActual.getDeclaredConstructor(Posicion.class);
+		Obstaculo Obs = (Obstaculo) constructor.newInstance((Object)pos);
+		return Obs;
 	}
 }

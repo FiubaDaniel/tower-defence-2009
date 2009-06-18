@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import vista.menu.VistaPrincipal;
 
 import customExceptions.EnemigoYaMuerto;
+import controlador.FabricaDeEnemigos;
 
 import modelo.Enemigo;
 import modelo.Escenario;
@@ -62,6 +63,7 @@ public class ControlSimulacion  implements ActionListener{
 	/**
 	 * Instancio el modelo.
 	 */
+	
 	private ControlSimulacion(){
 
 		escenario = Escenario.obtenerEscenario();
@@ -70,9 +72,9 @@ public class ControlSimulacion  implements ActionListener{
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		fabrica = new FabricaDeEnemigos(escenario.getCantBichos(), escenario.getNumeroNivel());
+		fabrica = FabricaDeEnemigos.obtenerFabricaEnemigos(escenario.getCantBichos(), escenario.getNumeroNivel());
 	}
-	
+
 	public boolean isTerminoJuego(){
 		return terminoJuego;
 	}
