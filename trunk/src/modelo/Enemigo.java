@@ -134,7 +134,8 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 	
 		Element posXML=actual.getChild("Posicion");
 		Posicion pos=new Posicion(posXML);
-		Class<?> claseActual = Class.forName(actual.getName());
+		//Class<?> claseActual = Class.forName(actual.getName());
+		Class<?> claseActual = Class.forName(actual.getAttributeValue("Tipo"));
 		Constructor<?> constructor = claseActual.getDeclaredConstructor(Posicion.class);
 		Enemigo enemigo = (Enemigo) constructor.newInstance((Object)pos);
 		return enemigo;
