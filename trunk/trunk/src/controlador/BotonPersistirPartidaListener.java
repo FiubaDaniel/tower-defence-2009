@@ -47,7 +47,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
                         fc.getSelectedFile().getName());*/
             	
             	 try {
-					this.recuperar(fc.getSelectedFile().getName());
+					this.recuperar(fc.getSelectedFile().getAbsoluteFile());
 				} catch (IOException e1) {
 					
 					e1.printStackTrace();
@@ -67,7 +67,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
                         fc.getSelectedFile().getName());*/
         		File unFile=fc.getSelectedFile().getAbsoluteFile();
            	    try {
-					this.guardar(fc.getSelectedFile().getName());
+           	    	this.guardar(fc.getSelectedFile().getAbsoluteFile());
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -75,7 +75,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
         }
     }
  
-    public static void guardar(String archivo) throws IOException{
+    public static void guardar(File archivo) throws IOException{
 		Escenario escenario = Escenario.obtenerEscenario();
 		Jugador jugador = Jugador.obtenerJugador();
 		FabricaDeEnemigos fabrica = FabricaDeEnemigos.obtenerFabricaEnemigos(escenario.getCantBichos(),escenario.getNumeroNivel());
@@ -88,6 +88,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
 		Document doc = new Document(raiz);   
 		try {
   	          XMLOutputter serializer = new XMLOutputter();
+  	        serializer.output(raiz, System.out);
 		      serializer.output(doc, archDeTexto);
 		    }
 		  catch (IOException e) {
@@ -96,7 +97,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
     }
  
 	
-	public static void recuperar(String archivo) throws IOException{	 
+	public static void recuperar(File archivo) throws IOException{	 
 		FileInputStream archRecu;
 		Escenario escenario=Escenario.obtenerEscenario();
 		Jugador jugador= Jugador.obtenerJugador();

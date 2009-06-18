@@ -242,9 +242,9 @@ public class FabricaDeEnemigos {
 				.valueOf(this.Cantidad_Enemigos));
 
 		Iterator it = ColaEnemigos.iterator();
-		int i = 1;
+		
 		while (it.hasNext()) {
-			xmlElement.addContent(i, ((Enemigo) it.next()).persistir());
+			xmlElement.addContent(((Enemigo) it.next()).persistir());
 		}
 
 		return xmlElement;

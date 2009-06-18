@@ -731,14 +731,13 @@ public class Escenario implements Persistente {
 
 	public Element persistir() {
 		Element xmlElement = new Element("Escenario");
-		int i=1;
         Iterator it = EnemigosEnElMapa.iterator();
         while (it.hasNext()) {
-        	xmlElement.addContent(i, ((Enemigo)it.next()).persistir());
+        	xmlElement.addContent(((Enemigo)it.next()).persistir());
         }
         it = ObstaculosEnElMapa.iterator();
         while (it.hasNext())
-        	xmlElement.addContent(i, ((Obstaculo)it.next()).persistir());
+        	xmlElement.addContent(((Obstaculo)it.next()).persistir());
         
         xmlElement.setAttribute("Nivel", String.valueOf(this.NumeroNivel));
         return xmlElement;
