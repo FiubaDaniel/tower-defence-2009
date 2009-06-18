@@ -115,14 +115,14 @@ public class ControlSimulacion  implements ActionListener{
 		}
 	}
 	
-	private void verificar_pasaje_de_nivel() {
+	private void VerificarSiTerminoNivel() {
 		if (escenario.getCantBichos() <= 0) {
 			FinDeNivel = true;			
 			pausado = true;
 			
 			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
 			vistaP.getPanelDatos().cambiarEtiquetaIniciar_Pausar();
-			
+			//vistaP.getPanelDatos().
 			
 			
 			fabrica.crearNuevosEnemigos(escenario.getNumeroNivel());
@@ -140,7 +140,7 @@ public class ControlSimulacion  implements ActionListener{
 		this.agregarEnemigos();
 		this.avanzar();
 		this.atacar();
-		this.verificar_pasaje_de_nivel();
+		this.VerificarSiTerminoNivel();
 		this.aumentarTiempoPasado();
 	}
 	
@@ -188,7 +188,6 @@ public class ControlSimulacion  implements ActionListener{
 		if (tiempo_pasado > 60000)
 			tiempo_pasado = 0;
 	}
-	
 	/**
 	 * Este metodo es llamado si el boton de Pausar-Iniciar es activado.
 	 * 

@@ -491,6 +491,7 @@ public class Escenario implements Persistente {
 				CantBichos--;
 			}
 		}
+		
 
 	}
 

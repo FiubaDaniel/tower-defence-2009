@@ -181,7 +181,6 @@ public class ControlVista {
 	public void nuevoNivel(){
 		ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
 		if (simulacion.isFinDeNivel()){
-			simulacion.nuevoNivel();
 			try {
 				if (escenario.getNumeroNivel() < escenario.getCant_Mapas_Disponibles())
 					escenario.setNumeroNivel(escenario.getNumeroNivel() + 1);
@@ -198,6 +197,7 @@ public class ControlVista {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
+			simulacion.nuevoNivel();
 		}
 	}
 	
