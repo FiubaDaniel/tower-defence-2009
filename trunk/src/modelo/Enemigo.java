@@ -141,7 +141,6 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 		Enemigo enemigo = (Enemigo) constructor.newInstance(pos);
 		Posicion pos2=new Posicion(posXML);
 		enemigo.cambiarPosicion(pos2);
-		System.out.println("ACA");
 		return enemigo;
 	}
 }
