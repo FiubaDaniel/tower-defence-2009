@@ -59,8 +59,13 @@ public class Mapa extends JPanel implements Observer,
 		return insetar_objeto;
 	}
 
-	public void setInsetar_objeto(boolean insetar_objeto) {
-		this.insetar_objeto = insetar_objeto;
+	public void Insetar_objeto() {
+		Jugador jugador = Jugador.obtenerJugador();
+		VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
+
+		Obstaculo aux = vistaP.getPanelDatos().getObs_seleccionado();
+		if ((aux != null) && (jugador.getDinero() >= aux.getPrecio()))
+			this.insetar_objeto = true;
 	}
 
 	private Seleccionable Objeto_seleccionado;
@@ -142,9 +147,8 @@ public class Mapa extends JPanel implements Observer,
 
 			// Copio el contenido del buffer a la ventana de Mapa
 			g.drawImage(buffer, 0, 0, this);
-
+			
 		}
-
 	}
 
 	public void actualizar() {
@@ -217,53 +221,37 @@ public class Mapa extends JPanel implements Observer,
 
 			Obstaculo aux = vistaP.getPanelDatos().getObs_seleccionado();
 
-			if ((aux != null) && (jugador.getDinero() >= aux.getPrecio())) {
-
-				Posicion aux_pos = new Posicion(RepresentacionMouseEnMapa_X,
-						RepresentacionMouseEnMapa_Y, false);
-
-				aux_pos
-						.setCaminable(escenario
-								.obtener_tipo_de_terreno(aux_pos));
-
-				/*
-				 * Como necesito crear nuevas torres con cada click, uso
-				 * reflexion para conseguir el constructor y crear una neuva
-				 * clase del mismo tipo
-				 */
-
-				// Creo un array de constructores
-				Constructor[] constructor = aux.getClass().getConstructors();
-
-				/*
-				 * Creo un array de Objects, que van a ser los argumentos del
-				 * constructor a usar. Y le digo que la posicion 0 hay un objeto
-				 * del tipo posicion
-				 */
-				Object args[] = new Object[1];
-				args[0] = aux_pos;
-
-				try {
-
-					// Llamo al constructor con el argumento seleccionado.
-					aux = (Obstaculo) constructor[0].newInstance(args);
-
-					aux.setPosicion(aux_pos);
-
-					escenario.insertarObstaculoEnMapa(aux);
-					jugador.ModificarDinero(-aux.getPrecio());
-
-				} catch (InvalidPositionException e) {
-					insetar_objeto = false;
-				} catch (InstantiationException e1) {
-				} catch (IllegalAccessException e1) {
-				} catch (IllegalArgumentException e) {
-				} catch (InvocationTargetException e) {
-				}
-
+			Posicion aux_pos = new Posicion(RepresentacionMouseEnMapa_X, RepresentacionMouseEnMapa_Y, false);
+			aux_pos.setCaminable(escenario.obtener_tipo_de_terreno(aux_pos));
+			/*
+			 * Como necesito crear nuevas torres con cada click, uso
+			 * reflexion para conseguir el constructor y crear una neuva
+			 * clase del mismo tipo
+			 */
+			// Creo un array de constructores
+			Constructor[] constructor = aux.getClass().getConstructors();
+			/*
+			 * Creo un array de Objects, que van a ser los argumentos del
+			 * constructor a usar. Y le digo que la posicion 0 hay un objeto
+			 * del tipo posicion
+			 */
+			Object args[] = new Object[1];
+			args[0] = aux_pos;
+			try {
+				// Llamo al constructor con el argumento seleccionado.
+				aux = (Obstaculo) constructor[0].newInstance(args);
+				aux.setPosicion(aux_pos);
+				escenario.insertarObstaculoEnMapa(aux);
+				jugador.ModificarDinero(-aux.getPrecio());
+			} catch (InvalidPositionException e) {
+				insetar_objeto = false;
+			} catch (InstantiationException e1) {
+			} catch (IllegalAccessException e1) {
+			} catch (IllegalArgumentException e) {
+			} catch (InvocationTargetException e) {
 			}
+			this.insetar_objeto = false;
 		}
-
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
