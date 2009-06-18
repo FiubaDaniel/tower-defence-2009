@@ -652,7 +652,13 @@ public class Escenario implements Persistente {
 		
 		this.NumeroNivel = Integer.parseInt(xmlElement.getAttributeValue("Nivel"));
 		
-		configurarMapa();
+		try {
+			this.setNumeroNivel(this.NumeroNivel);
+		} catch (FileNotFoundException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 		
 		List Element_list = xmlElement.getChildren();
 		
@@ -725,9 +731,7 @@ public class Escenario implements Persistente {
 
 	public Element persistir() {
 		Element xmlElement = new Element("Escenario");
-		//Jugador jugador= Jugador.obtenerJugador();
 		int i=1;
-		//xmlElement.addContent(i,jugador.persistir());
         Iterator it = EnemigosEnElMapa.iterator();
         while (it.hasNext()) {
         	xmlElement.addContent(i, ((Enemigo)it.next()).persistir());
