@@ -42,6 +42,9 @@ public class BotonPersistirPartidaListener implements ActionListener {
         	int returnVal = fc.showOpenDialog(vista);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
             	//Llamadas para cargar un estado del juego.
+                System.out.println("Elegiste el file: " + fc.getSelectedFile().getAbsoluteFile() +
+                        fc.getSelectedFile().getName());
+
             	
            }
         }
@@ -52,7 +55,10 @@ public class BotonPersistirPartidaListener implements ActionListener {
            	}
         	int returnVal = fc.showSaveDialog(vista);
         	if (returnVal == JFileChooser.APPROVE_OPTION) {
-        		//Llamadas para guardar un estado del juego.       		
+        		System.out.print(returnVal);
+        		//Llamadas para guardar un estado del juego.   
+        		System.out.println("Elegiste el file: " + fc.getSelectedFile().getAbsoluteFile() +
+                        fc.getSelectedFile().getName());
         	} 
         }
     }
@@ -60,14 +66,14 @@ public class BotonPersistirPartidaListener implements ActionListener {
     public static void guardar(String archivo) throws IOException{
 		Escenario escenario = Escenario.obtenerEscenario();
 		PrintStream archDeTexto= new PrintStream(archivo);
-		Document doc = new Document(this.persistir());   
-		try {
+	//	Document doc = new Document(this.persistir());   
+		//try {
 		      XMLOutputter serializer = new XMLOutputter();
-		      serializer.output(doc, archDeTexto);
-		    }
-		    catch (IOException e) {
+		//      serializer.output(doc, archDeTexto);
+		//    }
+		  //  catch (IOException e) {
 		      
-		    }
+		   // }
     }
 	
 	public static Escenario recuperar(String archivo) throws IOException{	 
@@ -78,7 +84,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
 					Document doc = parser.build(archivo);
 					Element raiz=doc.getRootElement();
 		               /*  */
-		 			return recuperar(raiz);
+//		 			return recuperar(raiz);
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -88,8 +94,11 @@ public class BotonPersistirPartidaListener implements ActionListener {
 	public static void persistir(){
 		
 	Escenario escenario= Escenario.obtenerEscenario();
-	escenario.reIniciar();
-	Element elementoXML= escenario.persistir();
+	
+	Document docNuevo = new Document();  
+	Element eRaiz = new Element("raiz");  
+	docNuevo.addContent(eRaiz);
+	docNuevo.addContent(escenario.persistir());
 	
 		
 	}
