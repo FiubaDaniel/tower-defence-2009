@@ -60,6 +60,7 @@ public class ControlSimulacion  implements ActionListener{
 		return instancia;
 	}
 	
+	
 	/**
 	 * Instancio el modelo.
 	 */
@@ -74,6 +75,15 @@ public class ControlSimulacion  implements ActionListener{
 		}
 		fabrica = FabricaDeEnemigos.obtenerFabricaEnemigos(escenario.getCantBichos(), escenario.getNumeroNivel());
 	}
+	
+	
+
+	public ControlSimulacion(int i) {
+		escenario = Escenario.obtenerEscenario();
+		fabrica = FabricaDeEnemigos.obtenerFabricaEnemigos(escenario.getCantBichos(), escenario.getNumeroNivel());
+		pausado=false;
+	}
+
 
 	public boolean isTerminoJuego(){
 		return terminoJuego;
@@ -97,6 +107,10 @@ public class ControlSimulacion  implements ActionListener{
 	
 	public boolean isPausado(){
 		return pausado;
+	}
+	
+	public void despausar(){
+		pausado=false;
 	}
 	
 	private void agregarEnemigos(){
@@ -199,4 +213,14 @@ public class ControlSimulacion  implements ActionListener{
 			aux.setText("Pausa");
 
 	}
+
+    public static ControlSimulacion ObtenerControl(int i) {
+    	if (instancia == null)
+			instancia = new ControlSimulacion(1);
+		else
+			return instancia;
+		return instancia;
+
+	}
+	
 }
