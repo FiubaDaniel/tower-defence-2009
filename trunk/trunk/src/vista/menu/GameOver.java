@@ -50,6 +50,7 @@ public class GameOver extends JFrame {
 	  		simul.setTerminado();
 	  		Jugador jugador = Jugador.obtenerJugador();
 	  		jugador.matarJugador();
+	  		vista.getPanelDatos().cambiarEtiquetaIniciar_Pausar();
 	    	controlador.GameLoop nuevoJuego = new controlador.GameLoop();
 	    	nuevoJuego.Jugar();
 	    }
