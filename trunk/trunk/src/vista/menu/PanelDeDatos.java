@@ -187,6 +187,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 
 	}
 
+	
 	public javax.swing.JButton getBotonCargar() {
 		return BotonCargar;
 	}
@@ -214,6 +215,14 @@ public class PanelDeDatos extends JPanel implements Observer {
 		return LinkCantEnemigosEscenario;
 	}
 
+	/*public void reiniciarListaTorres(){
+		ListaTorres = new javax.swing.JList();
+		ListaDeCompras ListaCompras = new ListaDeCompras();
+		ListaTorres.setModel(ListaCompras);
+		ListaTorres.addListSelectionListener(new ListaDeTorresListener());
+		ScrollTorres.setViewportView(ListaTorres);
+	}*/
+	
 	public PanelDatosDeSeleccion getPanelDatosSeleccion() {
 		return PanelDatosSeleccion;
 	}
