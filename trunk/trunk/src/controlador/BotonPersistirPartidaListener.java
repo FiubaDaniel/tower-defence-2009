@@ -16,6 +16,7 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
 import modelo.Escenario;
+import modelo.Jugador;
 
 import vista.menu.VistaPrincipal;
 
@@ -42,10 +43,15 @@ public class BotonPersistirPartidaListener implements ActionListener {
         	int returnVal = fc.showOpenDialog(vista);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
             	//Llamadas para cargar un estado del juego.
-                System.out.println("Elegiste el file: " + fc.getSelectedFile().getAbsoluteFile() +
-                        fc.getSelectedFile().getName());
-
+                /*System.out.println("Elegiste el file: " + fc.getSelectedFile().getAbsoluteFile() +
+                        fc.getSelectedFile().getName());*/
             	
+            	 try {
+					this.guardar(fc.getSelectedFile().getName());
+				} catch (IOException e1) {
+					
+					e1.printStackTrace();
+				}
            }
         }
         if (e.getSource() == guardar) {
@@ -57,50 +63,68 @@ public class BotonPersistirPartidaListener implements ActionListener {
         	if (returnVal == JFileChooser.APPROVE_OPTION) {
         		System.out.print(returnVal);
         		//Llamadas para guardar un estado del juego.   
-        		System.out.println("Elegiste el file: " + fc.getSelectedFile().getAbsoluteFile() +
-                        fc.getSelectedFile().getName());
+        		/*System.out.println("Elegiste el file: " + fc.getSelectedFile().getAbsoluteFile() +
+                        fc.getSelectedFile().getName());*/
+        		File unFile=fc.getSelectedFile().getAbsoluteFile();
+           	    try {
+					this.recuperar(fc.getSelectedFile().getName());
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
         	} 
         }
     }
-    
+ 
     public static void guardar(String archivo) throws IOException{
 		Escenario escenario = Escenario.obtenerEscenario();
+		Jugador jugador = Jugador.obtenerJugador();
+		FabricaDeEnemigos fabrica = FabricaDeEnemigos.obtenerFabricaEnemigos(escenario.getCantBichos(),escenario.getNumeroNivel());
 		PrintStream archDeTexto= new PrintStream(archivo);
-	//	Document doc = new Document(this.persistir());   
-		//try {
-		      XMLOutputter serializer = new XMLOutputter();
-		//      serializer.output(doc, archDeTexto);
-		//    }
-		  //  catch (IOException e) {
+
+		Element raiz=new Element("Juego");
+		raiz.addContent(escenario.persistir());
+		raiz.addContent(jugador.persistir());
+		raiz.addContent(fabrica.persistir());
+		Document doc = new Document(raiz);   
+		try {
+  	          XMLOutputter serializer = new XMLOutputter();
+		      serializer.output(doc, archDeTexto);
+		    }
+		  catch (IOException e) {
 		      
-		   // }
+		  }
     }
+ 
 	
-	public static Escenario recuperar(String archivo) throws IOException{	 
+	public static void recuperar(String archivo) throws IOException{	 
 		FileInputStream archRecu;
+		Escenario escenario=Escenario.obtenerEscenario();
+		Jugador jugador= Jugador.obtenerJugador();
+		FabricaDeEnemigos fabrica=FabricaDeEnemigos.obtenerFabricaEnemigos(escenario.getCantBichos(),escenario.getNumeroNivel());
+		escenario.reIniciar();
 				try {
 					archRecu = new FileInputStream(archivo);
 					SAXBuilder parser = new SAXBuilder();
 					Document doc = parser.build(archivo);
 					Element raiz=doc.getRootElement();
-		               /*  */
-//		 			return recuperar(raiz);
+					escenario=escenario.recuperar(raiz.getChild("Escenario"));
+                    jugador = jugador.recuperar(raiz.getChild("Jugador"));
+                    fabrica = fabrica.recuperar(raiz.getChild("FabricaDeEnemigos"));
 
 				} catch (Exception e) {
 					e.printStackTrace();
-				}return null;
-			}
+					throw new RuntimeException(e);
+				}
+				
+	    controlador.GameLoop nuevoJuego = new controlador.GameLoop();
+	    nuevoJuego.Jugar();
 	
-	public static void persistir(){
-		
-	Escenario escenario= Escenario.obtenerEscenario();
-	
-	Document docNuevo = new Document();  
-	Element eRaiz = new Element("raiz");  
-	docNuevo.addContent(eRaiz);
-	docNuevo.addContent(escenario.persistir());
-	
-		
 	}
-	
+ 	
 }
+    
+    
+    
+
+
+

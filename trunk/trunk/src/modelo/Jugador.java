@@ -98,7 +98,7 @@ public class Jugador extends Observable implements Persistente{
 		this.setChanged();
 	}
 
-	public Jugador ObtenerJugador(Element xmlElement) {
+	public Jugador recuperar(Element xmlElement) {
 		if (jugador == null) {
 			jugador = new Jugador(xmlElement.getAttributeValue("Nombre"), Double.parseDouble(xmlElement.getAttributeValue("Dinero")), Integer.parseInt(xmlElement.getAttributeValue("Vidas")));
 		}
