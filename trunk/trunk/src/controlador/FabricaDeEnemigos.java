@@ -3,8 +3,12 @@ package controlador;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+
+import org.jdom.Element;
 
 import modelo.Arania;
 import modelo.Cucaracha;
@@ -19,10 +23,12 @@ import modelo.Posicion;
  * sea el nivel del mapa, se busca la cantidad adecuada de enemigos de cada
  * clase a crear.
  * 
-
+ * 
  * 
  */
 public class FabricaDeEnemigos {
+
+	private static FabricaDeEnemigos fabrica;
 
 	private int Cantidad_Enemigos;
 	private int NumeroNivel;
@@ -147,6 +153,23 @@ public class FabricaDeEnemigos {
 	}
 
 	/**
+	 * Metodo para obtener la unica instancia de la clase Fabrica de Enemigos.
+	 * 
+	 * @param cantidad_enemigos
+	 *            Cantidad de Enemigos Base del Nivel
+	 * @param numeroNivel
+	 *            Numero de Nivel
+	 * @return retorna laa instancia de fabrica creada o crea una si no existe
+	 *         ninguna.
+	 */
+	public static FabricaDeEnemigos obtenerFabricaEnemigos(
+			int cantidad_enemigos, int numeroNivel) {
+		if (fabrica == null)
+			return new FabricaDeEnemigos(cantidad_enemigos, numeroNivel);
+		return fabrica;
+	}
+
+	/**
 	 * Instancio una nueva fabrica de enemigos.
 	 * 
 	 * @param cantidad_enemigos
@@ -154,7 +177,7 @@ public class FabricaDeEnemigos {
 	 * @param numeroNivel
 	 *            El numero de nivel para el que se crearan los enemigos.
 	 */
-	public FabricaDeEnemigos(int cantidad_enemigos, int numeroNivel) {
+	private FabricaDeEnemigos(int cantidad_enemigos, int numeroNivel) {
 
 		Cantidad_Enemigos = cantidad_enemigos;
 		NumeroNivel = numeroNivel;
@@ -164,9 +187,9 @@ public class FabricaDeEnemigos {
 		crearNuevosEnemigos(numeroNivel);
 
 		Escenario escenario = Escenario.obtenerEscenario();
-		
+
 		escenario.setCantBichos(ColaEnemigos.size());
-		
+
 	}
 
 	/**
@@ -205,4 +228,81 @@ public class FabricaDeEnemigos {
 		return (Enemigo) ColaEnemigos.poll();
 	}
 
+	/**
+	 * Este método tiene ocmo objetivo crear el modulo de persistencia de la
+	 * fabrica.
+	 * 
+	 * @return Retorna un elemento para persistir
+	 */
+	public Element persistir() {
+		Element xmlElement = new Element("FabricaDeEnemigos");
+
+		xmlElement.setAttribute("Nivel", String.valueOf(this.NumeroNivel));
+		xmlElement.setAttribute("Cantidad_Enemigos", String
+				.valueOf(this.Cantidad_Enemigos));
+
+		Iterator it = ColaEnemigos.iterator();
+		int i = 1;
+		while (it.hasNext()) {
+			xmlElement.addContent(i, ((Enemigo) it.next()).persistir());
+		}
+
+		return xmlElement;
+	}
+
+	/**
+	 * ESte método crea uan isntancia de la fabrica de enemigos, a partir de un
+	 * elemento XML
+	 * 
+	 * @param xmlElement
+	 *            El elemento XML que representa la Fabrica
+	 * @return Una instancia de la Fabrica de Enemigos con los datos del XML
+	 */
+	public static FabricaDeEnemigos recuperar(Element xmlElement) {
+
+		// Cargo los datos principales del XML
+		int cant_enemigos = Integer.parseInt(xmlElement
+				.getAttributeValue("Cantidad_Enemigos"));
+		int num_nivel = Integer.parseInt(xmlElement.getAttributeValue("Nivel"));
+
+		// Si no existe instancia crea uan isntancia nueva de la fabrica.
+		if (fabrica == null)
+			fabrica = new FabricaDeEnemigos(cant_enemigos, num_nivel);
+		else {
+
+			// Si ya existe, le cmabio los valores iniciales a la fabrica.
+			fabrica.Cantidad_Enemigos = cant_enemigos;
+			fabrica.NumeroNivel = num_nivel;
+
+			fabrica.intervalo_entre_salidas = 150 / num_nivel;
+
+		}
+
+		/*
+		 * En ambos casos, la cola de enemigos que viene con el constructor no
+		 * tiene los enemigos adecuados, por eso la borramos y colocamos los
+		 * enemigos del XML
+		 */
+
+		fabrica.ColaEnemigos.clear();
+
+		List Element_List = xmlElement.getAttributes();
+
+		Iterator it = Element_List.iterator();
+
+		while (it.hasNext()) {
+			Element aux = (Element) it.next();
+			if (aux.getName() == "Obstaculo") {
+				Enemigo enemigo = Enemigo.recuperar(aux);
+				fabrica.ColaEnemigos.add(enemigo);
+			}
+
+			Escenario escenario = Escenario.obtenerEscenario();
+
+			escenario.setCantBichos(fabrica.ColaEnemigos.size());
+
+		}
+		
+		return fabrica;
+	}
 }
