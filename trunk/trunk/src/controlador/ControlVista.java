@@ -43,6 +43,10 @@ public class ControlVista {
 	
 	private VistaPrincipal VentanaPrincipal;
 	
+	public static void setTerminado() {
+		 instancia = null;
+	}
+	
 	public static ControlVista obtenerControl(){
 		if (instancia == null)
 			instancia = new ControlVista();

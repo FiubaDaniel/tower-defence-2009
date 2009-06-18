@@ -120,7 +120,11 @@ public class BotonPersistirPartidaListener implements ActionListener {
 					e.printStackTrace();
 					throw new RuntimeException(e);
 				}
-				
+		ControlSimulacion simul = ControlSimulacion.obtenerControl();
+  		simul.setTerminado();
+  		ControlSimulacion simul2 = ControlSimulacion.ObtenerControl(1);
+  		ControlVista controlvis= ControlVista.obtenerControl();
+  		controlvis.setTerminado();
 	    controlador.GameLoop nuevoJuego = new controlador.GameLoop();
 	    nuevoJuego.Jugar();
 	

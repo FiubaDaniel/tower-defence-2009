@@ -15,7 +15,9 @@ public class GameLoop {
 		ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
 		ControlVista vista = ControlVista.obtenerControl();
 		
+
 		//Corazón del GameLoop
+	    simulacion.despausar();
 		while (!simulacion.isTerminoJuego()){
 			while (!simulacion.isPausado()){
 				simulacion.actuar();
