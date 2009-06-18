@@ -47,7 +47,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
                         fc.getSelectedFile().getName());*/
             	
             	 try {
-					this.guardar(fc.getSelectedFile().getName());
+					this.recuperar(fc.getSelectedFile().getName());
 				} catch (IOException e1) {
 					
 					e1.printStackTrace();
@@ -67,7 +67,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
                         fc.getSelectedFile().getName());*/
         		File unFile=fc.getSelectedFile().getAbsoluteFile();
            	    try {
-					this.recuperar(fc.getSelectedFile().getName());
+					this.guardar(fc.getSelectedFile().getName());
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
