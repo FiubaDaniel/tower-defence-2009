@@ -87,6 +87,7 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 			lugarQueOcupa = entrada;
 	}
 
+
 	public void cambiarPosicion(Posicion unLugar) {
 		lugarQueOcupa = unLugar;
 	}
@@ -132,12 +133,15 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 
 	public static Enemigo recuperar(Element actual) throws ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
 	
+		Escenario escenario=Escenario.obtenerEscenario();
+		Posicion pos = new Posicion(escenario.getEntrada());
 		Element posXML=actual.getChild("Posicion");
-		Posicion pos=new Posicion(posXML);
-		//Class<?> claseActual = Class.forName(actual.getName());
 		Class<?> claseActual = Class.forName(actual.getAttributeValue("Tipo"));
-		Constructor<?> constructor = claseActual.getDeclaredConstructor(Posicion.class);
-		Enemigo enemigo = (Enemigo) constructor.newInstance((Object)pos);
+		Constructor<?> constructor = claseActual.getDeclaredConstructor(Posicion.class);	
+		Enemigo enemigo = (Enemigo) constructor.newInstance(pos);
+		Posicion pos2=new Posicion(posXML);
+		enemigo.cambiarPosicion(pos2);
+		System.out.println("ACA");
 		return enemigo;
 	}
 }
