@@ -131,7 +131,9 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 	}
 
 	public static Enemigo recuperar(Element actual) throws ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
-		Posicion pos=new Posicion(actual);
+	
+		Element posXML=actual.getChild("Posicion");
+		Posicion pos=new Posicion(posXML);
 		Class<?> claseActual = Class.forName(actual.getName());
 		Constructor<?> constructor = claseActual.getDeclaredConstructor(Posicion.class);
 		Enemigo enemigo = (Enemigo) constructor.newInstance((Object)pos);
