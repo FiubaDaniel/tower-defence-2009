@@ -52,6 +52,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
             	
             	 try {
 					this.recuperar(fc.getSelectedFile().getAbsoluteFile());
+					ControlSimulacion.obtenerControl().despausar();
 				} catch (IOException e1) {
 					
 					e1.printStackTrace();
@@ -106,7 +107,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
 		Escenario escenario=Escenario.obtenerEscenario();
 		Jugador jugador= Jugador.obtenerJugador();
 		FabricaDeEnemigos fabrica=FabricaDeEnemigos.obtenerFabricaEnemigos(escenario.getCantBichos(),escenario.getNumeroNivel());
-		escenario.reIniciar();
+		//escenario.reIniciar();
 				try {
 					archRecu = new FileInputStream(archivo);
 					SAXBuilder parser = new SAXBuilder();
@@ -114,19 +115,15 @@ public class BotonPersistirPartidaListener implements ActionListener {
 					Element raiz=doc.getRootElement();
 					escenario=escenario.recuperar(raiz.getChild("Escenario"));
                     jugador = jugador.recuperar(raiz.getChild("Jugador"));
-                    //fabrica = fabrica.recuperar(raiz.getChild("FabricaDeEnemigos"));
+                    fabrica = fabrica.recuperar(raiz.getChild("FabricaDeEnemigos"));
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException(e);
 				}
 		ControlSimulacion simul = ControlSimulacion.obtenerControl();
-  		simul.setTerminado();
-  		ControlSimulacion simul2 = ControlSimulacion.ObtenerControl(1);
-  		ControlVista controlvis= ControlVista.obtenerControl();
-  		controlvis.setTerminado();
-	    controlador.GameLoop nuevoJuego = new controlador.GameLoop();
-	    nuevoJuego.Jugar();
+	    simul.despausar();
+	    GameLoop.Jugar();
 	
 	}
 	
