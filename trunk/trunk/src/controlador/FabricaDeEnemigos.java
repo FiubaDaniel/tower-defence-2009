@@ -165,7 +165,7 @@ public class FabricaDeEnemigos {
 	public static FabricaDeEnemigos obtenerFabricaEnemigos(
 			int cantidad_enemigos, int numeroNivel) {
 		if (fabrica == null)
-			return new FabricaDeEnemigos(cantidad_enemigos, numeroNivel);
+			return fabrica = new FabricaDeEnemigos(cantidad_enemigos, numeroNivel);
 		return fabrica;
 	}
 
@@ -293,7 +293,7 @@ public class FabricaDeEnemigos {
 
 		fabrica.ColaEnemigos.clear();
 
-		List Element_List = xmlElement.getAttributes();
+		List Element_List = xmlElement.getChildren();
 
 		Iterator it = Element_List.iterator();
 

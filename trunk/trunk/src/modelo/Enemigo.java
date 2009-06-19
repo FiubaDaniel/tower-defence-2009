@@ -4,9 +4,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import org.jdom.Element;
-import org.omg.CORBA.Object;
-
-
 import customExceptions.*;
 
 public abstract class Enemigo  implements Seleccionable, Persistente {
@@ -128,6 +125,7 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 		Element xmlElement = new Element("Enemigo");
         xmlElement.addContent(lugarQueOcupa.persistir());
         xmlElement.setAttribute("Tipo", this.getClass().getName());
+        xmlElement.setAttribute("Cantidad_Avanzada", String.valueOf(this.cant_avanzada));
         return xmlElement;
 	}
 
@@ -141,6 +139,8 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 		Enemigo enemigo = (Enemigo) constructor.newInstance(pos);
 		Posicion pos2=new Posicion(posXML);
 		enemigo.cambiarPosicion(pos2);
+		enemigo.cant_avanzada = Integer.parseInt(actual.getAttributeValue("Cantidad_Avanzada"));
+		
 		return enemigo;
 	}
 }

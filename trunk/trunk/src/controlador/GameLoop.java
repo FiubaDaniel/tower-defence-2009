@@ -6,10 +6,10 @@ import controlador.ControlSimulacion;
 
 public class GameLoop {
 	
-	public void Jugar() {
+	public static void Jugar() {
 		//Instancio el reproductor de Audio.
 		ReproductorAudio repro = ReproductorAudio.getInstancia();
-		//repro.reproducirCancion(ReproductorAudio.CANCION_INTRO);
+		repro.reproducirCancion(ReproductorAudio.CANCION_INTRO);
 		
 		//Instancio los controladores.
 		ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
@@ -17,7 +17,7 @@ public class GameLoop {
 		
 
 		//Corazón del GameLoop
-	    simulacion.despausar();
+	   
 		while (!simulacion.isTerminoJuego()){
 			while (!simulacion.isPausado()){
 				simulacion.actuar();
