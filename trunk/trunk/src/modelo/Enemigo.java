@@ -126,6 +126,7 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
         xmlElement.addContent(lugarQueOcupa.persistir());
         xmlElement.setAttribute("Tipo", this.getClass().getName());
         xmlElement.setAttribute("Cantidad_Avanzada", String.valueOf(this.cant_avanzada));
+       
         return xmlElement;
 	}
 
@@ -140,7 +141,6 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 		Posicion pos2=new Posicion(posXML);
 		enemigo.cambiarPosicion(pos2);
 		enemigo.cant_avanzada = Integer.parseInt(actual.getAttributeValue("Cantidad_Avanzada"));
-		
 		return enemigo;
 	}
 }

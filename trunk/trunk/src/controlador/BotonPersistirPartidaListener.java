@@ -108,16 +108,19 @@ public class BotonPersistirPartidaListener implements ActionListener {
 					SAXBuilder parser = new SAXBuilder();
 					Document doc = parser.build(archivo);
 					Element raiz=doc.getRootElement();
-					escenario=escenario.recuperar(raiz.getChild("Escenario"));
-                    jugador = jugador.recuperar(raiz.getChild("Jugador"));
+					escenario.recuperar(raiz.getChild("Escenario"));
+                    jugador.recuperarJugador(raiz.getChild("Jugador"));
                     fabrica = fabrica.recuperar(raiz.getChild("FabricaDeEnemigos"));
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException(e);
 				}
-		ControlSimulacion simul = ControlSimulacion.obtenerControl();
-	   
+				 
+				ControlVista control = ControlVista.obtenerControl();
+				control.actualizarVista();
+				ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
+				simulacion.despausar();
 	    GameLoop.Jugar();
 	
 	}
