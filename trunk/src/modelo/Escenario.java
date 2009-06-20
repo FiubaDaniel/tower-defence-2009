@@ -653,6 +653,9 @@ public class Escenario implements Persistente {
 		
 		this.NumeroNivel = Integer.parseInt(xmlElement.getAttributeValue("Nivel"));
 		
+		EnemigosEnElMapa.clear();
+		ObstaculosEnElMapa.clear();
+		
 		try {
 			this.setNumeroNivel(this.NumeroNivel);
 		} catch (FileNotFoundException e) {
@@ -680,7 +683,7 @@ public class Escenario implements Persistente {
 		this.CantBichos = EnemigosEnElMapa.size();	
 	}
 	
-	public  Escenario recuperar(Element xmlElement) {
+	public  void recuperar(Element xmlElement) {
 		
 			try {
 				 this.setRecuperar(xmlElement);
@@ -721,8 +724,6 @@ public class Escenario implements Persistente {
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
-		
-		return escenario;
 	}
 
 	public Element persistir() {

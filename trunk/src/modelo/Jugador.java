@@ -38,6 +38,7 @@ public class Jugador extends Observable implements Persistente{
 		this.setDinero(80);
 		this.setNombre("Grupo 4");
 	}
+
 	
 	private Jugador(String nombre, double dinero, int vidas) {
 		this.setCantidadVidas(vidas);
@@ -98,13 +99,18 @@ public class Jugador extends Observable implements Persistente{
 		this.setChanged();
 	}
 
-	public Jugador recuperar(Element xmlElement) {
+	/*public Jugador recuperar(Element xmlElement) {
 		if (jugador == null) {
 			jugador = new Jugador(xmlElement.getAttributeValue("Nombre"), Double.parseDouble(xmlElement.getAttributeValue("Dinero")), Integer.parseInt(xmlElement.getAttributeValue("Vidas")));
 		}
 		return jugador;
-	}
+       }*/
 	
+	public void recuperarJugador(Element xmlElement){
+		this.setCantidadVidas(Integer.parseInt(xmlElement.getAttributeValue("Vidas")));
+		this.setDinero(Double.parseDouble(xmlElement.getAttributeValue("Dinero")));
+		this.setNombre(xmlElement.getAttributeValue("Nombre"));
+	}
 	public Element persistir() {
 		Element xmlElement = new Element("Jugador");
         xmlElement.setAttribute("Nombre", this.Nombre);
