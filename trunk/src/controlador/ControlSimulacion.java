@@ -1,13 +1,8 @@
 package controlador;
 
-import java.awt.Dialog;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.util.Iterator;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
+//import javax.swing.JButton;
 
 import vista.menu.VistaPrincipal;
 
@@ -27,26 +22,18 @@ import modelo.Posicion;
 
  *
  */
-public class ControlSimulacion  implements ActionListener{
+public class ControlSimulacion {
 
 	private static ControlSimulacion instancia = null;
-	
 	// Este atributo establece si la simulacion se detiene o si continua
 	private boolean pausado = true;
-	
 	private boolean terminoJuego = false;
-	
-	private boolean FinDeNivel = false;
-	
 	private FabricaDeEnemigos fabrica;
-	
 	private Escenario escenario;
-	
 	/* Este atributo establece la cantidad de milisegundos a esperar entre Loop
 	 * del simulador
 	 */
 	private int SleepTime = 100;
-	
 	/* En esta variable, como el nombre lo indica guardo el tiempo pasado en
 	 * el juego
 	 */
@@ -59,48 +46,43 @@ public class ControlSimulacion  implements ActionListener{
 		return instancia;
 	}
 	
-	
 	/**
 	 * Instancio el modelo.
 	 */
-	
 	private ControlSimulacion(){
-
 		escenario = Escenario.obtenerEscenario();
-		try {
-			escenario.setNumeroNivel(escenario.getNumeroNivel());
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
 		fabrica = FabricaDeEnemigos.obtenerFabricaEnemigos(escenario.getCantBichos(), escenario.getNumeroNivel());
 	}
-
+	
+	/*public void reiniciarSimulacion(){
+		escenario.reIniciar();
+		fabrica.reiniciarFabrica();
+  		Jugador jugador = Jugador.obtenerJugador();
+  		jugador.reiniciarJugador();
+  		this.terminoJuego = false;
+  		this.pausado = false;
+  	}*/
+	
 	public boolean isTerminoJuego(){
 		return terminoJuego;
 	}
 	
-	public void setTerminado() {
-		terminoJuego=false;
-	}
-	
-	public boolean isFinDeNivel() {
-		return FinDeNivel;
-	}
-	
-	public void nuevoNivel() {
-		FinDeNivel = false;
-	}
-	
-	public void pausarJuego(){
-		pausado = !pausado;
+	public void setTerminoJuego() {
+		terminoJuego = false;
 	}
 	
 	public boolean isPausado(){
 		return pausado;
 	}
+	/**
+	 * Pone o saca la pausa segun corresponda.
+	 */
+	public void pausarSimulacion(){
+		pausado = true;
+	}
 	
-	public void despausar(){
-		this.pausado = false;
+	public void despausarSimulacion() {
+		pausado = false;
 	}
 	
 	private void agregarEnemigos(){
@@ -120,11 +102,13 @@ public class ControlSimulacion  implements ActionListener{
 	}
 	
 	private void VerificarSiTerminoNivel() {
-		if (escenario.getCantBichos() <= 0) {
-			FinDeNivel = true;			
+		if (escenario.isTerminoNivel()) {
 			pausado = true;
 			
 			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
+			/* Deberia haber un metodo que reinicie la vista por cada
+			 * nivel pasado.
+			 */
 			vistaP.getPanelDatos().cambiarEtiquetaIniciar_Pausar();
 						
 			fabrica.crearNuevosEnemigos(escenario.getNumeroNivel());
@@ -136,7 +120,6 @@ public class ControlSimulacion  implements ActionListener{
 	 * Este metodo es el que se ocupa de llamar a las acciones
 	 * necesarias para mover, disparar e ir agregando enemigos
 	 * a la pantalla.
-	 * 
 	 */
 	public void actuar(){
 		this.agregarEnemigos();
@@ -190,18 +173,4 @@ public class ControlSimulacion  implements ActionListener{
 		if (tiempo_pasado > 60000)
 			tiempo_pasado = 0;
 	}
-	/**
-	 * Este metodo es llamado si el boton de Pausar-Iniciar es activado.
-	 * 
-	 */
-	public void actionPerformed(ActionEvent e) {
-		pausado = !pausado;
-		JButton aux = (JButton) (e.getSource());
-		if (pausado)
-			aux.setText("Iniciar");
-		else
-			aux.setText("Pausa");
-
-	}
-
 }

@@ -46,7 +46,7 @@ public class Escenario implements Persistente {
 	private LinkedList ObstaculosEnElMapa;
 	private Posicion Salida, Entrada;
 	private Posicion[][] Mapa;
-	private int NumeroNivel = 1;
+	private int NumeroNivel;
 	private File ArchivodeMapa;
 	private HashMap MapaTerreno;
 
@@ -79,10 +79,10 @@ public class Escenario implements Persistente {
 	}
 	
 	public void reIniciar() {
-		this.escenario=null;
+		escenario = null;
 	}
 
-	private void configurarMapa() throws FileNotFoundException {
+	private void configurarMapa() {
 
 		cargarMapaConfiguracion();
 		
@@ -96,9 +96,9 @@ public class Escenario implements Persistente {
 			EnemigosEnElMapa = new LinkedList();
 			ObstaculosEnElMapa = new LinkedList();
 		} catch (NullPointerException e) {
-			throw new FileNotFoundException();
+			System.out.println("Archivo no encontrado");
 		} catch (IllegalStateException e) {
-			throw new InvalidMapFormatException();
+			System.out.println("Formato de mapa Invalido");
 		}
 	}
 
@@ -115,6 +115,7 @@ public class Escenario implements Persistente {
 	 *             configurado
 	 */
 	private Escenario() throws FileNotFoundException {
+		this.NumeroNivel = 1;
 		configurarMapa();
 	}
 
@@ -221,12 +222,18 @@ public class Escenario implements Persistente {
 		return Entrada;
 	}
 
-	public void setNumeroNivel(int numeroNivel) throws FileNotFoundException {
-		// nose si debería ser publico o privado
+	private void setNumeroNivel(int numeroNivel) {
 		this.NumeroNivel = numeroNivel;
 		configurarMapa();
 		ObstaculosEnElMapa.clear();
-
+	}
+	
+	public boolean isTerminoNivel(){
+		if (CantBichos == 0){
+			this.setNumeroNivel(++NumeroNivel);
+			return true;
+		}else
+			return false;
 	}
 
 	public int getNumeroNivel() {
@@ -475,7 +482,7 @@ public class Escenario implements Persistente {
 		}
 	}
 
-	public void eliminarEnemigosSinVidadelaLista() {
+	public void eliminarEnemigosSinVidadelaLista() throws FileNotFoundException {
 		Iterator it = EnemigosEnElMapa.iterator();
 
 		Enemigo PosibleVictima = null;
@@ -491,8 +498,6 @@ public class Escenario implements Persistente {
 				CantBichos--;
 			}
 		}
-		
-
 	}
 
 	/**
@@ -653,16 +658,11 @@ public class Escenario implements Persistente {
 		
 		this.NumeroNivel = Integer.parseInt(xmlElement.getAttributeValue("Nivel"));
 		
+
+		this.setNumeroNivel(this.NumeroNivel);
+
 		EnemigosEnElMapa.clear();
 		ObstaculosEnElMapa.clear();
-		
-		try {
-			this.setNumeroNivel(this.NumeroNivel);
-		} catch (FileNotFoundException e) {
-
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
 		
 		List Element_list = xmlElement.getChildren();
 		

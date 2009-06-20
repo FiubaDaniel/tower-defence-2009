@@ -28,15 +28,13 @@ public class Jugador extends Observable implements Persistente{
 	}
 
 	private Jugador() {
-		this.setCantidadVidas(100);
+		this.setCantidadVidas(10);
 		this.setDinero(80);
 		this.setNombre("Grupo 4");
 	}
 	
-	public void matarJugador() {
-		this.setCantidadVidas(100);
-		this.setDinero(80);
-		this.setNombre("Grupo 4");
+	public void reiniciarJugador() {
+		jugador = null;
 	}
 
 	
@@ -48,7 +46,7 @@ public class Jugador extends Observable implements Persistente{
 
 	private void setCantidadVidas(int cantidadVidas) {
 			this.CantidadVidas = cantidadVidas;
-			this.notifyObservers();
+			//this.notifyObservers();
 	}
 
 	public int getCantidadVidas() {
@@ -57,7 +55,7 @@ public class Jugador extends Observable implements Persistente{
 	private void setDinero(double dinero){
 		if (dinero >= 0) {
 			this.Dinero = dinero;
-			this.notifyObservers();
+			//this.notifyObservers();
 		}
 		else
 			throw new IllegalArgumentException();
@@ -70,7 +68,7 @@ public class Jugador extends Observable implements Persistente{
 	public void setNombre(String nombre) {
 		if (!nombre.isEmpty()) {
 			this.Nombre = nombre;
-			this.notifyObservers();
+			//this.notifyObservers();
 		}
 		else
 			throw new IllegalArgumentException();

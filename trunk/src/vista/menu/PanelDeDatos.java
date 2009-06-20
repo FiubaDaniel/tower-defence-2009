@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import controlador.BotonPausarListener;
 import controlador.BotonPersistirPartidaListener;
 import controlador.ControlSimulacion;
 
@@ -120,7 +121,7 @@ public class PanelDeDatos extends JPanel implements Observer {
 		BotonCargar.setText("Cargar");
 		
 		// Agrego un Listener del boton Iniciar_Pausar
-		BotonIniciar_Pausar.addActionListener(ControlSimulacion.obtenerControl());
+		BotonIniciar_Pausar.addActionListener(new BotonPausarListener());
 
 		BotonGuardar.addActionListener(new BotonPersistirPartidaListener());
 		

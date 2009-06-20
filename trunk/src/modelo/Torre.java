@@ -1,5 +1,6 @@
 package modelo;
 
+import java.io.FileNotFoundException;
 import java.util.Iterator;
 
 import org.jdom.Element;
@@ -34,7 +35,7 @@ public abstract class Torre extends Obstaculo {
 
 	// Realizar Ataque
 
-	public void atacar() throws EnemigoYaMuerto{
+	public void atacar() throws EnemigoYaMuerto, FileNotFoundException{
 		Iterator itEnemigos = escenario.getIteradordeEnemigos();
 	
 		while (itEnemigos.hasNext()) {
