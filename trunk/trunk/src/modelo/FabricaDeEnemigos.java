@@ -292,7 +292,7 @@ public class FabricaDeEnemigos {
 
 		while (it.hasNext()) {
 			Element aux = (Element) it.next();
-			if (aux.getName() == "Obstaculo") {
+			if (aux.getName() == "Enemigo") {
 				Enemigo enemigo = Enemigo.recuperar(aux);
 				fabrica.ColaEnemigos.add(enemigo);
 			}
