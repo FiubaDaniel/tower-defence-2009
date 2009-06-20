@@ -15,7 +15,7 @@ public class ReproductorAudio {
 	public static Sequence CANCION_INTRO;
     {
             try {
-                    CANCION_INTRO = MidiSystem.getSequence(new File("audio/zelda.mid"));
+                    CANCION_INTRO = MidiSystem.getSequence(new File("audio/ñan fri fruli frali fru-.mid"));
             } catch (Exception e){
                     e.printStackTrace();
             }
