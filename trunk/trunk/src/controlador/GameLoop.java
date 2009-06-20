@@ -9,7 +9,7 @@ public class GameLoop {
 	public static void Jugar() {
 		//Instancio el reproductor de Audio.
 		ReproductorAudio repro = ReproductorAudio.getInstancia();
-		repro.reproducirCancion(ReproductorAudio.CANCION_INTRO);
+		//repro.reproducirCancion(ReproductorAudio.CANCION_INTRO);
 		
 		//Instancio los controladores.
 		ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
@@ -23,15 +23,14 @@ public class GameLoop {
 				simulacion.actuar();
 				vista.actualizarVista();
 			}
+			vista.finDeJuego();
 			
 			try {
 				Thread.sleep(simulacion.getSleepTime());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
 		}
-		vista.finDeJuego(true);
 	}
 
 	/**

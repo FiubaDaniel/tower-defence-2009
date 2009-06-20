@@ -39,10 +39,10 @@ public class BotonPersistirPartidaListener implements ActionListener {
         VistaPrincipal vista = VistaPrincipal.obtenerVistaPrincipal();
         JButton guardar = vista.getPanelDatos().getBotonGuardar();
         JButton cargar = vista.getPanelDatos().getBotonCargar();
-                
+        
         if (e.getSource() == cargar) {
         	if (!simulacion.isPausado()){
-        		simulacion.pausarJuego();
+        		simulacion.pausarSimulacion();
         		vista.getPanelDatos().cambiarEtiquetaIniciar_Pausar();
         	}
         	int returnVal = fc.showOpenDialog(vista);
@@ -50,7 +50,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
             	//Llamadas para cargar un estado del juego.
             	 try {
 					this.recuperar(fc.getSelectedFile().getAbsoluteFile());
-					ControlSimulacion.obtenerControl().despausar();
+					ControlSimulacion.obtenerControl().despausarSimulacion();
 				} catch (IOException e1) {
 					
 					e1.printStackTrace();
@@ -59,13 +59,12 @@ public class BotonPersistirPartidaListener implements ActionListener {
         }
         if (e.getSource() == guardar) {
         	if (!simulacion.isPausado()){
-           		simulacion.pausarJuego();
+           		simulacion.pausarSimulacion();
            		vista.getPanelDatos().cambiarEtiquetaIniciar_Pausar();
            	}
         	int returnVal = fc.showSaveDialog(vista);
         	if (returnVal == JFileChooser.APPROVE_OPTION) {
-        		System.out.print(returnVal);
-        		//Llamadas para guardar un estado del juego.   
+        		File unFile=fc.getSelectedFile().getAbsoluteFile();
            	    try {
            	    	this.guardar(fc.getSelectedFile().getAbsoluteFile());
 				} catch (IOException e1) {
@@ -116,11 +115,11 @@ public class BotonPersistirPartidaListener implements ActionListener {
 					e.printStackTrace();
 					throw new RuntimeException(e);
 				}
-				 
+			 
 				ControlVista control = ControlVista.obtenerControl();
 				control.actualizarVista();
 				ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
-				simulacion.despausar();
+				simulacion.despausarSimulacion();
 	    GameLoop.Jugar();
 	
 	}

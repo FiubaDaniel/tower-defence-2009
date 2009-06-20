@@ -28,7 +28,7 @@ import vista.menu.PanelDatosDeSeleccion;
 import vista.menu.VistaPrincipal;
 
 /**
- * Esta clase se encarga de manejar los refresh de la vista y de instanciarla.
+ * Esta clase se encarga de manejar los refresh de la vista.
  * 
  * @author Grupo 4
  *
@@ -86,9 +86,8 @@ public class ControlVista {
 		this.dibujarEnemigos();
 		this.dibujarObstaculos();
 		this.actualizarPaneles();
-		this.nuevoNivel();
-		
 	}
+	
 	/**
 	 * Dibuja los enemigos despues de cada movimiento, se invoca al metodo desde
 	 * actualizaVista.
@@ -182,32 +181,10 @@ public class ControlVista {
 		mapa.paint(mapa.getGraphics());
 	}
 	
-	public void nuevoNivel(){
+	public void finDeJuego(){
 		ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
-		if (simulacion.isFinDeNivel()){
-			
-			try {
-				if (escenario.getNumeroNivel() < escenario.getCant_Mapas_Disponibles())
-					escenario.setNumeroNivel(escenario.getNumeroNivel() + 1);
-				else {
-					this.finDeJuego(false);
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				
-					escenario.setNumeroNivel(1);
-				}
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			simulacion.nuevoNivel();
-		}
-	}
-	
-	public void finDeJuego(boolean gane){
-		new GameOver(VentanaPrincipal,gane);
+		if (simulacion.isTerminoJuego())
+			new GameOver(VentanaPrincipal);
 	}
 
 }
