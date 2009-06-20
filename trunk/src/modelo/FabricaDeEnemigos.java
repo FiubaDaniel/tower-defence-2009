@@ -1,4 +1,4 @@
-package controlador;
+package modelo;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -10,13 +10,6 @@ import java.util.Queue;
 
 import org.jdom.Element;
 
-import modelo.Arania;
-import modelo.Cucaracha;
-import modelo.Enemigo;
-import modelo.Escenario;
-import modelo.Hormiga;
-import modelo.Mosca;
-import modelo.Posicion;
 
 /**
  * Esta clase se encarga del manejo de la creación de enemigos en el mapa. Según
@@ -165,7 +158,7 @@ public class FabricaDeEnemigos {
 	public static FabricaDeEnemigos obtenerFabricaEnemigos(
 			int cantidad_enemigos, int numeroNivel) {
 		if (fabrica == null)
-			return fabrica = new FabricaDeEnemigos(cantidad_enemigos, numeroNivel);
+			 fabrica = new FabricaDeEnemigos(cantidad_enemigos, numeroNivel);
 		return fabrica;
 	}
 

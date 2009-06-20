@@ -12,10 +12,10 @@ import javax.swing.JFrame;
 import vista.menu.VistaPrincipal;
 
 import customExceptions.EnemigoYaMuerto;
-import controlador.FabricaDeEnemigos;
 
 import modelo.Enemigo;
 import modelo.Escenario;
+import modelo.FabricaDeEnemigos;
 import modelo.Jugador;
 import modelo.Obstaculo;
 import modelo.Posicion;
@@ -74,8 +74,6 @@ public class ControlSimulacion  implements ActionListener{
 		}
 		fabrica = FabricaDeEnemigos.obtenerFabricaEnemigos(escenario.getCantBichos(), escenario.getNumeroNivel());
 	}
-	
-
 
 	public boolean isTerminoJuego(){
 		return terminoJuego;
