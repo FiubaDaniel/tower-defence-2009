@@ -229,9 +229,12 @@ public class Escenario implements Persistente {
 	}
 	
 	public boolean isTerminoNivel(){
-		if (CantBichos == 0){
-			this.setNumeroNivel(++NumeroNivel);
-			return true;
+		if (CantBichos == 0)
+			if (NumeroNivel < Cant_Mapas_Disponibles){
+				this.setNumeroNivel(++NumeroNivel);
+				return true;
+			}else{
+				return true;
 		}else
 			return false;
 	}
