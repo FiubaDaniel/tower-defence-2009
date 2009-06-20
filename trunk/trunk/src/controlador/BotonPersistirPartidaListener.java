@@ -17,6 +17,7 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
 import modelo.Escenario;
+import modelo.FabricaDeEnemigos;
 import modelo.Jugador;
 
 import vista.menu.VistaPrincipal;
@@ -47,9 +48,6 @@ public class BotonPersistirPartidaListener implements ActionListener {
         	int returnVal = fc.showOpenDialog(vista);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
             	//Llamadas para cargar un estado del juego.
-                /*System.out.println("Elegiste el file: " + fc.getSelectedFile().getAbsoluteFile() +
-                        fc.getSelectedFile().getName());*/
-            	
             	 try {
 					this.recuperar(fc.getSelectedFile().getAbsoluteFile());
 					ControlSimulacion.obtenerControl().despausar();
@@ -68,9 +66,6 @@ public class BotonPersistirPartidaListener implements ActionListener {
         	if (returnVal == JFileChooser.APPROVE_OPTION) {
         		System.out.print(returnVal);
         		//Llamadas para guardar un estado del juego.   
-        		/*System.out.println("Elegiste el file: " + fc.getSelectedFile().getAbsoluteFile() +
-                        fc.getSelectedFile().getName());*/
-        		File unFile=fc.getSelectedFile().getAbsoluteFile();
            	    try {
            	    	this.guardar(fc.getSelectedFile().getAbsoluteFile());
 				} catch (IOException e1) {
@@ -122,7 +117,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
 					throw new RuntimeException(e);
 				}
 		ControlSimulacion simul = ControlSimulacion.obtenerControl();
-	    simul.despausar();
+	   
 	    GameLoop.Jugar();
 	
 	}

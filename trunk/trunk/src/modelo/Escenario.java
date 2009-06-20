@@ -649,7 +649,7 @@ public class Escenario implements Persistente {
 		return Cant_Mapas_Disponibles;
 	}
 	
-	private Escenario(Element xmlElement) throws FileNotFoundException, ClassNotFoundException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+	private void setRecuperar(Element xmlElement) throws FileNotFoundException, ClassNotFoundException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
 		
 		this.NumeroNivel = Integer.parseInt(xmlElement.getAttributeValue("Nivel"));
 		
@@ -675,20 +675,15 @@ public class Escenario implements Persistente {
                 Enemigo enemigo= Enemigo.recuperar(actual);
                 EnemigosEnElMapa.add(enemigo);
 			}
-			/*if (aux instanceof Obstaculo)
-				ObstaculosEnElMapa.add(aux);
-			else if (aux instanceof Enemigo)
-				EnemigosEnElMapa.add(aux);*/
 		}
 			
 		this.CantBichos = EnemigosEnElMapa.size();	
 	}
 	
-	public static Escenario recuperar(Element xmlElement) {
+	public  Escenario recuperar(Element xmlElement) {
 		
-		if (escenario == null) {
 			try {
-				escenario = new Escenario(xmlElement);
+				 this.setRecuperar(xmlElement);
 			} catch (FileNotFoundException e) {
 				throw new BaseMapNotFoundException();
 			} catch (SecurityException e) {
@@ -726,7 +721,7 @@ public class Escenario implements Persistente {
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
-		}
+		
 		return escenario;
 	}
 
