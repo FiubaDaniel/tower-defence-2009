@@ -14,10 +14,10 @@ public class BotonPausarListener implements ActionListener{
 		ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
 		JButton botonPausado = (JButton) (e.getSource());
 		if (simulacion.isPausado()){
-			botonPausado.setText("Iniciar");
+			botonPausado.setText("Pausa");
 			simulacion.despausarSimulacion();
 		}else{
-			botonPausado.setText("Pausa");
+			botonPausado.setText("Iniciar");
 			simulacion.pausarSimulacion();
 		}
 	}
