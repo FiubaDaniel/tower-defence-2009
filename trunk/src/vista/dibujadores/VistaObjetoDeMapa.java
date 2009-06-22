@@ -22,32 +22,41 @@ public abstract class VistaObjetoDeMapa {
 	private int X_pos, Y_pos;
 
 	protected Image_Observer Observador;
+	
+	ImageIcon imageIcon = null;
+	Image preImagen= null;
+	
+	
+	private void cacheDibujo(Mapa superfice) {
+
+		// Cargo una imagen, para ser dibujada.
+		if (imageIcon == null) {
+			this.imageIcon = new ImageIcon(this.getDir_imagen());
+		}
+		
+		Image buffer = superfice.createImage(superfice.getUNIDADANCHO(), superfice.getUNIDADALTO());
+		Graphics grafBuffer = buffer.getGraphics();
+		// Dibujo la iamgen en el buffer y luego la copio al mapa, para evitar
+		// del destello de la imagen
+		grafBuffer.drawImage(imageIcon.getImage(), 0, 0, Observador);
+		
+		this.preImagen=buffer;
+		
+	}
 
 	/**
 	 * Este metodo dibuja la imagen en la superficie de DIbujo.
 	 */
 	public void dibujar(Mapa superfice) {
+		
+		if (preImagen==null) {
+			cacheDibujo(superfice);
+		}
 
 		// Pido una superficie donde dibujar, es decir un graphics.
 		Graphics grafico = superfice.getGraphics();
-
-		// Cargo una imagen, para ser dibujada.
-		ImageIcon aux = new ImageIcon(this.getDir_imagen());
-
-		// Creación buffer
-		Image buffer = superfice.createImage(superfice.getUNIDADANCHO(), superfice.getUNIDADALTO());
-		Graphics graph_buffer = buffer.getGraphics();
-		// Creación buffer
-
-		// Obtengo el ancho y alto de las iamgenes a crear.
-		int ANCHOUNITARIO = superfice.getUNIDADANCHO();
-		int ALTOUNITARIO = superfice.getUNIDADANCHO();
-
-		// Dibujo la iamgen en el buffer y luego la copio al mapa, para evitar
-		// del destello de la imagen
-		graph_buffer.drawImage(aux.getImage(), 0, 0, Observador);
-		grafico.drawImage(buffer, this.getX() * ANCHOUNITARIO, this.getY()
-				* ALTOUNITARIO, Observador);
+		grafico.drawImage(this.preImagen, this.getX() * superfice.getUNIDADANCHO(), this.getY()
+				* superfice.getUNIDADALTO(), Observador);
 
 	}
 
