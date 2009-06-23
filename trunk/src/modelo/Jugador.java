@@ -85,6 +85,8 @@ public class Jugador extends Observable implements Persistente{
 	public void quitarVida() {
 		this.setCantidadVidas(CantidadVidas - 1);
 		this.setChanged();
+		notifyObservers();
+
 	}
 
 	public void ModificarDinero(double dinero) throws DineroMuyBajoException {
@@ -95,6 +97,8 @@ public class Jugador extends Observable implements Persistente{
 			throw new DineroMuyBajoException();
 		}
 		this.setChanged();
+		notifyObservers();
+
 	}
 
 	/*public Jugador recuperar(Element xmlElement) {
