@@ -312,6 +312,8 @@ public class FabricaDeEnemigos {
 	
 	public void reiniciarFabrica(){
 		fabrica = null;
+		Escenario escenario = Escenario.obtenerEscenario();
 		ColaEnemigos.clear();
+		fabrica = new FabricaDeEnemigos(escenario.getCantBichos(),escenario.getNumeroNivel());
 	}
 }
