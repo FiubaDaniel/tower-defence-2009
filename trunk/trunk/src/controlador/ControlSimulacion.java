@@ -100,13 +100,11 @@ public class ControlSimulacion {
 	}
 	
 	private void VerificarSiTerminoNivel() {
-		if (escenario.isTerminoNivel()) {
+		if (escenario.isTerminoNivel()){
 			pausado = true;
-			
+			if (!escenario.isMapasDisponibles())
+				terminoJuego = true;
 			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
-			/* Deberia haber un metodo que reinicie la vista por cada
-			 * nivel pasado.
-			 */
 			vistaP.getPanelDatos().cambiarEtiquetaIniciar_Pausar();
 						
 			fabrica.crearNuevosEnemigos(escenario.getCantBichos());
