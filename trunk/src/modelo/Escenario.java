@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -41,9 +42,9 @@ public class Escenario implements Persistente {
 	private int Cant_Mapas_Disponibles;
 	private double DineroBase;
 	private int CantidadDeVidaBase;
-	private LinkedList CaminoAlaSalida;
-	private LinkedList EnemigosEnElMapa;
-	private LinkedList ObstaculosEnElMapa;
+	private List CaminoAlaSalida;
+	private List EnemigosEnElMapa;
+	private List ObstaculosEnElMapa;
 	private Posicion Salida, Entrada;
 	private Posicion[][] Mapa;
 	private int NumeroNivel;
@@ -93,8 +94,8 @@ public class Escenario implements Persistente {
 			this.cargarMapa(); // Este método tira una excepción si el formato
 			// del archivo está mal
 			this.crearListaAlaSalida();
-			EnemigosEnElMapa = new LinkedList();
-			ObstaculosEnElMapa = new LinkedList();
+			EnemigosEnElMapa = Collections.synchronizedList(new LinkedList());
+			ObstaculosEnElMapa = Collections.synchronizedList(new LinkedList());
 		} catch (NullPointerException e) {
 			System.out.println("Archivo no encontrado");
 		} catch (IllegalStateException e) {
@@ -206,11 +207,11 @@ public class Escenario implements Persistente {
 		return CantBichos;
 	}
 
-	private void setCaminoAlaSalida(LinkedList caminoAlaSalida) {
+	private void setCaminoAlaSalida(List caminoAlaSalida) {
 		this.CaminoAlaSalida = caminoAlaSalida;
 	}
 
-	public LinkedList getCaminoAlaSalida() {
+	public List getCaminoAlaSalida() {
 		return CaminoAlaSalida;
 	}
 
@@ -275,7 +276,7 @@ public class Escenario implements Persistente {
 	 */
 	public void agregarEnemigoALista(Enemigo enemigo) {
 		if (EnemigosEnElMapa.isEmpty()) {
-			EnemigosEnElMapa = new LinkedList();
+			EnemigosEnElMapa = Collections.synchronizedList(new LinkedList());
 		}
 		EnemigosEnElMapa.add(enemigo);
 	}
