@@ -2,7 +2,6 @@ package modelo;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -26,7 +25,7 @@ public class FabricaDeEnemigos {
 
 	private int Cantidad_Enemigos;
 	private int NumeroNivel;
-	private List ColaEnemigos;
+	private Queue ColaEnemigos;
 	private HashMap CodigosUtiles;
 
 	/**
@@ -79,7 +78,7 @@ public class FabricaDeEnemigos {
 		NumeroNivel = nivel;
 
 		if (ColaEnemigos == null)
-			ColaEnemigos = Collections.synchronizedList(new LinkedList());
+			ColaEnemigos = new LinkedList();
 		else
 			ColaEnemigos.clear();
 
@@ -219,7 +218,7 @@ public class FabricaDeEnemigos {
 	 *         null, quiere decir que la lista se termino.
 	 */
 	public Enemigo getSiguienteEnemigoParaCrear() {
-		return (Enemigo) ColaEnemigos.get(1);
+		return (Enemigo) ColaEnemigos.poll();
 	}
 
 	/**
