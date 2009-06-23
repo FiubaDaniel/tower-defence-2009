@@ -29,11 +29,12 @@ public class FabricaDeEnemigos {
 	private HashMap CodigosUtiles;
 
 	/**
-	 * Este array de float guarda la cantidad base de enemigos en cada ronda En
-	 * total son 8 rondas
+	 * Este array de double guarda la cantidad base de enemigos en cada ronda En
+	 * total son 8 rondas. Estos valores representan porsentajes sobre los enemigos
+	 * que faltan crear. Por ej. el primer elemento del array dice que debo crear el
+	 * 10% de lo que falta crear.
 	 */
-	private float[] niveles_base = { 0.1f, 0.1f, 0.1f, 0.1f, 0.15f, 0.15f,
-			0.15f, 0.15f };
+	private double[] niveles_base = {0.1, 0.15, 0.20, 0.30, 0.40, 0.60, 0.70, 1};
 
 	private int intervalo_entre_salidas;
 
@@ -58,9 +59,6 @@ public class FabricaDeEnemigos {
 		CodigosUtiles.put("2", new Mosca(aux_pos));
 		CodigosUtiles.put("3", new Cucaracha(aux_pos));
 		CodigosUtiles.put("4", new Hormiga(aux_pos));
-		CodigosUtiles.put("5", new Arania(aux_pos));
-		CodigosUtiles.put("6", new Mosca(aux_pos));
-		CodigosUtiles.put("7", new Cucaracha(aux_pos));
 		CodigosUtiles.put("Hormiga", new Hormiga(aux_pos));
 		CodigosUtiles.put("Arania", new Arania(aux_pos));
 		CodigosUtiles.put("Mosca", new Mosca(aux_pos));
@@ -73,9 +71,9 @@ public class FabricaDeEnemigos {
 	 * 
 	 * @param nivel
 	 */
-	public void crearNuevosEnemigos(int nivel) {
+	public void crearNuevosEnemigos(int cantidad_enemigos) {
 
-		NumeroNivel = nivel;
+		Cantidad_Enemigos = cantidad_enemigos;
 
 		if (ColaEnemigos == null)
 			ColaEnemigos = new LinkedList();
@@ -86,20 +84,26 @@ public class FabricaDeEnemigos {
 		// Itero sobre todas las rondas
 		for (int i = 0; i < niveles_base.length; i++) {
 
-			// Obtengo la cantidad de enemigos a crear, en la ronda actual
-			// La cuenta que se ve a continuación esta hecha para que en cada
-			// aumento de 1 nivel, aumento en 50% la cantidad total de enemigos.
-			// Empezando en el nivel 1, con el 50% del total de enemigos
+			/* Aca es donde calculo los enemigos que voy a crear
+			 * segun los porsentajes cargados en le array. 
+			 */
 			int cant_enemigos_actual = (int) (Cantidad_Enemigos
-					* niveles_base[i] / 2 * NumeroNivel);
+					* niveles_base[i]);
+			/* A la cantidad de enemigos total que tengo que crar le
+			 * resto los que voy a crear en esta ronda.
+			 */
+			Cantidad_Enemigos = Cantidad_Enemigos - cant_enemigos_actual;
+			
 			Escenario escenario = Escenario.obtenerEscenario();
 			Posicion aux_pos = new Posicion(escenario.getEntrada());
-
+			
 			for (int j = 0; j < cant_enemigos_actual; j++) {
-				// Obtengo del HashMap que tipo de enemigo debo crear segun el
-				// numero de la ronda
+				/* Uso un random para elegir al azar que enemigo voy
+				 * a crear.
+				 */
+				int x = (int)(Math.random() * 4);
 				Enemigo para_crear = (Enemigo) CodigosUtiles.get(String
-						.valueOf(i));
+						.valueOf(x));
 
 				// Como el HashMap siemrpe devuelve la misma instancia de la
 				// clase, debo crear un objeto nuevo del mismo tipo, para eso
@@ -176,9 +180,9 @@ public class FabricaDeEnemigos {
 		Cantidad_Enemigos = cantidad_enemigos;
 		NumeroNivel = numeroNivel;
 
-		cargarCodigos();
+		this.cargarCodigos();
 
-		crearNuevosEnemigos(numeroNivel);
+		this.crearNuevosEnemigos(cantidad_enemigos);
 
 		Escenario escenario = Escenario.obtenerEscenario();
 
@@ -314,6 +318,6 @@ public class FabricaDeEnemigos {
 	public void reiniciarFabrica(){
 		Escenario escenario = Escenario.obtenerEscenario();
 		ColaEnemigos.clear();
-		this.crearNuevosEnemigos(escenario.getNumeroNivel());
+		this.crearNuevosEnemigos(escenario.getCantBichos());
 	}
 }
