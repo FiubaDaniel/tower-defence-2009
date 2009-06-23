@@ -50,6 +50,7 @@ public class Escenario implements Persistente {
 	private int NumeroNivel;
 	private File ArchivodeMapa;
 	private HashMap MapaTerreno;
+	private boolean mapasDisponibles;
 
 	/**
 	 * Este metodo se encarga de la implementacion de Escenario como singleton.
@@ -233,9 +234,14 @@ public class Escenario implements Persistente {
 				this.setNumeroNivel(++NumeroNivel);
 				return true;
 			}else{
+				mapasDisponibles = false;
 				return true;
 		}else
 			return false;
+	}
+	
+	public boolean isMapasDisponibles() {
+		return mapasDisponibles;
 	}
 
 	public int getNumeroNivel() {
@@ -644,6 +650,7 @@ public class Escenario implements Persistente {
 			}
 		} catch (FileNotFoundException e) {
 			this.setCant_Mapas_Disponibles(numero_intento - 1);
+			this.mapasDisponibles = true;
 		} catch (IOException e) {
 		}
 	}
