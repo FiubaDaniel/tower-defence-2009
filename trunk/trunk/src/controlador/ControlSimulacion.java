@@ -59,17 +59,13 @@ public class ControlSimulacion {
 		fabrica.reiniciarFabrica();
   		Jugador jugador = Jugador.obtenerJugador();
   		jugador.reiniciarJugador();
-  		this.pausado = false;
+  		this.pausado = true;
   		this.terminoJuego = false;
   	}
 	
 	public boolean isTerminoJuego(){
 		return terminoJuego;
 	}
-	
-	/*public void setTerminoJuego() {
-		terminoJuego = false;
-	}*/
 	
 	public boolean isPausado(){
 		return pausado;

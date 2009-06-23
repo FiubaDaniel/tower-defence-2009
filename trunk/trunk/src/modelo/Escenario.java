@@ -663,7 +663,9 @@ public class Escenario implements Persistente {
 		return Cant_Mapas_Disponibles;
 	}
 	
-	private void setRecuperar(Element xmlElement) throws FileNotFoundException, ClassNotFoundException, SecurityException, IllegalArgumentException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+	private void setRecuperar(Element xmlElement) throws FileNotFoundException, 
+			ClassNotFoundException, SecurityException, IllegalArgumentException, 
+			NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
 		
 		this.NumeroNivel = Integer.parseInt(xmlElement.getAttributeValue("Nivel"));
 		

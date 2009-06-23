@@ -50,15 +50,13 @@ public class BotonPersistirPartidaListener implements ActionListener {
             	//Llamadas para cargar un estado del juego.
             	 try {
 					this.recuperar(fc.getSelectedFile().getAbsoluteFile());
-					ControlSimulacion.obtenerControl().despausarSimulacion();
 				} catch (IOException e1) {
 					
 					e1.printStackTrace();
 				}
            }
-         ControlVista vistaControl = ControlVista.obtenerControl();
-         vistaControl.actualizarVista();
         }
+        
         if (e.getSource() == guardar) {
         	if (!simulacion.isPausado()){
            		simulacion.pausarSimulacion();
@@ -103,27 +101,18 @@ public class BotonPersistirPartidaListener implements ActionListener {
 		Escenario escenario=Escenario.obtenerEscenario();
 		Jugador jugador= Jugador.obtenerJugador();
 		FabricaDeEnemigos fabrica=FabricaDeEnemigos.obtenerFabricaEnemigos(escenario.getCantBichos(),escenario.getNumeroNivel());
-		//escenario.reIniciar();
-				try {
-					archRecu = new FileInputStream(archivo);
-					SAXBuilder parser = new SAXBuilder();
-					Document doc = parser.build(archivo);
-					Element raiz=doc.getRootElement();
-					escenario.recuperar(raiz.getChild("Escenario"));
-                    jugador.recuperarJugador(raiz.getChild("Jugador"));
-                    fabrica = fabrica.recuperar(raiz.getChild("FabricaDeEnemigos"));
-
-				} catch (Exception e) {
-					e.printStackTrace();
-					throw new RuntimeException(e);
-				}
-			 
-				ControlVista control = ControlVista.obtenerControl();
-				control.actualizarVista();
-				ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
-				simulacion.despausarSimulacion();
-	    GameLoop.Jugar();
-	
+		try {
+			archRecu = new FileInputStream(archivo);
+			SAXBuilder parser = new SAXBuilder();
+			Document doc = parser.build(archivo);
+			Element raiz=doc.getRootElement();
+			escenario.recuperar(raiz.getChild("Escenario"));
+            jugador.recuperarJugador(raiz.getChild("Jugador"));
+            fabrica = fabrica.recuperar(raiz.getChild("FabricaDeEnemigos"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 	}
 	
 	class ExtensionFileFilter extends FileFilter {
@@ -156,9 +145,9 @@ public class BotonPersistirPartidaListener implements ActionListener {
 		  }
 
 		  public boolean accept(File file) {
-		    if (file.isDirectory()) {
+		    if (file.isDirectory())
 		      return true;
-		    } else {
+		    else{
 		      String path = file.getAbsolutePath().toLowerCase();
 		      for (int i = 0, n = extensions.length; i < n; i++) {
 		        String extension = extensions[i];
@@ -170,7 +159,6 @@ public class BotonPersistirPartidaListener implements ActionListener {
 		    return false;
 		  }
 		}
- 	
 }
     
     
