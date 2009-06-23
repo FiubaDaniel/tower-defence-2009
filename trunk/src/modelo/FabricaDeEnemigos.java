@@ -81,7 +81,8 @@ public class FabricaDeEnemigos {
 			ColaEnemigos = new LinkedList();
 		else
 			ColaEnemigos.clear();
-
+		
+		
 		// Itero sobre todas las rondas
 		for (int i = 0; i < niveles_base.length; i++) {
 
@@ -126,7 +127,7 @@ public class FabricaDeEnemigos {
 
 					para_crear = (Enemigo) constructor[0].newInstance(args);
 					para_crear.cambiarPosicion(aux_pos);
-
+					
 					ColaEnemigos.add(para_crear);
 
 				} catch (InstantiationException e) {
@@ -311,9 +312,8 @@ public class FabricaDeEnemigos {
 	}
 	
 	public void reiniciarFabrica(){
-		fabrica = null;
 		Escenario escenario = Escenario.obtenerEscenario();
 		ColaEnemigos.clear();
-		fabrica = new FabricaDeEnemigos(escenario.getCantBichos(),escenario.getNumeroNivel());
+		this.crearNuevosEnemigos(escenario.getNumeroNivel());
 	}
 }

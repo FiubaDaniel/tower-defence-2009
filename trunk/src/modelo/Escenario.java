@@ -75,10 +75,10 @@ public class Escenario implements Persistente {
 	}
 	
 	public void reIniciar() {
-		escenario = null;
 		EnemigosEnElMapa.clear();
 		ObstaculosEnElMapa.clear();
-		escenario = new Escenario();
+		this.NumeroNivel = 1;
+		this.configurarMapa();
 	}
 
 	private void configurarMapa() {
