@@ -35,7 +35,7 @@ public class Jugador extends Observable implements Persistente{
 	}
 	
 	public void reiniciarJugador() {
-		this.setCantidadVidas(10);
+		this.setCantidadVidas(50);
 		this.setDinero(80);
 		this.setNombre("Grupo 4");
 		this.setChanged();
@@ -89,8 +89,6 @@ public class Jugador extends Observable implements Persistente{
 	public void quitarVida() {
 		this.setCantidadVidas(CantidadVidas - 1);
 		this.setChanged();
-		//this.notifyObservers();
-
 	}
 
 	public void ModificarDinero(double dinero) throws DineroMuyBajoException {
@@ -101,22 +99,14 @@ public class Jugador extends Observable implements Persistente{
 			throw new DineroMuyBajoException();
 		}
 		this.setChanged();
-		//this.notifyObservers();
-
 	}
 
-	/*public Jugador recuperar(Element xmlElement) {
-		if (jugador == null) {
-			jugador = new Jugador(xmlElement.getAttributeValue("Nombre"), Double.parseDouble(xmlElement.getAttributeValue("Dinero")), Integer.parseInt(xmlElement.getAttributeValue("Vidas")));
-		}
-		return jugador;
-       }*/
-	
 	public void recuperarJugador(Element xmlElement){
 		this.setCantidadVidas(Integer.parseInt(xmlElement.getAttributeValue("Vidas")));
 		this.setDinero(Double.parseDouble(xmlElement.getAttributeValue("Dinero")));
 		this.setNombre(xmlElement.getAttributeValue("Nombre"));
 	}
+	
 	public Element persistir() {
 		Element xmlElement = new Element("Jugador");
         xmlElement.setAttribute("Nombre", this.Nombre);
