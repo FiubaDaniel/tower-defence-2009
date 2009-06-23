@@ -3,6 +3,8 @@ package vista.menu;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import modelo.Jugador;
+
 import controlador.ControlSimulacion;
 import controlador.ControlVista;
 
@@ -15,7 +17,8 @@ public class GameOver extends JFrame {
 
 	public GameOver(VistaPrincipal vista){
 		String valor;
-		if (true) {
+		Jugador jugador = Jugador.obtenerJugador();
+		if (jugador.getCantidadVidas() == 0) {
 			valor="Game Over";
 		} else {
 			valor="Ganaste";
@@ -29,10 +32,9 @@ public class GameOver extends JFrame {
 	    		null,
 	    		options,
 	    		options[1]);
-	    if (n==1) {
+	   if (n==1)
 	    	System.exit(0);
-	    	
-	    } else {
+	   else {
 	    	ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
 	    	simulacion.reiniciarSimulacion();
 	    }

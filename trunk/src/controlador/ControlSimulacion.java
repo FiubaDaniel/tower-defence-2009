@@ -67,16 +67,14 @@ public class ControlSimulacion {
 		return terminoJuego;
 	}
 	
-	public void setTerminoJuego() {
+	/*public void setTerminoJuego() {
 		terminoJuego = false;
-	}
+	}*/
 	
 	public boolean isPausado(){
 		return pausado;
 	}
-	/**
-	 * Pone o saca la pausa segun corresponda.
-	 */
+	
 	public void pausarSimulacion(){
 		pausado = true;
 	}
@@ -111,9 +109,9 @@ public class ControlSimulacion {
 			 */
 			vistaP.getPanelDatos().cambiarEtiquetaIniciar_Pausar();
 						
-			fabrica.crearNuevosEnemigos(escenario.getNumeroNivel());
-			
+			fabrica.crearNuevosEnemigos(escenario.getCantBichos());
 		}
+		
 	}
 	
 	/**
