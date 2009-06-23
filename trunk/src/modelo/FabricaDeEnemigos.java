@@ -305,4 +305,12 @@ public class FabricaDeEnemigos {
 		
 		return fabrica;
 	}
+	
+	public boolean tieneEnemigos(){
+		return ColaEnemigos.isEmpty();
+	}
+	
+	public void reiniciarFabrica(){
+		fabrica = null;
+	}
 }

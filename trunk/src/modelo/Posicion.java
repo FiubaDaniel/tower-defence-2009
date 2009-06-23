@@ -104,4 +104,9 @@ public class Posicion implements Persistente{
         xmlElement.setAttribute("Caminable", String.valueOf(this.Caminable));
         return xmlElement;
 	}
+	
+	public String toString(){
+		System.out.print(CoordX+" "+CoordY);
+		return "";
+	}
 }

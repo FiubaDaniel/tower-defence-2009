@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="controlador/ControladorDios.java|controlador/Main.java|pruebasIndividuales/|pruebasIntegradas/|controlador/EnemigoListener.java|vista/menu/MenuSuperior.java|controlador/BotonCargarPartidaListener.java" kind="src" path="src"/>
+	<classpathentry excluding="controlador/ControladorDios.java|controlador/Main.java|pruebasIntegradas/|controlador/EnemigoListener.java|vista/menu/MenuSuperior.java|controlador/BotonCargarPartidaListener.java|modelo/Nivel.java|pruebasIndividuales/AllTests.java|pruebasIndividuales/ArenaTest.java|pruebasIndividuales/EnemigoTest.java|pruebasIndividuales/EscenarioTest.java|pruebasIndividuales/JugadorTest.java|pruebasIndividuales/PegoteTest.java|pruebasIndividuales/PosicionTest.java|pruebasIndividuales/pruebaTorreAzul.java|pruebasIndividuales/pruebaTorreBlanca.java|pruebasIndividuales/pruebaTorreDorada.java|pruebasIndividuales/pruebaTorrePlateada.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/jdom.jar"/>

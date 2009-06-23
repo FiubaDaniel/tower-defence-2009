@@ -81,6 +81,7 @@ public class Escenario implements Persistente {
 	
 	public void reIniciar() {
 		escenario = null;
+		EnemigosEnElMapa.clear();
 	}
 
 	private void configurarMapa() {
