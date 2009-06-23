@@ -151,6 +151,7 @@ public class ControlVista {
 		 */
 		PanelDatosDeSeleccion panel = VentanaPrincipal.getPanelDatos()
 				.getPanelDatosSeleccion();
+		
 		if (VentanaPrincipal.getMapa().getObjeto_seleccionado() != null) {
 
 			Seleccionable seleccionado = VentanaPrincipal.getMapa()
