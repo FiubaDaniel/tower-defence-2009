@@ -103,7 +103,7 @@ public class ControlVista {
 		/* Aqui consigo un iterador de enemigos en el mapa, apra
 		 * recorrerlos e ir dibujandolos
 		 */
-		Iterator it_en = escenario.getIteradordeEnemigos();
+		Iterator it_en = Escenario.obtenerEscenario().getIteradordeEnemigos();
 		while (it_en.hasNext()) {
 			// Saco un enemigo de la lista
 			Enemigo aux = (Enemigo) it_en.next();
