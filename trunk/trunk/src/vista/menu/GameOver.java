@@ -34,10 +34,7 @@ public class GameOver extends JFrame {
 	    	
 	    } else {
 	    	ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
-	    	
 	    	simulacion.reiniciarSimulacion();
-	    	simulacion.obtenerControl();
-	    	
 	    }
 	    
 	}
