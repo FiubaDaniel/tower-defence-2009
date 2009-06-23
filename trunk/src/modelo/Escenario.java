@@ -61,13 +61,8 @@ public class Escenario implements Persistente {
 	 *         al que ya fue creado.
 	 */
 	public static Escenario obtenerEscenario() {
-		if (escenario == null) {
-			try {
-				escenario = new Escenario();
-			} catch (FileNotFoundException e) {
-				throw new BaseMapNotFoundException();
-			}
-		}
+		if (escenario == null)
+			escenario = new Escenario();
 		return escenario;
 	}
 
@@ -83,6 +78,7 @@ public class Escenario implements Persistente {
 		escenario = null;
 		EnemigosEnElMapa.clear();
 		ObstaculosEnElMapa.clear();
+		escenario = new Escenario();
 	}
 
 	private void configurarMapa() {
@@ -117,7 +113,7 @@ public class Escenario implements Persistente {
 	 *             archivo. Es decir, se encontró el archivo, pero esta mal
 	 *             configurado
 	 */
-	private Escenario() throws FileNotFoundException {
+	private Escenario() {
 		this.NumeroNivel = 1;
 		configurarMapa();
 	}

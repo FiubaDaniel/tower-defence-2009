@@ -31,10 +31,12 @@ public class Jugador extends Observable implements Persistente{
 		this.setCantidadVidas(10);
 		this.setDinero(80);
 		this.setNombre("Grupo 4");
+		this.setChanged();
 	}
 	
 	public void reiniciarJugador() {
 		jugador = null;
+		jugador = new Jugador();
 	}
 
 	

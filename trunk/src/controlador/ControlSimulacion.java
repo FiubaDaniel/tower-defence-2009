@@ -54,14 +54,14 @@ public class ControlSimulacion {
 		fabrica = FabricaDeEnemigos.obtenerFabricaEnemigos(escenario.getCantBichos(), escenario.getNumeroNivel());
 	}
 	
-	/*public void reiniciarSimulacion(){
+	public void reiniciarSimulacion(){
 		escenario.reIniciar();
 		fabrica.reiniciarFabrica();
   		Jugador jugador = Jugador.obtenerJugador();
   		jugador.reiniciarJugador();
-  		this.terminoJuego = false;
   		this.pausado = false;
-  	}*/
+  		this.terminoJuego = false;
+  	}
 	
 	public boolean isTerminoJuego(){
 		return terminoJuego;
