@@ -113,6 +113,8 @@ public class BotonPersistirPartidaListener implements ActionListener {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
+		ControlVista vista = ControlVista.obtenerControl();
+		vista.actualizarVista();
 	}
 	
 	class ExtensionFileFilter extends FileFilter {

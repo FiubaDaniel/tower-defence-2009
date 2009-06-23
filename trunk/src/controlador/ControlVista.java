@@ -138,7 +138,6 @@ public class ControlVista {
 			vistaObjeto = (VistaObjetoDeMapa) TablaVistas.get(aux.toString());
 			vistaObjeto.setX(aux.getPosicion().getCoordX());
 			vistaObjeto.setY(aux.getPosicion().getCoordY());
-
 			vistaObjeto.dibujar(VentanaPrincipal.getMapa());
 		}
 	}
@@ -164,7 +163,6 @@ public class ControlVista {
 					.getValorEvolucion()));
 			panel.setLabelSeleccion_Text(seleccionado.toString());
 		}
-		
 		
 		VentanaPrincipal.getPanelDatos().getLabel_Cant_Enemigos().setText(String.valueOf(escenario.getCantBichos()));
 	}
