@@ -312,5 +312,6 @@ public class FabricaDeEnemigos {
 	
 	public void reiniciarFabrica(){
 		fabrica = null;
+		ColaEnemigos.clear();
 	}
 }

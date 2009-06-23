@@ -85,7 +85,7 @@ public class Jugador extends Observable implements Persistente{
 	public void quitarVida() {
 		this.setCantidadVidas(CantidadVidas - 1);
 		this.setChanged();
-		notifyObservers();
+		//this.notifyObservers();
 
 	}
 
@@ -97,7 +97,7 @@ public class Jugador extends Observable implements Persistente{
 			throw new DineroMuyBajoException();
 		}
 		this.setChanged();
-		notifyObservers();
+		//this.notifyObservers();
 
 	}
 
