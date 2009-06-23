@@ -80,6 +80,11 @@ public class FabricaDeEnemigos {
 		else
 			ColaEnemigos.clear();
 		
+		/* Hago esta copia para no perder la informacion inicial.
+		 * Me facilita analizar si cuando se persiste la fabrica
+		 * respeta la cantidad al recuperarse.
+		 */
+		int cantidadDeEnemigos = Cantidad_Enemigos;
 		
 		// Itero sobre todas las rondas
 		for (int i = 0; i < niveles_base.length; i++) {
@@ -87,12 +92,12 @@ public class FabricaDeEnemigos {
 			/* Aca es donde calculo los enemigos que voy a crear
 			 * segun los porsentajes cargados en le array. 
 			 */
-			int cant_enemigos_actual = (int) (Cantidad_Enemigos
+			int cant_enemigos_actual = (int) (cantidadDeEnemigos
 					* niveles_base[i]);
 			/* A la cantidad de enemigos total que tengo que crar le
 			 * resto los que voy a crear en esta ronda.
 			 */
-			Cantidad_Enemigos = Cantidad_Enemigos - cant_enemigos_actual;
+			cantidadDeEnemigos = cantidadDeEnemigos - cant_enemigos_actual;
 			
 			Escenario escenario = Escenario.obtenerEscenario();
 			Posicion aux_pos = new Posicion(escenario.getEntrada());
