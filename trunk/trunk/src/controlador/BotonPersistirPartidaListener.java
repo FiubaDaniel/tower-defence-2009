@@ -64,6 +64,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
            	}
         	int returnVal = fc.showSaveDialog(vista);
         	if (returnVal == JFileChooser.APPROVE_OPTION) {
+        		//Llamadas para guardar un estado del juego.
         		File unFile=fc.getSelectedFile().getAbsoluteFile();
            	    try {
            	    	this.guardar(fc.getSelectedFile().getAbsoluteFile());
@@ -87,12 +88,9 @@ public class BotonPersistirPartidaListener implements ActionListener {
 		Document doc = new Document(raiz);   
 		try {
   	          XMLOutputter serializer = new XMLOutputter();
-  	          serializer.output(raiz, System.out);
-		      serializer.output(doc, archDeTexto);
+  	          serializer.output(doc, archDeTexto);
 		    }
-		  catch (IOException e) {
-		      
-		  }
+		catch (IOException e) {}
     }
  
 	

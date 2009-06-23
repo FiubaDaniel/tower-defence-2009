@@ -299,20 +299,16 @@ public class FabricaDeEnemigos {
 		List Element_List = xmlElement.getChildren();
 
 		Iterator it = Element_List.iterator();
-
-		while (it.hasNext()) {
+		
+		while (it.hasNext()){
 			Element aux = (Element) it.next();
 			if (aux.getName() == "Enemigo") {
 				Enemigo enemigo = Enemigo.recuperar(aux);
 				fabrica.ColaEnemigos.add(enemigo);
 			}
-
-			Escenario escenario = Escenario.obtenerEscenario();
-
-			escenario.setCantBichos(fabrica.ColaEnemigos.size());
-
 		}
-		
+		Escenario escenario = Escenario.obtenerEscenario();
+		escenario.setCantBichos(fabrica.ColaEnemigos.size()+escenario.getCantBichos());
 		return fabrica;
 	}
 	
