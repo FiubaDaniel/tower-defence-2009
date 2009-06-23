@@ -56,6 +56,8 @@ public class BotonPersistirPartidaListener implements ActionListener {
 					e1.printStackTrace();
 				}
            }
+         ControlVista vistaControl = ControlVista.obtenerControl();
+         vistaControl.actualizarVista();
         }
         if (e.getSource() == guardar) {
         	if (!simulacion.isPausado()){
