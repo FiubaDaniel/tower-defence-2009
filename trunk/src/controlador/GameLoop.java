@@ -16,7 +16,7 @@ public class GameLoop {
 		ControlVista vista = ControlVista.obtenerControl();
 		
 
-		//Corazón del GameLoop
+		//Corazon del GameLoop
 	   
 		while (!simulacion.isTerminoJuego()){
 			while (!simulacion.isPausado()){
