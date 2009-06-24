@@ -6,12 +6,12 @@ import modelo.Jugador;
 
 public class JugadorTest extends TestCase {
 
-	Jugador jugador1 = Jugador.obtenerJugador(20, 50, "Prueba");
+	Jugador jugador1 = Jugador.obtenerJugador();
 
 	public void testAgregarQuitarVida() {
 
-		jugador1.AgregarQuitarVida(10);
-		assertEquals(30, jugador1.getCantidadVidas());
+		jugador1.quitarVida();
+		assertEquals(79, jugador1.getCantidadVidas());
 
 	}
 
@@ -23,18 +23,6 @@ public class JugadorTest extends TestCase {
 		} catch (DineroMuyBajoException e) {
 			assertTrue(true);
 		}
-		assertEquals(150, (long) jugador1.getDinero());
+		assertEquals(180, (long) jugador1.getDinero());
 	}
-
-	public void testAgregarPuntos() {
-		try {
-			jugador1.agregarPuntos(100);
-			jugador1.agregarPuntos(-500);
-			fail("Debería haber lanzado una excepción");
-		} catch (IllegalArgumentException e) {
-			assertTrue(true);
-		}
-		assertEquals(100, (long) jugador1.getPuntos());
-	}
-
 }
