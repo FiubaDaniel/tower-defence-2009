@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 import modelo.Jugador;
 
 import controlador.ControlSimulacion;
-import controlador.ControlVista;
 
 public class GameOver extends JFrame {
 
