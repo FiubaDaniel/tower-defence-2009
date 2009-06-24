@@ -20,6 +20,7 @@ import modelo.Escenario;
 import modelo.FabricaDeEnemigos;
 import modelo.Jugador;
 
+import vista.audio.ReproductorAudio;
 import vista.menu.VistaPrincipal;
 
 /**
@@ -111,6 +112,14 @@ public class BotonPersistirPartidaListener implements ActionListener {
 			throw new RuntimeException(e);
 		}
 		ControlVista vista = ControlVista.obtenerControl();
+		ReproductorAudio repro = ReproductorAudio.getInstancia();
+		repro.stop();
+		if(escenario.getNumeroNivel()==1)
+	        repro.reproducirCancion(ReproductorAudio.CANCION_INTRO); 
+		if(escenario.getNumeroNivel()==2)
+			repro.reproducirCancion(ReproductorAudio.CANCION_NIVEL2);
+		if(escenario.getNumeroNivel()==3)
+			repro.reproducirCancion(ReproductorAudio.CANCION_NIVEL3);
 		vista.actualizarVista();
 	}
 	

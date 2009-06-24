@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 //import javax.swing.JButton;
 
+import vista.audio.ReproductorAudio;
 import vista.menu.VistaPrincipal;
 
 import customExceptions.EnemigoYaMuerto;
@@ -101,9 +102,15 @@ public class ControlSimulacion {
 			if (!escenario.isMapasDisponibles())
 				terminoJuego = true;
 			VistaPrincipal vistaP = VistaPrincipal.obtenerVistaPrincipal();
-			vistaP.getPanelDatos().cambiarEtiquetaIniciar_Pausar();
-						
+			vistaP.getPanelDatos().cambiarEtiquetaIniciar_Pausar();			
 			fabrica.crearNuevosEnemigos(escenario.getCantBichos());
+			//toco sonido
+			ReproductorAudio repro = ReproductorAudio.getInstancia();
+			repro.stop();
+			if(escenario.getNumeroNivel()==2)
+				repro.reproducirCancion(ReproductorAudio.CANCION_NIVEL2);
+			if(escenario.getNumeroNivel()==3)
+				repro.reproducirCancion(ReproductorAudio.CANCION_NIVEL3);	
 		}
 		
 	}
