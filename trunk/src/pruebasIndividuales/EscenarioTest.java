@@ -1,5 +1,6 @@
 package pruebasIndividuales;
 
+import java.io.FileNotFoundException;
 import java.util.Iterator;
 
 import customExceptions.EnemigoYaMuerto;
@@ -40,9 +41,11 @@ public class EscenarioTest extends TestCase {
 		escenario.agregarEnemigoALista(Cobayo);
 
 		try {
-			escenario.eliminarEnemigodeLista(Cobayo);
+			escenario.eliminarEnemigosSinVidadelaLista();
 		} catch (MapaSinEnemigosExcepion e) {
 			fail("Enemigo no encontrado");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 
 	}
@@ -61,19 +64,31 @@ public class EscenarioTest extends TestCase {
 		} catch (EnemigoYaMuerto e) {
 			fail ("Error con enemigo");
 		}
+		
+		escenario.limpiarListaEnemigos();
 
 		escenario.agregarEnemigoALista(Auxiliar1);
 		escenario.agregarEnemigoALista(Auxiliar2);
 		escenario.agregarEnemigoALista(Auxiliar3);
 		escenario.agregarEnemigoALista(Auxiliar4);
+		
+		try {
+			escenario.eliminarEnemigosSinVidadelaLista();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			fail ("Error al eliminar enemigos");
+		}
+		
+		Iterator it = escenario.getIteradordeEnemigos();
+		int cant = 0;
+		
+		while (it.hasNext()) {
+			cant++;
+			it.next();
+		}
+		
+		assertEquals(2, cant);
 
-		escenario.eliminarEnemigosSinVidadelaLista();
-
-		if (escenario.eliminarEnemigodeLista(Auxiliar1) != true
-				|| escenario.eliminarEnemigodeLista(Auxiliar2) != false
-				|| escenario.eliminarEnemigodeLista(Auxiliar3) != true
-				|| escenario.eliminarEnemigodeLista(Auxiliar4) != false)
-			fail ("Error al eliminar");
 
 	}
 
@@ -81,11 +96,11 @@ public class EscenarioTest extends TestCase {
 
 		// En el mapa1 la posición (22,20) es seguida por (22,19)
 
-		Posicion Origen = new Posicion(22, 20, true);
+		Posicion Origen = new Posicion(26, 47, true);
 
-		Posicion Destino = escenario.obtenerSiguientePosicionCaminable(Origen,1);
+		Posicion Destino = escenario.obtenerSiguientePosicionCaminable(Origen,18);
 
-		if (Destino.getCoordX() != 22 || Destino.getCoordY() != 19)
+		if (Destino.getCoordX() != 26 || Destino.getCoordY() != 46)
 			fail("Error en posicion siguiente");
 	}
 

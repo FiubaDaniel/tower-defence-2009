@@ -145,14 +145,14 @@ public class Escenario implements Persistente {
 		try {
 
 			fl = new FileReader(ArchivodeMapa);
-			
+
 			LectorCaracteres Lector;
 
 			MAPROWS = (char) fl.read();
 			auxiliardeLecturadeChars = (char) fl.read();
 			MAPCOLUMNS = (char) fl.read();
 			auxiliardeLecturadeChars = (char) fl.read();
-			
+
 			Mapa = new Posicion[MAPROWS][MAPCOLUMNS];
 
 			int EOF = 0;
@@ -491,6 +491,10 @@ public class Escenario implements Persistente {
 		} else {
 			throw new MapNotCreatedException();
 		}
+	}
+	
+	public void limpiarListaEnemigos() {
+		EnemigosEnElMapa.clear();
 	}
 
 	public void eliminarEnemigosSinVidadelaLista() throws FileNotFoundException {
