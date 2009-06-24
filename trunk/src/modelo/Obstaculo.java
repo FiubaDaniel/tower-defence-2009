@@ -3,12 +3,7 @@ package modelo;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-
-
 import org.jdom.Element;
-import org.omg.CORBA.Object;
-
-
 
 public abstract class Obstaculo implements Seleccionable, Persistente {
 	private int precio;

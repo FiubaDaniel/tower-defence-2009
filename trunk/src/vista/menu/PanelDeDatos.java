@@ -15,7 +15,6 @@ import javax.swing.event.ListSelectionListener;
 
 import controlador.BotonPausarListener;
 import controlador.BotonPersistirPartidaListener;
-import controlador.ControlSimulacion;
 
 import modelo.Arena;
 import modelo.Escenario;
