@@ -20,6 +20,7 @@ import customExceptions.MapNotCreatedException;
 import customExceptions.NoteHagaselVivoException;
 
 import modelo.terrenos.*;
+
 /**
  * Esta clase controla todos los aspectos generales del manejo del mapa, desde
  * su creacion a su correcta configuracion.
@@ -29,8 +30,8 @@ import modelo.terrenos.*;
  */
 public class Escenario implements Persistente {
 
-	private static final int MAPCOLUMNS = 50;
-	private static final int MAPROWS = 50;
+	private int MAPCOLUMNS = 50;
+	private int MAPROWS = 50;
 	private static final double DINEROBASEMAX = 2000;
 	private static Escenario escenario;
 	private int CantBichos;
@@ -69,7 +70,7 @@ public class Escenario implements Persistente {
 		MapaTerreno.put("S", new CaracterS());
 		MapaTerreno.put("E", new CaracterE());
 	}
-	
+
 	public void reIniciar() {
 		EnemigosEnElMapa.clear();
 		ObstaculosEnElMapa.clear();
@@ -80,7 +81,7 @@ public class Escenario implements Persistente {
 	private void configurarMapa() {
 
 		cargarMapaConfiguracion();
-		
+
 		search_maps();
 
 		try {
@@ -141,12 +142,18 @@ public class Escenario implements Persistente {
 
 		int i = 0, j = 0;
 
-		Mapa = new Posicion[MAPROWS][MAPCOLUMNS];
-
-		LectorCaracteres Lector;
-
 		try {
+
 			fl = new FileReader(ArchivodeMapa);
+			
+			LectorCaracteres Lector;
+
+			MAPROWS = (char) fl.read();
+			auxiliardeLecturadeChars = (char) fl.read();
+			MAPCOLUMNS = (char) fl.read();
+			auxiliardeLecturadeChars = (char) fl.read();
+			
+			Mapa = new Posicion[MAPROWS][MAPCOLUMNS];
 
 			int EOF = 0;
 
@@ -222,19 +229,20 @@ public class Escenario implements Persistente {
 		configurarMapa();
 		ObstaculosEnElMapa.clear();
 	}
-	
-	public boolean isTerminoNivel(){
+
+	public boolean isTerminoNivel() {
 		if (CantBichos == 0)
-			if (NumeroNivel < Cant_Mapas_Disponibles){
+			if (NumeroNivel < Cant_Mapas_Disponibles) {
 				this.setNumeroNivel(++NumeroNivel);
 				return true;
-			}else{
+			} else {
 				mapasDisponibles = false;
 				return true;
-		}else
+			}
+		else
 			return false;
 	}
-	
+
 	public boolean isMapasDisponibles() {
 		return mapasDisponibles;
 	}
@@ -567,13 +575,16 @@ public class Escenario implements Persistente {
 		Iterator it_obs = ObstaculosEnElMapa.iterator();
 		while (it_obs.hasNext()) {
 			Obstaculo actual = (Obstaculo) it_obs.next();
-			if (actual.getPosicion().getCoordX() == obstaculo.getPosicion().getCoordX()
-					&& actual.getPosicion().getCoordY() == obstaculo.getPosicion().getCoordY())
+			if (actual.getPosicion().getCoordX() == obstaculo.getPosicion()
+					.getCoordX()
+					&& actual.getPosicion().getCoordY() == obstaculo
+							.getPosicion().getCoordY())
 				insertar = false;
 		}
 
-		if (insertar && Mapa[obstaculo.getPosicion().getCoordY()][obstaculo.getPosicion()
-				.getCoordX()].isCaminable()) {
+		if (insertar
+				&& Mapa[obstaculo.getPosicion().getCoordY()][obstaculo
+						.getPosicion().getCoordX()].isCaminable()) {
 			if (obstaculo.getAlcance() == 0) {
 				// Si entra aca, es que es un pegote o arena.
 				ObstaculosEnElMapa.add(obstaculo);
@@ -615,23 +626,29 @@ public class Escenario implements Persistente {
 	 * @return
 	 */
 	public boolean obtener_tipo_de_terreno(Posicion pos) {
-		return Mapa[pos.getCoordX()][pos.getCoordY()].isCaminable();
+		try {
+			return Mapa[pos.getCoordX()][pos.getCoordY()].isCaminable();
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return false;
+		} catch (NullPointerException e) {
+			return false;
+		}
 	}
 
-	public static int getMapColumns() {
+	public int getMapColumns() {
 		return MAPCOLUMNS;
 	}
 
-	public static int getMapRows() {
+	public int getMapRows() {
 		return MAPROWS;
 	}
-	
+
 	/**
-	 * Este método verifica la cantidad de archivos de mapas disponibles que hay.
-	 * Esto lo hace, tratando de abrir todos los posibles, y cuando salta una
-	 *  excepcion quiere decir que ese archivo no existe.
+	 * Este método verifica la cantidad de archivos de mapas disponibles que
+	 * hay. Esto lo hace, tratando de abrir todos los posibles, y cuando salta
+	 * una excepcion quiere decir que ese archivo no existe.
 	 */
-	
+
 	private void search_maps() {
 		int numero_intento = 1;
 		File Mapas;
@@ -657,93 +674,94 @@ public class Escenario implements Persistente {
 	public int getCant_Mapas_Disponibles() {
 		return Cant_Mapas_Disponibles;
 	}
-	
-	private void setRecuperar(Element xmlElement) throws FileNotFoundException, 
-			ClassNotFoundException, SecurityException, IllegalArgumentException, 
-			NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-		
-		this.NumeroNivel = Integer.parseInt(xmlElement.getAttributeValue("Nivel"));
-		
+
+	private void setRecuperar(Element xmlElement) throws FileNotFoundException,
+			ClassNotFoundException, SecurityException,
+			IllegalArgumentException, NoSuchMethodException,
+			InstantiationException, IllegalAccessException,
+			InvocationTargetException {
+
+		this.NumeroNivel = Integer.parseInt(xmlElement
+				.getAttributeValue("Nivel"));
 
 		this.setNumeroNivel(this.NumeroNivel);
 
 		EnemigosEnElMapa.clear();
 		ObstaculosEnElMapa.clear();
-		
+
 		List Element_list = xmlElement.getChildren();
-		
+
 		Iterator it = Element_list.iterator();
-		
+
 		while (it.hasNext()) {
-			Element actual=(Element) it.next();
-			if(actual.getName()=="Obstaculo"){
-		        Obstaculo obstaculo=Obstaculo.recuperar(actual);
-		        ObstaculosEnElMapa.add(obstaculo);
-		   }
-			else if (actual.getName()=="Enemigo"){
-                Enemigo enemigo= Enemigo.recuperar(actual);
-                EnemigosEnElMapa.add(enemigo);
+			Element actual = (Element) it.next();
+			if (actual.getName() == "Obstaculo") {
+				Obstaculo obstaculo = Obstaculo.recuperar(actual);
+				ObstaculosEnElMapa.add(obstaculo);
+			} else if (actual.getName() == "Enemigo") {
+				Enemigo enemigo = Enemigo.recuperar(actual);
+				EnemigosEnElMapa.add(enemigo);
 			}
 		}
-			
-		this.CantBichos = EnemigosEnElMapa.size();	
+
+		this.CantBichos = EnemigosEnElMapa.size();
 	}
-	
-	public  void recuperar(Element xmlElement) {
-		
-			try {
-				 this.setRecuperar(xmlElement);
-			} catch (FileNotFoundException e) {
-				throw new BaseMapNotFoundException();
-			} catch (SecurityException e) {
-				
-				e.printStackTrace();
-				throw new RuntimeException(e);
-				
-			} catch (IllegalArgumentException e) {
-			
-				e.printStackTrace();
-				throw new RuntimeException(e);
-				
-			} catch (ClassNotFoundException e) {
-				
-				e.printStackTrace();
-				throw new RuntimeException(e);
-				
-			} catch (NoSuchMethodException e) {
-				
-				e.printStackTrace();
-				throw new RuntimeException(e);
-				
-			} catch (InstantiationException e) {
-				
-				e.printStackTrace();
-				throw new RuntimeException(e);
-				
-			} catch (IllegalAccessException e) {
-				
-				e.printStackTrace();
-				throw new RuntimeException(e);
-				
-			} catch (InvocationTargetException e) {
-				
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}
+
+	public void recuperar(Element xmlElement) {
+
+		try {
+			this.setRecuperar(xmlElement);
+		} catch (FileNotFoundException e) {
+			throw new BaseMapNotFoundException();
+		} catch (SecurityException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException(e);
+
+		} catch (IllegalArgumentException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException(e);
+
+		} catch (ClassNotFoundException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException(e);
+
+		} catch (NoSuchMethodException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException(e);
+
+		} catch (InstantiationException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException(e);
+
+		} catch (IllegalAccessException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException(e);
+
+		} catch (InvocationTargetException e) {
+
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 	}
 
 	public Element persistir() {
 		Element xmlElement = new Element("Escenario");
-        Iterator it = EnemigosEnElMapa.iterator();
-        while (it.hasNext()) {
-        	xmlElement.addContent(((Enemigo)it.next()).persistir());
-        }
-        it = ObstaculosEnElMapa.iterator();
-        while (it.hasNext())
-        	xmlElement.addContent(((Obstaculo)it.next()).persistir());
-        
-        xmlElement.setAttribute("Nivel", String.valueOf(this.NumeroNivel));
-        return xmlElement;
+		Iterator it = EnemigosEnElMapa.iterator();
+		while (it.hasNext()) {
+			xmlElement.addContent(((Enemigo) it.next()).persistir());
+		}
+		it = ObstaculosEnElMapa.iterator();
+		while (it.hasNext())
+			xmlElement.addContent(((Obstaculo) it.next()).persistir());
+
+		xmlElement.setAttribute("Nivel", String.valueOf(this.NumeroNivel));
+		return xmlElement;
 	}
-	
+
 }

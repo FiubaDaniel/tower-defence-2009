@@ -1,4 +1,6 @@
-Mapa 50 filas X 50 columnas
+Filas
+Columnas
+Mapa filas X columnas
 Dinero Inicial / 5
 CantidadDeBichosBase
 CantidadDeVidaBase
