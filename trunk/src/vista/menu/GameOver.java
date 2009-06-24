@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import modelo.Jugador;
 
 import controlador.ControlSimulacion;
+import controlador.ControlVista;
 
 public class GameOver extends JFrame {
 
@@ -36,6 +37,7 @@ public class GameOver extends JFrame {
 	   else {
 	    	ControlSimulacion simulacion = ControlSimulacion.obtenerControl();
 	    	simulacion.reiniciarSimulacion();
+	    	vista.getPanelDatos().cambiarEtiquetaIniciar_Pausar();
 	    }
 	    
 	}
