@@ -36,7 +36,7 @@ public class pruebaTorreDorada extends TestCase {
 		posicionEnemigo4 = new Posicion(5, 8, true);
 		posicionEnemigo5 = new Posicion(5, 6, true);
 
-		jugador = Jugador.obtenerJugador(1, 55.60, "Daniel");
+		jugador = Jugador.obtenerJugador();
 
 		enemigo = new Hormiga(escenario.getEntrada());
 		enemigo.cambiarPosicion(posicionEnemigo);
