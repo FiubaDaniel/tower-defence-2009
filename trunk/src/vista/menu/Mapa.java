@@ -45,6 +45,9 @@ public class Mapa extends JPanel implements Observer,
 
 	private static final int UNIDADANCHO = 15;
 	private static final int UNIDADALTO = 15;
+	
+	private int Ancho_Mapa_Actual;
+	private int Alto_Mapa_Actual;
 
 	private boolean dibujar_habilitado = true;
 
@@ -96,13 +99,16 @@ public class Mapa extends JPanel implements Observer,
 		setDoubleBuffered(true);
 		
 		Escenario escenario = Escenario.obtenerEscenario();
+		
+		Alto_Mapa_Actual = escenario.getMapRows();
+		Ancho_Mapa_Actual = escenario.getMapColumns();
 
 		PanelMapaLayout.setHorizontalGroup(PanelMapaLayout.createParallelGroup(
 				javax.swing.GroupLayout.Alignment.LEADING).addGap(0,
-				escenario.getMapColumns() * UNIDADANCHO, Short.MAX_VALUE));
+						Ancho_Mapa_Actual * UNIDADANCHO, Short.MAX_VALUE));
 		PanelMapaLayout.setVerticalGroup(PanelMapaLayout.createParallelGroup(
 				javax.swing.GroupLayout.Alignment.LEADING).addGap(0,
-				escenario.getMapRows() * UNIDADALTO, Short.MAX_VALUE));
+						Alto_Mapa_Actual * UNIDADALTO, Short.MAX_VALUE));
 	}
 
 	public void update(Observable o, Object arg) {
@@ -120,10 +126,15 @@ public class Mapa extends JPanel implements Observer,
 
 		if (dibujar_habilitado) {
 
-			VistaPrincipal vistap = VistaPrincipal.obtenerVistaPrincipal();
-			vistap.repaint();
-			
 			Escenario escenario = Escenario.obtenerEscenario();
+			
+			if ((Alto_Mapa_Actual != escenario.getMapRows()) || (Ancho_Mapa_Actual != escenario.getMapColumns())) {
+				VistaPrincipal vistap = VistaPrincipal.obtenerVistaPrincipal();
+				vistap.repaint();
+			}
+			
+			Alto_Mapa_Actual = escenario.getMapRows();
+			Ancho_Mapa_Actual = escenario.getMapColumns();
 			
 			// Creación buffer
 			Image buffer = createImage(escenario.getMapColumns() * UNIDADANCHO,
