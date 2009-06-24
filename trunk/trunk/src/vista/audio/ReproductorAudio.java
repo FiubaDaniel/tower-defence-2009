@@ -15,7 +15,25 @@ public class ReproductorAudio {
 	public static Sequence CANCION_INTRO;
     {
             try {
-                    CANCION_INTRO = MidiSystem.getSequence(new File("audio/Callejeros - Prohibido.mid"));
+            	   CANCION_INTRO = MidiSystem.getSequence(new File("audio/nian fri fruli frali fru-.mid"));
+            } catch (Exception e){
+                    e.printStackTrace();
+            }
+    }
+    
+    public static Sequence CANCION_NIVEL2;
+    {
+            try {
+                    CANCION_NIVEL2 = MidiSystem.getSequence(new File("audio/Callejeros - Prohibido.mid"));
+            } catch (Exception e){
+                    e.printStackTrace();
+            }
+    }
+    
+    public static Sequence CANCION_NIVEL3;
+    {
+            try {
+                    CANCION_NIVEL3 = MidiSystem.getSequence(new File("audio/Callejeros - Una nueva noche fria.mid"));
             } catch (Exception e){
                     e.printStackTrace();
             }
@@ -51,6 +69,10 @@ public class ReproductorAudio {
             }
             reproductor.start();
             reproductor.setLoopCount(Sequencer.LOOP_CONTINUOUSLY);
+    }
+    
+    public void stop(){
+    	reproductor.stop();
     }
 
 	
