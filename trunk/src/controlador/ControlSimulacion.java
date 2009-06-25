@@ -60,7 +60,7 @@ public class ControlSimulacion {
 		fabrica.reiniciarFabrica();
   		Jugador jugador = Jugador.obtenerJugador();
   		jugador.reiniciarJugador();
-  		this.pausado = true;
+  		this.pausado = false;
   		this.terminoJuego = false;
   	}
 	
