@@ -24,7 +24,7 @@ public class ReproductorAudio {
     public static Sequence CANCION_NIVEL2;
     {
             try {
-                    CANCION_NIVEL2 = MidiSystem.getSequence(new File("audio/El pibe de los astilleros-.mid"));
+                    CANCION_NIVEL2 = MidiSystem.getSequence(new File("audio/Callejeros - Una nueva noche fria.mid"));
             } catch (Exception e){
                     e.printStackTrace();
             }
