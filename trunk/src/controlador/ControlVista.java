@@ -1,7 +1,11 @@
 package controlador;
 
+import java.awt.Dialog;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import javax.swing.JFrame;
 
 import modelo.Enemigo;
 import modelo.Escenario;

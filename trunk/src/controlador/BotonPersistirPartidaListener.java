@@ -66,7 +66,8 @@ public class BotonPersistirPartidaListener implements ActionListener {
         	int returnVal = fc.showSaveDialog(vista);
         	if (returnVal == JFileChooser.APPROVE_OPTION) {
         		//Llamadas para guardar un estado del juego.
-        		try {
+        		File unFile=fc.getSelectedFile().getAbsoluteFile();
+           	    try {
            	    	this.guardar(fc.getSelectedFile().getAbsoluteFile());
 				} catch (IOException e1) {
 					e1.printStackTrace();
@@ -75,7 +76,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
         }
     }
  
-    public void guardar(File archivo) throws IOException{
+    public static void guardar(File archivo) throws IOException{
 		Escenario escenario = Escenario.obtenerEscenario();
 		Jugador jugador = Jugador.obtenerJugador();
 		FabricaDeEnemigos fabrica = FabricaDeEnemigos.obtenerFabricaEnemigos(escenario.getCantBichos(),escenario.getNumeroNivel());
@@ -94,7 +95,7 @@ public class BotonPersistirPartidaListener implements ActionListener {
     }
  
 	
-	public void recuperar(File archivo) throws IOException{	 
+	public static void recuperar(File archivo) throws IOException{	 
 		FileInputStream archRecu;
 		Escenario escenario=Escenario.obtenerEscenario();
 		Jugador jugador= Jugador.obtenerJugador();
