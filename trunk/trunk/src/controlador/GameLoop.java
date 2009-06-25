@@ -6,7 +6,7 @@ import controlador.ControlSimulacion;
 
 public class GameLoop {
 	
-	public void Jugar() {
+	public static void Jugar() {
 		//Instancio el reproductor de Audio.
 		ReproductorAudio repro = ReproductorAudio.getInstancia();
 		repro.reproducirCancion(ReproductorAudio.CANCION_INTRO);
