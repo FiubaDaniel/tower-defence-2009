@@ -21,7 +21,7 @@ public class Arena extends Obstaculo {
 			if (!enemigoAux.getVolador()
 					&& this.getPosicion().getDistancia(enemigoAux.getPosicion()) == this
 							.getAlcance()) {
-				enemigoAux.frenarOAvanzar();
+				enemigoAux.disminuirVelocidad(50);
 			}
 		}
 	}

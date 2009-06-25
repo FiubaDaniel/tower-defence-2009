@@ -2,6 +2,7 @@ package modelo;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Calendar;
 
 import org.jdom.Element;
 import customExceptions.*;
@@ -13,10 +14,27 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 	private int velocidad;
 	private Posicion lugarQueOcupa;
 	private boolean frenado = false;
+	private int tiempoFrenado;
+	private int segundosDelSistema;
 	protected int cant_avanzada = 0;
 	private int premioDinero;
 
-	public abstract void avanzar(Escenario terreno);
+	/**
+	 * Devuelve true si pudo avanzar y false si no pudo.
+	 * @param terreno
+	 * @return
+	 */
+	public boolean avanzar(Escenario terreno){
+		if (this.getFrenado() == false) {
+			Posicion siguiente = terreno.obtenerSiguientePosicionCaminable(this
+					.getPosicion(), cant_avanzada);
+			this.cambiarPosicion(siguiente);
+			cant_avanzada++;
+			if(cant_avanzada > terreno.getCaminoAlaSalida().size())
+				cant_avanzada = 0;
+		}
+		return true;
+	}
 
 	public void disminuirVida(int vidaRestada) throws EnemigoYaMuerto {
 		if (vida == 0)
@@ -35,14 +53,31 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 	}
 
 	public boolean getFrenado() {
+		this.procesarTiempoDetenido();
 		return frenado;
 	}
 
-	public void frenarOAvanzar() {
-		if (frenado)
+	private boolean procesarTiempoDetenido(){
+		Calendar calendario = Calendar.getInstance();
+		int diferencia = calendario.get(Calendar.SECOND) - segundosDelSistema;
+		if (diferencia < 0)
+			diferencia = diferencia * -1;
+		if (diferencia > tiempoFrenado)
 			frenado = false;
 		else
 			frenado = true;
+		return frenado;
+	}
+	
+	public void frenar(int segundos) {
+		if (segundos < 0)
+			throw new ValorNegativoException();
+		else{
+			Calendar calendario = Calendar.getInstance();
+			segundosDelSistema = calendario.get(Calendar.SECOND);
+			tiempoFrenado = segundos;
+			this.procesarTiempoDetenido();
+		}
 	}
 
 	public Posicion getPosicion() {

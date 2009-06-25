@@ -22,7 +22,7 @@ public class Pegote extends Obstaculo {
 					&& this.getPosicion().getDistancia(enemigoAux.getPosicion()) == this
 							.getAlcance()) {
 				try {
-					enemigoAux.disminuirVelocidad(50);
+					enemigoAux.frenar(10);
 				} catch (ValorNegativoException e) {
 					System.out
 							.println("La capturo para que no se queje el compilador");
