@@ -21,4 +21,17 @@ public class Cucaracha extends Enemigo {
 		return "Cucaracha";
 	}
 
+	@Override
+	public Enemigo clone() {
+		Cucaracha clon = new Cucaracha(this.getPosicion());
+		try {
+			this.setVelocidad(this.getVelocidad());
+			this.setVida(this.getVida());
+		}
+		catch (ValorNegativoException error) {
+		}
+		this.setPremioDinero(this.getPremioDinero());
+		return clon;
+	}
+
 }
