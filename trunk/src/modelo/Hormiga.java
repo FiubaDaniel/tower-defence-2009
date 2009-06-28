@@ -18,4 +18,17 @@ public class Hormiga extends Enemigo {
 	public String toString() {
 		return "Hormiga";
 	}
+
+	@Override
+	public Enemigo clone() {
+		Hormiga clon = new Hormiga(this.getPosicion());
+		try {
+			this.setVelocidad(this.getVelocidad());
+			this.setVida(this.getVida());
+		}
+		catch (ValorNegativoException error) {
+		}
+		this.setPremioDinero(this.getPremioDinero());
+		return clon;
+	}
 }

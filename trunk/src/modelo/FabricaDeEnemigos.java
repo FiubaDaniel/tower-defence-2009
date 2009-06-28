@@ -94,7 +94,7 @@ public class FabricaDeEnemigos {
 			 */
 			int cant_enemigos_actual = (int) (cantidadDeEnemigos
 					* niveles_base[i]);
-			/* A la cantidad de enemigos total que tengo que crar le
+			/* A la cantidad de enemigos total que tengo le
 			 * resto los que voy a crear en esta ronda.
 			 */
 			cantidadDeEnemigos = cantidadDeEnemigos - cant_enemigos_actual;
@@ -110,42 +110,9 @@ public class FabricaDeEnemigos {
 				Enemigo para_crear = (Enemigo) CodigosUtiles.get(String
 						.valueOf(x));
 
-				// Como el HashMap siemrpe devuelve la misma instancia de la
-				// clase, debo crear un objeto nuevo del mismo tipo, para eso
-				// uso reflexion
-
-				// Obtengo en un array los constructores de la clase que me
-				// proporciono el HashMap
-				Constructor[] constructor = para_crear.getClass()
-						.getConstructors();
-
-				// Creo un array con los argumentos que recibe el constructor
-				// que quiero usar, en este caso un tipo Posicion. Notar que el
-				// array debe ser si o si de tipo Object
-				Object args[] = new Object[1];
-				args[0] = aux_pos;
-
-				try {
-					// Pido una nueva instancia del tipo de clase necesaria, por
-					// medio de reflexion.
-					// El metodo debe estar entre un try-catch ya que puede
-					// lanzar excepciones si no encuentra un constructor
-					// adecuado que reciba lso parametros proporcionados. En
-					// este caso nunca sucederá porque conocemos exactamente
-					// como está hecha la clase en cuestion
-
-					para_crear = (Enemigo) constructor[0].newInstance(args);
-					para_crear.cambiarPosicion(aux_pos);
-					
-					ColaEnemigos.add(para_crear);
-
-				} catch (InstantiationException e) {
-				} catch (IllegalAccessException e) {
-				} catch (IllegalArgumentException e) {
-				} catch (InvocationTargetException e) {
-				}
-
+				ColaEnemigos.add(para_crear.clone());
 			}
+
 		}
 
 		// Establezco el intervalo entre salidas de enemigos. EL valor 150 fue

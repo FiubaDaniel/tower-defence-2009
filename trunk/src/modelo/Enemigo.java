@@ -7,7 +7,7 @@ import java.util.Calendar;
 import org.jdom.Element;
 import customExceptions.*;
 
-public abstract class Enemigo  implements Seleccionable, Persistente {
+public abstract class Enemigo  implements Cloneable, Seleccionable, Persistente {
 
 	private int vida;
 	private boolean bichoVolador = false;
@@ -111,12 +111,8 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 		return velocidad;
 	}
 
-	protected void setPosicion(Posicion entrada) throws NoEsEntradaException {
-		Escenario escenario = Escenario.obtenerEscenario();
-		if (!entrada.equals(escenario.getEntrada()))
-			throw new NoEsEntradaException();
-		else
-			lugarQueOcupa = entrada;
+	protected void setPosicion(Posicion posicion) {
+		lugarQueOcupa = posicion;
 	}
 
 
@@ -178,4 +174,6 @@ public abstract class Enemigo  implements Seleccionable, Persistente {
 		enemigo.cant_avanzada = Integer.parseInt(actual.getAttributeValue("Cantidad_Avanzada"));
 		return enemigo;
 	}
+	
+	public abstract Enemigo clone();
 }

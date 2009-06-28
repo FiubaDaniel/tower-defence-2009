@@ -19,4 +19,19 @@ public class Arania extends Enemigo {
 	public String toString() {
 		return "Arania";
 	}
+
+	@Override
+	public Enemigo clone() {
+		Arania clon = new Arania(this.getPosicion());
+		try {
+			this.setVelocidad(this.getVelocidad());
+			this.setVida(this.getVida());
+		}
+		catch (ValorNegativoException error) {
+		}
+		this.setPremioDinero(this.getPremioDinero());
+		return clon;
+	}
+	
+	
 }

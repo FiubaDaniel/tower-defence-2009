@@ -19,4 +19,18 @@ public class Mosca extends Enemigo {
 	public String toString() {
 		return "Mosca";
 	}
+
+	@Override
+	public Enemigo clone() {
+		Mosca clon = new Mosca(this.getPosicion());
+		this.setVolador();
+		try {
+			this.setVelocidad(this.getVelocidad());
+			this.setVida(this.getVida());
+		}
+		catch (ValorNegativoException error) {
+		}
+		this.setPremioDinero(this.getPremioDinero());
+		return clon;
+	}
 }
