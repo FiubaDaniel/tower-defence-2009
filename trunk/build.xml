@@ -10,8 +10,7 @@
 	<property name="mapas"		value="${basedir}/Mapas" />
 	
 	<!-- Otras variables -->
-	<property name="main.class" value="TowerDefens.TP" />
-	<property name="main2.class" value="controlador.GameLoop" />
+	<property name="main.class" value="controlador.GameLoop" />
 	<property name="test.class" value="pruebasIndividuales.AllTests" />
 	
 	<!-- init -->
@@ -49,16 +48,6 @@
 	<target name="run" depends="build" description="Ejecuta la aplicacion">
 		<java
 			classname="${main.class}"
-			classpathref="idClasspath"
-			fork="true"
-			dir="${basedir}">
-		</java>
-	</target>
-	
-	<!-- run2 -->
-	<target name="run2" depends="build" description="Ejecuta la aplicacion">
-		<java
-			classname="${main2.class}"
 			classpathref="idClasspath"
 			fork="true"
 			dir="${basedir}">
